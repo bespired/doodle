@@ -1,0 +1,17 @@
+* {
+	box-sizing: border-box;
+}
+
+h1 {
+	margin: $mainheader-height 0;
+}
+
+textarea.html-code {
+	border: none;
+	width: 100%;
+	font-family: monospace;
+	background-color: #191a1b;
+	color: #f9fdff;
+	padding: 1em;
+	border-radius: 8px;
+}

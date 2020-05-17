@@ -1,0 +1,30 @@
+.sign {
+
+	border: 7px solid vc('action');
+	padding: 1em;
+	min-width: 90px;
+	min-height: 90px;
+	max-width: 90px;
+	max-height: 90px;
+	margin: 0 auto;
+	border-radius: 50%;
+
+	&.danger {
+		color: vc('danger');
+		border-color: vc('danger');
+	}
+
+	&.success,
+	&.action {
+		color: vc('action');
+		border-color: vc('action');
+	}
+
+	&.warning {
+		background-color: transparent;
+		color: vc('warning');
+		border-color: vc('warning');
+		padding-top: 11px;
+	}
+
+}

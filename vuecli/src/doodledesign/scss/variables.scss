@@ -1,0 +1,102 @@
+$image-url-bg-doodle      : url("https://images.unsplash.com/photo-1474835409173-5dc81aae3faa");
+$image-url-home-doodle    : url("https://images.unsplash.com/photo-1474835409173-5dc81aae3faa");
+
+$image-url-home-doodle-1    : url("https://images.unsplash.com/photo-1474835409173-5dc81aae3faa?w=600");
+$image-url-home-doodle-2    : url("https://images.unsplash.com/photo-1474835409173-5dc81aae3faa?w=1000");
+$image-url-home-doodle-3    : url("https://images.unsplash.com/photo-1474835409173-5dc81aae3faa?w=1400");
+
+
+$font-family-url         : "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400";
+$font-family-primary     : Source Sans Pro, sans-serif;
+
+$mainheader-height       :  53px;
+$subheader-height        :  50px;
+$heroimage-height        : 135px;
+
+$font-size               : 14px;
+
+$tempo                   : 300ms;
+
+$color-default           : #3b8ae4;
+$color-brand             : #333f50;
+$color-cancel            : #a2a2a2;
+$color-second            : #f7f7f8;
+$color-action            : #67bf2e;
+$color-danger            : #d10b07;
+$color-warning           : #ed9d03;
+$color-success           : #67bf2e;
+$color-error             : #d10b07;
+$color-font              : #333f50;
+
+$button-default-image    : linear-gradient(180deg, $color-default, darken($color-default, 2%));
+$button-brand-image      : linear-gradient(180deg, $color-brand,   darken($color-brand,   2%));
+$button-cancel-image     : linear-gradient(180deg, $color-cancel,  darken($color-cancel,  2%));
+$button-second-image     : linear-gradient(180deg, $color-second,  darken($color-second,  2%));
+$button-action-image     : linear-gradient(180deg, $color-action,  darken($color-action,  2%));
+$button-danger-image     : linear-gradient(180deg, $color-danger,  darken($color-danger,  2%));
+$button-warning-image    : linear-gradient(180deg, $color-warning, darken($color-warning, 2%));
+
+
+$media-small             :  576px;
+$media-smaller           :  768px;
+$media-medium            :  992px;
+$media-large             : 1346px;
+$media-sml-min-width     :  540px;
+$media-smr-min-width     :  720px;
+$media-med-min-width     :  960px;
+$media-lrg-min-width     : 1346px;
+
+$border-radius           :    3px;
+
+
+:root {
+
+    --border-radius      : #{$border-radius};
+
+    --color-black        : #2b2b2b;
+    --color-grey-dark    : #404040;
+    --color-grey-medium  : #8c8c8c;
+    --color-grey         : #dde2ed;
+    --color-grey-light   : #F7F7F8;
+    --color-white        : #fff;
+
+    --color-background   : #f8f9fa;
+    --color-appheader    : #3d0032;
+    --color-panel        : #f8f9fa;
+    --color-darker       : #eeeded;
+    --color-decor        : #a1a5ac;
+    --color-font         : #{$color-font};
+    --color-font-inverse : #f8f9fa;
+
+    --color-border       : #dededf;
+    --color-panel-border : #333f50;
+    --color-panel-radius : 0px;
+
+    --color-brand        : #{$color-brand};
+    --color-cancel       : #{$color-cancel};
+    --color-second       : #{$color-second};
+    --color-action       : #{$color-action};
+    --color-danger       : #{$color-danger};
+    --color-warning      : #{$color-warning};
+
+
+    // --color-testing      : #2689df;
+    // --color-bounce       : #cb2431;
+    // --color-evergreen    : #28a745;
+    // --color-funnel       : #fcc43b;
+    // --color-persona      : #6fa92b;
+    // --color-value        : #6fa92b;
+    // --color-roi          : #6fa92b;
+    // --color-start        : #0aa78a;
+    // --color-action       : #666e7c;
+    // --color-timing       : #ed9d03;
+    // --color-condition    : #666e7c;
+    // --color-goal         : #1a87e2;
+    // --color-assets       : #991f87;
+
+    --color-hdr-border   : #dededf;
+    --color-hdr-font     : #333f50;
+    --color-hdr-hover    : #{$color-default};
+    --color-hdr-toggled  : #566882;
+    --color-hdr-icon     : #999ea7;
+}

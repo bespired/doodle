@@ -1,0 +1,13 @@
+.od-label{
+	user-select: none;
+	text-transform:lowercase;
+	display: inline-block;
+	margin-right: 4px;
+	&.capitalize-words{
+		text-transform:capitalize;
+	}
+}
+
+.od-label::first-letter {
+	text-transform:uppercase;
+}

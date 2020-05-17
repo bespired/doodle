@@ -1,0 +1,78 @@
+.od-switch {
+    display: flex;
+    margin: 8px $font-size 0 0;
+    pointer-events: initial;
+
+    label {
+        font-size: $font-size;
+        margin-left: #{ $font-size / 2 };
+        user-select: none;
+    }
+
+    .od-switch-container {
+        background-color: $color-cancel;
+        width: 34px;
+        min-width: 34px;
+        height: 14px;
+        margin: 3px 0;
+        display: flex;
+        align-items: center;
+        position: relative;
+        border-radius: 14px;
+        transition: background-color 200ms;
+    }
+
+    .od-switch-thumb {
+        background-color: #fff;
+        border: 1px solid $color-cancel;
+        box-shadow: 0 1px 3px 1px rgba(0, 0, 0, .4);
+        width: 20px;
+        height: 20px;
+        position: relative;
+        border-radius: 50%;
+        margin-left: 0px;
+        transition: margin-left 200ms;
+    }
+
+    &.pressed {
+        & .od-switch-thumb {
+            margin-left: 15px;
+            border: 1px solid $color-action;
+        }
+
+        & .od-switch-container {
+            background-color: $color-action;
+        }
+    }
+
+    & .od-switch-thumb:before {
+        width: 48px;
+        height: 48px;
+        top: 50%;
+        left: 50%;
+        z-index: 6;
+        content: " ";
+        position: absolute;
+        transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+        filter: brightness(1.10);
+    }
+
+    &:active {
+        filter: brightness(0.95);
+
+        .od-radiobox-thumb {
+            box-shadow: inset 0px 5px 4px 0 rgba(0, 0, 0, 0.15);
+        }
+    }
+
+}
+
+
+
+.od-switch:not(.od-disabled),
+.od-switch:not(.od-disabled) .od-switch-label {
+    cursor: pointer;
+}

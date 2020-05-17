@@ -1,0 +1,23 @@
+.confirm {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    overflow: hidden;
+    overflow-y: scroll;
+    outline: 0;
+    background-color: rgba(0, 0, 0, .5);
+
+    &.confirm--open {
+        display: block;
+    }
+}
+
+.confirm .modal--dialog {
+    animation-name: fadeInTop;
+    animation-duration: 300ms;
+    animation-fill-mode: forwards;
+}

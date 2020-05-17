@@ -1,0 +1,100 @@
+.od-radiorow {
+    display: flex;
+
+    &.disabled .od-radiobox {
+        filter: contrast(.5) saturate(0.5) brightness(1.5);
+    }
+}
+
+.od-radiobox {
+    display: flex;
+    margin-right: $font-size;
+    pointer-events: initial;
+
+    label {
+        font-size: $font-size;
+        margin-left: #{ $font-size / 2 };
+        user-select: none;
+        line-height: #{$font-size * 2 + 2}
+    }
+
+    .od-radiobox-container {
+        background-color: vc('grey-light');
+        width: 34px;
+        min-width: 34px;
+        height: 34px;
+        min-height: 34px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        border-radius: 50%;
+        border: 2px solid $color-default;
+        color: $color-default;
+        transition: background-color 100ms;
+    }
+
+    .od-radiobox-thumb {
+        background-color: darken($color-default, 10%);
+        width: 20px;
+        height: 20px;
+        position: relative;
+        border-radius: 50%;
+        margin-left: 5px;
+        opacity: 0;
+        transform: scale(.5);
+        transition: opacity 100ms, transform 100ms;
+    }
+
+    &.pressed {
+        &.smaller .od-radiobox-thumb {
+            margin-left: 1px;
+        }
+
+        & .od-radiobox-thumb {
+            opacity: 1;
+            margin-left: 5px;
+            transform: scale(1);
+        }
+
+        & .od-radiobox-container {
+            background-color: lighten($color-default, 30%);
+        }
+    }
+
+    &.smaller .od-radiobox-container {
+        width: 28px;
+        min-width: 28px;
+        height: 28px;
+        min-height: 28px;
+
+        .od-radiobox-thumb {
+            margin-left: 4px;
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    &:hover {
+        filter: brightness(1.10);
+    }
+
+    &:active {
+        filter: brightness(0.95);
+
+        .od-radiobox-thumb {
+            box-shadow: inset 0px 5px 4px 0 rgba(0, 0, 0, 0.15);
+        }
+    }
+
+    &.disabled {
+        filter: contrast(.5) saturate(0.5) brightness(1.5);
+    }
+
+}
+
+
+
+.od-radiobox:not(.od-disabled),
+.od-radiobox:not(.od-disabled) .od-radiobox-label {
+    cursor: pointer;
+}

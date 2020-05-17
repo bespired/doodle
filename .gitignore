@@ -1,0 +1,16 @@
+/vuecli/node_modules
+/vuecli/dist
+/laravel/public/hot
+/laravel/public/storage/
+/laravel/bootstrap/cache/
+/laravel/storage/
+/laravel/vendor
+/laravel/.env
+/laravel/supervisord.pid
+/laravel/supervisord.log
+/supervisord.pid
+/supervisord.log
+.idea
+._*
+.fuse_*
+/nbproject/private/

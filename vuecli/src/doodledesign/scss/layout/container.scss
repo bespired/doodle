@@ -1,0 +1,63 @@
+// .od-content,
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    background-color: vc(background);
+
+    .flex-80,
+    .flex {
+        display: flex;
+        flex-wrap: wrap;
+
+        .button {
+            align-self: flex-start;
+            // margin: 0 3px 6px;
+        }
+    }
+
+    .flex-80 {
+        width: 80%;
+    }
+
+    .row {
+        display: flex;
+        margin: -3px;
+
+        .button {
+            margin: 0 3px 6px;
+        }
+
+    }
+
+}
+
+@media (min-width: $media-small) {
+    .container {
+        max-width: $media-sml-min-width;
+    }
+}
+
+@media (min-width: $media-smaller) {
+    .container {
+        max-width: $media-smr-min-width;
+    }
+}
+
+@media (min-width: $media-medium) {
+    .container {
+        max-width: $media-med-min-width;
+    }
+}
+
+@media (min-width: $media-large) {
+    .container {
+        max-width: $media-lrg-min-width;
+    }
+}

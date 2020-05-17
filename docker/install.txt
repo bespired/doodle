@@ -1,0 +1,12 @@
+// share folder in mac docker file sharing
+
+$
+docker network create traefik-net; \
+docker network create inter-net
+
+docker-compose build
+
+docker-compose up --force-recreate
+docker-compose up
+
+

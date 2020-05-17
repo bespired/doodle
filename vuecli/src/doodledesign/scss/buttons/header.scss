@@ -1,0 +1,98 @@
+.od-window-header {
+    line-height: 50px;
+
+    .dropdown--menu {
+        display: none;
+        margin-top: 0px;
+        margin-left: 0px;
+        line-height: #{1.4 * $font-size};
+    }
+
+}
+
+.appheader .button,
+.od-window-header .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    background-image: none;
+    border: 0 solid transparent;
+    border-radius: 0;
+    padding: 0 1em;
+    margin: 0;
+    box-sizing: content-box;
+    color: vc('hdr-font');
+    min-height: $subheader-height;
+    line-height: $subheader-height;
+    box-shadow: none;
+    border-right: 1px solid vc('hdr-border');
+
+    &.off {
+        pointer-events: none;
+    }
+
+    &.none {
+        max-width: 0;
+        min-width: 0;
+        overflow: hidden;
+        padding: 0;
+        flex-grow: 0;
+        border: 0;
+    }
+
+    &.square {
+        max-width: $subheader-height;
+        min-width: $subheader-height;
+        overflow: hidden;
+        padding: 0;
+        flex-grow: 1;
+    }
+
+    &.double {
+        max-width: #{ 2 * $subheader-height};
+        min-width: #{ 2 * $subheader-height};
+        overflow: hidden;
+        padding: 0;
+        flex-grow: 2;
+    }
+
+    &.push-middle {
+        margin-left: auto;
+        border-left: 1px solid vc('hdr-border');
+
+        &~.push-middle {
+            margin-left: 0;
+            margin-right: auto;
+            border-left: 1px solid vc('hdr-border');
+            border-right: 0 solid transparent;
+        }
+    }
+
+    &.push-right {
+        margin-left: auto;
+        border-left: 1px solid vc('hdr-border');
+        border-right: 0 solid transparent;
+
+        ~.button {
+            border-left: 1px solid vc('hdr-border');
+            border-right: 0 solid transparent;
+        }
+    }
+
+    &:hover {
+        background-color: vc('hdr-hover');
+        color: vc('font-inverse');
+    }
+
+    &.open,
+    &.pressed {
+        background-color: #463350;
+        color: vc('font-inverse');
+
+        &:hover {
+            filter: brightness(.8);
+        }
+    }
+
+}

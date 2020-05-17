@@ -1,0 +1,2 @@
+* * * * * www-data /usr/bin/php7.2 /application/laravel/artisan schedule:run
+# Mandatory blank line

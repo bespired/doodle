@@ -1,0 +1,64 @@
+.appheader {
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    display: flex;
+    // justify-content: space-between;
+
+    min-height: $mainheader-height;
+    max-height: $mainheader-height;
+    background-color: vc(appheader);
+    color: vc(font-inverse);
+
+    font-family: $font-family-primary;
+    font-size: .875rem;
+    line-height: 1.5;
+
+    .push-right {
+        margin-left: auto;
+    }
+
+}
+
+.appheader-logo {
+    max-height: $mainheader-height;
+    padding: 1em 2em;
+    min-width: 180px;
+}
+
+
+.appheader {
+    .dropdown--toggle {
+        .sub-title {
+            display: block;
+            font-size: 11px;
+            color: #d1d5da;
+        }
+    }
+
+    .dropdown--menu {
+        margin-top: 0;
+        min-width: 200px;
+        // flex-wrap: wrap;
+
+        &.pop-right {
+            left: auto;
+            right: 0;
+        }
+    }
+
+    .button {
+        border-right: 0;
+        color: white;
+        height: 53px;
+
+        &:hover {
+            background-color: rgba(59, 138, 228, 0.2);
+        }
+
+        &:after {
+            color: #ed9d03;
+        }
+    }
+}

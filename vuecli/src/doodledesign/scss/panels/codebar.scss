@@ -1,0 +1,48 @@
+.od-content pre {
+    font-size: .8em;
+    padding: 1em;
+    color: white;
+    background: var(--color-appheader);
+    border-radius: 4px;
+    font-size: .8em;
+    width: 100%;
+
+}
+
+.for-overview~.full-width {
+    .code-bar:not(.overlap) {
+        margin-top: 20px;
+    }
+
+    .code-bar.overlap {
+        margin-top: -42px;
+    }
+}
+
+.code-bar {
+    text-align: right;
+
+    &.overlap {
+        pointer-events: none;
+        margin-top: -35px;
+    }
+
+    &~pre {
+        max-height: 0;
+        overflow: hidden;
+        margin-top: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        opacity: 0;
+        transition: max-height 100ms, padding 100ms, opacity 100ms, margin 100ms;
+
+        &.open {
+            max-height: 70vh;
+            opacity: 1;
+            margin-top: 1.5em;
+            padding-top: 1em;
+            padding-bottom: 1em;
+        }
+    }
+
+}

@@ -1,0 +1,22 @@
+@function vc($var) {
+	@return var(--color-#{$var});
+}
+
+@function v($var) {
+	@return var(--#{$var});
+}
+
+@import 'systematize';
+@import 'variables';
+@import 'html';
+@import 'body';
+@import 'docs';
+@import 'animations/keyframes';
+@import 'layout/all';
+@import 'panels/all';
+@import 'buttons/all';
+@import 'inputs/all';
+@import 'modals/all';
+@import 'lists/all';
+@import 'design/all';
+@import 'appheader/header';

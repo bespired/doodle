@@ -1,0 +1,59 @@
+.od-foldable > div:last-of-type{
+	border-bottom:  1px solid var(--color-border);
+}
+
+.od-fold-header{
+	background-color: #fff;
+	border-top:   1px solid var(--color-border);
+	border-left:  1px solid var(--color-border);
+	border-right: 1px solid var(--color-border);
+    padding: 1em;
+    display: flex;
+    cursor: pointer;
+
+    .od-fold-wing{
+    	padding-top: 3px;
+    	max-height: 1.3rem;
+    	transition: transform $tempo;
+    }
+    .od-fold-label{
+    	user-select: none;
+    	padding-left: 3px;
+	}
+	~.od-fold-body{
+		max-height: 0;
+		padding-top: 0;
+		padding-bottom: 0;
+		overflow: auto;
+		transition: padding 200ms, max-height 100ms;
+		flex-direction: column;
+
+		& > div{ width: 100%; }
+
+	}
+
+    &.opened{
+    	background-color: #f7f7f8;
+    	color: $color-default;
+    	border-bottom:  1px solid var(--color-border);
+
+    	.od-fold-wing{
+    		transform: rotate(180deg);
+    	}
+
+    	&~.od-fold-body{
+    		max-height: calc(100vh - 300px);
+    		padding-top: 1em;
+			padding-bottom: 1em;
+    	}
+    }
+
+}
+
+.od-fold-body{
+	background-color: #fff;
+	border-left: 1px solid var(--color-border);
+	border-right: 1px solid var(--color-border);
+    padding: 1em;
+    display: flex;
+}

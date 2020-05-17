@@ -1,0 +1,61 @@
+.alertbar {
+	position: fixed;
+	z-index: 200;
+	right: 1em;
+	top: -104px;
+	width: 100px;
+	min-width: 500px;
+	animation-name: fadeInLeft;
+	animation-duration: 5s;
+	animation-fill-mode: forwards;
+	pointer-events: none;
+}
+
+.alert {
+	position: relative;
+	background-color: $color-default;
+	border: 1px solid $color-default;
+	color: var(--color-font-inverse);
+	border-radius: v(border-radius);
+	padding: 1em;
+	margin-top: 1em;
+	opacity: 1;
+
+	&.alert--brand {
+		background-color: $color-brand;
+		border-color: var(--color-border);
+	}
+
+	&.alert--second {
+		background-color: $color-second;
+		border-color: var(--color-border);
+		color: var(--color-font);
+	}
+
+	&.alert--action {
+		background-color: $color-action;
+		border-color: $color-action;
+	}
+
+	&.alert--success {
+		background-color: $color-success;
+		border-color: $color-success;
+	}
+
+	&.alert--danger,
+	&.alert--error {
+		background-color: $color-danger;
+		border-color: $color-danger;
+	}
+
+	.alert--title {}
+
+	&.closing {
+		transition: opacity 400ms;
+		opacity: 0;
+
+		.button {
+			pointer-events: none !important;
+		}
+	}
+}

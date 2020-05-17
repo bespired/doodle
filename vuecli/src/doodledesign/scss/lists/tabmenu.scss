@@ -1,0 +1,42 @@
+.od-tabmenu {
+    top: 2px;
+    left: 10vw;
+    right: 10vw;
+    padding: 0;
+    margin: 0;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    pointer-events: none;
+
+    height: $subheader-height;
+
+    .od-tabmenu--tab {
+
+        padding: 1em .2em 17px;
+        padding-top: calc(#{$subheader-height / 2 - $font-size + 5});
+        padding-bottom: calc(#{$subheader-height / 2 - $font-size + 5});
+
+        margin: 0 1em;
+        text-transform: uppercase;
+        text-align: center;
+        font-size: .8em;
+        font-weight: 900;
+        cursor: pointer;
+        pointer-events: all;
+
+        &.selected {
+            color: var(--color-hdr-hover);
+            border-bottom: 3px solid var(--color-hdr-hover);
+            padding-bottom: calc(#{$subheader-height / 2 - $font-size + 5} - 3px);
+        }
+
+        &:hover {
+            border-bottom: 5px solid var(--color-hdr-hover);
+            padding-bottom: calc(#{$subheader-height / 2 - $font-size + 5} - 5px);
+        }
+
+    }
+}

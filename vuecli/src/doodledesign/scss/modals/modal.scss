@@ -1,0 +1,42 @@
+.modal--dialog {
+    position: relative;
+    width: auto;
+    max-width: 750px;
+    margin: 30px auto;
+    pointer-events: none;
+}
+
+.modal--content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto;
+    background-color: vc('panel');
+    background-clip: padding-box;
+    padding: 20px 30px;
+    border-radius: 3px;
+    outline: 0;
+}
+
+.modal--body {
+    padding: $font-size $font-size #{2 * $font-size} $font-size;
+}
+
+.modal--footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: $font-size;
+    border-top: 1px solid vc('border');
+}
+
+.modal--title {
+    font-size: #{$font-size * 1.6};
+    text-align: left;
+    padding: #{$font-size * .8} 0;
+}
+
+.confirm--small .modal--dialog {
+    max-width: 450px;
+    text-align: center;
+}

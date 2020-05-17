@@ -1,0 +1,112 @@
+.input-group {
+
+    font-family: $font-family-primary;
+    width: 100%;
+    color: vc(font);
+    text-align: left;
+    padding-bottom: 7px;
+
+    label[for] {
+        cursor: pointer;
+        font-weight: 500;
+        // letter-spacing: -.05px;
+        line-height: 22px;
+        display: inline-block;
+        margin-bottom: .25rem;
+        transform-origin: top left;
+        transform: scale(1) translateY(0) translateX(8);
+        margin-left: 0px;
+        transition: transform 200ms linear, margin-left 200ms linear, font-weight 200ms;
+
+        &.placeholder {
+            font-weight: 100;
+            color: lighten($color-font, 20%);
+            transform: scale(1.2) translateY(25px) translateX(8px);
+        }
+
+    }
+
+    .input-row {
+        display: flex;
+        border-radius: v(border-radius);
+        background-color: vc('darker');
+
+        span {
+            display: flex;
+            flex-grow: 0;
+            padding: 7px $font-size;
+            min-width: 35px;
+            place-content: center;
+            border: 1px solid vc('border');
+        }
+
+        .input-button{
+            &:hover {
+                cursor: pointer;
+                background-color: vc('panel');
+            }
+            &:active {
+                filter: brightness(0.95);
+                box-shadow: inset 0px 5px 4px 0 rgba(0, 0, 0, 0.15);
+            }
+        }
+
+    }
+
+    &.prefix .input-row{
+        input{
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        span:first-of-type {
+            border-right: 0;
+            border-top-left-radius: v(border-radius);
+            border-bottom-left-radius: v(border-radius);
+        }
+    }
+
+    &.postfix .input-row{
+        input{
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            & ~ span {
+                border-left: 0;
+                &:last-of-type {
+                    border-top-right-radius: v(border-radius);
+                    border-bottom-right-radius: v(border-radius);
+                }
+            }
+        }
+    }
+
+
+    input {
+        display: block;
+        flex-grow: 90;
+        border-radius: v(border-radius);
+        appearance: none;
+        border: 1px solid vc(border);
+        padding: 8px 12px;
+        font-size: $font-size;
+
+        outline: 0;
+        background-color: #fff;
+        background-color: vc('grey-light');
+
+        &:focus {
+            border-color: $color-default;
+        }
+    }
+
+}
+
+@for $i from 1 through 12 {
+    .prefix.prefix-#{$i} {
+        & .input-row span:first-of-type {
+            min-width: #{$i * 1.2 * $font-size + 24};
+        }
+        & label[for].placeholder {
+            margin-left: #{$i * 1.2 * $font-size + 26};
+        }
+    }
+}

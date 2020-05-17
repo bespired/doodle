@@ -1,0 +1,60 @@
+@import url($font-family-url);
+
+#app:before{
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% $heroimage-height;
+    background-size: cover;
+    background-position: 0 $mainheader-height;
+    filter: saturate(70%) hue-rotate(-10deg);
+
+};
+
+body {
+    min-height: 100vh;
+    background-color: black;
+    // background-image: $image-url-home-doodle-1;
+    background-repeat: no-repeat;
+    background-size: 100% $heroimage-height;
+    background-size: cover;
+    background-position: 0 $mainheader-height;
+
+    font-family: $font-family-primary;
+    font-size: $font-size;
+    font-weight: 300;
+    line-height: 1.5;
+
+
+    .full-height {
+        min-height: 100vh;
+    }
+
+    .full-width {
+        min-width: 100%;
+    }
+
+    .ucfirst {
+        text-transform: lowercase;
+    }
+
+    .ucfirst:first-letter {
+        text-transform: uppercase;
+    }
+}
+
+
+#app:before { background-image: $image-url-home-doodle-1 }
+
+@media (min-width: $media-small){
+    #app:before { background-image: $image-url-home-doodle-2 }
+}
+
+@media (min-width: $media-medium){
+    #app:before { background-image: $image-url-home-doodle-3 }
+}
+
+
+

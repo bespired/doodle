@@ -1,0 +1,230 @@
+.button, a, button {
+    text-decoration: none;
+}
+
+.button {
+    margin: 0 3px 6px;
+
+    display: inline-block;
+
+    color: #fff;
+    background-color: #fff;
+    background-image: $button-default-image;
+
+    border-radius: v(border-radius);
+    border: 0;
+
+    white-space: nowrap;
+    text-align: center;
+
+    min-width: 100px;
+
+    font-weight: 600;
+    font-family: $font-family-primary;
+    font-size: $font-size;
+    line-height: $font-size;
+    letter-spacing: .3px;
+    vertical-align: top;
+
+    outline: 0;
+    padding: #{$font-size * 0.71428571428 + .5} 22px;
+
+    box-shadow: inset 0 0 0 1px rgba(67, 90, 111, .1), inset 0 -1px 1px 0 rgba(67, 90, 111, .06);
+
+    cursor: pointer;
+    pointer-events: initial;
+    user-select: none;
+
+    &.pressed {
+        background-image: none;
+        background-color: lighten($color-default, 30%);
+        color: darken($color-default, 10%);
+        border: 1px solid $color-default;
+        padding: #{$font-size * 0.71428571428 - .5} 20px;
+    }
+
+    &.brand {
+        background-image: $button-brand-image;
+
+        &.pressed {
+            background-image: none;
+            background-color: lighten($color-brand, 30%);
+            color: darken($color-brand, 10%);
+            border: 1px solid $color-brand;
+            padding: #{$font-size * 0.71428571428 - .5} 20px;
+        }
+    }
+
+    &.cancel {
+        background-image: $button-cancel-image;
+    }
+
+    &.second {
+        background-image: $button-second-image;
+        color: vc(font);
+
+        &.pressed {
+            background-image: none;
+            background-color: darken($color-second, 20%);
+            color: lighten($color-second, 10%);
+            border: 1px solid darken($color-second, 60%);
+        }
+    }
+
+    &.success,
+    &.action {
+        background-image: $button-action-image;
+
+        &.pressed {
+            background-image: none;
+            background-color: lighten($color-action, 30%);
+            color: darken($color-action, 10%);
+            border: 1px solid $color-action;
+        }
+    }
+
+    &.danger {
+        background-image: $button-danger-image;
+    }
+
+    &.warning {
+        background-image: $button-warning-image;
+    }
+
+    &.smaller {
+        padding: 7px 20px;
+        font-size: #{$font-size - 1};
+        font-weight: 500;
+    }
+
+    &.bigger {
+        padding: 13px 24px;
+        font-size: #{$font-size + 1};
+    }
+
+    &:before {
+        content: ' ';
+        display: inherit;
+    }
+
+    &.round {
+        border-radius: #{2 * $font-size};
+    }
+
+    &.simple {
+        background-image: none;
+        background-color: initial;
+        box-shadow: initial;
+        color: vc(font);
+
+        &:hover {
+            box-shadow: inset 0px 0px 10px 0px rgba(42, 128, 165, 0.13);
+        }
+    }
+
+    &.icon {
+        border-radius: #{2 * $font-size};
+        max-width: #{2.5 * $font-size};
+        min-width: #{2.5 * $font-size};
+        max-height: #{2.5 * $font-size};
+        padding-left: 0;
+        padding-right: 0;
+
+        svg {
+            width: $font-size;
+            height: $font-size;
+        }
+    }
+
+    &.close {
+        background-image: none;
+        background-color: initial;
+        box-shadow: initial;
+        max-width: #{2.5 * $font-size};
+        min-width: #{2.5 * $font-size};
+        max-height: #{2.5 * $font-size};
+        padding-left: 0;
+        padding-right: 0;
+        color: vc(font);
+    }
+
+    &.right-icon {
+        position: relative;
+        padding-right: #{$font-size + 22px};
+
+        svg {
+            right: 1em;
+            position: absolute;
+            width: $font-size;
+            height: $font-size;
+        }
+    }
+
+    &.left-icon {
+        position: relative;
+        padding-left: #{$font-size + 22px};
+
+        svg {
+            left: 1em;
+            position: absolute;
+            width: $font-size;
+            height: $font-size;
+        }
+    }
+
+
+    &:hover {
+        filter: brightness(1.10);
+    }
+
+    &:active {
+        filter: brightness(0.95);
+        box-shadow: inset 0px 5px 4px 0 rgba(0, 0, 0, 0.15);
+    }
+
+    svg {
+        pointer-events: none;
+        overflow: visible;
+    }
+
+    &:disabled {
+        filter: contrast(.45) saturate(0.5) brightness(1.5);
+    }
+
+    &.radio-button {
+        margin-right: 0;
+        margin-left: 0;
+        border-right-width: 0;
+        border-radius: 0;
+
+        &:first-child {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+
+        &:last-child {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            border-right-width: 1px;
+        }
+    }
+
+}
+
+.od-radiorow.disabled .radio-button {
+    filter: contrast(.5) saturate(0.5) brightness(1.5);
+}
+
+
+
+// .flex{
+//     .button {
+//         align-self: flex-start;
+//         margin: 0 3px 6px;
+//     }
+//     .row{
+//         .button {
+//             margin: 0 3px 6px;
+//         }
+//     }
+// }

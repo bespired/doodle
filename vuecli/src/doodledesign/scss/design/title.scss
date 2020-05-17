@@ -1,0 +1,14 @@
+.title {
+	margin-top: 1rem;
+	margin-bottom: .6rem;
+
+	font-size: $font-size * 1.25;
+
+	&.big {
+		font-size: $font-size * 1.5;
+	}
+
+	&.bigger {
+		font-size: $font-size * 2.0;
+	}
+}

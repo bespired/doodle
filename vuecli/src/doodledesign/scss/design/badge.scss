@@ -1,0 +1,62 @@
+.badge{
+	user-select: none;
+	text-transform: uppercase;
+	border: 1px solid #dededf;
+	font-size: .8em;
+	padding: 2px 8px;
+	background-color: #fff;
+	min-width: 70px;
+	text-align: center;
+	display: inline-block;
+	max-height: 2em;
+	margin-right: 4px;
+	margin-bottom: 4px;
+
+	&.round{
+		border-radius: 10px;
+	}
+	&.smaller{
+	    padding: 2px 7px;
+	    font-size: 0.7em;
+	    min-width: auto;
+	    height: 18px;
+	}
+
+	&.brand{
+		background-color: $color-brand;
+		color: lighten($color-brand, 60%);
+	}
+	&.cancel{
+		background-color: $color-cancel;
+		color: lighten($color-cancel, 60%);
+	}
+	&.second{
+		background-color: $color-second;
+	}
+	&.action{
+		background-color: $color-action;
+		color: lighten($color-action, 60%);
+	}
+	&.danger{
+		background-color: $color-danger;
+		color: lighten($color-danger, 60%);
+	}
+	&.warning{
+		background-color: $color-warning;
+		color: lighten($color-warning, 60%);
+	}
+	&.true, &.success{
+		background-color: $color-success;
+		color: lighten($color-success, 60%);
+		border-color: lighten($color-success, 5%);
+	}
+	&.false, &.error{
+		background-color: $color-error;
+		color: lighten($color-error, 60%);
+		border-color: lighten($color-error, 5%);
+	}
+
+}
+// .badge + .badge{
+// 	margin-left: 4px;
+// }

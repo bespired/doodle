@@ -1,0 +1,22 @@
+.od-tag-listing {
+	tr {
+		vertical-align: top;
+		border-bottom: 1px solid var(--border-color);
+	}
+
+	td {
+		vertical-align: top;
+	}
+
+	.od-tag-listing-label{
+		display: flex;
+	}
+	.od-tag-listing-tags{
+	    vertical-align: top;
+	    display: flex;
+	    flex-wrap: wrap;
+	    align-content: space-evenly;
+	    padding-left: 2em;
+	}
+
+}
