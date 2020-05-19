@@ -71,6 +71,15 @@ http://localhost/_
 Doodle welcome:
 http://localhost/admin
 
+  
+
+Create default admin login  
+`docker/doexec.sh doodle_php php artisan doodle:create:admin`  
+
+Doodle design:  
+http://localhost/admin/doodledesign/welcome  
+
+
 
 __develop__  
 Develop doodle with:  

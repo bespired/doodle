@@ -2,7 +2,7 @@
 <template>
     <div :id="$options.namedId" class="full-width">
         <div class="code-bar" :class="{ overlap:overlapping }" v-if="hasButton">
-            <od-button class="simple smaller" icons="code" @click="codeOpen=!codeOpen" />
+            <od-button class="simple smaller" icons="file-code" @click="codeOpen=!codeOpen" />
         </div>
         <pre :class="{open:codeOpen}">{{ code }}</pre>
     </div>
