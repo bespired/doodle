@@ -20,9 +20,11 @@ export default {
         this.$refs.loginmodel.open(authRoute)
             .then((credentials) => {
 
+                console.log(credentials)
+
                 auth.setToken(
                     credentials.token,
-                    57600 + Math.floor(Date.now() / 1000),
+                    Date.now() + 57600 * 1000,
                 )
 
                 const intended =  localStorage.getItem('doodle.intended') || '/'
