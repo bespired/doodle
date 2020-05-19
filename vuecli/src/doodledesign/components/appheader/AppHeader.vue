@@ -1,15 +1,15 @@
 <template>
-    <header id="appheader" class="appheader">
-        <doodle-logo class="appheader-logo"/>
-        <div class="flex">
-			<od-dropdown class="tentant" :label="tenant.project" :sublabel="tenant.client">
+    <header id="appheader" class="appheader" >
+        <doodle-logo class="appheader-logo" />
+        <div class="flex" v-if="tenant">
+			<od-dropdown class="tentant" :label="tenant.project" sublabel="" >
 				<template v-for="entry in tenant.menulist">
-					<a :key="entry.id">{{ entry.project }}</a>
+					<a :key="entry.id">{{ entry.label }}</a>
 				</template>
 			</od-dropdown>
 		</div>
 		<div class="flex">
-			<template v-for="dropdown in menu">
+			<template v-for="dropdown in main">
 				<od-dropdown :label="dropdown.label" :key="dropdown.alias">
 					<div class="menu-panel" :class="{triple: dropdown.chapters.length > 2}">
 						<template v-for="chapter in dropdown.chapters">
@@ -24,7 +24,7 @@
 				</od-dropdown>
 			</template>
 		</div>
-		<div class="flex push-right">
+		<div class="flex push-right" v-if="profile">
 			<od-dropdown class="pop-right" :label="user.fullname">
 				<template v-for="entry in profile">
 					<a :key="entry.id">{{ entry.label }}</a>
@@ -35,30 +35,39 @@
 </template>
 
 <script>
-import Menu from '../../helpers/menu.js'
+
+import Storage from '../../helpers/storage.js'
+import Vue from 'vue'
+
 export default {
     name: 'app-header',
+
     data(){
     	return{
-    		tenant: {
-    			client: 'Bespired', project: 'Doodles',
-    			menulist:[
-	    			{ id: 10001, client_id: 1, project_id: 1, client: 'Bespired', project: 'Doodles'    },
-	    			{ id: 20002, client_id: 2, project_id: 2, client: 'Nibe'    , project: 'Aardgasvrij' },
-	    			{ id: 50005, client_id: 5, project_id: 5, client: 'Zeroplex', project: 'Zeroplex'    },
-	    		]
-	    	},
-    		user:{
-    			fullname: 'Joeri Kassenaar'
-    		},
-    		profile:[
-    			{ label: 'Your Profile', action: '' },
-    			{ label: 'Settings',     action: '' },
-    			{ label: 'Sign-out',     action: '' },
-    		],
-    		menu: Menu
+    		tenant:  Storage.get('tenantmenu', {}),
+    		user:    Storage.get('usermenu', { fullname:'' }),
+    		profile: Storage.get('profilemenu',[]),
+    		main:    Storage.get('mainmenu', []),
+    	}
+    },
 
+    mounted() {
+        this.loadMenu('tenantmenu')
+		this.loadMenu('usermenu')
+		this.loadMenu('profilemenu')
+		this.loadMenu('mainmenu')
+    },
 
+    methods: {
+    	loadMenu(item){
+			const url = `${window.location.protocol}//${window.location.hostname}/api/${item}`
+        	axios.get(url)
+            	.then(response => {
+            		const varname= item.replace(/menu/, '')
+            		this[varname] = response.data
+            		Storage.set(item, response.data);
+            	})
+            	.catch( error => error )
     	}
     }
 }

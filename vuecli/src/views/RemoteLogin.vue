@@ -22,7 +22,7 @@ export default {
 
                 auth.setToken(
                     credentials.token,
-                    57600 + Date.now(),
+                    57600 + Math.floor(Date.now() / 1000),
                 )
 
                 const intended =  localStorage.getItem('doodle.intended') || '/'

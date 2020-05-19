@@ -39,10 +39,7 @@ export default {
 
         texts: {
             // slots for drop down states
-        }
-
-
-
+        },
     },
 
     getters: {

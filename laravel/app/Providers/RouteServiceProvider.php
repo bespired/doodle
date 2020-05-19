@@ -73,7 +73,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         Route::prefix('api/')
-            ->namespace('App\Http\Controllers\JwtApi')
+            ->namespace('App\Http\Controllers')
             ->group(base_path('routes/api.php'));
     }
 }

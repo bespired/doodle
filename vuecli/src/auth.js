@@ -5,19 +5,12 @@ const auth = {
     parsedToken: null,
 
     requireAuth(to, from, next) {
-
         if (!auth.isAuthenticated()) {
-
             localStorage.setItem('doodle.intended', to.path);
             next({path: '/remotelogin'});
-
-
         } else {
-
             next();
-
         }
-
     },
 
     setToken(token, expiration) {
