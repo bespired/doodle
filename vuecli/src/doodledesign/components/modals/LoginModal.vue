@@ -27,7 +27,7 @@
 							required
 							vmodel="credentials.password"
 						/>
-						<div class="alert alert--danger" v-if="error">
+						<div class="alert alert--danger" v-if="error" :data-error="error">
 							These credentials do not match our records.
 						</div>
 					</div>
@@ -72,7 +72,6 @@
 
 		methods: {
 			open(url) {
-				console.log( url )
 				this.url    = url;
 				this.dialog = true;
 				return new Promise((resolve, reject) => {
@@ -88,8 +87,7 @@
 					this.resolve(response.data);
 
 				}, (e) => {
-
-					this.error = e.response.data.message;
+					this.error = e.response.data.error;
 
 				});
 			},

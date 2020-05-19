@@ -26,9 +26,9 @@ router.beforeEach((to, from, next) => {
 
     document.title = 'Doodle'
 
-    // if (to.name && to.name !== 'remotelogin') {
-    //     auth.requireAuth(to, from, next)
-    // }
+    if (to.name && to.name !== 'remotelogin') {
+        auth.requireAuth(to, from, next)
+    }
 
     next()
 })

@@ -8,21 +8,14 @@ const auth = {
 
         if (!auth.isAuthenticated()) {
 
-            let intended = to.path;
+            localStorage.setItem('doodle.intended', to.path);
+            next({path: '/remotelogin'});
 
-            if (process.env.NODE_ENV === 'development') {
-
-                next({path: '/remotelogin', query: {intended}});
-
-            } else {
-
-                next(false);
-                intended = encodeURIComponent(window.location.origin+'/'+intended);
-                window.location = '/admin/auth/login?intended='+intended;
-            }
 
         } else {
+
             next();
+
         }
 
     },

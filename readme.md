@@ -56,8 +56,8 @@ traefik:v2.2          0.0.0.0:80->80/tcp, 0.0.0.0:9090->8080/tcp   traefik
 
 Use php version 7.2 in container to install Laravel 6
 `docker/doexec.sh doodle_php composer install`
-`docker/doexec.sh doodle_php php artisan key:generate`
-
+`docker/doexec.sh doodle_php php artisan key:generate`  
+`docker/doexec.sh doodle_php php artisan jwt:secret`  
 
 
 

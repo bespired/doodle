@@ -11,19 +11,18 @@
 |
  */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
+Route::post('login', 'UserController@authenticate');
+Route::get('open', 'DataController@open');
+
+Route::get('/', function () {return json_encode(['hi']);});
+
+Route::group(['middleware' => ['jwt.verify']], function () {
+    Route::get('user', 'UserController@getAuthenticatedUser');
+    Route::get('closed', 'DataController@closed');
+    Route::post('register', 'UserController@register');
+});
+
+// Route::get('/event/send/{message}', function ($message) {
+//     event(new \App\Events\MessageSend($message));
+//     return json_encode(['message sent' => $message]);
 // });
-
-Route::get('/', function () {
-    return json_encode(['hi']);
-});
-
-Route::get('/event/send/{message}', function ($message) {
-    event(new \App\Events\MessageSend($message));
-    return json_encode(['message sent' => $message]);
-});
-
-Route::post('_/auth/v1/login', function () {
-    return json_encode(['hi']);
-});
