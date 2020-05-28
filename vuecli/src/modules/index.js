@@ -1,58 +1,39 @@
 import Vue       from 'vue'
 import Vuex      from 'vuex'
-import doodleApi from '@/packages/doodle'
+import DoodleApi from '@/packages/doodle'
 
 Vue.use(Vuex)
 
 export default {
+
     namespaced: true,
 
     state: {
         mainIndex:   true,
 
         apis: {
-            doodleApi: new doodleApi(),
+            doodleApi: new DoodleApi(),
         },
 
-        connections: null,
-        differences: null,
+        rowTemplates: null,
 
     },
 
     getters: {
-
-        connections: (state) => { return state.connections },
-        differences: (state) => { return state.differences },
-
+        getRowTemplates: (state) => { return state.rowTemplates },
     },
 
     mutations: {
-
-        setConnections(state, connections){ state.connections = connections },
-        setDifferences(state, differences){ state.differences = differences },
-
+        setRowTemplates(state, rowTemplates){ state.rowTemplates = rowTemplates },
     },
 
     actions: {
-
-        setCredentials(context, params) {
-            context.state.params = params
-            context.state.apis.doodleApi.setCredentials(params.client, params.project)
-        },
-
-        getConnections(context, type){
-            context.state.apis.doodleApi.getConnections()
+        getRowTemplates(context){
+            context.state.apis.doodleApi.getRowTemplates()
                 .then( result => {
-                    context.commit('setConnections', result )
-                })
-        },
-        getDifferences(context, type){
-            context.state.apis.doodleApi.getDifferences()
-                .then( result => {
-                    context.commit('setDifferences', result )
+                    context.commit('setRowTemplates', result )
                 })
         },
     },
-
 
 }

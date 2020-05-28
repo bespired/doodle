@@ -42,6 +42,9 @@
 </template>
 
 <script>
+
+	import Encryption from "../../helpers/encryption.js"
+
 	export default {
 		name: 'login-modal',
 		data() {
@@ -79,17 +82,15 @@
 					this.reject  = reject;
 				})
 			},
-
 			login() {
-				global.axios.post(this.url, this.credentials)
-				.then( (response) => {
-					this.dialog = false;
-					this.resolve(response.data);
-
-				}, (e) => {
-					this.error = e.response.data.error;
-
-				});
+				let encryped= Encryption.model(this.credentials)
+				global.axios.post(this.url, encryped)
+					.then( (response) => {
+						this.dialog = false;
+						this.resolve(response.data);
+					}, (e) => {
+						this.error = e.response.data.error;
+					});
 			},
 			cancel() {
 				this.dialog = false;

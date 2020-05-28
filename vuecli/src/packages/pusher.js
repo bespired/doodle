@@ -36,7 +36,6 @@ export default class PusherApi {
              this.channel[params.channel].event[params.event] = {
                 name  : params.event,
                 event : this.channel[params.channel].channel.bind(params.event, function(data) {
-                    console.log( `context.commit('${params.event}', "${data.message}")`);
                     context.commit(params.event, data.message)
                 })
             }

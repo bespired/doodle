@@ -8,6 +8,9 @@ import mainRoutes   from './routes/main.js'
 import indexRoutes  from './routes/index.js'
 import DoodleRoutes from './doodledesign/routes/doodles.js'
 
+import PageRoutes   from './routes/page.js'
+import RowRoutes    from './routes/row.js'
+
 
 Vue.use(Router)
 
@@ -19,8 +22,9 @@ let router = new Router({
 
 router.addRoutes(mainRoutes)
 router.addRoutes(indexRoutes)
+router.addRoutes(PageRoutes)
+router.addRoutes(RowRoutes)
 router.addRoutes(DoodleRoutes)
-
 
 router.beforeEach((to, from, next) => {
 
@@ -29,6 +33,8 @@ router.beforeEach((to, from, next) => {
     if (to.name && to.name !== 'remotelogin') {
         auth.requireAuth(to, from, next)
     }
+
+	// history.pushState( null, null, document.location.href )
 
     next()
 })

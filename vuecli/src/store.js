@@ -13,6 +13,6 @@ export default new Vuex.Store({
         base:      moduleBase,
         index:     moduleIndex,
         pusher:    modulePusher,
-        doodlegui: moduleDoodle, // stupid -- is for vue inspect
+        doodlegui: moduleDoodle, // stupid that this can't be in doodledesign-- is for vue inspect
     },
 });

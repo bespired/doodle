@@ -31,7 +31,6 @@ export default {
 
 	computed:{
 		panels(){
-			// console.log(this.$store.getters['doodlegui/getAlertPanels'], '...')
 			return this.$store.getters['doodlegui/getAlertPanels']
 		}
 	},

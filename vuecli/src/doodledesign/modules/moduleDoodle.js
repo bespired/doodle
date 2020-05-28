@@ -37,9 +37,20 @@ export default {
             // slots for drop down states
         },
 
-        texts: {
-            // slots for drop down states
+        selects: {
+            // slots for select values
         },
+
+        options: {
+            // slots for select options
+        },
+
+        texts: {
+            // slots for text values
+        },
+
+        searchValue: '',
+
     },
 
     getters: {
@@ -63,17 +74,29 @@ export default {
         getTextValue: (state) => item => {
             if ( state.texts[item] === undefined ) Vue.set(state.texts, item, null)
             return state.texts[item]
-        }
+        },
+        getSelectValue: (state) => item => {
+            if ( state.selects[item] === undefined ) Vue.set(state.selects, item, null)
+            return state.selects[item]
+        },
+        getSelectOptions: (state) => item => {
+            if ( state.options[item] === undefined ) Vue.set(state.options, item, [])
+            return state.options[item]
+        },
+        getSearchValue: (state) => { return state.searchValue }
     },
 
     mutations: {
         prepareAlertPanel (state, payload) { state.alertPanels.slotted[payload.index]= payload    },
+        setSearchValue    (state, payload) { state.searchValue= payload.value },
         setToggleState    (state, payload) { Vue.set(state.toggles,   payload.key, payload.value) },
         setTabState       (state, payload) { Vue.set(state.tabs,      payload.key, payload.value) },
         setRadioState     (state, payload) { Vue.set(state.radiorows, payload.key, payload.value) },
         setFoldState      (state, payload) { Vue.set(state.folds,     payload.key, payload.value) },
         setDropdownState  (state, payload) { Vue.set(state.dropdowns, payload.key, payload.value) },
         setTextValue      (state, payload) { Vue.set(state.texts,     payload.key, payload.value) },
+        setSelectValue    (state, payload) { Vue.set(state.selects,   payload.key, payload.value) },
+        setSelectOptions  (state, payload) { Vue.set(state.options,   payload.key, payload.value) },
         addAlertPanel (state, payload) {
             let now = new Date().getTime()
             payload.id = Helpers.uuid(payload.title)

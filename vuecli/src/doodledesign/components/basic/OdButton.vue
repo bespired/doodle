@@ -18,7 +18,13 @@ export default {
     },
     data() {
         let valueState = this.vmodel ? this.$parent[this.vmodel] : false
-        if (this.smodel) valueState = this.$store.getters['doodlegui/getToggleState'](this.smodel)
+        if (this.smodel) {
+            if (this.function === 'radio') {
+                valueState = this.$store.getters['doodlegui/getRadioState'](this.smodel)
+            }else{
+                valueState = this.$store.getters['doodlegui/getToggleState'](this.smodel)
+            }
+        }
 
         return {
             valueState: valueState,
@@ -31,7 +37,13 @@ export default {
     computed: {
         changed() {
             if (this.vmodel) return this.$parent[this.vmodel]
-            if (this.smodel) return this.$store.getters['doodlegui/getToggleState'](this.smodel)
+            if (this.smodel){
+                if (this.function === 'radio') {
+                    return this.$store.getters['doodlegui/getRadioState'](this.smodel)
+                }else{
+                    return this.$store.getters['doodlegui/getToggleState'](this.smodel)
+                }
+            }
             return this.valueState
         }
     },
@@ -72,7 +84,6 @@ export default {
                     return
                 }
                 if (this.smodel !== null) {
-                    console.log('set', this.smodel, this.valueState)
                     this.$store.commit('doodlegui/setRadioState', {
                         key:   this.smodel,
                         value: this.valueState,
@@ -91,7 +102,6 @@ export default {
                     return
                 }
                 if (this.smodel !== null) {
-                    console.log('set', this.smodel, this.valueState)
                     this.$store.commit('doodlegui/setToggleState', {
                         key:   this.smodel,
                         value: this.valueState,

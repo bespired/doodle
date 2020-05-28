@@ -1,24 +1,11 @@
-export default class ScoreApi {
+export default class DoodleApi {
 
     constructor() {
- 		this.client  = null
-        this.project = null
-        this.baseUrl = null
+        this.baseUrl = `${window.location.protocol}//${window.location.hostname}/api`
     }
 
-    setCredentials(clientId, projectId){
- 		this.client  = clientId
-        this.project = projectId
-        this.baseUrl = process.env.VUE_APP_SERVICES_LOCATION + `/_/doodle`
-
-    }
-
-    getConnections() {
-        return axios.get(`${this.baseUrl}/connection/test`).then( response => response.data )
-    }
-
-    getDifferences() {
-        return axios.get(`${this.baseUrl}/database/differences`).then( response => response.data )
+    getRowTemplates() {
+        return axios.get(`${this.baseUrl}/rowtemplates/index`).then( response => response.data )
     }
 
 }

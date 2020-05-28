@@ -17,8 +17,8 @@ export default {
 	name: 'overview',
 
 	mounted() {
-		this.$store.dispatch('index/setCredentials', {client: 1, project: 1 })
-		this.$store.dispatch('index/getConnections')
+		// this.$store.dispatch('index/setCredentials', {client: 1, project: 1 })
+		// this.$store.dispatch('index/getConnections')
 	},
 
 }

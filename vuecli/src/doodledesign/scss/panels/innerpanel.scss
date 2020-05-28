@@ -33,8 +33,22 @@
     .od-split-right,
     .od-split-left {
         max-height: calc(100vh - #{$heroimage-height});
+        overflow: scroll;
     }
 
+    &.split--small--large--small {
+        .inner-window-flex{
+            .small {
+                min-width: 240px;
+                max-width: 240px;
+                flex-basis: 240px;
+                width: 20%;
+            }
+            .large {
+                min-width: calc(100% - 480px);
+            }
+        }
+    }
     .inner-window-flex {
         display: flex;
         flex-direction: row;
@@ -45,6 +59,7 @@
         max-height: calc(100vh - #{$heroimage-height});
         min-height: calc(100vh - #{$heroimage-height});
 
+        .od-split-center,
         .od-split-left {
             border-right: 1px solid vc('border');
         }
@@ -79,6 +94,7 @@
 
         .large {
             min-width: calc(100% - 320px);
+            max-width: calc(100% - 320px);
         }
 
         .small.action {
@@ -90,6 +106,7 @@
 
         .large.result {
             min-width: calc(100% - 480px);
+            max-width: calc(100% - 480px);
         }
 
     }

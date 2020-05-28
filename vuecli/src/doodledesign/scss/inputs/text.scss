@@ -1,10 +1,45 @@
-.input-group {
+.input-select-group, .input-group {
 
     font-family: $font-family-primary;
     width: 100%;
     color: vc(font);
     text-align: left;
     padding-bottom: 7px;
+
+
+    .input-row.input-slider{
+        input {
+            min-height: 36px;
+            max-height: 36px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        input::-moz-range-thumb,
+        input::-webkit-slider-thumb {
+            appearance: none; /* Override default look */
+            width: 25px; /* Set a specific slider handle width */
+            height: 25px; /* Slider handle height */
+            background: #4CAF50; /* Green background */
+            cursor: pointer; /* Cursor on hover */
+        }
+        span {
+            min-width: 4em;
+            max-height: 36px;
+            border-left: 0 solid;
+            border-top-right-radius: v(border-radius);
+            border-bottom-right-radius: v(border-radius);
+            &.units{
+                min-width: 6em;
+            }
+        }
+    }
+    .input-row.input-slider.numberless{
+        input{
+            border-top-right-radius: v(border-radius);
+            border-bottom-right-radius: v(border-radius);
+        }
+    }
+
 
     label[for] {
         cursor: pointer;
@@ -80,6 +115,11 @@
     }
 
 
+
+
+}
+
+.input-group{
     input {
         display: block;
         flex-grow: 90;
@@ -94,11 +134,15 @@
         background-color: vc('grey-light');
 
         &:focus {
-            border-color: $color-default;
+            border-color: vc(border-focus);
         }
     }
-
 }
+
+.multiselect--active .multiselect__tags {
+    border: 1px solid vc(border-focus);
+}
+
 
 @for $i from 1 through 12 {
     .prefix.prefix-#{$i} {

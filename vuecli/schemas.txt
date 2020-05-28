@@ -1,0 +1,54 @@
+
+
+page-rules:{
+	responsive: {
+		mobile:  { min:    0, max:  400 }
+		tablet:  { min:  399, max:  900 }
+		desktop: { min:  899, max: 1200 }
+		xlarge:  { min: 1199, max: 9999 }
+	}
+
+	meta: [
+
+	],
+
+	automation: [
+
+	],
+
+	rows: [
+		{ type: widget, handle: #-# }
+		{ type: widget, handle: #-# }
+		{ type: widget, handle: #-# }
+		{ type: widget, handle: #-# }
+	],
+
+	modals: [
+	]
+
+}
+
+widget-row:{
+
+	id:     (#)	   // unique in database
+	handle: (#-#)  // unique in database
+	name:   (slug) // unique per widget
+	label:  (text)
+
+	background: (transparent | color | image | movie)
+	fill-style: (full-page | full-width | max-width)
+	max-width : (px | % | vw | wh)
+
+	columns: {
+		mobile:  { 100, 100, 100 },
+		tablet:  { 100,  50,  50 },
+		desktop: {  20,  40,  40 },
+		xlarge:  {  20,  40,  40 },
+	}
+
+	conditions: [
+	]
+
+	draw: ''
+
+}

@@ -1,0 +1,27 @@
+.od-panel-header{
+    .od-search {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        min-height: 50px;
+        max-height: 50px;
+        border-bottom: 1px solid vc('hdr-border');
+        input{
+            font-size: 1em;
+            margin: 0;
+            width: 100%;
+            max-height: 50px;
+            min-height: 50px;
+            padding-left: 1em;
+            background-color: transparent;
+            border: 0 solid #cccfd3;
+
+        }
+    }
+    .od-search-eyeglass{
+        position: absolute;
+        right: 1em;
+        top: 18px;
+        color: gray;
+    }
+}

@@ -34,6 +34,13 @@ export default [
                     rightContent:  global.loadDoc('pages/Inputs')
                 }
             },{
+                name: 'selects',
+                path: 'selects',
+                components: {
+                    leftContent:   global.loadDoc('views/Legenda'),
+                    rightContent:  global.loadDoc('pages/Selects')
+                }
+            },{
                 name: 'icons',
                 path: 'icons',
                 components: {

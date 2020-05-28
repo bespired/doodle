@@ -20,8 +20,6 @@ export default {
         this.$refs.loginmodel.open(authRoute)
             .then((credentials) => {
 
-                console.log(credentials)
-
                 auth.setToken(
                     credentials.token,
                     Date.now() + 57600 * 1000,

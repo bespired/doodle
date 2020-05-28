@@ -1,6 +1,7 @@
 <template>
 	<div class="container">
 		<div class="title bigger">Basic Elements</div>
+
 		<div class="title">Switch</div>
 		<div class="flex-80">
 			<od-switch vmodel="modelname"> model </od-switch>

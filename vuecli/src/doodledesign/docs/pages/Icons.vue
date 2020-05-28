@@ -3,6 +3,11 @@
 		<div class="title bigger">Basic Elements</div>
 		<div class="title big">Icons</div>
 		<div class="flex">
+			<od-codeview :openbutton="false" :overlap="false">
+			<pre>
+				(*od-iconpath name="address-card" /*)
+			</pre>
+			</od-codeview>
 			<!-- insert fonts here -->
 			<div class="od-icon-spacer"><od-iconpath name="address-card" />address-card</div>
 			<div class="od-icon-spacer"><od-iconpath name="alert" />alert</div>
@@ -14,6 +19,7 @@
 			<div class="od-icon-spacer"><od-iconpath name="audit" />audit</div>
 			<div class="od-icon-spacer"><od-iconpath name="back-arrow" />back-arrow</div>
 			<div class="od-icon-spacer"><od-iconpath name="bank" />bank</div>
+			<div class="od-icon-spacer"><od-iconpath name="battery-full" />battery-full</div>
 			<div class="od-icon-spacer"><od-iconpath name="bell-alt" />bell-alt</div>
 			<div class="od-icon-spacer"><od-iconpath name="bookmark" />bookmark</div>
 			<div class="od-icon-spacer"><od-iconpath name="branch" />branch</div>
@@ -163,11 +169,15 @@
 			<div class="od-icon-spacer"><od-iconpath name="zzz" />zzz</div>
 			<!-- end fonts here -->
 		</div>
-		<od-codeview :openbutton="false" :overlap="false">
+		<div class="title">Create more icons</div>
+		<div> When you've added an svg to the doodledesign glyph folder you can create a new icon component. </div>
+		<od-codeview>
 			<pre>
-				(*od-iconpath name="address-card" /*)
+			$> npx svgo -p 4 -q -f ./src/doodledesign/glyphs
+			$> php tools/iconfont.php
 			</pre>
 		</od-codeview>
+		<br>
 	</div>
 </template>
 

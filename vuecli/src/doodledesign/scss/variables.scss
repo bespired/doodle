@@ -5,7 +5,6 @@ $image-url-home-doodle-1    : url("https://images.unsplash.com/photo-14748354091
 $image-url-home-doodle-2    : url("https://images.unsplash.com/photo-1474835409173-5dc81aae3faa?w=1000");
 $image-url-home-doodle-3    : url("https://images.unsplash.com/photo-1474835409173-5dc81aae3faa?w=1400");
 
-
 $font-family-url         : "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400";
 $font-family-primary     : Source Sans Pro, sans-serif;
 
@@ -69,6 +68,8 @@ $border-radius           :    3px;
     --color-font-inverse : #f8f9fa;
 
     --color-border       : #dededf;
+    --color-border-focus : #{$color-default};
+
     --color-panel-border : #333f50;
     --color-panel-radius : 0px;
 

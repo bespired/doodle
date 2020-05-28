@@ -1,0 +1,27 @@
+.od-thumbs{
+
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding: 20px;
+
+	.od-thumb{
+		min-width: 215px;
+    	max-width: 215px;
+    	min-height: 171px;
+    	max-height: 171px;
+    	box-shadow: inset 0px 0px 0px 1px #e0e0e0;
+    	margin: 15px;
+    	position: relative;
+    	overflow: hidden;
+    	padding: 8px;
+
+    	background-color: black;
+		background: linear-gradient(to bottom, #2f0c0c 13%, #1f0115 100%);
+		background-repeat: no-repeat;
+		background-size: 100% 110px;
+		color: white;
+	}
+
+
+}

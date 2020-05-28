@@ -39,5 +39,11 @@ export default {
 		if (dots === 1) { root[parts[0]][parts[1]] = value; return }
 		if (dots === 2) { root[parts[0]][parts[1]][parts[2]] = value; return }
 		if (dots === 3) { root[parts[0]][parts[1]][parts[2]][parts[3]] = value; return }
+	},
+
+	camelcase(str) {
+  		return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
+    		return index === 0 ? word.toLowerCase() : word.toUpperCase();
+  		}).replace(/\s+/g, '');
 	}
 };

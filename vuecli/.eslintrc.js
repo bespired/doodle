@@ -7,6 +7,9 @@ module.exports = {
     'plugin:vue/essential',
   ],
   rules: {
+
+      'import/prefer-default-export' :"off",
+
       "vue/no-unused-vars"       : "off",
       "vue/no-unused-components" : "off",
       "vue/no-async-in-computed-properties" :"off",

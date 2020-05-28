@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\JwtApi;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\Decrypt;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -12,9 +13,13 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 
 class UserController extends Controller
 {
+    use Decrypt;
+
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
+
+        $credentials = Decrypt::decrypt($credentials);
 
         try {
             if (!$token = JWTAuth::attempt($credentials)) {

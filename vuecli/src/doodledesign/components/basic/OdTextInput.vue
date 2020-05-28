@@ -5,7 +5,15 @@
         </label>
         <div class="input-row">
             <span :ref="$options.namedId" v-if="prefix!==null">{{ prefix }}</span>
-            <input :id="$options.namedId" :required="isRequired" :autocomplete="isAutocomplete" :type="type" v-model="modelValue" @focus="focusLabel(true)" @blur="focusLabel(false)" />
+            <input
+                :id="$options.namedId"
+                :required="isRequired"
+                :type="type"
+                autocomplete="new-password"
+                v-model="modelValue"
+                @focus="focusLabel(true)"
+                @blur="focusLabel(false)"
+            />
             <span @click="doAction()" v-if="postfix!==null" :class="{'input-button':action}">{{ postfix }}</span>
             <span @click="doClear()"  v-if="clear" class="input-button">×</span>
         </div>
@@ -13,6 +21,7 @@
 </template>
 <script>
 import Helpers from '../../helpers/helpers.js'
+import Vue     from 'vue'
 
 export default {
     name: 'od-text-input',
@@ -23,7 +32,7 @@ export default {
         value:        { type: String,  default: null  },
         label:        { type: String,  default: null  },
         required:     { type: Boolean, default: false },
-        autocomplete: { type: String,  default: null  },
+        autocomplete: { type: String,  default: null },
         type:         { type: String,  default: 'text'},
 
         prefix:       { type: String,  default: null  },
@@ -35,19 +44,22 @@ export default {
 
     data() {
         return {
-            // autocomplete: 'off',
             focus:          false,
-            isAutocomplete: this.autocomplete ? this.autocomplete : this.$options.namedId,
+            autofill:       false,
             isRequired:     this.required ? 'required' : false,
             vparent:        this.$parent,
             placeholder:    this.initialLabel(),
+            autocompleter:  this.initialAutocomplete(),
         }
     },
 
     computed: {
         modelValue: {
             get() {
-                if (this.vmodel) return Helpers.dotget(this.vparent, this.vmodel)
+                if (this.vmodel) {
+                    if (this.vparent === undefined) return this.$parent[this.vmodel]
+                    return Helpers.dotget(this.vparent, this.vmodel)
+                }
                 if (this.smodel) return this.$store.getters['doodlegui/getTextValue'](this.smodel)
                 return this.value
             },
@@ -91,12 +103,19 @@ export default {
         focusLabel(focus) {
             if (focus !== undefined) this.focus = focus
             this.placeholder = false;
-            if (this.modelValue === null) this.placeholder = true;
-            if ((this.modelValue !== null) && (this.modelValue.length === 0)) this.placeholder = true;
+            if ( !this.autofill ){
+                if (this.modelValue === null) this.placeholder = true;
+                if ((this.modelValue !== null) && (this.modelValue.length === 0)) this.placeholder = true;
+            }
             if (this.focus) this.placeholder = false;
         },
+        initialAutocomplete() {
+            if (this.type === 'email') return 'email'
+            if (this.type === 'password') return 'password'
+            return this.autocomplete ? this.autocomplete : 'new-password'
+        },
         initialLabel() {
-            if (this.vmodel) return Helpers.dotget(this.$parent, this.vmodel) === null || Helpers.dotget(this.vparent, this.vmodel).length === 0
+            if (this.vmodel) return Helpers.dotget(this.$parent, this.vmodel) === null || Helpers.dotget(this.$parent, this.vmodel).length === 0
             if (this.smodel) return this.$store.getters['doodlegui/getTextValue'](this.smodel).length === 0
             return this.value.length === 0
         },

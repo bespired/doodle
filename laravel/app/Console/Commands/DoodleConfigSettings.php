@@ -20,6 +20,11 @@ class DoodleConfigSettings extends Command
             ['payload' => config('menus.main')]
         );
 
+        Setting::updateOrCreate(
+            ['type' => 'responsive'],
+            ['payload' => config('seeds.responsive')]
+        );
+
     }
 
 }

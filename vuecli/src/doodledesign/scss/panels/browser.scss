@@ -1,0 +1,34 @@
+.od-browser-look{
+    margin: 20px;
+    padding: 0px;
+    border-radius: 8px;
+    background-color: #dee1e6;
+    box-shadow: 0px 10px 24px 0px rgba(0,0,0,0.5);
+
+    .dot{
+        display: inline-block;
+        background-color: #dadada;
+        border-radius: 50%;
+        width: 11px; height: 11px;
+        box-shadow: 0px 0px 0px 1px rgba(200,200,200,0.75);
+        margin: 12px 0 6px 8px;
+    }
+    .dot:nth-child(1){
+        margin-left:12px;
+    }
+}
+.od-url-area{
+    background-color: #ffff;
+    display: inline-block;
+    width: 100%;
+    padding: 4px 10px 4px 40px;
+    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.25);
+}
+.od-url-bar{
+    border-radius: 20px;
+    background-color: #f1f3f4;
+    padding: 4px 12px;
+}
+.handle{
+    background-color: red
+}

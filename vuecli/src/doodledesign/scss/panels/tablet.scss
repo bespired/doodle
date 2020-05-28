@@ -1,0 +1,53 @@
+@media (min-width: 1346px){
+    .od-tablet-look {
+       margin: 40px auto !important;
+       min-height: 480px !important;
+    }
+}
+
+.od-tablet-look{
+    margin: 20px;
+    padding: 0px;
+    border-radius: 30px;
+    background-color: white;
+    border: 20px solid black;
+    box-shadow: 0px 10px 24px 0px rgba(0, 0, 0, 0.5), 0px 0px 0px 3px rgb(190, 190, 194);
+
+    max-width:  800px;
+    min-height: 360px;
+
+    .od-url-area{
+        background-color: #ffff;
+        display: inline-block;
+        width: 100%;
+        padding: 4px 40px 12px 40px;
+        box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.25);
+    }
+    .od-url-bar{
+        border-radius: 3px;
+        background-color: #f1f3f4;
+        padding: 2px 6px;
+        font-size: 0.8em;
+    }
+    .od-battery-area{
+        display: flex;
+    }
+    .clock, .battery{
+        display: flex;
+        font-size: 0.6em;
+        font-weight: 900;
+        padding: 2px 8px 2px;
+    }
+    .battery{
+        margin-left: auto;
+        svg{
+            margin-top: -2px;
+            margin-left: 3px;
+        }
+    }
+
+}
+
+.handle{
+    background-color: red
+}

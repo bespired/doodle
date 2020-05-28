@@ -29,6 +29,10 @@
 
 
 .appheader {
+    .flex{
+        display: flex;
+        flex-flow: nowrap;
+    }
     .dropdown--toggle {
         .sub-title {
             display: block;

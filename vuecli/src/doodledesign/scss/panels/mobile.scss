@@ -1,0 +1,72 @@
+.od-mobile-look{
+    border: 15px solid grey;
+    border-top-left-radius: 65px;
+    border-top-right-radius: 65px;
+    margin: 40px auto;
+    border-bottom: 0;
+    max-width: 600px;
+}
+.od-glass-look{
+    padding: 0px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    background-color: white;
+    border: 10px solid black;
+
+    max-width: 600px;
+    min-height: 30vw;
+    min-height: calc(100vh - 260px);
+    border-bottom: 0;
+
+    .od-url-area{
+        background-color: #ffff;
+        display: inline-block;
+        width: 100%;
+        padding: 16px 40px 12px 40px;
+        box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.25);
+    }
+    .od-url-bar{
+        border-radius: 3px;
+        background-color: #f1f3f4;
+        padding: 2px 6px;
+        font-size: 0.8em;
+    }
+    .od-battery-area{
+        border-top-left-radius: 50px;
+        border-top-right-radius: 50px;
+        display: flex;
+    }
+    .clock, .battery, .iphoneX{
+        display: flex;
+        font-size: 1em;
+        font-weight: 900;
+        padding: 12px 8px 12px;
+        width: 25%;
+        background-color: transparent;
+        justify-content: center;
+    }
+    .iphoneX{
+        content: ' ';
+        width: 50%;
+        background-color: black;
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+    }
+    .clock{
+        background-color: transparent;
+        padding-left: 12px;
+    }
+    .battery{
+        background-color: transparent;
+        padding-right: 12px;
+        svg{
+            margin-top:  2px;
+            margin-left: 3px;
+        }
+    }
+
+}
+
+.handle{
+    background-color: red
+}
