@@ -13,8 +13,8 @@ export default {
         doodleGui: true,
 
         alertPanels: {
-            display : [{ id: 1, type: 'info',  title: 'Welcome.', message: 'Doodle Design is loaded.' }],
-            slotted : {}
+            display: [{ id: 1, type: 'info', title: 'Welcome.', message: 'Doodle Design is loaded.' }],
+            slotted: {}
         },
 
         toggles: {
@@ -51,67 +51,90 @@ export default {
 
         searchValue: '',
 
+
+        multiselect(values, template) {
+            function nodeToString(node) {
+                var tmpNode = document.createElement("div");
+                tmpNode.appendChild(node.cloneNode(true));
+                var str = tmpNode.innerHTML;
+                tmpNode = node = null; // prevent memory leaks in IE
+                return str;
+            }
+
+            const el = document.createElement('div')
+            const vm = new Vue({
+                template: template,
+                data: values,
+            }).$mount(el)
+
+            return nodeToString(vm.$el)
+        }
+
     },
 
+
+
+
+
     getters: {
-        getAlertPanels:  state  => state.alertPanels.display,
+        getAlertPanels: state => state.alertPanels.display,
         getToggleState: (state) => item => {
-            if ( state.toggles[item] === undefined ) Vue.set(state.toggles, item, false)
+            if (state.toggles[item] === undefined) Vue.set(state.toggles, item, false)
             return state.toggles[item]
         },
         getRadioState: (state) => item => {
-            if ( state.radiorows[item] === undefined ) Vue.set(state.radiorows, item, false)
+            if (state.radiorows[item] === undefined) Vue.set(state.radiorows, item, false)
             return state.radiorows[item]
         },
         getFoldState: (state) => item => {
-            if ( state.folds[item] === undefined ) Vue.set(state.radiorows, item, false)
+            if (state.folds[item] === undefined) Vue.set(state.radiorows, item, false)
             return state.folds[item]
         },
         getTabState: (state) => item => {
-            if ( state.tabs[item] === undefined ) Vue.set(state.tabs, item, null)
+            if (state.tabs[item] === undefined) Vue.set(state.tabs, item, null)
             return state.tabs[item]
         },
         getTextValue: (state) => item => {
-            if ( state.texts[item] === undefined ) Vue.set(state.texts, item, null)
+            if (state.texts[item] === undefined) Vue.set(state.texts, item, null)
             return state.texts[item]
         },
         getSelectValue: (state) => item => {
-            if ( state.selects[item] === undefined ) Vue.set(state.selects, item, null)
+            if (state.selects[item] === undefined) Vue.set(state.selects, item, null)
             return state.selects[item]
         },
         getSelectOptions: (state) => item => {
-            if ( state.options[item] === undefined ) Vue.set(state.options, item, [])
+            if (state.options[item] === undefined) Vue.set(state.options, item, [])
             return state.options[item]
         },
         getSearchValue: (state) => { return state.searchValue }
     },
 
     mutations: {
-        prepareAlertPanel (state, payload) { state.alertPanels.slotted[payload.index]= payload    },
-        setSearchValue    (state, payload) { state.searchValue= payload.value },
-        setToggleState    (state, payload) { Vue.set(state.toggles,   payload.key, payload.value) },
-        setTabState       (state, payload) { Vue.set(state.tabs,      payload.key, payload.value) },
-        setRadioState     (state, payload) { Vue.set(state.radiorows, payload.key, payload.value) },
-        setFoldState      (state, payload) { Vue.set(state.folds,     payload.key, payload.value) },
-        setDropdownState  (state, payload) { Vue.set(state.dropdowns, payload.key, payload.value) },
-        setTextValue      (state, payload) { Vue.set(state.texts,     payload.key, payload.value) },
-        setSelectValue    (state, payload) { Vue.set(state.selects,   payload.key, payload.value) },
-        setSelectOptions  (state, payload) { Vue.set(state.options,   payload.key, payload.value) },
-        addAlertPanel (state, payload) {
+        prepareAlertPanel(state, payload) { state.alertPanels.slotted[payload.index] = payload },
+        setSearchValue(state, payload) { state.searchValue = payload.value },
+        setToggleState(state, payload) { Vue.set(state.toggles, payload.key, payload.value) },
+        setTabState(state, payload) { Vue.set(state.tabs, payload.key, payload.value) },
+        setRadioState(state, payload) { Vue.set(state.radiorows, payload.key, payload.value) },
+        setFoldState(state, payload) { Vue.set(state.folds, payload.key, payload.value) },
+        setDropdownState(state, payload) { Vue.set(state.dropdowns, payload.key, payload.value) },
+        setTextValue(state, payload) { Vue.set(state.texts, payload.key, payload.value) },
+        setSelectValue(state, payload) { Vue.set(state.selects, payload.key, payload.value) },
+        setSelectOptions(state, payload) { Vue.set(state.options, payload.key, payload.value) },
+        addAlertPanel(state, payload) {
             let now = new Date().getTime()
             payload.id = Helpers.uuid(payload.title)
             payload.created_at = now
             state.alertPanels.display.push(Helpers.clone(payload))
         },
-        removeAlertPanel (state, id)      {
-            state.alertPanels.display.forEach((panel, idx)=>{
-                if ( panel.id === id ) state.alertPanels.display.splice(idx, 1)
+        removeAlertPanel(state, id) {
+            state.alertPanels.display.forEach((panel, idx) => {
+                if (panel.id === id) state.alertPanels.display.splice(idx, 1)
             })
         },
     },
 
     actions: {
-        addNamedAlertPanel (context, index) {
+        addNamedAlertPanel(context, index) {
             context.commit('addAlertPanel', context.state.alertPanels.slotted[index])
         }
     },

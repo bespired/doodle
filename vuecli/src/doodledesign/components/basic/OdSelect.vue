@@ -1,12 +1,13 @@
 /* eslint-disable no-alert, no-console */
 <template>
     <div class="input-select-group" >
+
         <label :for="$options.namedId">
             {{ label }}
         </label>
 
         <multiselect
-            v-if="!isTags"
+            v-if="!isTags && !isCustom"
             :id="$options.namedId"
             class="od-select"
             v-model="modelValue"
@@ -26,26 +27,25 @@
             :options="modelOptions"
             :label="labelby"
             :track-by= "trackby"
-            :multiple="multiple"
-            :taggable="taggable"
+            :multiple="isMultiple"
+            :taggable="isTaggable"
             @tag="addTag"
         />
-
-           <!--  <template slot="singleLabel" slot-scope="props">
-                <span class="option__title" v-html="layout(props.option.layout)"></span>
-            </template>
-            <template slot="option" slot-scope="props">
-                <span class="option__title" v-html="layout(props.option.layout)"></span>
-            </template> -->
-        <!-- </multiselect> -->
     </div>
 </template>
 <script>
-import Helpers from '../../helpers/helpers.js'
-import Vue     from 'vue'
+
+import Helpers     from '../../helpers/helpers.js'
+import Multiselect from "vue-multiselect"
+import Vue         from 'vue'
 
 export default {
     name: 'od-select',
+
+    components: {
+        Multiselect
+    },
+
     props: {
         options:      {}, // Array, null or undefined...
         placeholder:  { type: String,  default: null  },
@@ -55,19 +55,22 @@ export default {
         value:        { type: String,  default: null  },
         label:        { type: String,  default: null  },
         required:     { type: Boolean, default: false },
+        single:       { type: String,  default: null  },
+        list:         { type: String,  default: null  },
     },
 
-    components:{  Multiselect: window.VueMultiselect.default },
     data() {
+
         return {
-            labelby  : "label",
-            trackby  : "id",
-            isTags   : this.$attrs.tags !== undefined,
-            multiple : this.$attrs.tags !== undefined,
-            taggable : false, // true to create new tags...
-            vparent  : this.$parent,
-            theme    : this.$vnode.data.staticClass,
-            byholder : this.placeholder ? this.placeholder : 'Select option'
+            labelby    : "label",
+            trackby    : "id",
+            isTags     : this.$attrs.tags   !== undefined,
+            isMultiple : this.$attrs.tags !== undefined,
+            isCustom   : this.single !== null,
+            isTaggable : false, // true to create new tags...
+            vparent    : this.$parent,
+            theme      : this.$vnode.data.staticClass,
+            byholder   : this.placeholder ? this.placeholder : 'Select option',
         }
     },
 
@@ -80,7 +83,8 @@ export default {
             // }
             // this.options.push(tag)
             // this.value.push(tag)
-        }
+        },
+
     },
 
     computed: {

@@ -22,10 +22,28 @@ Vue.mixin({
 	},
 
 	mounted() {
-		this.$options.confirmModal = this.$root.$children[0].$refs.confirm
-		this.$options.loginModal   = this.$root.$children[0].$refs.login
+		if ( this.$root.$children[0] !== undefined ){
+			this.$options.confirmModal = this.$root.$children[0].$refs.confirm
+			this.$options.loginModal   = this.$root.$children[0].$refs.login
+		}
 	}
 
+})
+
+
+
+Vue.directive('templated', {
+    inserted: function (el, binding, vNode) {
+    	console.log('templated:', el, binding, vNode)
+    	el.innerHTML = "Hello"
+        // const handler = (e) => {
+        //     if (!el.contains(e.target) && el !== e.target) {
+        //         vNode.context[binding.expression] = false
+        //     }
+        // }
+        // el.out = handler
+        // document.addEventListener('click', handler)
+    },
 })
 
 Vue.directive('out', {
