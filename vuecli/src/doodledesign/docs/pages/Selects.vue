@@ -18,19 +18,39 @@
             />
         -->
             <od-custom-select
-                v-model  = "imageValue"
-                track-by = "value"
-                label    = "title"
-                :show-labels = "false"
-                :options = "imageOptions"
+                label        = "Custom select"
+                vmodel       = "imageValue"
+                :options     = "imageOptions"
 
-                :single  = "single"
-                :list    = "list"
+                :single      = "single"
+                :list        = "list"
             />
         </div>
+
         <od-codeview :openbutton="true" :overlap="true">
             <pre>
-                (*od-select smodel="options" /*)
+            (*od-custom-select
+                vmodel       = "imageValue" :options     = "imageOptions"
+                track-by     = "value"      label        = "title"
+                :single      = "single"     :list        = "list"
+            /*)
+
+            data(){
+                return {
+                    imageValue: '1',
+                    imageOptions: [
+                        { value: '1' , title: "Random img", img: "https://picsum.photos/300/150" },
+                        { value: '2' , title: "Cool image", img: "https://picsum.photos/300/151" }
+                    ],
+                    single: `(*span class="option__title"*)({ title })(*/span*)`,
+                    list:   `(*span*)
+                                (*img class="option__image" :src="img" :alt="title" /*)
+                                (*span class="option__desc"*)
+                                    (*span class="option__title"*)({ title })(*/span*)
+                                (*/span*)
+                            (*/span*)`,
+                }
+            }
             </pre>
         </od-codeview>
 
@@ -94,10 +114,10 @@ export default {
     name: 'selects',
     data(){
         return {
-            imageValue: null,
+            imageValue: 1,
             imageOptions: [
-                { value: '1' , title: "Random img", img: "https://picsum.photos/300/150" },
-                { value: '2' , title: "Cool image", img: "https://picsum.photos/300/151" }
+                { value: '1' , title: "Random img", img: "https://picsum.photos/300/151" },
+                { value: '2' , title: "Cool image", img: "https://picsum.photos/300/150" }
             ],
             single: `<span class="option__title">{{ title }}</span>`,
             list:   `<span>
