@@ -1,6 +1,6 @@
 import Vue       from 'vue'
 import Vuex      from 'vuex'
-import DoodleApi from '@/packages/doodle'
+import DragrrApi from '../packages/dragrr'
 
 Vue.use(Vuex)
 
@@ -12,7 +12,7 @@ export default {
         mainIndex:   true,
 
         apis: {
-            doodleApi: new DoodleApi(),
+            dragrrApi: new DragrrApi(),
         },
 
         rowTemplates: null,
@@ -29,7 +29,7 @@ export default {
 
     actions: {
         getRowTemplates(context){
-            context.state.apis.doodleApi.getRowTemplates()
+            context.state.apis.dragrrApi.getRowTemplates()
                 .then( result => {
                     context.commit('setRowTemplates', result )
                 })
