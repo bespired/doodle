@@ -18,7 +18,7 @@ class CreateSettingsTable extends Migration
             $table->bigIncrements('id');
             $table->char('handle', 32);
             $table->char('type', 32);
-            $table->longText('payload');
+            $table->longText('payload')->nullable();
             $table->timestamps();
         });
 

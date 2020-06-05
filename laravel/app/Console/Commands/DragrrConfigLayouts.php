@@ -2,23 +2,23 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Eloquent\RowTemplate;
+use App\Models\Eloquent\LayoutTemplate;
 use Illuminate\Console\Command;
 
-class DoodleConfigRows extends Command
+class DragrrConfigLayouts extends Command
 {
 
-    protected $signature = 'doodle:config:rows';
+    protected $signature = 'dragrr:config:layouts';
 
     protected $description = 'Fill rows in database from config';
 
     public function handle()
     {
 
-        foreach (config('seeds.rowtemplates') as $templated) {
+        foreach (config('dragrr.layout-templates') as $templated) {
 
             $template = (object) $templated;
-            RowTemplate::updateOrCreate(
+            LayoutTemplate::updateOrCreate(
                 [
                     'name' => $template->name,
                     'type' => 'template',

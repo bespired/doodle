@@ -80,10 +80,10 @@
 
             data(){
                 return {
-                    imageValue: '1',
+                    imageValue: 2,
                     imageOptions: [
-                        { value: '1' , title: "Random img", img: "https://picsum.photos/300/150" },
-                        { value: '2' , title: "Cool image", img: "https://picsum.photos/300/151" }
+                        { id: 1, value: 'stripy' , title: "Stripes", img: "https://picsum.photos/300/150" },
+                        { id: 2, value: 'swirly' , title: "Swirls",  img: "https://picsum.photos/300/151" }
                     ],
                     single: `(*span class="option__title"*)({ title })(*/span*)`,
                     list:   `(*span*)
@@ -107,10 +107,10 @@ export default {
     name: 'selects',
     data(){
         return {
-            imageValue: 1,
+            imageValue: 2,
             imageOptions: [
-                { value: '1' , title: "Random img", img: "https://picsum.photos/300/151" },
-                { value: '2' , title: "Cool image", img: "https://picsum.photos/300/150" }
+                { id: 1, value: 'strip' , title: "Stripes", img: "https://images.unsplash.com/photo-1558244661-d248897f7bc4?fit=crop&h=120&w=300" },
+                { id: 2, value: 'swirl' , title: "Swirls",  img: "https://images.unsplash.com/photo-1565619624098-cf4168a7cd9d?fit=crop&h=120&w=300" }
             ],
             single: `<span class="option__title">{{ title }}</span>`,
             list:   `<span>

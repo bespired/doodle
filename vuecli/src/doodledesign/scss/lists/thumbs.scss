@@ -22,6 +22,14 @@
 		background-size: 100% 110px;
 		color: white;
 	}
+}
 
-
+@media (max-width: $media-large){
+    .od-thumbs .od-thumb{
+    	max-width: 169px;
+    	min-width: 169px;
+		min-height: 121px;
+    	max-height: 121px;
+    	background-size: 100% 80px;
+    }
 }

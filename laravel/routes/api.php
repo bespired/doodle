@@ -20,7 +20,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('register', 'JwtApi\UserController@register');
 });
 
-Route::get('rowtemplates/index', 'JsonApi\RowTemplateController@index');
+Route::get('templates/{type}/index', 'JsonApi\TemplateController@index');
 
 // Route::get('/event/send/{message}', function ($message) {
 //     event(new \App\Events\MessageSend($message));

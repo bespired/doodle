@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\JsonApi;
 
 use App\Http\Controllers\Controller;
-use App\Models\Eloquent\RowTemplate;
 
-class RowTemplateController extends Controller
+class TemplateController extends Controller
 {
 
-    public function index()
+    public function index($type)
     {
-        $rows = RowTemplate::query()
+        $Model = sprintf('\App\Models\Eloquent\%sTemplate', ucfirst($type));
+
+        $rows = $Model::query()
             ->whereType('template')
             ->get();
 

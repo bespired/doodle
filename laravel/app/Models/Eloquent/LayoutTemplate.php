@@ -5,7 +5,7 @@ namespace App\Models\Eloquent;
 use App\Models\Traits\HasHandleId;
 use Illuminate\Database\Eloquent\Model;
 
-class RowTemplate extends Model
+class LayoutTemplate extends Model
 {
 
     use HasHandleId;

@@ -2,7 +2,7 @@
 
 return [
 
-    'responsive'   =>
+    'responsive'       =>
     [
         'responsive' => 12,
         'fillstyle'  => 'max-width',
@@ -54,7 +54,7 @@ return [
 
     ],
 
-    'rowtemplates' => [
+    'layout-templates' => [
         [
             'name'       => 'hero',
             'background' => 'image',

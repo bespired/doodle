@@ -6,12 +6,14 @@
 			<template #leftMenu     ><od-header-search /></template>
 			<template #rightMenu    >&nbsp;</template>
 			<template #leftContent  ><od-thumbs :thumbs="thumbs" :route="route" /></template>
-			<template #rightContent >NEW</template>
+			<template #rightContent >todo... NEW</template>
 		</od-split-window>
 	</section>
 </template>
 
 <script>
+
+import Helpers from "@/doodledesign/helpers/helpers.js"
 
 export default {
 	name: 'index',
@@ -20,29 +22,22 @@ export default {
 
 	data(){
 		return {
-			route: document.location.pathname.replace('/admin','')
+			route: document.location.pathname.replace('/admin', '')
 		}
 	},
 
 	mounted() {
-		let indexer = this.camelcase(this.index)
-		this.$store.dispatch(`index/get${indexer}`)
+		let indexer = Helpers.pascalcase(this.index)
+		this.$store.dispatch(`dragrr/get${indexer}`)
 	},
 
 	computed: {
 		thumbs() {
-			let indexer = this.camelcase(this.index)
-			return this.$store.getters[`index/get${indexer}`]
+			let indexer = Helpers.pascalcase(this.index)
+			return this.$store.getters[`dragrr/get${indexer}`]
 		}
 	},
 
-	methods:{
-		camelcase(str) {
-			return str.split('-').map(function(word,index){
-				return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-		  }).join('');
-		}
-	}
 
 }
 </script>

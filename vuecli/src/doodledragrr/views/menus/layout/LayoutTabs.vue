@@ -6,6 +6,6 @@
 </template>
 <script>
 export default {
-	name: 'page-tabs',
+	name: 'row-tabs',
 }
 </script>

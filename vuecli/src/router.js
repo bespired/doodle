@@ -22,8 +22,7 @@ router.addRoutes(DoodleRoutes)
 
 router.beforeEach((to, from, next) => {
 
-    document.title = 'Draggr'
-
+    document.title = to.meta.title || 'Dragrr'
     if (to.name && to.name !== 'remotelogin') {
         auth.requireAuth(to, from, next)
     }

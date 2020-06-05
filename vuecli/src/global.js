@@ -8,6 +8,9 @@ global.loadView = function(view) {
 global.loadDoc = function(view) {
     return () => import(/* webpackChunkName: "[index]" */ `@/doodledesign/docs/${view}.vue`)
 }
+global.loadDrag = function(view) {
+    return () => import(/* webpackChunkName: "[index]" */ `@/doodledragrr/views/${view}.vue`)
+}
 
 global.axios = require('axios');
 

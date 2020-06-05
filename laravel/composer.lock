@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dbf3ab52af0f1c0d29934aafa5a52f3c",
+    "content-hash": "5461f41ab346a6540c2653a1e369fa6f",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1217,6 +1217,54 @@
                 "php"
             ],
             "time": "2020-04-10T16:34:50+00:00"
+        },
+        {
+            "name": "nscreed/laravel-migration-paths",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nscreed/laravel-migration-paths.git",
+                "reference": "e80999b478fa96c2d250d6b13039fa44974edacf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nscreed/laravel-migration-paths/zipball/e80999b478fa96c2d250d6b13039fa44974edacf",
+                "reference": "e80999b478fa96c2d250d6b13039fa44974edacf",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "~5.5|^6.0",
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NsCreed\\MigrationPath\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NsCreed\\MigrationPath\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Faisal Islam",
+                    "email": "faisal.islam70@gmail.com"
+                }
+            ],
+            "description": "Custom migration paths for Laravel project.",
+            "keywords": [
+                "laravel",
+                "migrations"
+            ],
+            "time": "2019-09-25T14:15:56+00:00"
         },
         {
             "name": "opis/closure",

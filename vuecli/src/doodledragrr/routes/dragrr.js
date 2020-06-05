@@ -1,8 +1,8 @@
 import PageRoutes   from './page.js'
-import RowRoutes    from './row.js'
+import LayoutRoutes from './layout.js'
 
 
 export default [
 	...PageRoutes,
-	...RowRoutes,
+	...LayoutRoutes,
 ]

@@ -4,8 +4,8 @@ export default class DoodleApi {
         this.baseUrl = `${window.location.protocol}//${window.location.hostname}/api`
     }
 
-    getRowTemplates() {
-        return axios.get(`${this.baseUrl}/rowtemplates/index`).then( response => response.data )
+    getTemplates(type) {
+        return axios.get(`${this.baseUrl}/templates/${type}/index`).then( response => response.data )
     }
 
 }

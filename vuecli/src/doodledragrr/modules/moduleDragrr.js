@@ -9,29 +9,29 @@ export default {
     namespaced: true,
 
     state: {
-        mainIndex:   true,
+        mainDragrr: true,
 
         apis: {
             dragrrApi: new DragrrApi(),
         },
 
-        rowTemplates: null,
+        layoutTemplates: null,
 
     },
 
     getters: {
-        getRowTemplates: (state) => { return state.rowTemplates },
+        getLayoutTemplates: (state) => { return state.layoutTemplates },
     },
 
     mutations: {
-        setRowTemplates(state, rowTemplates){ state.rowTemplates = rowTemplates },
+        setLayoutTemplates(state, layoutTemplates){ state.layoutTemplates = layoutTemplates },
     },
 
     actions: {
-        getRowTemplates(context){
-            context.state.apis.dragrrApi.getRowTemplates()
+        getLayoutTemplates(context){
+            context.state.apis.dragrrApi.getTemplates('layout')
                 .then( result => {
-                    context.commit('setRowTemplates', result )
+                    context.commit('setLayoutTemplates', result )
                 })
         },
     },
