@@ -16,7 +16,7 @@ export default [
 				path: ':id',
 				components: {
 					leftMenu:       global.loadDrag('menus/shared/DeviceSizes'),
-					leftContent:    global.loadDrag('builders/RowTemplate'),
+					leftContent:    global.loadDrag('builders/LayoutBuilder'),
 					rightMenu:      global.loadDrag('menus/shared/SharedSave'),
 					rightContent:   global.loadDrag('menus/layout/LayoutProperties')
 				}

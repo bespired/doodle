@@ -5,7 +5,10 @@
 			<template #subtitle     >{{ index }}</template>
 			<template #leftMenu     ><od-header-search /></template>
 			<template #rightMenu    >&nbsp;</template>
-			<template #leftContent  ><od-thumbs :thumbs="thumbs" :route="route" /></template>
+			<template #leftContent  >
+				<od-thumbs :thumbs="thumbs" :route="route" v-if="thumbs"/>
+				<od-loading v-else/>
+			</template>
 			<template #rightContent >todo... NEW</template>
 		</od-split-window>
 	</section>
