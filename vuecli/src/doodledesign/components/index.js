@@ -6,6 +6,7 @@ import OdButton from './basic/OdButton'
 import OdCheckbox from './basic/OdCheckbox'
 import OdCodeview from './basic/OdCodeview'
 import OdContent from './basic/OdContent'
+import OdCustomFunction from './basic/OdCustomFunction'
 import OdCustomSelect from './basic/OdCustomSelect'
 import OdDropdown from './basic/OdDropdown'
 import OdHeader from './basic/OdHeader'
@@ -53,6 +54,7 @@ export default {
     OdCheckbox,
     OdCodeview,
     OdContent,
+    OdCustomFunction,
     OdCustomSelect,
     OdDropdown,
     OdHeader,

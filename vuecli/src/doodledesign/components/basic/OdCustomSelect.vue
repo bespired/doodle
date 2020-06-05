@@ -4,6 +4,7 @@
             {{ label }}
         </label>
         <multiselect
+            v-if="funcName === null"
             v-bind="$props"
             v-on="$listeners"
             v-model="modelValue"
@@ -12,14 +13,35 @@
             :allow-empty="false"
             :label="labelby"
             :track-by= "trackby"
-
         >
-            <template slot="singleLabel" slot-scope="props">
+            <template slot="singleLabel" slot-scope="props" >
                 <span v-html="$store.state.doodlegui.multiselect(props.option, single)"></span>
             </template>
-            <template slot="option" slot-scope="props">
+            <template slot="option" slot-scope="props" >
                 <span v-html="$store.state.doodlegui.multiselect(props.option, list)"></span>
             </template>
+        </multiselect>
+
+        <multiselect
+            v-if="funcName !== null"
+            v-bind="$props"
+            v-on="$listeners"
+            v-model="modelValue"
+            :placeholder="byholder"
+            :options="modelOptions"
+            :allow-empty="false"
+            :label="labelby"
+            :track-by= "trackby"
+        >
+            <template slot="singleLabel" slot-scope="props" >
+                <span class="od-custom-select"
+                    v-html="$store.state.doodlegui.customFunction(funcName, props.option)"></span>
+            </template>
+            <template slot="option" slot-scope="props" >
+                <span class="od-custom-select"
+                    v-html="$store.state.doodlegui.customFunction(funcName, props.option)"></span>
+            </template>
+
         </multiselect>
     </div>
 
@@ -39,14 +61,15 @@ export default {
     props: Object.assign(
         MultiselectMixin.props, {
             options:     {}, // Array, null or undefined...
-            placeholder: { type: String,  default: null   },
-            vmodel:      { type: String,  default: null   },
-            smodel:      { type: String,  default: null   },
-            soptions:    { type: String,  default: null   },
-            label:       { type: String,  default: null   },
-            required:    { type: Boolean, default: false  },
-            single:      { type: String,  default: null   },
-            list:        { type: String,  default: null   },
+            placeholder: { type: String,  default: null  },
+            vmodel:      { type: String,  default: null  },
+            smodel:      { type: String,  default: null  },
+            soptions:    { type: String,  default: null  },
+            label:       { type: String,  default: null  },
+            required:    { type: Boolean, default: false },
+            single:      { type: String,  default: null  },
+            list:        { type: String,  default: null  },
+            funcName:    { type: String,  default: null  },
         }
     ),
     data() {

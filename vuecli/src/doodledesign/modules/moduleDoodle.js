@@ -49,6 +49,10 @@ export default {
             // slots for text values
         },
 
+        functions: {
+            // slots for custom functions
+        },
+
         searchValue: '',
 
 
@@ -68,13 +72,14 @@ export default {
             }).$mount(el)
 
             return nodeToString(vm.$el)
-        }
+        },
+
+        customFunction(funcName, options){
+            return this.functions[funcName](options)
+        },
+
 
     },
-
-
-
-
 
     getters: {
         getAlertPanels: state => state.alertPanels.display,
@@ -106,20 +111,30 @@ export default {
             if (state.options[item] === undefined) Vue.set(state.options, item, [])
             return state.options[item]
         },
+        getgetFunction: (state) => item => {
+            if (state.functions[item] === undefined) return null
+            return state.functions[item]
+        },
         getSearchValue: (state) => { return state.searchValue }
     },
 
     mutations: {
-        prepareAlertPanel(state, payload) { state.alertPanels.slotted[payload.index] = payload },
-        setSearchValue(state, payload) { state.searchValue = payload.value },
-        setToggleState(state, payload) { Vue.set(state.toggles, payload.key, payload.value) },
-        setTabState(state, payload) { Vue.set(state.tabs, payload.key, payload.value) },
-        setRadioState(state, payload) { Vue.set(state.radiorows, payload.key, payload.value) },
-        setFoldState(state, payload) { Vue.set(state.folds, payload.key, payload.value) },
-        setDropdownState(state, payload) { Vue.set(state.dropdowns, payload.key, payload.value) },
-        setTextValue(state, payload) { Vue.set(state.texts, payload.key, payload.value) },
-        setSelectValue(state, payload) { Vue.set(state.selects, payload.key, payload.value) },
-        setSelectOptions(state, payload) { Vue.set(state.options, payload.key, payload.value) },
+        prepareAlertPanel(state, payload) { state.alertPanels.slotted[payload.index] = payload   },
+        setSearchValue(state, payload)    { state.searchValue = payload.value                    },
+        setToggleState(state, payload)    { Vue.set(state.toggles, payload.key, payload.value)   },
+        setTabState(state, payload)       { Vue.set(state.tabs, payload.key, payload.value)      },
+        setRadioState(state, payload)     { Vue.set(state.radiorows, payload.key, payload.value) },
+        setFoldState(state, payload)      { Vue.set(state.folds, payload.key, payload.value)     },
+        setDropdownState(state, payload)  { Vue.set(state.dropdowns, payload.key, payload.value) },
+        setTextValue(state, payload)      { Vue.set(state.texts, payload.key, payload.value)     },
+
+        setCustomFunction(state, payload) {
+            state.functions[payload.key]= payload.value
+        },
+
+        setSelectValue(state, payload)    { Vue.set(state.selects, payload.key, payload.value)   },
+        setSelectOptions(state, payload)  { Vue.set(state.options, payload.key, payload.value)   },
+
         addAlertPanel(state, payload) {
             let now = new Date().getTime()
             payload.id = Helpers.uuid(payload.title)

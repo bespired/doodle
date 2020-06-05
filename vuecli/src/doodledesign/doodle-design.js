@@ -31,21 +31,6 @@ Vue.mixin({
 })
 
 
-
-Vue.directive('templated', {
-    inserted: function (el, binding, vNode) {
-    	console.log('templated:', el, binding, vNode)
-    	el.innerHTML = "Hello"
-        // const handler = (e) => {
-        //     if (!el.contains(e.target) && el !== e.target) {
-        //         vNode.context[binding.expression] = false
-        //     }
-        // }
-        // el.out = handler
-        // document.addEventListener('click', handler)
-    },
-})
-
 Vue.directive('out', {
     bind: function (el, binding, vNode) {
         const handler = (e) => {
