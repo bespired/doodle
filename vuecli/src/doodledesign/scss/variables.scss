@@ -1,9 +1,11 @@
-$image-url-bg-doodle      : url("https://images.unsplash.com/photo-1474835409173-5dc81aae3faa");
-$image-url-home-doodle    : url("https://images.unsplash.com/photo-1474835409173-5dc81aae3faa");
 
-$image-url-home-doodle-1    : url("https://images.unsplash.com/photo-1474835409173-5dc81aae3faa?w=600");
-$image-url-home-doodle-2    : url("https://images.unsplash.com/photo-1474835409173-5dc81aae3faa?w=1000");
-$image-url-home-doodle-3    : url("https://images.unsplash.com/photo-1474835409173-5dc81aae3faa?w=1400");
+
+$image-url-bg-doodle      : url("https://images.unsplash.com/photo-1498262257252-c282316270bc");
+$image-url-home-doodle    : url("https://images.unsplash.com/photo-1498262257252-c282316270bc");
+
+$image-url-home-doodle-1    : url("https://images.unsplash.com/photo-1498262257252-c282316270bc?w=600");
+$image-url-home-doodle-2    : url("https://images.unsplash.com/photo-1498262257252-c282316270bc?w=1000");
+$image-url-home-doodle-3    : url("https://images.unsplash.com/photo-1498262257252-c282316270bc?w=1400");
 
 $font-family-url         : "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400";
 $font-family-primary     : Source Sans Pro, sans-serif;
@@ -60,7 +62,10 @@ $border-radius           :    3px;
     --color-white        : #fff;
 
     --color-background   : #f8f9fa;
-    --color-appheader    : #3d0032;
+
+    --color-appheader    : #232323;
+    --color-headhelper   : #{$color-default};
+
     --color-panel        : #f8f9fa;
     --color-darker       : #eeeded;
     --color-decor        : #a1a5ac;

@@ -37,7 +37,7 @@
         .sub-title {
             display: block;
             font-size: 11px;
-            color: #d1d5da;
+            color: vc(appheader);
         }
     }
 
@@ -62,7 +62,8 @@
         }
 
         &:after {
-            color: #ed9d03;
+
+            color: vc(headhelper);
         }
     }
 }

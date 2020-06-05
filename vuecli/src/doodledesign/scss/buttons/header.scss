@@ -87,7 +87,7 @@
 
     &.open,
     &.pressed {
-        background-color: #463350;
+        background-color: vc(appheader);
         color: vc('font-inverse');
 
         &:hover {
