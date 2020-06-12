@@ -3,6 +3,8 @@ import DoodleDesign from "./components";
 
 import "./scss/doodle-app.scss";
 
+Vue.prototype.$eventHub = new Vue(); // Global event bus
+
 Vue.mixin({
 
 	methods: {

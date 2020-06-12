@@ -1,6 +1,6 @@
 export default [
-
 	{
+		name: 'layout-builders',
 		path: '/layout-builders',
 		component: global.loadDrag('index/BuilderIndex'),
 		meta:  { title: 'Layouts | Dragrr' },
@@ -9,7 +9,8 @@ export default [
 	{
 		path: '/layout-builder',
 		component: global.loadDrag('routed/Propview'),
-		meta: { title: 'Layout Builder | Dragrr' },
+		meta:  { title: 'Layout Builder | Dragrr' },
+		props: { source: 'layout' },
 		children: [
 			{
 				name: 'layout-builder',
@@ -17,8 +18,8 @@ export default [
 				components: {
 					leftMenu:       global.loadDrag('menus/shared/DeviceSizes'),
 					leftContent:    global.loadDrag('builders/LayoutBuilder'),
+					rightContent:   global.loadDrag('builders/LayoutProperties'),
 					rightMenu:      global.loadDrag('menus/shared/SharedSave'),
-					rightContent:   global.loadDrag('menus/layout/LayoutProperties')
 				}
 			}
 		]

@@ -1,14 +1,14 @@
 <template>
 	<div class="container">
-		<div class="title bigger">Modals</div>
-
-		<div class="title big">Login</div>
+		<od-title type="bigger">Modals</od-title>
+		<od-title>Login</od-title>
 		<div class="flex">
 			<od-button @click="login()" class="action" >Login</od-button>
 		</div>
 
-		<div class="title big">Confirm</div>
-		<div class="title">Sure?</div>
+		<od-title >Confirm</od-title>
+		<od-title type="">Sure?</od-title>
+
 		<div class="flex">
 			<od-button @click="sure('danger')"  class="danger  left-icon" icons="x"     >Sure?</od-button>
 			<od-button @click="sure('success')" class="action  left-icon" icons="ok"    >Sure?</od-button>
@@ -38,8 +38,8 @@
 		</div>
 
 
-		<div class="title big">Alerts</div>
-		<div class="title">Dynamic</div>
+		<od-title >Alerts</od-title>
+		<od-title type="">Dynamic</od-title>
 		<div class="flex">
 			<od-button @click="alert('info')"> Info </od-button>
 		</div>
@@ -57,7 +57,8 @@
 				</pre>
 			</od-codeview>
 		</div>
-		<div class="title">Static</div>
+
+		<od-title type="">Static</od-title>
 		<div class="flex">
 			<od-alert index="saved" type="success" title="Saved" message="Your file is saved."   />
 			<od-alert index="error" type="error"   title="Error" message="Something went wrong." />

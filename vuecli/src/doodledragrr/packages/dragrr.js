@@ -8,4 +8,7 @@ export default class DoodleApi {
         return axios.get(`${this.baseUrl}/templates/${type}/index`).then( response => response.data )
     }
 
+    saveTemplates(type, payload) {
+        return axios.post(`${this.baseUrl}/templates/${type}/save`, payload)
+    }
 }

@@ -33,7 +33,7 @@
 <script>
 import Vue from 'vue';
 export default {
-	name: 'row-builder',
+	name: 'section-builder',
 
 	components: {
 		draggable: window.vuedraggable,

@@ -14,11 +14,29 @@
 <script>
 
 export default {
-	name: 'overview',
+	name: 'propview',
 
-	mounted() {
-		// this.$store.dispatch('index/setCredentials', {client: 1, project: 1 })
-		// this.$store.dispatch('index/getConnections')
+	props: ['source'], // router hands the source... like layout...
+
+	mounted(){
+		let handle= this.$router.currentRoute.params.id
+		this.$store.dispatch(`dragrr/setCurrentTemplate`, { source: this.source, handle: handle })
+
+		let media = this.$store.getters['doodlegui/getRadioState']('devicesize')
+		if (!media) {
+			this.$store.commit('doodlegui/setRadioState', {
+				key: 'devicesize', value: 'desktop',
+			})
+		}
+	},
+
+	beforeUpdate() {
+		let handle= this.$router.currentRoute.params.id
+		this.$store.dispatch(`dragrr/setCurrentTemplate`, { source: this.source, handle: handle })
+	},
+
+	beforeDestroy() {
+		this.$store.commit(`dragrr/clearCurrentTemplate`)
 	},
 
 }

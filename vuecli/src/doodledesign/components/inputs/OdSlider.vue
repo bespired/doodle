@@ -41,16 +41,22 @@ export default {
             let initial = this.$store.getters['doodlegui/getTextValue'](this.smodel)
             if (initial === null) this.modelValue= (this.max - this.min) / 2 + this.min
         }
+        // this is not how to do it ...
+        var wrapper= this.$parent.$vnode.tag.indexOf('od-fold-body') > -1
         return {
-            vparent: this.$parent,
+            vparent: wrapper ? this.$parent.$parent.$parent : this.$parent,
         }
     },
 
     computed: {
         modelValue: {
             get() {
-                if (this.vmodel) return Helpers.dotget(this.vparent, this.vmodel)
-                if (this.smodel) return this.$store.getters['doodlegui/getTextValue'](this.smodel)
+                if (this.vmodel) {
+                    return Helpers.dotget(this.vparent, this.vmodel)
+                }
+                if (this.smodel) {
+                    return this.$store.getters['doodlegui/getTextValue'](this.smodel)
+                }
                 return this.value
             },
             set(value) {

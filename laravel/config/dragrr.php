@@ -2,59 +2,134 @@
 
 return [
 
-    'responsive'       =>
-    [
-        'responsive' => 12,
-        'fillstyle'  => 'max-width',
+    'layout-templates'  => [
+        [
+            'name'       => 'hero-layout',
+            'type'       => 'template',
+            'label'      => 'Full Width',
+            'responsive' => 12,
+            'draw'       => '',
+            'media'      => [
+                'mobile'  => [
+                    'fillstyle'  => 'full-width',
+                    'background' => 'image',
+                    'maxWidth'   => 0,
+                    'min'        => 0,
+                    'max'        => 640,
+                    'gutters'    => [
+                        'row'    => 10,
+                        'column' => 10,
+                        'top'    => 10,
+                        'bottom' => 10,
+                    ],
+                ],
+                'tablet'  => [
+                    'fillstyle'  => 'full-width',
+                    'background' => 'image',
+                    'maxWidth'   => 0,
+                    'min'        => 641,
+                    'max'        => 1007,
+                    'gutters'    => [
+                        'row'    => 10,
+                        'column' => 20,
+                        'top'    => 30,
+                        'bottom' => 40,
+                    ],
+                ],
+                'desktop' => [
+                    'fillstyle'  => 'full-width',
+                    'background' => 'image',
+                    'maxWidth'   => 960,
+                    'min'        => 1008,
+                    'max'        => 1365,
+                    'gutters'    => [
+                        'row'    => 30,
+                        'column' => 20,
+                        'top'    => 30,
+                        'bottom' => 40,
+                    ],
+                ],
+                'xlarge'  => [
+                    'fillstyle'  => 'full-width',
+                    'background' => 'image',
+                    'maxWidth'   => 1140,
+                    'min'        => 1366,
+                    'max'        => 9999,
+                    'gutters'    => [
+                        'row'    => 30,
+                        'column' => 20,
+                        'top'    => 30,
+                        'bottom' => 40,
+                    ],
+                ],
+            ],
+        ],
+        [
+            'name'       => '12-layout',
+            'responsive' => 12,
+            'type'       => 'template',
+            'label'      => 'Responsive 12',
+            'draw'       => '',
+            'media'      => [
 
-        'mobile'     => [
-            'maxWidth' => 0,
-            'min'      => 0,
-            'max'      => 640,
-            'gutters'  => [
-                'row'    => 10,
-                'column' => 10,
-                'top'    => 10,
-                'bottom' => 10,
-            ],
-        ],
-        'tablet'     => [
-            'maxWidth' => 0,
-            'min'      => 641,
-            'max'      => 1007,
-            'gutters'  => [
-                'row'    => 10,
-                'column' => 20,
-                'top'    => 30,
-                'bottom' => 40,
-            ],
-        ],
-        'desktop'    => [
-            'maxWidth' => 960,
-            'min'      => 1008,
-            'max'      => 1365,
-            'gutters'  => [
-                'row'    => 30,
-                'column' => 20,
-                'top'    => 30,
-                'bottom' => 40,
-            ],
-        ],
-        'xlarge'     => [
-            'maxWidth' => 1140,
-            'min'      => 1366,
-            'max'      => 9999,
-            'gutters'  => [
-                'row'    => 30,
-                'column' => 20,
-                'top'    => 30,
-                'bottom' => 40,
+                'mobile'  => [
+                    'fillstyle'  => 'full-width',
+                    'background' => 'image',
+                    'maxWidth'   => 0,
+                    'min'        => 0,
+                    'max'        => 640,
+                    'gutters'    => [
+                        'row'    => 10,
+                        'column' => 10,
+                        'top'    => 10,
+                        'bottom' => 10,
+                    ],
+                ],
+                'tablet'  => [
+                    'fillstyle'  => 'full-width',
+                    'background' => 'image',
+                    'maxWidth'   => 0,
+                    'min'        => 641,
+                    'max'        => 1007,
+                    'gutters'    => [
+                        'row'    => 10,
+                        'column' => 20,
+                        'top'    => 30,
+                        'bottom' => 40,
+                    ],
+                ],
+                'desktop' => [
+                    'fillstyle'  => 'full-width',
+                    'background' => 'image',
+                    'maxWidth'   => 960,
+                    'min'        => 1008,
+                    'max'        => 1365,
+                    'gutters'    => [
+                        'row'    => 30,
+                        'column' => 20,
+                        'top'    => 30,
+                        'bottom' => 40,
+                    ],
+                ],
+                'xlarge'  => [
+                    'fillstyle'  => 'full-width',
+                    'background' => 'image',
+                    'maxWidth'   => 1140,
+                    'min'        => 1366,
+                    'max'        => 9999,
+                    'gutters'    => [
+                        'row'    => 30,
+                        'column' => 20,
+                        'top'    => 30,
+                        'bottom' => 40,
+                    ],
+                ],
             ],
         ],
 
     ],
 
-    'layout-templates' => [
+    'section-templates' => [
         [
             'name'       => 'hero',
             'background' => 'image',

@@ -20,13 +20,13 @@ const auth = {
 
     getToken() {
         const token = Cookies.get('token');
-        const expiration = Cookies.get('token_expiration');
 
-        if (!token || !expiration) {
+        if (!token) {
             return null;
         }
+        const expiration = this.parseToken(token)['exp']
 
-        if (Date.now() > parseInt(expiration, 10)) {
+        if (Date.now()> parseInt(expiration, 10) * 1000 ) {
             this.destroyToken();
             return null;
         }

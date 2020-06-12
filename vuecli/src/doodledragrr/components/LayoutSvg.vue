@@ -34,13 +34,13 @@
 			  class="width-background-color"/>
 
 		<text
-			:x="gutterSvg.left + 2 * gutter.column"
+			:x="gutterSvg.left + gutter.column + 10"
 			:y="rowSvg.height - gutter.bottom - 62" class="header">The header</text>
 		<text
-			:x="gutterSvg.left + 2 * gutter.column"
+			:x="gutterSvg.left + gutter.column + 10"
 			:y="rowSvg.height - gutter.bottom - 40" class="article">Some text of the article</text>
 		<text
-			:x="gutterSvg.left + 2 * gutter.column"
+			:x="gutterSvg.left + gutter.column + 10"
 			:y="rowSvg.height - gutter.bottom - 20" class="article">will be here.</text>
 
 
@@ -102,27 +102,29 @@
 <script>
 
 export default {
-	name: 'row-svg',
+	name: 'layout-svg',
 
-	props: ['data', 'size'],
+	props: ['layout', 'media'],
 
 	data(){
 		const displays= {
+			xlarge:  { w: 2280, h:  320, base: 370, height:  960 },
 			desktop: { w: 1280, h:  320, base: 370, height:  960 },
 			tablet:  { w: 1024, h:  300, base: 340, height:  768 },
-			mobile:  { w:  320, h:  200, base: 240, height:  480 }
+			mobile:  { w:  320, h:  200, base: 240, height:  480 },
 		}
-		const sizes = this.data[this.size]
+
+		const mediasizes = this.layout.media[this.media]
 
 		return {
-			display:    displays[this.size],
-			responsive: this.data.responsive,
-			maxWidth:   this.data.fillstyle === 'maxwidth' ? 0 : sizes.maxWidth,
+			display:    displays[this.media],
+			responsive: this.layout.responsive,
+			maxWidth:   mediasizes.fillstyle === 'full-width' ? 0 : parseInt(mediasizes.maxWidth, 10),
 			gutter: {
-				row:    sizes.gutters.row,
-				column: sizes.gutters.column,
-				top:    sizes.gutters.top,
-				bottom: sizes.gutters.bottom,
+				row:    parseInt(mediasizes.gutters.row, 10),
+				column: parseInt(mediasizes.gutters.column, 10),
+				top:    parseInt(mediasizes.gutters.top, 10),
+				bottom: parseInt(mediasizes.gutters.bottom, 10),
 			},
 		}
 	},
@@ -136,12 +138,13 @@ export default {
 		},
 		maxWidthSvg() {
 			return {
-				left:  this.maxWidth === 0 ? 0 : (this.display.w - this.maxWidth) / 2,
-				right: this.maxWidth === 0 ? this.display.w : this.display.w - (this.display.w - this.maxWidth) / 2,
+				left:  this.maxWidth === 0 ? 0 : Math.max( 0, (this.display.w - this.maxWidth) / 2) ,
+				right: this.maxWidth === 0 ? this.display.w : Math.min( this.display.w, this.display.w - (this.display.w - this.maxWidth) / 2),
 				width: this.maxWidth === 0 ? this.display.w : this.maxWidth,
 			}
 		},
 		gutterSvg(){
+			if ( this.gutter.row < 0 ) this.gutter.row = 0
 			return {
 				left:   this.maxWidthSvg.left  + this.gutter.row,
 				right:  this.maxWidthSvg.right - this.gutter.row,
@@ -152,12 +155,11 @@ export default {
 		},
 		rspSvg(){
 			return {
-				left:  this.gutterSvg.left,
-				right: this.gutterSvg.right,
-				step: ( this.gutterSvg.right - this.gutterSvg.left ) / this.responsive,
-				width: this.gutterSvg.right - this.gutterSvg.left,
+				left:   this.gutterSvg.left,
+				right:  this.gutterSvg.right,
+				step:   Math.max( 0, this.gutterSvg.right - this.gutterSvg.left) / this.responsive,
+				width:  Math.max( 0, this.gutterSvg.right - this.gutterSvg.left),
 				column: Math.round( this.responsive / 3 )
-
 			}
 		}
 

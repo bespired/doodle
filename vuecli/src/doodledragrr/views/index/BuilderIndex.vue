@@ -16,8 +16,6 @@
 
 <script>
 
-import Helpers from "@/doodledesign/helpers/helpers.js"
-
 export default {
 	name: 'index',
 
@@ -30,14 +28,16 @@ export default {
 	},
 
 	mounted() {
-		let indexer = Helpers.pascalcase(this.index)
-		this.$store.dispatch(`dragrr/get${indexer}`)
+		this.$store.dispatch(`dragrr/get${this.index.pascalcase()}`, {force: false})
+	},
+
+	beforeUpdate() {
+		this.$store.dispatch(`dragrr/get${this.index.pascalcase()}`, {force: true})
 	},
 
 	computed: {
 		thumbs() {
-			let indexer = Helpers.pascalcase(this.index)
-			return this.$store.getters[`dragrr/get${indexer}`]
+			return this.$store.getters[`dragrr/get${this.index.pascalcase()}`]
 		}
 	},
 

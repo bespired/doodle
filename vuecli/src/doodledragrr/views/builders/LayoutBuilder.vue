@@ -1,14 +1,23 @@
 <template>
-	<section class="od-device-look" :key="size" >
-		<div class="od-browser-look" v-if="size === 'desktop'">
+	<section class="od-device-look" :key="`${media}-${update}`" v-if="layoutTemplate">
+
+		<div class="od-browser-look" v-if="media === 'xlarge'">
 			<div class="dot"></div><div class="dot"></div><div class="dot"></div>
 			<div class="od-url-area"><div class="od-url-bar">
 				http://url
 			</div></div>
-			<row-svg :data="data" size="desktop" />
+			<layout-svg :layout="layoutTemplate" :media="media" />
 		</div>
 
-		<div class="od-tablet-look" v-if="size === 'tablet'">
+		<div class="od-browser-look" v-if="media === 'desktop'">
+			<div class="dot"></div><div class="dot"></div><div class="dot"></div>
+			<div class="od-url-area"><div class="od-url-bar">
+				http://url
+			</div></div>
+			<layout-svg :layout="layoutTemplate" :media="media" />
+		</div>
+
+		<div class="od-tablet-look" v-if="media === 'tablet'">
 			<div class="od-battery-area">
 				<span class="clock">{{ date }}</span>
 				<span class="battery">100% <od-iconpath name="battery-full"/></span>
@@ -16,10 +25,10 @@
 			<div class="od-url-area"><div class="od-url-bar">
 				http://url
 			</div></div>
-			<row-svg :data="data" size="tablet" />
+			<layout-svg :layout="layoutTemplate" :media="media" />
 		</div>
 
-		<div class="od-mobile-look" v-if="size === 'mobile'">
+		<div class="od-mobile-look" v-if="media === 'mobile'">
 			<div class="od-glass-look">
 				<div class="od-battery-area">
 					<span class="clock">{{ time }}</span>
@@ -29,51 +38,55 @@
 				<div class="od-url-area"><div class="od-url-bar">
 					http://url
 				</div></div>
-				<row-svg :data="data" size="mobile" />
+				<layout-svg :layout="layoutTemplate" :media="media" />
 			</div>
 		</div>
+
 	</section>
 </template>
 
 <script>
 import Vue from 'vue';
-import RowSvg from '@/components/RowSvg'
+import LayoutSvg from '@/doodledragrr/components/LayoutSvg'
 
 export default {
-	name: 'row-template',
+	name: 'layout-builder',
 
 	components: {
-		RowSvg,
+		LayoutSvg,
 	},
 
-	mounted(){
-		let size = this.$store.getters['doodlegui/getRadioState']('devicesize')
-		if (!size) {
-			this.$store.commit('doodlegui/setRadioState', {
-                key:   'devicesize', value: 'desktop',
-			})
-		}
-	},
+	// Media Setting and Loading of Template in parent
 
 	data(){
 		let dt = new Date()
 		return {
-			date: this.today(),
-			time: this.clock()
+			date:   this.today(),
+			time:   this.clock(),
+			update: 0,
 		}
 	},
 
 	computed: {
-		data(){
-			return {"responsive":12,"fillstyle":"max-width","mobile":{"maxWidth":0,"min":10,"max":640,"gutters":{"row":0,"column":10,"top":10,"bottom":10}},"tablet":{"maxWidth":0,"min":641,"max":1007,"gutters":{"row":10,"column":20,"top":30,"bottom":40}},"desktop":{"maxWidth":960,"min":1008,"max":1365,"gutters":{"row":30,"column":20,"top":30,"bottom":40}},"xlarge":{"maxWidth":1140,"min":1366,"max":9999,"gutters":{"row":30,"column":20,"top":30,"bottom":40}}}
+		layoutTemplate(){
+			return this.$store.getters['dragrr/currentTemplate']
 		},
 
-		size(){
+		media(){
 			this.date= this.today()
 			this.time= this.clock()
 			return this.$store.getters['doodlegui/getRadioState']('devicesize')
 		}
 	},
+
+	watch: {
+    	layoutTemplate: {
+      		deep: true,
+      		handler(){
+      			this.update++;
+    	  	}
+    	}
+  	},
 
 	methods:{
 		clock(){

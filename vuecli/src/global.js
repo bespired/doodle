@@ -20,3 +20,19 @@ global.axios.interceptors.request.use((config) => {
 });
 
 Vue.prototype.global = global
+
+String.prototype.capitalize = function() {
+  return this.charAt(0).toUpperCase() + this.slice(1)
+}
+
+String.prototype.camelcase = function() {
+	return this.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
+		return index === 0 ? word.toLowerCase() : word.toUpperCase();
+	}).replace(/\s+/g, '');
+},
+
+String.prototype.pascalcase = function() {
+	return this.split('-').map(function(word,index){
+		return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+	}).join('');
+}

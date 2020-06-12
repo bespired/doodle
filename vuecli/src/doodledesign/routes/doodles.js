@@ -63,6 +63,14 @@ export default [
                     rightContent:  global.loadDoc('pages/Panels')
                 }
             },{
+                name: 'accordions',
+                path: 'accordions',
+                meta:{ title: 'Doodle' },
+                components: {
+                    leftContent:   global.loadDoc('views/Legenda'),
+                    rightContent:  global.loadDoc('pages/Accordions')
+                }
+            },{
                 name: 'lists',
                 path: 'lists',
                 meta:{ title: 'Doodle' },

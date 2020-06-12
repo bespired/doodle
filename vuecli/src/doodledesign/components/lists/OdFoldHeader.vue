@@ -15,7 +15,6 @@ export default {
 	name: 'od-fold-header',
 	props: ['label'],
 
-
 	mounted() {
 		this.$store.commit('doodlegui/setFoldState', {
 			key:   this.$options.namedId,

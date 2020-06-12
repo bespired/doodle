@@ -2,30 +2,26 @@ import AppHeader from './appheader/AppHeader'
 import DoodleLogo from './appheader/DoodleLogo'
 import OdAction from './basic/OdAction'
 import OdBadge from './basic/OdBadge'
-import OdButton from './basic/OdButton'
-import OdCheckbox from './basic/OdCheckbox'
 import OdCodeview from './basic/OdCodeview'
 import OdContent from './basic/OdContent'
-import OdCustomFunction from './basic/OdCustomFunction'
-import OdCustomSelect from './basic/OdCustomSelect'
-import OdDropdown from './basic/OdDropdown'
 import OdHeader from './basic/OdHeader'
 import OdHeaderSearch from './basic/OdHeaderSearch'
 import OdIconpath from './basic/OdIconpath'
 import OdLabel from './basic/OdLabel'
 import OdLink from './basic/OdLink'
 import OdLoading from './basic/OdLoading'
-import OdOptions from './basic/OdOptions'
 import OdPanel from './basic/OdPanel'
-import OdRadioButton from './basic/OdRadioButton'
-import OdRadioRow from './basic/OdRadioRow'
-import OdRadiobox from './basic/OdRadiobox'
 import OdReady from './basic/OdReady'
-import OdSelect from './basic/OdSelect'
 import OdSign from './basic/OdSign'
-import OdSlider from './basic/OdSlider'
-import OdSwitch from './basic/OdSwitch'
-import OdTextInput from './basic/OdTextInput'
+import OdTitle from './basic/OdTitle'
+import OdButton from './inputs/OdButton'
+import OdCheckbox from './inputs/OdCheckbox'
+import OdRadioButton from './inputs/OdRadioButton'
+import OdRadioRow from './inputs/OdRadioRow'
+import OdRadiobox from './inputs/OdRadiobox'
+import OdSlider from './inputs/OdSlider'
+import OdSwitch from './inputs/OdSwitch'
+import OdTextInput from './inputs/OdTextInput'
 import OdFoldBody from './lists/OdFoldBody'
 import OdFoldHeader from './lists/OdFoldHeader'
 import OdFoldable from './lists/OdFoldable'
@@ -41,6 +37,11 @@ import ActionPanel from './panels/ActionPanel'
 import AlertPanel from './panels/AlertPanel'
 import OdAlert from './panels/OdAlert'
 import TitlePanel from './panels/TitlePanel'
+import OdCustomFunction from './selects/OdCustomFunction'
+import OdCustomSelect from './selects/OdCustomSelect'
+import OdDropdown from './selects/OdDropdown'
+import OdOptions from './selects/OdOptions'
+import OdSelect from './selects/OdSelect'
 import OdFullWindow from './windows/OdFullWindow'
 import OdSplit3Window from './windows/OdSplit3Window'
 import OdSplitWindow from './windows/OdSplitWindow'
@@ -50,28 +51,24 @@ export default {
     DoodleLogo,
     OdAction,
     OdBadge,
-    OdButton,
-    OdCheckbox,
     OdCodeview,
     OdContent,
-    OdCustomFunction,
-    OdCustomSelect,
-    OdDropdown,
     OdHeader,
     OdHeaderSearch,
     OdIconpath,
     OdLabel,
     OdLink,
     OdLoading,
-    OdOptions,
     OdPanel,
+    OdReady,
+    OdSign,
+    OdSlider,
+    OdTitle,
+    OdButton,
+    OdCheckbox,
     OdRadioButton,
     OdRadioRow,
     OdRadiobox,
-    OdReady,
-    OdSelect,
-    OdSign,
-    OdSlider,
     OdSwitch,
     OdTextInput,
     OdFoldBody,
@@ -89,6 +86,11 @@ export default {
     AlertPanel,
     OdAlert,
     TitlePanel,
+    OdCustomFunction,
+    OdCustomSelect,
+    OdDropdown,
+    OdOptions,
+    OdSelect,
     OdFullWindow,
     OdSplit3Window,
     OdSplitWindow

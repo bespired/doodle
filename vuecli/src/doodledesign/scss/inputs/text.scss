@@ -121,6 +121,8 @@
 
 .input-group{
     input {
+        font-family: $font-family-primary;
+        font-weight: 400;
         display: block;
         flex-grow: 90;
         border-radius: v(border-radius);
@@ -131,7 +133,7 @@
 
         outline: 0;
         background-color: #fff;
-        background-color: vc('grey-light');
+        background-color: vc('input-bg');
 
         &:focus {
             border-color: vc(border-focus);

@@ -18,19 +18,19 @@ class DragrrConfigLayouts extends Command
         foreach (config('dragrr.layout-templates') as $templated) {
 
             $template = (object) $templated;
+
+            $name = $template->name;
+            $type = $template->type;
+            unset($templated['name']);
+            unset($templated['type']);
+
             LayoutTemplate::updateOrCreate(
                 [
-                    'name' => $template->name,
-                    'type' => 'template',
-                ], [
-                    'label'      => ucfirst($template->name),
-                    'background' => $template->background,
-                    'fillstyle'  => $template->fillstyle,
-                    'maxwidth'   => $template->maxwidth,
-                    'columns'    => $template->columns,
-                    'condition'  => $template->condition,
-                    'draw'       => $template->draw,
-                ]);
+                    'name' => $name,
+                    'type' => $type,
+                ],
+                $templated
+            );
 
         }
 

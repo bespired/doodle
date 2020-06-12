@@ -47,7 +47,7 @@ export default {
     },
 
     props: {
-        options:      {}, // Array, null or undefined...
+        options:      { }, // Array, null or undefined...
         placeholder:  { type: String,  default: null  },
         vmodel:       { type: String,  default: null  },
         smodel:       { type: String,  default: null  },
@@ -60,6 +60,7 @@ export default {
     },
 
     data() {
+        var wrapper= this.$parent.$vnode.tag.indexOf('od-fold-body') > -1
 
         return {
             labelby    : "label",
@@ -68,9 +69,10 @@ export default {
             isMultiple : this.$attrs.tags !== undefined,
             isCustom   : this.single !== null,
             isTaggable : false, // true to create new tags...
-            vparent    : this.$parent,
+            vparent    : wrapper ? this.$parent.$parent.$parent : this.$parent,
             theme      : this.$vnode.data.staticClass,
             byholder   : this.placeholder ? this.placeholder : 'Select option',
+            react      : 'value'
         }
     },
 
@@ -92,6 +94,13 @@ export default {
             if (this.soptions)
                 return this.$store.getters['doodlegui/getSelectOptions'](this.soptions)
             if ( this.options === undefined ) return []
+            if ( Array.isArray(this.options) ){
+                let options = []
+                this.options.forEach((i)=>{
+                    options.push({ id: i, value: i, label: i })
+                })
+                return options
+            }
             return this.options
         },
         modelValue: {
@@ -117,15 +126,49 @@ export default {
 
                     return value
                 }
-                if (this.smodel) return this.$store.getters['doodlegui/getSelectValue'](this.smodel)
+
+                if (this.smodel) {
+                    ////// if Row: then get the getRowValue ...
+                    if ( this.smodel.indexOf(':') !== -1 ){
+                        const regex = /([\S]*):([\S]*)/gm;
+                        const m = regex.exec(this.smodel)
+                        if (m[1] === 'row') {
+                            const value = this.$store.getters['doodlegui/getRadioState'](m[2])
+                            const result = this.modelOptions.filter(option => option.id === value);
+                            return result.length ? result[0] : null
+                        }
+                        if (m[1] === 'select') return this.$store.getters['doodlegui/getSelectValue'](m[2])
+                        return null;
+                    }
+
+                    return this.$store.getters['doodlegui/getSelectValue'](this.smodel)
+
+                }
+
                 return null
             },
             set(value) {
+                if ( this.react !== ''){
+                    value = value[this.react]
+                }
                 if (this.vmodel !== null) {
                     Helpers.dotset(this.vparent, this.vmodel, value)
                     return
                 }
                 if (this.smodel !== null) {
+
+                    if ( this.smodel.indexOf(':') !== -1 ){
+                        const regex = /([\S]*):([\S]*)/gm;
+                        const m = regex.exec(this.smodel)
+                        if (m[1] === 'row') {
+                            this.$store.commit('doodlegui/setRadioState', {
+                                key: m[2],
+                                value: value,
+                            })
+                        }
+                        return
+                    }
+
                     this.$store.commit('doodlegui/setSelectValue', {
                         key: this.smodel,
                         value: value,

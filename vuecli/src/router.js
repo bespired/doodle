@@ -27,8 +27,6 @@ router.beforeEach((to, from, next) => {
         auth.requireAuth(to, from, next)
     }
 
-	// history.pushState( null, null, document.location.href )
-
     next()
 })
 

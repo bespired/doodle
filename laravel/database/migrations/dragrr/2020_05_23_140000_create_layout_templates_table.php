@@ -14,17 +14,16 @@ class CreateLayoutTemplatesTable extends Migration
     public function up()
     {
 
+        Schema::dropIfExists('layout_templates');
+
         Schema::create('layout_templates', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('handle', 32);
             $table->char('type', 32)->default('');
             $table->char('name', 32)->nullable()->unique();
             $table->char('label', 64)->default('No Label');
-            $table->char('background', 64)->nullable();
-            $table->char('fillstyle', 64)->nullable();
-            $table->char('maxwidth', 64)->nullable();
-            $table->longText('columns')->nullable();
-            $table->longText('conditions')->nullable();
+            $table->integer('responsive')->default(12);
+            $table->longText('media')->nullable();
             $table->longText('draw')->nullable();
             $table->timestamps();
         });

@@ -18,9 +18,11 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('user', 'JwtApi\UserController@getAuthenticatedUser');
     Route::get('closed', 'JwtApi\DataController@closed');
     Route::post('register', 'JwtApi\UserController@register');
-});
 
-Route::get('templates/{type}/index', 'JsonApi\TemplateController@index');
+    Route::get('templates/{type}/index', 'JsonApi\TemplateController@index');
+    Route::post('templates/{type}/save', 'JsonApi\TemplateController@save');
+
+});
 
 // Route::get('/event/send/{message}', function ($message) {
 //     event(new \App\Events\MessageSend($message));

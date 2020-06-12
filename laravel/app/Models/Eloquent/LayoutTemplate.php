@@ -12,12 +12,11 @@ class LayoutTemplate extends Model
 
     protected $fillable = [
         'handle', 'name', 'label', 'type',
-        'background', 'fillstyle', 'maxwidth',
-        'columns', 'conditions', 'draw',
+        'responsive', 'media', 'draw',
     ];
 
     protected $casts = [
-        'columns' => 'array',
+        'media' => 'array',
     ];
 
 }

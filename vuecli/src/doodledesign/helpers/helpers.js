@@ -26,9 +26,17 @@ export default {
 		let dots= (prop.match(/\./g) || []).length
 		if (!dots) return root[prop];
 		let parts= prop.split('.')
+		for (var i = parts.length - 1; i >= 0; i--) {
+			if (parts[i].substr(0,1) === '$'){
+				const varname= parts[i].substr(1)
+				parts[i]=root[varname]
+			}
+		}
 		if (dots === 1) return root[parts[0]][parts[1]]
 		if (dots === 2) return root[parts[0]][parts[1]][parts[2]]
 		if (dots === 3) return root[parts[0]][parts[1]][parts[2]][parts[3]]
+		if (dots === 4) return root[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]]
+		if (dots === 5) return root[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[4]]
 	},
 
 	dotset(root, prop, value)
@@ -36,9 +44,21 @@ export default {
 		let dots= (prop.match(/\./g) || []).length
 		if (!dots) { Vue.set(root, prop, value); return }
 		let parts= prop.split('.')
+		for (var i = parts.length - 1; i >= 0; i--) {
+			if (parts[i].substr(0,1) === '$'){
+				const varname= parts[i].substr(1)
+				parts[i]=root[varname]
+			}
+		}
 		if (dots === 1) { root[parts[0]][parts[1]] = value; return }
 		if (dots === 2) { root[parts[0]][parts[1]][parts[2]] = value; return }
 		if (dots === 3) { root[parts[0]][parts[1]][parts[2]][parts[3]] = value; return }
+		if (dots === 4) { root[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]] = value; return }
+		if (dots === 5) { root[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]] = value; return }
+	},
+
+	capitalize(str) {
+  		return str.charAt(0).toUpperCase() + str.slice(1)
 	},
 
 	camelcase(str) {

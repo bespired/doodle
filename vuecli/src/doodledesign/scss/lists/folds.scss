@@ -20,7 +20,7 @@
     	user-select: none;
     	padding-left: 3px;
 	}
-	~.od-fold-body{
+	+.od-fold-body{
 		max-height: 0;
 		padding-top: 0;
 		padding-bottom: 0;
@@ -41,10 +41,11 @@
     		transform: rotate(180deg);
     	}
 
-    	&~.od-fold-body{
+    	+.od-fold-body{
     		max-height: calc(100vh - 300px);
     		padding-top: 1em;
 			padding-bottom: 1em;
+            overflow: visible;
     	}
     }
 
@@ -57,3 +58,18 @@
     padding: 1em;
     display: flex;
 }
+
+
+.od-split-right.small.props{
+    .od-foldable{
+        margin-top: 20px;
+        margin-left: -20px;
+        margin-right: -20px;
+        .od-fold-header, .od-fold-body{
+            border-left: 0px solid ;
+            border-right: 0px solid ;
+        }
+    }
+}
+
+
