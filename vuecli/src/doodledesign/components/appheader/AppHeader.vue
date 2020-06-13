@@ -16,7 +16,9 @@
 							<div class="column" :key="chapter.alias">
 								<div class="title">{{ chapter.label }}</div>
 								<template v-for="item in chapter.items">
-									<a :key="item.alias">{{ item.label }}</a>
+									<a :key="item.alias" :href="item.location">
+										{{ item.label }}
+									</a>
 								</template>
 							</div>
 						</template>

@@ -5,10 +5,10 @@ namespace App\Console\Commands;
 use App\Models\Eloquent\Setting;
 use Illuminate\Console\Command;
 
-class DoodleConfigSettings extends Command
+class DragrrConfigSettings extends Command
 {
 
-    protected $signature = 'doodle:config:settings';
+    protected $signature = 'dragrr:config:settings';
 
     protected $description = 'Fill settings in database from config';
 
@@ -16,7 +16,7 @@ class DoodleConfigSettings extends Command
     {
         Setting::updateOrCreate(
             ['type' => 'mainmenu'],
-            ['payload' => config('menus.main')]
+            ['payload' => config('dragrr.menus')]
         );
     }
 

@@ -2,6 +2,8 @@
 
 return [
 
+    'menus'             => json_decode(file_get_contents(__DIR__ . '/../resources/json/dragrr-menu.json')),
+
     'layout-templates'  => [
         [
             'name'       => 'hero-layout',
@@ -9,60 +11,7 @@ return [
             'label'      => 'Full Width',
             'responsive' => 12,
             'draw'       => '',
-            'media'      => [
-                'mobile'  => [
-                    'fillstyle'  => 'full-width',
-                    'background' => 'image',
-                    'maxWidth'   => 0,
-                    'min'        => 0,
-                    'max'        => 640,
-                    'gutters'    => [
-                        'row'    => 10,
-                        'column' => 10,
-                        'top'    => 10,
-                        'bottom' => 10,
-                    ],
-                ],
-                'tablet'  => [
-                    'fillstyle'  => 'full-width',
-                    'background' => 'image',
-                    'maxWidth'   => 0,
-                    'min'        => 641,
-                    'max'        => 1007,
-                    'gutters'    => [
-                        'row'    => 10,
-                        'column' => 20,
-                        'top'    => 30,
-                        'bottom' => 40,
-                    ],
-                ],
-                'desktop' => [
-                    'fillstyle'  => 'full-width',
-                    'background' => 'image',
-                    'maxWidth'   => 960,
-                    'min'        => 1008,
-                    'max'        => 1365,
-                    'gutters'    => [
-                        'row'    => 30,
-                        'column' => 20,
-                        'top'    => 30,
-                        'bottom' => 40,
-                    ],
-                ],
-                'xlarge'  => [
-                    'fillstyle'  => 'full-width',
-                    'background' => 'image',
-                    'maxWidth'   => 1140,
-                    'min'        => 1366,
-                    'max'        => 9999,
-                    'gutters'    => [
-                        'row'    => 30,
-                        'column' => 20,
-                        'top'    => 30,
-                        'bottom' => 40,
-                    ],
-                ],
-            ],
+            'media'      => json_decode(file_get_contents(__DIR__ . '/../resources/json/layout-hero.json')),
         ],
         [
             'name'       => '12-layout',
@@ -70,61 +19,7 @@ return [
             'type'       => 'template',
             'label'      => 'Responsive 12',
             'draw'       => '',
-            'media'      => [
-
-                'mobile'  => [
-                    'fillstyle'  => 'full-width',
-                    'background' => 'image',
-                    'maxWidth'   => 0,
-                    'min'        => 0,
-                    'max'        => 640,
-                    'gutters'    => [
-                        'row'    => 10,
-                        'column' => 10,
-                        'top'    => 10,
-                        'bottom' => 10,
-                    ],
-                ],
-                'tablet'  => [
-                    'fillstyle'  => 'full-width',
-                    'background' => 'image',
-                    'maxWidth'   => 0,
-                    'min'        => 641,
-                    'max'        => 1007,
-                    'gutters'    => [
-                        'row'    => 10,
-                        'column' => 20,
-                        'top'    => 30,
-                        'bottom' => 40,
-                    ],
-                ],
-                'desktop' => [
-                    'fillstyle'  => 'full-width',
-                    'background' => 'image',
-                    'maxWidth'   => 960,
-                    'min'        => 1008,
-                    'max'        => 1365,
-                    'gutters'    => [
-                        'row'    => 30,
-                        'column' => 20,
-                        'top'    => 30,
-                        'bottom' => 40,
-                    ],
-                ],
-                'xlarge'  => [
-                    'fillstyle'  => 'full-width',
-                    'background' => 'image',
-                    'maxWidth'   => 1140,
-                    'min'        => 1366,
-                    'max'        => 9999,
-                    'gutters'    => [
-                        'row'    => 30,
-                        'column' => 20,
-                        'top'    => 30,
-                        'bottom' => 40,
-                    ],
-                ],
-            ],
+            'media'      => json_decode(file_get_contents(__DIR__ . '/../resources/json/layout-12.json')),
         ],
 
     ],
