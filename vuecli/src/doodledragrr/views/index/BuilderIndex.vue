@@ -13,6 +13,7 @@
 				<component :is="component" />
 			</template>
 		</od-split-window>
+
 	</section>
 </template>
 

@@ -25,6 +25,7 @@ class CreateLayoutTemplatesTable extends Migration
             $table->integer('responsive')->default(12);
             $table->longText('media')->nullable();
             $table->longText('draw')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
 

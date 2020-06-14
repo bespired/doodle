@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 class TemplateController extends Controller
 {
 
+    public function schema($type)
+    {
+        return response()->json('yay');
+    }
+
     public function index($type)
     {
         $Model = sprintf('\App\Models\Eloquent\%sTemplate', ucfirst($type));
@@ -22,11 +27,9 @@ class TemplateController extends Controller
     public function save(Request $request, $type)
     {
 
-        $data = (object) $request->all();
-
+        $data  = (object) $request->all();
         $Model = sprintf('\App\Models\Eloquent\%sTemplate', ucfirst($type));
-
-        $row = $Model::query()
+        $row   = $Model::query()
             ->whereHandle($data->handle)
             ->whereType('template')
             ->first();
@@ -36,6 +39,34 @@ class TemplateController extends Controller
         $row->save();
 
         return response()->json($row);
+    }
+
+    public function remove(Request $request, $type)
+    {
+        $data  = (object) $request->all();
+        $Model = sprintf('\App\Models\Eloquent\%sTemplate', ucfirst($type));
+
+        $rows = $Model::query()
+            ->whereIn('handle', $data->handles)
+            ->get();
+
+        // free the name of the deleted row.
+        // events dont work on mass delete
+        foreach ($rows as $row) {
+            $row->name = $row->name . '--' . time();
+            $row->save();
+        }
+
+        $Model::query()
+            ->whereIn('handle', $data->handles)
+            ->delete();
+
+        return response()->json($data->handles);
+    }
+
+    public function export(Request $request, $type)
+    {
+        return response()->json('yay');
     }
 
     private function newLayoutData($row, $data)

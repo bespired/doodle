@@ -1,14 +1,16 @@
 <template>
-	<div :key="`selected-${selectedIndex}`">
-		<od-action @click="create" label="Create new layout" icon="plus" type="action" />
+	<div>
+		<od-action @click="create" label="Create new layout" icon="plus"    type="action" />
 		<od-action @click="upload" label="Import layout"     icon="publish" type="second" />
-		<od-action @click="edit"   label="Edit selected"     icon="edit"
-			v-if="selectedThumbsAmount === 1" />
+		<od-action @click="edit"   label="Edit selected"     icon="edit"    thumbs="1" />
 
-		<div class="od-bottom-menu" v-if="selectedThumbsAmount > 0" >
-			<od-action @click="download" label="Export selected" icon="download" type="second" />
-			<od-action @click="remove"   label="Delete selected" icon="trash" type="danger"/>
+		<div class="od-bottom-menu">
+			<od-action @click="download" thumbs=">0" label="Export selected" icon="download" type="second" />
+			<od-action @click="remove"   thumbs=">0" label="Delete selected" icon="trash"    type="danger"/>
 		</div>
+
+		<od-alert index="deleted"   type="success" title="Deleted"     message="Your templates are deleted." />
+		<od-alert index="no-delete" type="error"   title="Not Deleted" message="Something went wrong." />
 
 	</div>
 </template>
@@ -27,25 +29,46 @@ export default {
 		selectedIndex(){
 			return this.$store.getters['doodlegui/getSelectedIndex']
 		},
-		selectedThumbsAmount(){
-			let selected= this.selectedIndex
-			if ( selected === undefined ) return 0
-			return selected.length
-		},
 	},
 
 	methods:{
 		create(){
+			this.$store.dispatch('dragrr/createTemplate', {
+				source: 'layout'
+			})
 		},
 		upload(){
+			this.$options.confirmModal.open(
+				'Sorry', 'Not implemented yet.', 'Hmmm...', {type: 'success'}
+			)
 		},
 		edit(){
 			this.$router.push({ path: 'layout-builder/' + this.selectedIndex[0]  })
 		},
 		download(){
+			this.$options.confirmModal.open(
+				'Sorry', 'Not implemented yet.', 'Hmmm...', {type: 'success'}
+			)
+			// this.$store.dispatch('doodlegui/exportTemplates', {
+			// 	source: 'layout',
+			// 	handles: this.selectedIndex
+			// })
 		},
 		remove(){
-		},
+			this.$options.confirmModal.open(
+				'Are you sure?',
+				'This will delete the selected templates',
+				'Delete',
+				{type: 'danger'}
+			).then((confirm) => {
+				if (confirm){
+					this.$store.dispatch('dragrr/deleteTemplates', {
+						source: 'layout',
+						handles: this.selectedIndex
+					})
+				}
+			})
+		}
 	}
 
 }

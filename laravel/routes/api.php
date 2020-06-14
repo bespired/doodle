@@ -19,8 +19,11 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('closed', 'JwtApi\DataController@closed');
     Route::post('register', 'JwtApi\UserController@register');
 
+    Route::get('templates/{type}/schema', 'JsonApi\TemplateController@schema');
     Route::get('templates/{type}/index', 'JsonApi\TemplateController@index');
     Route::post('templates/{type}/save', 'JsonApi\TemplateController@save');
+    Route::post('templates/{type}/delete', 'JsonApi\TemplateController@remove');
+    Route::post('templates/{type}/export', 'JsonApi\TemplateController@export');
 
 });
 

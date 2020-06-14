@@ -38,6 +38,14 @@ export default {
     mutations: {
         setLayoutTemplates(state, layoutTemplates){ state.layoutTemplates = layoutTemplates },
 
+        removeLayoutTemplates(state, removedHandles){
+            removedHandles.forEach((h)=>{
+                state.layoutTemplates.forEach((t, i)=>{
+                    if ( t.handle === h )  state.layoutTemplates.splice(i, 1)
+                })
+            })
+        },
+
         clearCurrentTemplate(state) { state.currentTemplate = null },
         setCurrentTemplate(state, payload) {
             const source    = payload.source
@@ -84,15 +92,35 @@ export default {
 
         },
 
+        exportTemplates(context, payload){
+            context.state.apis.dragrrApi.exportTemplates(payload.source, payload.handles)
+
+        },
+
+        deleteTemplates(context, payload){
+            context.state.apis.dragrrApi.deleteTemplates(payload.source, payload.handles)
+            .then( result => {
+                context.dispatch('doodlegui/addNamedAlertPanel', 'deleted', {root:true})
+                context.commit('removeLayoutTemplates', payload.handles)
+
+            })
+            .catch((cancel) => {
+                context.dispatch('doodlegui/addNamedAlertPanel', 'no-delete', {root:true})
+            })
+        },
+
+        createTemplate(context, payload){
+
+        },
+
         saveCurrentTemplate(context, payload){
-            console.log( '-->', context.state.currentTemplate )
-            context.state.apis.dragrrApi.saveTemplates('layout', context.state.currentTemplate)
-                .then( result => {
-                    context.dispatch('doodlegui/addNamedAlertPanel', 'saved', {root:true})
-                })
-                .catch((cancel) => {
-                    context.dispatch('doodlegui/addNamedAlertPanel', 'not-saved', {root:true})
-                })
+            context.state.apis.dragrrApi.saveTemplates(payload.source, context.state.currentTemplate)
+            .then( result => {
+                context.dispatch('doodlegui/addNamedAlertPanel', 'saved', {root:true})
+            })
+            .catch((cancel) => {
+                context.dispatch('doodlegui/addNamedAlertPanel', 'not-saved', {root:true})
+            })
         }
 
     },
