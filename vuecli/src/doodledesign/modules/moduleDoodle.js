@@ -126,7 +126,6 @@ export default {
         getSearchValue: (state) => { return state.searchValue },
 
         getSelectedIndex: (state) => {
-            console.log( state.indexSelected )
             return state.indexSelected
         },
     },
@@ -149,11 +148,8 @@ export default {
         setSelectValue(state, payload)    { Vue.set(state.selects, payload.key, payload.value)   },
         setSelectOptions(state, payload)  { Vue.set(state.options, payload.key, payload.value)   },
 
-        addIndexSelected(state, handle)    {
-            state.indexSelected.push(handle)
-
-        },
-
+        clearIndexSelected(state)          { state.indexSelected=[]; },
+        addIndexSelected(state, handle)    { state.indexSelected.push(handle) },
         removeIndexSelected(state, handle) {
             state.indexSelected.forEach((handle, idx) => {
                 if ( state.indexSelected[idx] === handle ){

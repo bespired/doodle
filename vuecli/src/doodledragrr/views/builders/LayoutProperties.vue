@@ -41,12 +41,12 @@ export default {
 	name: 'layout-properties',
 
 	created() {
-    	this.$eventHub.$on('save',  this.save );
-    	this.$eventHub.$on('index', this.index );
+		this.$eventHub.$on('save',  this.save );
+		this.$eventHub.$on('index', this.index );
 	},
 	beforeDestroy() {
-    	this.$eventHub.$off('save');
-    	this.$eventHub.$off('index');
+		this.$eventHub.$off('save');
+		this.$eventHub.$off('index');
 	},
 
 	data(){

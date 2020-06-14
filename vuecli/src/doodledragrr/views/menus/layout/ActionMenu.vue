@@ -1,13 +1,13 @@
 <template>
-	<div>
-		<od-action label="Create new layout" icon="plus" type="action" />
-		<od-action label="Import layout"     icon="publish" type="second" />
-		<od-action label="Edit selected"     icon="edit"
+	<div :key="`selected-${selectedIndex}`">
+		<od-action @click="create" label="Create new layout" icon="plus" type="action" />
+		<od-action @click="upload" label="Import layout"     icon="publish" type="second" />
+		<od-action @click="edit"   label="Edit selected"     icon="edit"
 			v-if="selectedThumbsAmount === 1" />
 
 		<div class="od-bottom-menu" v-if="selectedThumbsAmount > 0" >
-			<od-action label="Export selected" icon="download" type="second" />
-			<od-action label="Delete selected" icon="trash" type="danger"/>
+			<od-action @click="download" label="Export selected" icon="download" type="second" />
+			<od-action @click="remove"   label="Delete selected" icon="trash" type="danger"/>
 		</div>
 
 	</div>
@@ -15,6 +15,13 @@
 <script>
 export default {
 	name: 'action-menu',
+
+	mounted() {
+		this.$store.commit('doodlegui/clearIndexSelected')
+	},
+	beforeDestroy() {
+		this.$store.commit('doodlegui/clearIndexSelected')
+	},
 
 	computed: {
 		selectedIndex(){
@@ -26,6 +33,20 @@ export default {
 			return selected.length
 		},
 	},
+
+	methods:{
+		create(){
+		},
+		upload(){
+		},
+		edit(){
+			this.$router.push({ path: 'layout-builder/' + this.selectedIndex[0]  })
+		},
+		download(){
+		},
+		remove(){
+		},
+	}
 
 }
 </script>

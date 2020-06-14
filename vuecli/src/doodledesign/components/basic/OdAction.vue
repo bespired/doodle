@@ -1,6 +1,8 @@
 <template>
 	<div class="od-action-row">
-		<od-button :class="type" class="left-icon" :icons="`${icon},${icon}`">
+		<od-button
+			@click="$emit('click')"
+			:class="type" class="left-icon" :icons="`${icon},${icon}`">
 			{{ label }}
 		</od-button>
 	</div>
