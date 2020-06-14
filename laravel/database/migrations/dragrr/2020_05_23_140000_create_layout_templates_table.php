@@ -20,13 +20,17 @@ class CreateLayoutTemplatesTable extends Migration
             $table->bigIncrements('id');
             $table->char('handle', 32);
             $table->char('type', 32)->default('');
-            $table->char('name', 32)->nullable()->unique();
+            $table->char('name', 32)->nullable();
             $table->char('label', 64)->default('No Label');
             $table->integer('responsive')->default(12);
             $table->longText('media')->nullable();
             $table->longText('draw')->nullable();
             $table->softDeletes();
             $table->timestamps();
+        });
+
+        Schema::table('layout_templates', function (Blueprint $table) {
+            $table->unique(['name', 'deleted_at']);
         });
 
         Artisan::call('dragrr:config:layouts');

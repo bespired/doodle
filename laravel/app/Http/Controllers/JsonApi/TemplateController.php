@@ -46,17 +46,6 @@ class TemplateController extends Controller
         $data  = (object) $request->all();
         $Model = sprintf('\App\Models\Eloquent\%sTemplate', ucfirst($type));
 
-        $rows = $Model::query()
-            ->whereIn('handle', $data->handles)
-            ->get();
-
-        // free the name of the deleted row.
-        // events dont work on mass delete
-        foreach ($rows as $row) {
-            $row->name = $row->name . '--' . time();
-            $row->save();
-        }
-
         $Model::query()
             ->whereIn('handle', $data->handles)
             ->delete();
