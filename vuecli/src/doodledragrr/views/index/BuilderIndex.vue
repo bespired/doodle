@@ -4,26 +4,34 @@
 			<template #title        >Index</template>
 			<template #subtitle     >{{ index }}</template>
 			<template #leftMenu     ><od-header-search /></template>
-			<template #rightMenu    >&nbsp;</template>
+			<!-- <template #rightMenu    ></template> -->
 			<template #leftContent  >
 				<od-thumbs :thumbs="thumbs" :route="route" v-if="thumbs"/>
 				<od-loading v-else/>
 			</template>
-			<template #rightContent >todo... NEW</template>
+			<template #rightContent >
+				<component :is="component" />
+			</template>
 		</od-split-window>
 	</section>
 </template>
 
 <script>
 
+import LayoutActionMenu from '@/doodledragrr/views/menus/layout/ActionMenu.vue'
+
 export default {
 	name: 'index',
 
 	props: ['index'],
 
+	components: { LayoutActionMenu },
+
 	data(){
+		const route = document.location.pathname.replace('/admin', '')
 		return {
-			route: document.location.pathname.replace('/admin', '')
+			route:     route,
+			component: route.replace('/', '').replace('-builders', '') + '-action-menu',
 		}
 	},
 

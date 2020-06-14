@@ -15,6 +15,7 @@ $subheader-height        :  50px;
 $heroimage-height        : 135px;
 
 $font-size               : 14px;
+$input-height            : 36px;
 
 $tempo                   : 300ms;
 
@@ -28,6 +29,8 @@ $color-warning           : #ed9d03;
 $color-success           : #67bf2e;
 $color-error             : #d10b07;
 $color-font              : #333f50;
+$color-selected          : #3b89e4;
+
 
 $button-default-image    : linear-gradient(180deg, $color-default, darken($color-default, 2%));
 $button-brand-image      : linear-gradient(180deg, $color-brand,   darken($color-brand,   2%));
@@ -82,6 +85,7 @@ $border-radius           :    3px;
     --color-brand        : #{$color-brand};
     --color-cancel       : #{$color-cancel};
     --color-second       : #{$color-second};
+    --color-selected     : #{$color-selected};
     --color-action       : #{$color-action};
     --color-danger       : #{$color-danger};
     --color-warning      : #{$color-warning};

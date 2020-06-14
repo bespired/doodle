@@ -1,9 +1,8 @@
 <template>
-	<div class="action-panel">
-		<div>{{ panel }}</div>
-		<div class="bottom-glue">
-			<od-link :route="route"> {{ label }}  </od-link>
-		</div>
+	<div class="od-action-row">
+		<od-button :class="type" class="left-icon" :icons="`${icon},${icon}`">
+			{{ label }}
+		</od-button>
 	</div>
 </template>
 <script>
@@ -13,7 +12,7 @@ export default {
 		type : String,
 		panel: String,
 		label: String,
-		route: String
+		icon : String,
 	},
 };
 </script>

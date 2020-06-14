@@ -53,6 +53,10 @@ export default {
             // slots for custom functions
         },
 
+        indexSelected: [
+            // slots for selected thumbs
+        ],
+
         searchValue: '',
 
 
@@ -111,11 +115,20 @@ export default {
             if (state.options[item] === undefined) Vue.set(state.options, item, [])
             return state.options[item]
         },
+        getIndexSelected: (state) => item => {
+            if (state.indexSelected === undefined) Vue.set(state, 'indexSelected', [])
+            return state.indexSelected
+        },
         getgetFunction: (state) => item => {
             if (state.functions[item] === undefined) return null
             return state.functions[item]
         },
-        getSearchValue: (state) => { return state.searchValue }
+        getSearchValue: (state) => { return state.searchValue },
+
+        getSelectedIndex: (state) => {
+            console.log( state.indexSelected )
+            return state.indexSelected
+        },
     },
 
     mutations: {
@@ -128,12 +141,27 @@ export default {
         setDropdownState(state, payload)  { Vue.set(state.dropdowns, payload.key, payload.value) },
         setTextValue(state, payload)      { Vue.set(state.texts, payload.key, payload.value)     },
 
+
         setCustomFunction(state, payload) {
             state.functions[payload.key]= payload.value
         },
 
         setSelectValue(state, payload)    { Vue.set(state.selects, payload.key, payload.value)   },
         setSelectOptions(state, payload)  { Vue.set(state.options, payload.key, payload.value)   },
+
+        addIndexSelected(state, handle)    {
+            state.indexSelected.push(handle)
+
+        },
+
+        removeIndexSelected(state, handle) {
+            state.indexSelected.forEach((handle, idx) => {
+                if ( state.indexSelected[idx] === handle ){
+                    state.indexSelected.splice(idx, 1)
+                }
+            })
+        },
+
 
         addAlertPanel(state, payload) {
             let now = new Date().getTime()

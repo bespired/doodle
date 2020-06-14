@@ -6,11 +6,10 @@
     text-align: left;
     padding-bottom: 7px;
 
-
     .input-row.input-slider{
         input {
-            min-height: 36px;
-            max-height: 36px;
+            min-height: $input-height;
+            max-height: $input-height;
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
         }
@@ -24,7 +23,7 @@
         }
         span {
             min-width: 4em;
-            max-height: 36px;
+            max-height: $input-height;
             border-left: 0 solid;
             border-top-right-radius: v(border-radius);
             border-bottom-right-radius: v(border-radius);

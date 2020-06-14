@@ -64,7 +64,7 @@ fieldset[disabled] .multiselect {
     display: block;
     position: relative;
     width: 100%;
-    min-height: 36px;
+    min-height: $input-height;
     text-align: left;
     color: #35495e
 }
@@ -158,8 +158,8 @@ fieldset[disabled] .multiselect {
 }
 
 .multiselect__tags {
-    min-height: 36px;
-    max-height: 36px;
+    min-height: $input-height;
+    max-height: $input-height;
     display: block;
     padding: 6px 40px 0 8px;
     border-radius: v(border-radius);
@@ -217,7 +217,7 @@ fieldset[disabled] .multiselect {
 }
 
 .multiselect__current {
-    min-height: 36px;
+    min-height: $input-height;
     overflow: hidden;
     padding: 8px 12px 0;
     padding-right: 30px;
@@ -315,7 +315,7 @@ fieldset[disabled] .multiselect {
 .multiselect__option {
     display: block;
     padding: 12px;
-    min-height: 36px;
+    min-height: $input-height;
     line-height: 16px;
     text-decoration: none;
     text-transform: none;
