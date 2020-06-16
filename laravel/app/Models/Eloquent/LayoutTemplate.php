@@ -13,7 +13,7 @@ class LayoutTemplate extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'handle', 'name', 'label', 'type',
+        'handle', 'name', 'label', 'type', 'status',
         'responsive', 'media', 'draw',
     ];
 
@@ -21,4 +21,8 @@ class LayoutTemplate extends Model
         'media' => 'array',
     ];
 
+    public function scopeExclude($query, $value = array())
+    {
+        return $query->select(array_diff($this->fillable, (array) $value));
+    }
 }

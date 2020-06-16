@@ -10,7 +10,22 @@ class TemplateController extends Controller
 
     public function schema($type)
     {
-        return response()->json('yay');
+        $Model = sprintf('\App\Models\Eloquent\%sTemplate', ucfirst($type));
+
+        $count  = $Model::count();
+        $schema = $Model::query()
+            ->whereType('schema')
+            ->exclude(['handle'])
+            ->first()
+            ->toArray();
+
+        $create         = $Model::create($schema);
+        $create->name   = $count . time();
+        $create->type   = 'template';
+        $create->status = 'new';
+        $create->save();
+
+        return response()->json($create);
     }
 
     public function index($type)
@@ -27,14 +42,15 @@ class TemplateController extends Controller
     public function save(Request $request, $type)
     {
 
-        $data  = (object) $request->all();
+        $data = (object) $request->all();
+
         $Model = sprintf('\App\Models\Eloquent\%sTemplate', ucfirst($type));
         $row   = $Model::query()
             ->whereHandle($data->handle)
             ->whereType('template')
             ->first();
 
-        if ($type === 'layout') {$row = $this->newLayoutData($row, $data);}
+        if ($type === 'layout') {$row = $this->fillLayoutData($row, $data);}
 
         $row->save();
 
@@ -46,7 +62,7 @@ class TemplateController extends Controller
         $data  = (object) $request->all();
         $Model = sprintf('\App\Models\Eloquent\%sTemplate', ucfirst($type));
 
-        $Model::query()
+        $fetch = $Model::query()
             ->whereIn('handle', $data->handles)
             ->delete();
 
@@ -58,8 +74,35 @@ class TemplateController extends Controller
         return response()->json('yay');
     }
 
-    private function newLayoutData($row, $data)
+    private function uniqueName($row, $data)
     {
+        // figure out model by row
+
+        $slug  = slug($data->label);
+        $Model = get_class($row);
+
+        $models = $Model::where('name', $slug)->get();
+
+        if (count($models) === 0) {
+            return $slug;
+        }
+
+        $count = count($models);
+        while (count($models) > 0) {
+            $check  = sprintf('%s-%s', $slug, $count);
+            $models = $Model::where('name', $check)->get();
+            $count++;
+        }
+        return $check;
+
+    }
+
+    private function fillLayoutData($row, $data)
+    {
+        if ($data->status === 'new') {
+            $row->name = $this->uniqueName($row, $data);
+        }
+        $row->status     = 'saved';
         $row->label      = $data->label;
         $row->responsive = $data->responsive;
         $row->media      = $data->media;

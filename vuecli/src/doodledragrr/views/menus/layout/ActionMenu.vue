@@ -9,6 +9,7 @@
 			<od-action @click="remove"   thumbs=">0" label="Delete selected" icon="trash"    type="danger"/>
 		</div>
 
+		<od-alert index="created"   type="success" title="Created"     message="Your templates is created." />
 		<od-alert index="deleted"   type="success" title="Deleted"     message="Your templates are deleted." />
 		<od-alert index="no-delete" type="error"   title="Not Deleted" message="Something went wrong." />
 

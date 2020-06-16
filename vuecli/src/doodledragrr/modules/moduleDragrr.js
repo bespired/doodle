@@ -27,8 +27,7 @@ export default {
         currentTemplate:    (state) => {
             if ( state.currentTemplate  === null ) return null
             if ( state.currentTemplate.error !== undefined ) {
-                console.error( isNotEmtpy.error )
-                return null
+                console.error( isNotEmtpy.error ); return null;
             }
             return state.currentTemplate
         },
@@ -36,16 +35,21 @@ export default {
     },
 
     mutations: {
-        setLayoutTemplates(state, layoutTemplates){ state.layoutTemplates = layoutTemplates },
-
+        // Layout
+        setLayoutTemplates(state, layoutTemplates)  { state.layoutTemplates = layoutTemplates    },
+        addLayoutTemplate(state, layoutTemplate)    { state.layoutTemplates.push(layoutTemplate) },
         removeLayoutTemplates(state, removedHandles){
             removedHandles.forEach((h)=>{
                 state.layoutTemplates.forEach((t, i)=>{
-                    if ( t.handle === h )  state.layoutTemplates.splice(i, 1)
+                    if ( t.handle === h )  {
+                        state.layoutTemplates.splice(i, 1)
+                    }
                 })
             })
         },
 
+
+        // Current
         clearCurrentTemplate(state) { state.currentTemplate = null },
         setCurrentTemplate(state, payload) {
             const source    = payload.source
@@ -101,7 +105,9 @@ export default {
             context.state.apis.dragrrApi.deleteTemplates(payload.source, payload.handles)
             .then( result => {
                 context.dispatch('doodlegui/addNamedAlertPanel', 'deleted', {root:true})
+                // Layout ??? How do we know?
                 context.commit('removeLayoutTemplates', payload.handles)
+                context.commit('doodlegui/clearIndexSelected', null, {root:true})
 
             })
             .catch((cancel) => {
@@ -110,7 +116,12 @@ export default {
         },
 
         createTemplate(context, payload){
-
+            context.state.apis.dragrrApi.createTemplate(payload.source)
+            .then( result => {
+                // Layout ??? How do we know?
+                context.dispatch('doodlegui/addNamedAlertPanel', 'created', {root:true})
+                context.commit('addLayoutTemplate', result.data)
+            })
         },
 
         saveCurrentTemplate(context, payload){

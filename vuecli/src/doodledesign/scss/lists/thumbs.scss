@@ -35,10 +35,11 @@
             border: 4px solid vc(selected);
             padding: 4px;
         }
-        &.created{
-            border: 4px solid vc(action);
-            padding: 4px;
+
+        &.new{
+            box-shadow: 0 0 8px 0 vc(action);
         }
+
         a {
             color: white;
         }

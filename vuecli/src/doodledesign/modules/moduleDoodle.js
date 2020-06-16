@@ -140,7 +140,6 @@ export default {
         setDropdownState(state, payload)  { Vue.set(state.dropdowns, payload.key, payload.value) },
         setTextValue(state, payload)      { Vue.set(state.texts, payload.key, payload.value)     },
 
-
         setCustomFunction(state, payload) {
             state.functions[payload.key]= payload.value
         },

@@ -73,6 +73,7 @@ export default {
 			this.$router.push('/layout-builders')
 		},
 		save(){
+			console.log('save')
 			this.$store.dispatch('dragrr/saveCurrentTemplate',  {source: 'layout'})
 		},
 

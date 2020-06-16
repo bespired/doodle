@@ -20,6 +20,7 @@ class CreateLayoutTemplatesTable extends Migration
             $table->bigIncrements('id');
             $table->char('handle', 32);
             $table->char('type', 32)->default('');
+            $table->char('status', 16)->default('new');
             $table->char('name', 32)->nullable();
             $table->char('label', 64)->default('No Label');
             $table->integer('responsive')->default(12);

@@ -1,7 +1,7 @@
 <template>
 	<div v-if="thumbs && Object.keys(thumbs)" class="od-thumbs" >
 		<template v-for="(item, index) in thumbs">
-			<div class="od-thumb" :class="{selected:isSelected[item.handle]}"
+			<div class="od-thumb" :class="[{selected:isSelected[item.handle]}, item.status]"
 				@click="setSelected(item)"
 				:key="`${item.name}-${index}-${update}`">
 				<div class="od-thumb-canvas">

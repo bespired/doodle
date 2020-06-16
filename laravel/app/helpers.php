@@ -1,8 +1,10 @@
 <?php
 
-if (!function_exists('connectionConfig')) {
-    function connectionConfig($stage, $connection)
+use Illuminate\Support\Str;
+
+if (!function_exists('slug')) {
+    function slug($str)
     {
-        return (object) config(sprintf("database.connections.%s_%s", $stage, $connection));
+        return Str::slug($str);
     }
 }
