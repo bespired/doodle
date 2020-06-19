@@ -1,10 +1,9 @@
 <template>
 	<section class="full-height">
 		<od-split-window sizes="large,smaller" types="index,action">
-			<template #title        >Index</template>
-			<template #subtitle     >{{ index }}</template>
-			<template #leftMenu     ><od-header-search /></template>
-			<!-- <template #rightMenu    ></template> -->
+			<template #title    >Index</template>
+			<template #subtitle >{{ index }}</template>
+			<template #leftMenu ><od-header-search /></template>
 			<template #leftContent  >
 				<od-thumbs :thumbs="thumbs" :route="route" v-if="thumbs"/>
 				<od-loading v-else/>
@@ -19,14 +18,15 @@
 
 <script>
 
-import LayoutActionMenu from '@/doodledragrr/views/menus/layout/ActionMenu.vue'
+import LayoutActionMenu  from '@/doodledragrr/views/menus/layout/ActionMenu.vue'
+import SectionActionMenu from '@/doodledragrr/views/menus/section/ActionMenu.vue'
 
 export default {
 	name: 'index',
 
 	props: ['index'],
 
-	components: { LayoutActionMenu },
+	components: { LayoutActionMenu, SectionActionMenu },
 
 	data(){
 		const route = document.location.pathname.replace('/admin', '')

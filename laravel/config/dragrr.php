@@ -4,6 +4,13 @@ return [
 
     'menus'             => json_decode(file_get_contents(__DIR__ . '/../resources/json/dragrr-menu.json')),
 
+    'settings'          => [
+        'responsiveOptions' => [0, 6, 8, 10, 12],
+        'backgroundOptions' => ['image', 'movie', 'color'],
+        'fillstyleOptions'  => ['full-width', 'max-width'],
+        'mediaOptions'      => ['mobile', 'tablet', 'desktop', 'xlarge'],
+    ],
+
     'layout-templates'  => [
         [
             'name'       => 'schema',
@@ -11,7 +18,7 @@ return [
             'type'       => 'schema',
             'label'      => 'New Layout',
             'responsive' => 12,
-            'draw'       => '...',
+            'draw'       => '',
             'media'      => json_decode(file_get_contents(__DIR__ . '/../resources/json/layout-hero.json')),
         ],
         [
@@ -37,32 +44,94 @@ return [
 
     'section-templates' => [
         [
-            'name'       => 'hero',
-            'background' => 'image',
-            'fillstyle'  => 'full-width',
-            'maxwidth'   => '100%',
-            'columns'    => [
-                'mobile'  => [100],
-                'tablet'  => [100],
-                'desktop' => [100],
-                'xlarge'  => [100],
-            ],
-            'condition'  => [],
-            'draw'       => '',
+            'name'   => 'schema',
+            'status' => 'default',
+            'type'   => 'schema',
+            'label'  => 'New Section',
+            'rows'   => json_decode(file_get_contents(__DIR__ . '/../resources/json/section-schema.json')),
+            'draw'   => '...',
         ],
         [
-            'name'       => 'example',
-            'background' => 'color',
-            'fillstyle'  => 'max-width',
-            'maxwidth'   => '980px',
-            'columns'    => [
-                'mobile'  => [100, 100, 100],
-                'tablet'  => [100, 50, 50],
-                'desktop' => [20, 40, 40],
-                'xlarge'  => [20, 40, 40],
+            'name'   => 'featured',
+            'status' => 'saved',
+            'type'   => 'template',
+            'label'  => 'Featured',
+            'rows'   => [
+                [
+                    'layout' => '12-layout',
+                    'repeat' => 1,
+                    'spaces' => [
+                        [
+                            'widget'  => 'title',
+                            'content' => 'fixed',
+                            'widths'  => ['100%', '100%', '100%', '100%'],
+                        ],
+                    ],
+                ],
+                [
+                    'layout' => '12-layout',
+                    'repeat' => 1,
+                    'spaces' => [
+                        [
+                            'widget'  => 'notice',
+                            'content' => 'fixed',
+                            'widths'  => ['100%', '50%', '50%', '50%'],
+                            // 'mobile'  => '100%', 'tablet'  => '50%', 'desktop' => '25%', 'xlarge'  => '25%',
+                        ],
+                        [
+                            'widget'  => 'image',
+                            'content' => 'fixed',
+                            'widths'  => ['100%', '50%', '50%', '50%'],
+                        ],
+                    ],
+                ],
             ],
-            'condition'  => [],
-            'draw'       => '',
+        ],
+        [
+            'name'   => 'horizons',
+            'status' => 'saved',
+            'type'   => 'template',
+            'label'  => 'Horizons',
+
+            'rows'   => [
+                [
+                    'layout' => '12-layout',
+                    'repeat' => 1,
+                    'spaces' => [
+                        [
+                            'widget'  => 'title',
+                            'content' => 'fixed',
+                            'widths'  => ['100%', '100%', '100%', '100%'],
+                        ],
+                    ],
+                ],
+                [
+                    'layout' => '12-layout',
+                    'repeat' => 1,
+                    'spaces' => [
+                        [
+                            'widget'  => 'teaser',
+                            'content' => 'fixed',
+                            'widths'  => ['100%', '50%', '25%', '25%'],
+                        ],
+                        [
+                            'widget'  => 'teaser',
+                            'content' => 'fixed',
+                            'widths'  => ['100%', '50%', '25%', '25%'],
+                        ],
+                        [
+                            'widget'  => 'teaser',
+                            'content' => 'fixed',
+                            'widths'  => ['100%', '50%', '25%', '25%'],
+                        ],
+                        [
+                            'widget'  => 'teaser',
+                            'content' => 'fixed',
+                            'widths'  => ['100%', '50%', '25%', '25%'],
+                        ],
+                    ],
+                ],
+            ],
         ],
     ],
 ];

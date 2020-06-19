@@ -1,29 +1,28 @@
 export default [
-
-    // {
-	// 	path: '/layout-builders',
-	// 	component: global.loadDrag('pages/Index'),
-	// 	meta: { title: 'Row Builders | Dragrr' },
-	// 	props: { index: 'row-templates' }
-	// },
-	// {
-	// 	path: '/layout-builder',
-	// 	component: global.loadDrag('routed/DragDrop'),
-	// 	meta: { title: 'Row Builder | Dragrr' },
-	// 	children: [
-	// 		{
-	// 			name: 'layout-builder',
-	// 			path: ':id',
-	// 			components: {
-	// 				leftMenu:       global.loadDrag('menus/shared/EmptySpace'),
-	// 				leftContent:    global.loadDrag('menus/shared/EmptySpace'),
-	// 				centerMenu:     global.loadDrag('menus/shared/EmptySpace'),
-	// 				centerContent:  global.loadDrag('pages/builder/LayoutBuilder'),
-	// 				rightMenu:      global.loadDrag('menus/layout/LayoutSave'),
-	// 				rightContent:   global.loadDrag('menus/layout/LayoutProperties')
-	// 			}
-	// 		}
-	// 	]
-	// }
+	{
+		name: 'section-builders',
+		path: '/section-builders',
+		component: global.loadDrag('index/BuilderIndex'),
+		meta:  { title: 'Sections | Dragrr' },
+		props: { index: 'section-templates' }
+	},
+	{
+		path: '/section-builder',
+		component: global.loadDrag('routed/Propview'),
+		meta:  { title: 'Section Builder | Dragrr' },
+		props: { source: 'section' },
+		children: [
+			{
+				name: 'section-builder',
+				path: ':id',
+				components: {
+					leftMenu:       global.loadDrag('menus/shared/DeviceSizes'),
+					leftContent:    global.loadDrag('builders/SectionBuilder'),
+					rightContent:   global.loadDrag('builders/SectionProperties'),
+					rightMenu:      global.loadDrag('menus/shared/SharedSave'),
+				}
+			}
+		]
+	},
 
 ]

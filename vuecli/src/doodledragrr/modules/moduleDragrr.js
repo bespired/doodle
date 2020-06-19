@@ -18,12 +18,16 @@ export default {
         layoutTemplates:  null,
         layoutTemplateId: null,
 
+        sectionTemplates:  null,
+        sectionTemplateId: null,
+
         currentTemplate: null,
 
     },
 
     getters: {
-        getLayoutTemplates: (state) => { return state.layoutTemplates },
+        getLayoutTemplates:  (state) => { return state.layoutTemplates  },
+        getSectionTemplates: (state) => { return state.sectionTemplates },
         currentTemplate:    (state) => {
             if ( state.currentTemplate  === null ) return null
             if ( state.currentTemplate.error !== undefined ) {
@@ -35,19 +39,23 @@ export default {
     },
 
     mutations: {
-        // Layout
-        setLayoutTemplates(state, layoutTemplates)  { state.layoutTemplates = layoutTemplates    },
-        addLayoutTemplate(state, layoutTemplate)    { state.layoutTemplates.push(layoutTemplate) },
-        removeLayoutTemplates(state, removedHandles){
-            removedHandles.forEach((h)=>{
-                state.layoutTemplates.forEach((t, i)=>{
+        // General for Layout and Section
+        setTemplates(state, payload)  {
+            state[`${payload.source}Templates`] = payload.templates
+        },
+        addTemplate(state, payload)    {
+            state[`${payload.source}Templates`].push(payload.template)
+        },
+        removeTemplates(state, payload){
+            let stateTemplates = `${payload.source}Templates`
+            payload.removedHandles.forEach((h)=>{
+                state[stateTemplates].forEach((t, i)=>{
                     if ( t.handle === h )  {
-                        state.layoutTemplates.splice(i, 1)
+                        state[stateTemplates].splice(i, 1)
                     }
                 })
             })
         },
-
 
         // Current
         clearCurrentTemplate(state) { state.currentTemplate = null },
@@ -67,14 +75,29 @@ export default {
 
     actions: {
         getLayoutTemplates(context, payload){
+            const source = 'layout'
             if ( payload.force || context.state.layoutTemplates === null ){
             context.state.apis.dragrrApi.getTemplates('layout')
                 .then( result => {
-                    context.commit('setLayoutTemplates', result )
+                    context.commit('setTemplates', { source:source,  templates: result })
                     if (context.state.layoutTemplateId){
                         const handle = context.state.layoutTemplateId
                         context.state.layoutTemplateId = null
-                        context.commit('setCurrentTemplate', {source: 'layout', handle: handle })
+                        context.commit('setCurrentTemplate', { source: 'layout', handle: handle })
+                    }
+                })
+            }
+        },
+        getSectionTemplates(context, payload){
+            const source = 'section'
+            if ( payload.force || context.state.sectionTemplates === null ){
+            context.state.apis.dragrrApi.getTemplates('section')
+                .then( result => {
+                    context.commit('setTemplates', { source:source,  templates: result })
+                    if (context.state.sectionTemplateId){
+                        const handle = context.state.sectionTemplateId
+                        context.state.sectionTemplateId = null
+                        context.commit('setCurrentTemplate', {source: 'section', handle: handle })
                     }
                 })
             }
@@ -102,13 +125,11 @@ export default {
         },
 
         deleteTemplates(context, payload){
+            context.commit('removeTemplates', {source: payload.source, removedHandles: payload.handles})
             context.state.apis.dragrrApi.deleteTemplates(payload.source, payload.handles)
             .then( result => {
-                context.dispatch('doodlegui/addNamedAlertPanel', 'deleted', {root:true})
-                // Layout ??? How do we know?
-                context.commit('removeLayoutTemplates', payload.handles)
                 context.commit('doodlegui/clearIndexSelected', null, {root:true})
-
+                context.dispatch('doodlegui/addNamedAlertPanel', 'deleted', {root:true})
             })
             .catch((cancel) => {
                 context.dispatch('doodlegui/addNamedAlertPanel', 'no-delete', {root:true})
@@ -118,9 +139,8 @@ export default {
         createTemplate(context, payload){
             context.state.apis.dragrrApi.createTemplate(payload.source)
             .then( result => {
-                // Layout ??? How do we know?
                 context.dispatch('doodlegui/addNamedAlertPanel', 'created', {root:true})
-                context.commit('addLayoutTemplate', result.data)
+                context.commit('addTemplate', { source: payload.source, template: result.data })
             })
         },
 

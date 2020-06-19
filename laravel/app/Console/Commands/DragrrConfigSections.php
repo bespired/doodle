@@ -2,20 +2,20 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Eloquent\LayoutTemplate;
+use App\Models\Eloquent\SectionTemplate;
 use Illuminate\Console\Command;
 
-class DragrrConfigLayouts extends Command
+class DragrrConfigSections extends Command
 {
 
-    protected $signature = 'dragrr:config:layouts';
+    protected $signature = 'dragrr:config:sections';
 
-    protected $description = 'Create layouts in database from config';
+    protected $description = 'Create sections in database from config';
 
     public function handle()
     {
 
-        foreach (config('dragrr.layout-templates') as $templated) {
+        foreach (config('dragrr.section-templates') as $templated) {
 
             $template = (object) $templated;
 
@@ -24,7 +24,7 @@ class DragrrConfigLayouts extends Command
             unset($templated['name']);
             unset($templated['type']);
 
-            LayoutTemplate::updateOrCreate(
+            SectionTemplate::updateOrCreate(
                 [
                     'name' => $name,
                     'type' => $type,

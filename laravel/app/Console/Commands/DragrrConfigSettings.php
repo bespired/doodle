@@ -18,6 +18,23 @@ class DragrrConfigSettings extends Command
             ['type' => 'mainmenu'],
             ['payload' => config('dragrr.menus')]
         );
+        Setting::updateOrCreate(
+            ['type' => 'responsiveOptions'],
+            ['payload' => config('dragrr.settings.responsiveOptions')]
+        );
+        Setting::updateOrCreate(
+            ['type' => 'backgroundOptions'],
+            ['payload' => config('dragrr.settings.backgroundOptions')]
+        );
+        Setting::updateOrCreate(
+            ['type' => 'fillstyleOptions'],
+            ['payload' => config('dragrr.settings.fillstyleOptions')]
+        );
+        Setting::updateOrCreate(
+            ['type' => 'mediaOptions'],
+            ['payload' => config('dragrr.settings.mediaOptions')]
+        );
+
     }
 
 }
