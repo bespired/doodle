@@ -18,8 +18,8 @@
 
 <script>
 
-import LayoutActionMenu  from '@/doodledragrr/views/menus/layout/ActionMenu.vue'
-import SectionActionMenu from '@/doodledragrr/views/menus/section/ActionMenu.vue'
+import LayoutActionMenu  from '@/doodledragrr/views/index/LayoutMenu.vue'
+import SectionActionMenu from '@/doodledragrr/views/index/SectionMenu.vue'
 
 export default {
 	name: 'index',

@@ -16,10 +16,10 @@ export default [
 				name: 'section-builder',
 				path: ':id',
 				components: {
-					leftMenu:       global.loadDrag('menus/shared/DeviceSizes'),
+					leftMenu:       global.loadDrag('builders/DeviceSizes'),
 					leftContent:    global.loadDrag('builders/SectionBuilder'),
 					rightContent:   global.loadDrag('builders/SectionProperties'),
-					rightMenu:      global.loadDrag('menus/shared/SharedSave'),
+					rightMenu:      global.loadDrag('builders/SharedSave'),
 				}
 			}
 		]

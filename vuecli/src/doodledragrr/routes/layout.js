@@ -16,10 +16,10 @@ export default [
 				name: 'layout-builder',
 				path: ':id',
 				components: {
-					leftMenu:       global.loadDrag('menus/shared/DeviceSizes'),
+					leftMenu:       global.loadDrag('builders/DeviceSizes'),
 					leftContent:    global.loadDrag('builders/LayoutBuilder'),
 					rightContent:   global.loadDrag('builders/LayoutProperties'),
-					rightMenu:      global.loadDrag('menus/shared/SharedSave'),
+					rightMenu:      global.loadDrag('builders/SharedSave'),
 				}
 			}
 		]
