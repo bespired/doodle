@@ -15,6 +15,9 @@ export default {
             dragrrApi: new DragrrApi(),
         },
 
+        widgetTemplates:  null,
+        widgetTemplateId: null,
+
         layoutTemplates:  null,
         layoutTemplateId: null,
 
@@ -26,14 +29,27 @@ export default {
     },
 
     getters: {
+        getWidgetTemplates:  (state) => { return state.widgetTemplates  },
         getLayoutTemplates:  (state) => { return state.layoutTemplates  },
         getSectionTemplates: (state) => { return state.sectionTemplates },
-        currentTemplate:    (state) => {
+        currentTemplate:     (state) => {
             if ( state.currentTemplate  === null ) return null
             if ( state.currentTemplate.error !== undefined ) {
                 console.error( isNotEmtpy.error ); return null;
             }
             return state.currentTemplate
+        },
+
+        getLayoutTemplate:(state) => name =>{
+            if ( state.layoutTemplates === null ) return null
+
+            const found = state.layoutTemplates.find(element => {
+                return element.name === name
+            });
+            if ( found.name === name ){
+                return found
+            }
+            return null
         },
 
     },
@@ -74,6 +90,20 @@ export default {
     },
 
     actions: {
+        getWidgetTemplates(context, payload){
+            const source = 'widget'
+            if ( payload.force || context.state.widgetTemplates === null ){
+            context.state.apis.dragrrApi.getTemplates('widget')
+                .then( result => {
+                    context.commit('setTemplates', { source:source,  templates: result })
+                    if (context.state.widgetTemplateId){
+                        const handle = context.state.widgetTemplateId
+                        context.state.widgetTemplateId = null
+                        context.commit('setCurrentTemplate', { source: 'widget', handle: handle })
+                    }
+                })
+            }
+        },
         getLayoutTemplates(context, payload){
             const source = 'layout'
             if ( payload.force || context.state.layoutTemplates === null ){
@@ -108,6 +138,10 @@ export default {
             const handle    = payload.handle
             const templates = context.state[`${source}Templates`]
             const getter    = `get${source.capitalize()}Templates`
+
+            // load all referenced templates...
+            if (( source === 'section' ) && ( context.state.layoutTemplates === null ))
+                context.dispatch('getLayoutTemplates', { force: true })
 
             if (templates === null) {
                 context.state[`${source}TemplateId`]= handle

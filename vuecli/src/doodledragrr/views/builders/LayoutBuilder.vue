@@ -56,8 +56,6 @@ export default {
 		LayoutSvg,
 	},
 
-	// Media Setting and Loading of Template in parent
-
 	data(){
 		let dt = new Date()
 		return {

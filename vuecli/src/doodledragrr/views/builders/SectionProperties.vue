@@ -1,38 +1,31 @@
 <template>
 	<section v-if="sectionTemplate">
-		<!-- <od-title type="big" :key="sectionTemplate.label">{{ sectionTemplate.label }}</od-title> -->
-
 		<od-text-input vmodel="sectionTemplate.label" label="label"/>
 
-		<od-select vmodel="sectionTemplate.responsive" label="responsive" :options="responsiveOptions" />
+		<!-- <od-select vmodel="sectionTemplate.layout" label="layout" :options="layoutOptions" /> -->
 
-		<od-select smodel="row:devicesize" label="media" :options="mediaOptions"  />
+		<od-foldable>
+			<template v-for="(row, idx) in sectionTemplate.rows">
 
-		<od-foldable >
-			<od-fold-header label="Gutter sizes" />
-			<od-fold-body>
-				<od-slider label="Row"    vmodel="sectionTemplate.media.$media.gutters.row"    :min="0" :max="200" units="px" />
-				<od-slider label="column" vmodel="sectionTemplate.media.$media.gutters.column" :min="0" :max="200" units="px" />
-				<od-slider label="Top"    vmodel="sectionTemplate.media.$media.gutters.top"    :min="0" :max="200" units="px" />
-				<od-slider label="Bottom" vmodel="sectionTemplate.media.$media.gutters.bottom" :min="0" :max="200" units="px" />
-			</od-fold-body>
-			<od-fold-header label="Row section" />
-			<od-fold-body>
-				<od-select label="fillstyle"   vmodel="sectionTemplate.media.$media.fillstyle"  :options="fillstyleOptions" />
-				<od-slider label="Max width"   vmodel="sectionTemplate.media.$media.maxWidth"   :min="100" :max="2000" units="px"
+				<od-fold-header label="Row" :key="`header-${idx}`" />
+				<od-fold-body :key="`body-${idx}`" >
 
-						   v-if="sectionTemplate.media[media].fillstyle === 'max-width'" />
-				<od-select label="background"  vmodel="sectionTemplate.media.$media.background" :options="backgroundOptions" />
-			</od-fold-body>
-			<od-fold-header label="Media breakpoints" />
-			<od-fold-body>
-				<od-slider label="Media minimum" vmodel="sectionTemplate.media.$media.min" :min="0" :max="2000" units="px" />
-				<od-slider label="Media maximum" vmodel="sectionTemplate.media.$media.max" :min="0" :max="2000" units="px" />
-			</od-fold-body>
+				<template v-for="(space, inx) in row.spaces">
+					<div :key="`row-${idx}-column-${inx}`">
+
+						<div>{{ space.widget }}</div>
+						<div>{{ space.content }}</div>
+						<div>{{ space.widths }}</div>
+
+					</div>
+				</template>
+
+				</od-fold-body>
+			</template>
+
 		</od-foldable>
 
-		<!-- {{ sectionTemplate.media[media] }} -->
-
+		<!-- {{ sectionTemplate }} -->
 	</section>
 </template>
 <script>
@@ -52,10 +45,7 @@ export default {
 
 	data(){
 		return {
-			responsiveOptions: [0,6,8,10,12],
-			backgroundOptions: ['image', 'movie', 'color'],
-			fillstyleOptions: ['full-width', 'max-width'],
-			mediaOptions: ['mobile', 'tablet', 'desktop', 'xlarge']
+			layoutOptions: ['full-width', '12-layout'],
 		}
 	},
 
@@ -74,8 +64,7 @@ export default {
 			this.$router.push('/section-builders')
 		},
 		save(){
-			console.log('save')
-			this.$store.dispatch('dragrr/saveCurrentTemplate',  {source: 'section'})
+			this.$store.dispatch('dragrr/saveCurrentTemplate', { source: 'section' })
 		},
 
 	}

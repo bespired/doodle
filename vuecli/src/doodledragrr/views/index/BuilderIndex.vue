@@ -18,6 +18,7 @@
 
 <script>
 
+import WidgetActionMenu  from '@/doodledragrr/views/index/WidgetMenu.vue'
 import LayoutActionMenu  from '@/doodledragrr/views/index/LayoutMenu.vue'
 import SectionActionMenu from '@/doodledragrr/views/index/SectionMenu.vue'
 
@@ -26,7 +27,7 @@ export default {
 
 	props: ['index'],
 
-	components: { LayoutActionMenu, SectionActionMenu },
+	components: { LayoutActionMenu, SectionActionMenu, WidgetActionMenu },
 
 	data(){
 		const route = document.location.pathname.replace('/admin', '')

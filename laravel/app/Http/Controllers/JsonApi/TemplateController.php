@@ -50,7 +50,7 @@ class TemplateController extends Controller
             ->whereType('template')
             ->first();
 
-        if ($type === 'layout') {$row = $this->fillLayoutData($row, $data);}
+        $row = $this->fillTemplateData($row, $data);
 
         $row->save();
 
@@ -97,16 +97,25 @@ class TemplateController extends Controller
 
     }
 
-    private function fillLayoutData($row, $data)
+    private function fillTemplateData($row, $data)
     {
         if ($data->status === 'new') {
             $row->name = $this->uniqueName($row, $data);
         }
-        $row->status     = 'saved';
-        $row->label      = $data->label;
-        $row->responsive = $data->responsive;
-        $row->media      = $data->media;
-        $row->draw       = $data->draw;
+        $row->status = 'saved';
+        $row->label  = $data->label;
+
+        if (isset($data->responsive)) {
+            $row->responsive = $data->responsive;
+            $row->media      = $data->media;
+        }
+        if (isset($data->rows)) {
+            $row->rows = $data->rows;
+        }
+        if (isset($data->elements)) {
+            $row->elements = $data->elements;
+        }
+        $row->draw = $data->draw;
         return $row;
     }
 

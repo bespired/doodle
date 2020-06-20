@@ -13,10 +13,12 @@
 
 <script>
 
+
 export default {
 	name: 'propview',
 
 	props: ['source'], // router hands the source... like layout...
+
 
 	mounted(){
 		let handle= this.$router.currentRoute.params.id
@@ -38,6 +40,8 @@ export default {
 	beforeDestroy() {
 		this.$store.commit(`dragrr/clearCurrentTemplate`)
 	},
+
+
 
 }
 </script>

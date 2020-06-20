@@ -60,6 +60,7 @@
 			<div class="od-icon-spacer"><od-iconpath name="dot-3" />dot-3</div>
 			<div class="od-icon-spacer"><od-iconpath name="download" />download</div>
 			<div class="od-icon-spacer"><od-iconpath name="downloader" />downloader</div>
+			<div class="od-icon-spacer"><od-iconpath name="duplicate" />duplicate</div>
 			<div class="od-icon-spacer"><od-iconpath name="edit" />edit</div>
 			<div class="od-icon-spacer"><od-iconpath name="email-click-action" />email-click-action</div>
 			<div class="od-icon-spacer"><od-iconpath name="email-sent" />email-sent</div>

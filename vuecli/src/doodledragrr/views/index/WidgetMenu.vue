@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<od-action @click="create"    label="Create new section" icon="plus"      type="action" />
-		<od-action @click="upload"    label="Import section"     icon="publish"   type="second" />
+		<od-action @click="create"    label="Create new widget"  icon="plus"      type="action" />
+		<od-action @click="upload"    label="Import widget"      icon="publish"   type="second" />
 		<od-action @click="edit"      label="Edit selected"      icon="edit"      thumbs="1" />
 		<od-action @click="duplicate" label="Duplicate selected" icon="duplicate" thumbs="1" />
 
@@ -10,7 +10,7 @@
 			<od-action @click="remove"   thumbs=">0" label="Delete selected" icon="trash"    type="danger"/>
 		</div>
 
-		<od-alert index="created"   type="success" title="Created"     message="Your section template is created." />
+		<od-alert index="created"   type="success" title="Created"     message="Your widget template is created." />
 		<od-alert index="deleted"   type="success" title="Deleted"     message="Your templates are deleted." />
 		<od-alert index="no-delete" type="error"   title="Not Deleted" message="Something went wrong." />
 
@@ -18,7 +18,7 @@
 </template>
 <script>
 export default {
-	name: 'section-menu',
+	name: 'widget-menu',
 
 	mounted() {
 		this.$store.commit('doodlegui/clearIndexSelected')
@@ -36,7 +36,7 @@ export default {
 	methods:{
 		create(){
 			this.$store.dispatch('dragrr/createTemplate', {
-				source: 'section'
+				source: 'widget'
 			})
 		},
 		duplicate(){
@@ -50,7 +50,7 @@ export default {
 			)
 		},
 		edit(){
-			this.$router.push({ path: 'section-builder/' + this.selectedIndex[0]  })
+			this.$router.push({ path: 'widget-builder/' + this.selectedIndex[0]  })
 		},
 		download(){
 			this.$options.confirmModal.open(
@@ -66,7 +66,7 @@ export default {
 			).then((confirm) => {
 				if (confirm){
 					this.$store.dispatch('dragrr/deleteTemplates', {
-						source: 'section',
+						source: 'widget',
 						handles: this.selectedIndex
 					})
 				}

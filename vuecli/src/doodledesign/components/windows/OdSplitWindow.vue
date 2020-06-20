@@ -30,6 +30,7 @@
 export default {
 	name: 'od-split-window',
 	props: ['sizes', 'types'],
+
 	data() {
 
 		let leftSize = ['od-split-left']
@@ -46,6 +47,7 @@ export default {
 			leftClass: leftSize.join(' '),
 			rightClass: rightSize.join(' ')
 		}
-	}
+	},
+
 }
 </script>

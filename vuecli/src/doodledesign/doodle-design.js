@@ -20,7 +20,6 @@ Vue.mixin({
 		} else {
 			this.$options.namedId = 'doodle' + number
 		}
-
 	},
 
 	mounted() {

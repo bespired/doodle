@@ -10,9 +10,16 @@
 
 <script>
 
+import auth from '@/auth'
+
 export default {
     name: 'app',
-
+    created() {
+        window.addEventListener('focus', this.authCheck)
+    },
+    destroyed() {
+        window.removeEventListener('focus', this.authCheck)
+    },
     mounted() {
         /*
         this.$store.dispatch('pusher/setAppKey', {
@@ -22,5 +29,11 @@ export default {
         })
         */
     },
+
+    methods:{
+        authCheck(){
+            console.log('focus')
+        }
+    }
 }
 </script>

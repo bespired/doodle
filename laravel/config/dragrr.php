@@ -11,6 +11,17 @@ return [
         'mediaOptions'      => ['mobile', 'tablet', 'desktop', 'xlarge'],
     ],
 
+    'widget-templates'  => [
+        [
+            'name'     => 'schema',
+            'status'   => 'default',
+            'type'     => 'schema',
+            'label'    => 'New widget',
+            'elements' => [],
+            'draw'     => '',
+        ],
+    ],
+
     'layout-templates'  => [
         [
             'name'       => 'schema',
@@ -116,17 +127,17 @@ return [
                         ],
                         [
                             'widget'  => 'teaser',
-                            'content' => 'fixed',
+                            'content' => 'magnet',
                             'widths'  => ['100%', '50%', '25%', '25%'],
                         ],
                         [
                             'widget'  => 'teaser',
-                            'content' => 'fixed',
+                            'content' => 'collection',
                             'widths'  => ['100%', '50%', '25%', '25%'],
                         ],
                         [
                             'widget'  => 'teaser',
-                            'content' => 'fixed',
+                            'content' => 'segment',
                             'widths'  => ['100%', '50%', '25%', '25%'],
                         ],
                     ],

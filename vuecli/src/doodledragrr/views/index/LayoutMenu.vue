@@ -1,8 +1,9 @@
 <template>
 	<div>
-		<od-action @click="create" label="Create new layout" icon="plus"    type="action" />
-		<od-action @click="upload" label="Import layout"     icon="publish" type="second" />
-		<od-action @click="edit"   label="Edit selected"     icon="edit"    thumbs="1" />
+		<od-action @click="create"    label="Create new layout"  icon="plus"      type="action" />
+		<od-action @click="upload"    label="Import layout"      icon="publish"   type="second" />
+		<od-action @click="edit"      label="Edit selected"      icon="edit"      thumbs="1" />
+		<od-action @click="duplicate" label="Duplicate selected" icon="duplicate" thumbs="1" />
 
 		<div class="od-bottom-menu">
 			<od-action @click="download" thumbs=">0" label="Export selected" icon="download" type="second" />
@@ -37,6 +38,11 @@ export default {
 			this.$store.dispatch('dragrr/createTemplate', {
 				source: 'layout'
 			})
+		},
+		duplicate(){
+			this.$options.confirmModal.open(
+				'Sorry', 'Not implemented yet.', 'Hmmm...', {type: 'success'}
+			)
 		},
 		upload(){
 			this.$options.confirmModal.open(
