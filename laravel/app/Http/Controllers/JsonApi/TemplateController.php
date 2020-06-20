@@ -10,7 +10,7 @@ class TemplateController extends Controller
 
     public function schema($type)
     {
-        $Model = sprintf('\App\Models\Eloquent\%sTemplate', ucfirst($type));
+        $Model = sprintf('\App\Models\Eloquent\Templated%s', ucfirst($type));
 
         $count  = $Model::count();
         $schema = $Model::query()
@@ -30,7 +30,7 @@ class TemplateController extends Controller
 
     public function index($type)
     {
-        $Model = sprintf('\App\Models\Eloquent\%sTemplate', ucfirst($type));
+        $Model = sprintf('\App\Models\Eloquent\Templated%s', ucfirst($type));
 
         $rows = $Model::query()
             ->whereType('template')
@@ -44,7 +44,7 @@ class TemplateController extends Controller
 
         $data = (object) $request->all();
 
-        $Model = sprintf('\App\Models\Eloquent\%sTemplate', ucfirst($type));
+        $Model = sprintf('\App\Models\Eloquent\Templated%s', ucfirst($type));
         $row   = $Model::query()
             ->whereHandle($data->handle)
             ->whereType('template')
@@ -60,7 +60,7 @@ class TemplateController extends Controller
     public function remove(Request $request, $type)
     {
         $data  = (object) $request->all();
-        $Model = sprintf('\App\Models\Eloquent\%sTemplate', ucfirst($type));
+        $Model = sprintf('\App\Models\Eloquent\Templated%s', ucfirst($type));
 
         $fetch = $Model::query()
             ->whereIn('handle', $data->handles)
@@ -108,6 +108,12 @@ class TemplateController extends Controller
         if (isset($data->responsive)) {
             $row->responsive = $data->responsive;
             $row->media      = $data->media;
+        }
+        if (isset($data->tag)) {
+            $row->tag   = $data->tag;
+            $row->style = $data->style;
+            $row->icon  = $data->icon;
+            $row->otml  = $data->otml;
         }
         if (isset($data->rows)) {
             $row->rows = $data->rows;

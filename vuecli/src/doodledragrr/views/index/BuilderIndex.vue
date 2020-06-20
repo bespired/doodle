@@ -8,9 +8,7 @@
 				<od-thumbs :thumbs="thumbs" :route="route" v-if="thumbs"/>
 				<od-loading v-else/>
 			</template>
-			<template #rightContent >
-				<component :is="component" />
-			</template>
+			<template #rightContent ><builder-menu /></template>
 		</od-split-window>
 
 	</section>
@@ -18,31 +16,30 @@
 
 <script>
 
-import WidgetActionMenu  from '@/doodledragrr/views/index/WidgetMenu.vue'
-import LayoutActionMenu  from '@/doodledragrr/views/index/LayoutMenu.vue'
-import SectionActionMenu from '@/doodledragrr/views/index/SectionMenu.vue'
+import BuilderMenu from '@/doodledragrr/views/index/BuilderMenu.vue'
 
 export default {
 	name: 'index',
 
 	props: ['index'],
 
-	components: { LayoutActionMenu, SectionActionMenu, WidgetActionMenu },
+	components: { BuilderMenu },
 
 	data(){
 		const route = document.location.pathname.replace('/admin', '')
 		return {
-			route:     route,
-			component: route.replace('/', '').replace('-builders', '') + '-action-menu',
+			route: route,
 		}
 	},
 
 	mounted() {
-		this.$store.dispatch(`dragrr/get${this.index.pascalcase()}`, {force: false})
+		const source= this.index.split('-')[0]
+		this.$store.dispatch('dragrr/getTemplatedTemplates', { source: source, force: false})
 	},
 
 	beforeUpdate() {
-		this.$store.dispatch(`dragrr/get${this.index.pascalcase()}`, {force: true})
+		const source= this.index.split('-')[0]
+		this.$store.dispatch('dragrr/getTemplatedTemplates', { source: source, force: false})
 	},
 
 	computed: {

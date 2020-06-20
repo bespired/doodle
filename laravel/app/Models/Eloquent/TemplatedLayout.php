@@ -6,7 +6,7 @@ use App\Models\Traits\HasHandleId;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class LayoutTemplate extends Model
+class TemplatedLayout extends Model
 {
 
     use HasHandleId;

@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Eloquent\LayoutTemplate;
+use App\Models\Eloquent\TemplatedLayout;
 use Illuminate\Console\Command;
 
 class DragrrConfigLayouts extends Command
@@ -24,7 +24,7 @@ class DragrrConfigLayouts extends Command
             unset($templated['name']);
             unset($templated['type']);
 
-            LayoutTemplate::updateOrCreate(
+            TemplatedLayout::updateOrCreate(
                 [
                     'name' => $name,
                     'type' => $type,

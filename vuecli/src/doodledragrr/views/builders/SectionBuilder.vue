@@ -113,14 +113,6 @@ export default {
 		},
 
 		cssFile(){
-//			const layout    = this.layoutTemplate(row.layout)
-//			if ( layout === null ) return className
-			// console.log( layout.media.tablet.min  )
-			// console.log( layout.media.desktop.min )
-			// console.log( layout.media.xlarge.min  )
-			// console.log( layout.media );
-
-			console.log( this.media, this.mediaquery[this.media] )
 			let styles = ''
 			let keys= Object.keys(this.mediaquery[this.media])
 			keys.forEach( key => {
@@ -139,26 +131,7 @@ export default {
 				]
 			}
 		},
-
-		// onChange(evt){
-		// 	if (evt.hasOwnProperty('added')){
-		// 		evt.added.element.id = this.freeId()
-		// 	}
-		// },
-
-		// freeId(){
-		// 	let used= []
-		// 	this.selectedOptions.forEach((o)=>{ used.push(o.id) })
-
-		// 	let free= this.selectedOptions.length;
-		// 	while( used.indexOf(free) !== -1 ){ free++ }
-		// 	return free;
-		// }
-
-
 	},
-
-
 
 }
 </script>

@@ -16,7 +16,7 @@ export default [
 				name: 'layout-builder',
 				path: ':id',
 				components: {
-					leftMenu:       global.loadDrag('builders/DeviceSizes'),
+					leftMenu:       global.loadDrag('builders/DeviceSizesIndex'),
 					leftContent:    global.loadDrag('builders/LayoutBuilder'),
 					rightContent:   global.loadDrag('builders/LayoutProperties'),
 					rightMenu:      global.loadDrag('builders/SharedSave'),

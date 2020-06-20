@@ -2,20 +2,20 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Eloquent\TemplatedSection;
+use App\Models\Eloquent\TemplatedElement;
 use Illuminate\Console\Command;
 
-class DragrrConfigSections extends Command
+class DragrrConfigElements extends Command
 {
 
-    protected $signature = 'dragrr:config:sections';
+    protected $signature = 'dragrr:config:elements';
 
-    protected $description = 'Create sections in database from config';
+    protected $description = 'Create elements in database from config';
 
     public function handle()
     {
 
-        foreach (config('dragrr.section-templates') as $templated) {
+        foreach (config('dragrr.element-templates') as $templated) {
 
             $template = (object) $templated;
 
@@ -24,7 +24,7 @@ class DragrrConfigSections extends Command
             unset($templated['name']);
             unset($templated['type']);
 
-            TemplatedSection::updateOrCreate(
+            TemplatedElement::updateOrCreate(
                 [
                     'name' => $name,
                     'type' => $type,

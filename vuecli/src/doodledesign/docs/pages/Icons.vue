@@ -89,13 +89,14 @@
 			<div class="od-icon-spacer"><od-iconpath name="hourglass-1" />hourglass-1</div>
 			<div class="od-icon-spacer"><od-iconpath name="hourglass-2" />hourglass-2</div>
 			<div class="od-icon-spacer"><od-iconpath name="hourglass-3" />hourglass-3</div>
+			<div class="od-icon-spacer"><od-iconpath name="hyperlink" />hyperlink</div>
+			<div class="od-icon-spacer"><od-iconpath name="image" />image</div>
 			<div class="od-icon-spacer"><od-iconpath name="laptop" />laptop</div>
 			<div class="od-icon-spacer"><od-iconpath name="layout" />layout</div>
 			<div class="od-icon-spacer"><od-iconpath name="left-open" />left-open</div>
 			<div class="od-icon-spacer"><od-iconpath name="link" />link</div>
 			<div class="od-icon-spacer"><od-iconpath name="linkedin" />linkedin</div>
 			<div class="od-icon-spacer"><od-iconpath name="lock-open" />lock-open</div>
-			<div class="od-icon-spacer"><od-iconpath name="lock" />lock</div>
 			<div class="od-icon-spacer"><od-iconpath name="locked" />locked</div>
 			<div class="od-icon-spacer"><od-iconpath name="mail-open" />mail-open</div>
 			<div class="od-icon-spacer"><od-iconpath name="mail" />mail</div>
@@ -110,6 +111,7 @@
 			<div class="od-icon-spacer"><od-iconpath name="opt-in" />opt-in</div>
 			<div class="od-icon-spacer"><od-iconpath name="opt-out" />opt-out</div>
 			<div class="od-icon-spacer"><od-iconpath name="overview" />overview</div>
+			<div class="od-icon-spacer"><od-iconpath name="paragraph" />paragraph</div>
 			<div class="od-icon-spacer"><od-iconpath name="pencil" />pencil</div>
 			<div class="od-icon-spacer"><od-iconpath name="pinterest" />pinterest</div>
 			<div class="od-icon-spacer"><od-iconpath name="plus" />plus</div>
@@ -129,6 +131,7 @@
 			<div class="od-icon-spacer"><od-iconpath name="scroll" />scroll</div>
 			<div class="od-icon-spacer"><od-iconpath name="search" />search</div>
 			<div class="od-icon-spacer"><od-iconpath name="select" />select</div>
+			<div class="od-icon-spacer"><od-iconpath name="sign" />sign</div>
 			<div class="od-icon-spacer"><od-iconpath name="sliders" />sliders</div>
 			<div class="od-icon-spacer"><od-iconpath name="sort-down" />sort-down</div>
 			<div class="od-icon-spacer"><od-iconpath name="sort-name-down" />sort-name-down</div>
@@ -147,6 +150,7 @@
 			<div class="od-icon-spacer"><od-iconpath name="tags" />tags</div>
 			<div class="od-icon-spacer"><od-iconpath name="tap" />tap</div>
 			<div class="od-icon-spacer"><od-iconpath name="tasks" />tasks</div>
+			<div class="od-icon-spacer"><od-iconpath name="text" />text</div>
 			<div class="od-icon-spacer"><od-iconpath name="th-list" />th-list</div>
 			<div class="od-icon-spacer"><od-iconpath name="timeicon" />timeicon</div>
 			<div class="od-icon-spacer"><od-iconpath name="timeline" />timeline</div>

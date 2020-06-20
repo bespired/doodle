@@ -14,9 +14,9 @@ class CreateWidgetTemplatesTable extends Migration
     public function up()
     {
 
-        Schema::dropIfExists('widget_templates');
+        Schema::dropIfExists('templated_widgets');
 
-        Schema::create('widget_templates', function (Blueprint $table) {
+        Schema::create('templated_widgets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('handle', 32);
             $table->char('type', 32)->default('');
@@ -29,7 +29,7 @@ class CreateWidgetTemplatesTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('widget_templates', function (Blueprint $table) {
+        Schema::table('templated_widgets', function (Blueprint $table) {
             $table->unique(['name', 'deleted_at']);
         });
 
@@ -44,6 +44,6 @@ class CreateWidgetTemplatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('widget_templates');
+        Schema::dropIfExists('templated_widgets');
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Eloquent\WidgetTemplate;
+use App\Models\Eloquent\TemplatedWidget;
 use Illuminate\Console\Command;
 
 class DragrrConfigWidgets extends Command
@@ -24,7 +24,7 @@ class DragrrConfigWidgets extends Command
             unset($templated['name']);
             unset($templated['type']);
 
-            WidgetTemplate::updateOrCreate(
+            TemplatedWidget::updateOrCreate(
                 [
                     'name' => $name,
                     'type' => $type,

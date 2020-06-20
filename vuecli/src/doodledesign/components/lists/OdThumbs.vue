@@ -5,13 +5,18 @@
 				@click="setSelected(item)"
 				:key="`${item.name}-${index}-${update}`">
 				<div class="od-thumb-canvas">
+					<span class="icon" v-if="item.icon">
+						<od-iconpath :name="item.icon" />
+					</span>
+					<span class="draw" v-if="item.draw">
+						{{ draw }}
+					</span>
 					<router-link
 						:to= "{ path: `${path}/${item.handle}` }"
 					>
-						<span class="bottom">
+						<span class="thumb-title">
 							{{ item.label }}
 						</span>
-
 					</router-link>
 				</div>
 			</div>

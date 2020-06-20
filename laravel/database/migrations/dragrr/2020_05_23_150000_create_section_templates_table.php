@@ -14,9 +14,9 @@ class CreateSectionTemplatesTable extends Migration
     public function up()
     {
 
-        Schema::dropIfExists('section_templates');
+        Schema::dropIfExists('templated_sections');
 
-        Schema::create('section_templates', function (Blueprint $table) {
+        Schema::create('templated_sections', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('handle', 32);
             $table->char('type', 32)->default('');
@@ -29,7 +29,7 @@ class CreateSectionTemplatesTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('section_templates', function (Blueprint $table) {
+        Schema::table('templated_sections', function (Blueprint $table) {
             $table->unique(['name', 'deleted_at']);
         });
 
@@ -44,6 +44,6 @@ class CreateSectionTemplatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('section_templates');
+        Schema::dropIfExists('templated_sections');
     }
 }

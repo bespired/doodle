@@ -15,6 +15,9 @@ export default {
             dragrrApi: new DragrrApi(),
         },
 
+        elementTemplates:  null,
+        elementTemplateId: null,
+
         widgetTemplates:  null,
         widgetTemplateId: null,
 
@@ -29,6 +32,7 @@ export default {
     },
 
     getters: {
+        getElementTemplates: (state) => { return state.elementTemplates },
         getWidgetTemplates:  (state) => { return state.widgetTemplates  },
         getLayoutTemplates:  (state) => { return state.layoutTemplates  },
         getSectionTemplates: (state) => { return state.sectionTemplates },
@@ -90,44 +94,17 @@ export default {
     },
 
     actions: {
-        getWidgetTemplates(context, payload){
-            const source = 'widget'
-            if ( payload.force || context.state.widgetTemplates === null ){
-            context.state.apis.dragrrApi.getTemplates('widget')
+        getTemplatedTemplates(context, payload){
+            const source    = payload.source
+            const stateName = payload.source + 'Templates'
+            const stateId   = payload.source + 'TemplateId'
+            if ( payload.force || context.state[stateName] === null ){
+            context.state.apis.dragrrApi.getTemplates(source)
                 .then( result => {
-                    context.commit('setTemplates', { source:source,  templates: result })
-                    if (context.state.widgetTemplateId){
-                        const handle = context.state.widgetTemplateId
-                        context.state.widgetTemplateId = null
-                        context.commit('setCurrentTemplate', { source: 'widget', handle: handle })
-                    }
-                })
-            }
-        },
-        getLayoutTemplates(context, payload){
-            const source = 'layout'
-            if ( payload.force || context.state.layoutTemplates === null ){
-            context.state.apis.dragrrApi.getTemplates('layout')
-                .then( result => {
-                    context.commit('setTemplates', { source:source,  templates: result })
-                    if (context.state.layoutTemplateId){
-                        const handle = context.state.layoutTemplateId
-                        context.state.layoutTemplateId = null
-                        context.commit('setCurrentTemplate', { source: 'layout', handle: handle })
-                    }
-                })
-            }
-        },
-        getSectionTemplates(context, payload){
-            const source = 'section'
-            if ( payload.force || context.state.sectionTemplates === null ){
-            context.state.apis.dragrrApi.getTemplates('section')
-                .then( result => {
-                    context.commit('setTemplates', { source:source,  templates: result })
-                    if (context.state.sectionTemplateId){
-                        const handle = context.state.sectionTemplateId
-                        context.state.sectionTemplateId = null
-                        context.commit('setCurrentTemplate', {source: 'section', handle: handle })
+                    context.commit('setTemplates', { source: source, templates: result })
+                    if (context.state[stateId]){
+                        context.state[stateId] = null
+                        context.commit('setCurrentTemplate', { source: source, handle: context.state[stateId] })
                     }
                 })
             }
@@ -137,15 +114,14 @@ export default {
             const source    = payload.source
             const handle    = payload.handle
             const templates = context.state[`${source}Templates`]
-            const getter    = `get${source.capitalize()}Templates`
 
             // load all referenced templates...
             if (( source === 'section' ) && ( context.state.layoutTemplates === null ))
-                context.dispatch('getLayoutTemplates', { force: true })
+                context.dispatch('getTemplatedTemplates', { source: 'layout', force: true })
 
             if (templates === null) {
                 context.state[`${source}TemplateId`]= handle
-                context.dispatch(getter, { force: true })
+                context.dispatch('getTemplatedTemplates', { source: source, force: true })
                 return
             }else{
                 context.commit('setCurrentTemplate', payload)

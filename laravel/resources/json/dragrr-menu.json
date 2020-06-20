@@ -181,6 +181,11 @@
 			"alias": "main3.chapter3.item2",
 			"label": "Widget Builders",
 			"location": "/admin/widget-builders"
+		},
+		{
+			"alias": "main3.chapter3.item3",
+			"label": "Element Builders",
+			"location": "/admin/element-builders"
 		}]
 	}]
 },

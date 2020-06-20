@@ -8,7 +8,7 @@ export default [
 	},
 	{
 		path: '/widget-builder',
-		component: global.loadDrag('routed/Propview'),
+		component: global.loadDrag('routed/DragDropview'),
 		meta:  { title: 'Widget Builder | Dragrr' },
 		props: { source: 'widget' },
 		children: [
@@ -16,8 +16,10 @@ export default [
 				name: 'widget-builder',
 				path: ':id',
 				components: {
-					leftMenu:       global.loadDrag('builders/DeviceSizes'),
-					leftContent:    global.loadDrag('builders/WidgetBuilder'),
+					leftMenu:       global.loadDrag('builders/IndexReturn'),
+					leftContent:    global.loadDrag('builders/WidgetDrag'),
+					centerMenu:     global.loadDrag('builders/DeviceSizes'),
+					centerContent:  global.loadDrag('builders/WidgetBuilder'),
 					rightContent:   global.loadDrag('builders/WidgetProperties'),
 					rightMenu:      global.loadDrag('builders/SharedSave'),
 				}

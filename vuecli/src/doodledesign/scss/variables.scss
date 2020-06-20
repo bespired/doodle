@@ -31,6 +31,7 @@ $color-error             : #d10b07;
 $color-font              : #333f50;
 $color-selected          : #3b89e4;
 
+$thumb-default-image     : linear-gradient(10deg, #3c454a, #121518);
 
 $button-default-image    : linear-gradient(180deg, $color-default, darken($color-default, 2%));
 $button-brand-image      : linear-gradient(180deg, $color-brand,   darken($color-brand,   2%));
