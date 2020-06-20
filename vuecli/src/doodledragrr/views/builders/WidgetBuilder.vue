@@ -1,7 +1,7 @@
 <template>
 	<section class="dd-size-look widgets" :class="media" v-if="widgetTemplate">
-		<section v-html="cssFile()"/>
-		<template v-for="(row, idx) in widgetTemplate.rows">
+		WIDGET
+		<!-- <template v-for="(row, idx) in widgetTemplate.rows">
 			<div class="row" :key="`row-${idx}`">
 				<template v-for="(space, inx) in row.spaces">
 					<div class="column"
@@ -12,7 +12,7 @@
 					</div>
 				</template>
 			</div>
-		</template>
+		</template> -->
 	</section>
 </template>
 

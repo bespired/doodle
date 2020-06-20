@@ -19,9 +19,9 @@ export default {
 
 	props: ['source'], // router hands the source... like layout...
 
-
 	mounted(){
 		let handle= this.$router.currentRoute.params.id
+
 		this.$store.dispatch(`dragrr/setCurrentTemplate`, { source: this.source, handle: handle })
 
 		let media = this.$store.getters['doodlegui/getRadioState']('devicesize')

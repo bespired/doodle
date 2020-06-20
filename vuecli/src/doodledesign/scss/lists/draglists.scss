@@ -2,4 +2,35 @@
 	.sortable-ghost{
 		opacity: 0.5;
 	}
+
+	.handle{
+		padding: 3px 8px;
+    	margin: 4px;
+		background-color: rgba(233, 244, 255, .5);
+    	border-bottom: 1px solid #dededf;
+    	border: 1px dashed;
+    	display: -webkit-box;
+    	display: -ms-flexbox;
+    	display: flex;
+    	align-items: center;
+    	border-radius: 0px;
+
+    	svg{
+    		display: flex;
+    		color: #424242;
+    		margin-right: 8px;
+    	}
+    	.label{
+    		display: flex;
+    		font-weight: 500;
+    		font-size: 14px;
+    		color: #424242;
+
+    	}
+	}
+
+}
+.small.props .od-content,
+.small.drag .od-content{
+	padding: 20px 8px;
 }

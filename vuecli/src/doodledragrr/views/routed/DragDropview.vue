@@ -1,6 +1,6 @@
 <template>
     <section class="full-height">
-        <od-split3-window sizes="small,large,small" types="drag,drop,prop" >
+        <od-split3-window sizes="small,large,small" types="drag,drop,props" >
             <template #title        >Builder</template>
             <template #subtitle     >{{ $router.currentRoute.name }}</template>
             <template #leftMenu      ><router-view name="leftMenu"      /></template>
@@ -18,9 +18,29 @@
 export default {
     name: 'drag-dropview',
 
-    data(){
-		return {
-		}
-	}
+   props: ['source'], // router hands the source... like layout...
+
+    mounted(){
+        let handle= this.$router.currentRoute.params.id
+
+        this.$store.dispatch(`dragrr/setCurrentTemplate`, { source: this.source, handle: handle })
+
+        let media = this.$store.getters['doodlegui/getRadioState']('devicesize')
+
+        if (!media) {
+            this.$store.commit('doodlegui/setRadioState', {
+                key: 'devicesize', value: 'desktop',
+            })
+        }
+    },
+
+    beforeUpdate() {
+        let handle= this.$router.currentRoute.params.id
+        this.$store.dispatch(`dragrr/setCurrentTemplate`, { source: this.source, handle: handle })
+    },
+
+    beforeDestroy() {
+        this.$store.commit(`dragrr/clearCurrentTemplate`)
+    },
 }
 </script>

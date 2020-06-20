@@ -36,10 +36,11 @@ export default {
         getWidgetTemplates:  (state) => { return state.widgetTemplates  },
         getLayoutTemplates:  (state) => { return state.layoutTemplates  },
         getSectionTemplates: (state) => { return state.sectionTemplates },
+
         currentTemplate:     (state) => {
             if ( state.currentTemplate  === null ) return null
             if ( state.currentTemplate.error !== undefined ) {
-                console.error( isNotEmtpy.error ); return null;
+                console.error( state.currentTemplate.error ); return null;
             }
             return state.currentTemplate
         },
@@ -99,12 +100,12 @@ export default {
             const stateName = payload.source + 'Templates'
             const stateId   = payload.source + 'TemplateId'
             if ( payload.force || context.state[stateName] === null ){
-            context.state.apis.dragrrApi.getTemplates(source)
+                context.state.apis.dragrrApi.getTemplates(source)
                 .then( result => {
                     context.commit('setTemplates', { source: source, templates: result })
                     if (context.state[stateId]){
-                        context.state[stateId] = null
                         context.commit('setCurrentTemplate', { source: source, handle: context.state[stateId] })
+                        context.state[stateId] = null
                     }
                 })
             }
@@ -113,14 +114,18 @@ export default {
         setCurrentTemplate(context, payload){
             const source    = payload.source
             const handle    = payload.handle
-            const templates = context.state[`${source}Templates`]
+            const templates  = context.state[`${source}Templates`]
+            const templateId = `${source}TemplateId`
 
             // load all referenced templates...
             if (( source === 'section' ) && ( context.state.layoutTemplates === null ))
                 context.dispatch('getTemplatedTemplates', { source: 'layout', force: true })
 
+            if (( source === 'widget' ) && ( context.state.elementTemplates === null ))
+                context.dispatch('getTemplatedTemplates', { source: 'element', force: true })
+
             if (templates === null) {
-                context.state[`${source}TemplateId`]= handle
+                context.state[templateId]= handle
                 context.dispatch('getTemplatedTemplates', { source: source, force: true })
                 return
             }else{
