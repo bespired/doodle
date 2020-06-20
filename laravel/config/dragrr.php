@@ -17,16 +17,16 @@ return [
             'tag'  => 'p', 'style'       => [], 'icon'        => 'star-full', 'draw' => '', 'otml' => '',
         ],
         [
-            'label' => 'H1 Title', 'draw'   => '',
+            'label' => 'Title h1', 'draw'   => '',
             'name'  => 'h1-title', 'status' => 'saved', 'type' => 'template',
             'tag'   => 'h1', 'icon'         => 'text',
             'style' => [], 'otml'           => '<h1 class="[class]">[text]</a>',
         ],
         [
-            'label' => 'H2 Title', 'draw'   => '',
-            'name'  => 'h2-title', 'status' => 'saved', 'type' => 'template',
-            'tag'   => 'h2', 'icon'         => 'text',
-            'style' => [], 'otml'           => '<h2 class="[class]">[text]</a>',
+            'label' => 'Subtitle h2', 'draw' => '',
+            'name'  => 'h2-title', 'status'  => 'saved', 'type' => 'template',
+            'tag'   => 'h2', 'icon'          => 'text',
+            'style' => [], 'otml'            => '<h2 class="[class]">[text]</a>',
         ],
         [
             'label' => 'Paragraph', 'draw'   => '',
@@ -56,12 +56,24 @@ return [
 
     'widget-templates'  => [
         [
-            'name'     => 'schema',
-            'status'   => 'default',
-            'type'     => 'schema',
-            'label'    => 'New widget',
-            'elements' => [],
-            'draw'     => '',
+            'label'    => 'New widget', 'name' => 'schema',
+            'status'   => 'default', 'type'    => 'schema', 'draw' => '',
+            'elements' => json_decode(file_get_contents(__DIR__ . '/../resources/json/widget-title.json')),
+        ],
+        [
+            'label'    => 'Title', 'name' => 'title-1',
+            'status'   => 'saved', 'type' => 'template', 'draw' => '',
+            'elements' => json_decode(file_get_contents(__DIR__ . '/../resources/json/widget-title.json')),
+        ],
+        [
+            'label'    => 'Teaser', 'name' => 'teaser-1',
+            'status'   => 'saved', 'type'  => 'template', 'draw' => '',
+            'elements' => json_decode(file_get_contents(__DIR__ . '/../resources/json/widget-teaser.json')),
+        ],
+        [
+            'label'    => 'Full Image', 'name' => 'full-image-1',
+            'status'   => 'saved', 'type'      => 'template', 'draw' => '',
+            'elements' => json_decode(file_get_contents(__DIR__ . '/../resources/json/widget-full-image.json')),
         ],
     ],
 

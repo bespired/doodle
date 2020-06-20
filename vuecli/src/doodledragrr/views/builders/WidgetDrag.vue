@@ -1,12 +1,7 @@
 <template>
 	<section v-if="elementTemplates">
-		<!-- <template v-for="(element, idx) in elementTemplates ">
-			<div :key="element.handle">
-				{{ element.label }}
-			</div>
-		</template> -->
 		<draggable
-			:group="{ name: 'widget' }"
+			:group="{ name: 'widget', pull: 'clone' }"
 			@change="onChange"
 			 handle=".handle"
 			 v-model="elementTemplates"
@@ -19,7 +14,6 @@
 			</div>
 		</draggable>
 
-		<!-- {{ elementTemplates }} -->
 	</section>
 </template>
 <script>
@@ -52,9 +46,6 @@ export default {
 
 	methods:{
 		onChange(evt){
-			// if (evt.hasOwnProperty('added')){
-			// 	evt.added.element.id = this.freeId()
-			// }
 		},
 	}
 
