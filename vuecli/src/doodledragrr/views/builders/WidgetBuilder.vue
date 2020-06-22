@@ -11,7 +11,7 @@
         >
             <div
             	v-for="(element, index) in elements"
-                :key="`widget-${index}-${update}`"
+                :key="`widget-${index}-${widgetTemplate.updated_at}`"
             	class="handle"
             	:class="{selected: element.selected }"
             	@click="toggleSelect(element)" >
@@ -43,7 +43,6 @@ export default {
 
 	data(){
 		return {
-			update: 0
 		}
 	},
 
@@ -57,27 +56,26 @@ export default {
     		get: function () { return this.widgetTemplate.elements },
     		set: function (newValue) {
     			// setting is done in onChange method
-    		}
+ 			}
 		},
 
 		media(){
 			return this.$store.getters['doodlegui/getRadioState']('devicesize')
-		}
+		},
+
 	},
 
 	methods: {
 
 		toggleSelect(element){
-			console.log('!!!')
-			this.update++;
-			if (element.selected === undefined) { element.selected = true; return }
+			if (element.selected === undefined) element.selected = false
 			element.selected = !element.selected
+
+			this.$store.commit('dragrr/touchCurrentTemplate')
 		},
 
 		onChange(evt){
             if (evt.hasOwnProperty('added')){
-
-                // evt.added.element.id = this.freeId()
                 const freeId= this.freeId()
 				const index = evt.added.newIndex
 				const local = evt.added.element.handle.split('-')

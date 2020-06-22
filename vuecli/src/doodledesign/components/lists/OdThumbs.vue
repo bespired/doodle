@@ -1,9 +1,9 @@
 <template>
-	<div v-if="thumbs && Object.keys(thumbs)" class="od-thumbs" >
+	<div v-if="thumbs && Object.keys(thumbs)" class="od-thumbs" :key="keys">
 		<template v-for="(item, index) in thumbs">
-			<div class="od-thumb" :class="[{selected:isSelected[item.handle]}, item.status]"
-				@click="setSelected(item)"
-				:key="`${item.name}-${index}-${update}`">
+			<div class="od-thumb" :class="[{selected:isSelected(item.handle)}, item.status]"
+				@click="setSelected(item.handle)"
+				:key="`${item.handle}-${index}-${isSelected(item.handle)}`">
 				<div class="od-thumb-canvas">
 					<span class="icon" v-if="item.icon">
 						<od-iconpath :name="item.icon" />
@@ -21,6 +21,8 @@
 				</div>
 			</div>
 		</template>
+
+
 	</div>
 </template>
 
@@ -33,25 +35,32 @@ export default {
 	data(){
         return {
         	path: this.route.replace(/s+$/,''),
-        	update: 0,
-        	isSelected: {}
         }
     },
 
     methods:{
-		setSelected(item){
-			this.update++
-			if ( this.isSelected[item.handle] === undefined ) {
-				this.$store.commit('doodlegui/addIndexSelected', item.handle)
-				this.isSelected[item.handle] = true;
-				return;
-			}
-			this.isSelected[item.handle] = !this.isSelected[item.handle]
-
-			if ( this.isSelected[item.handle] ) this.$store.commit('doodlegui/addIndexSelected', item.handle)
-			else this.$store.commit('doodlegui/removeIndexSelected', item.handle)
+    	isSelected(handle){
+    		return this.indexSelected.indexOf(handle) > -1
+    	},
+		setSelected(handle){
+			if ( !this.isSelected(handle) ) this.$store.commit('doodlegui/addIndexSelected', handle)
+			else this.$store.commit('doodlegui/removeIndexSelected', handle)
 		},
-	}
+	},
+
+    computed: {
+        indexSelected() {
+            return this.$store.getters['doodlegui/getIndexSelected']
+        },
+        keys(){
+    		let key= ''
+    		this.indexSelected.forEach((i)=>{
+    			key += i.substr(-6) + '-'
+    		})
+    		return key
+    	},
+    },
+
 
 }
 </script>

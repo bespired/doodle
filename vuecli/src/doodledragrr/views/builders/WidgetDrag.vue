@@ -1,5 +1,5 @@
 <template>
-	<section v-if="elementTemplates">
+	<section v-if="elementTemplates" >
 		<draggable
 			:group="{ name: 'widget', pull: 'clone' }"
 			@change="onChange"
@@ -13,6 +13,10 @@
 				<span class="label">{{ element.label }}</span>
 			</div>
 		</draggable>
+
+		<div class="od-bottom-menu" v-if="hasSelected" >
+			<od-action @click="remove" label="Delete selected" icon="trash" type="danger"/>
+		</div>
 
 	</section>
 </template>
@@ -34,6 +38,7 @@ export default {
 
 	data(){
 		return {
+			hasSelected : false
 		}
 	},
 
@@ -42,9 +47,44 @@ export default {
     		get: function () { return this.$store.getters['dragrr/getElementTemplates'] },
     		set: function (newValue) {  }
   		},
-	},
 
+		widgetTemplate(){
+			return this.$store.getters['dragrr/currentTemplate']
+		},
+
+	},
+	watch: {
+    	widgetTemplate: {
+      		deep: true,
+      		handler(){
+      			let elements = this.widgetTemplate.elements
+  				let selected = 0
+				elements.forEach((elm)=>{
+					selected += elm.selected ? 1 : 0
+				})
+				this.hasSelected = selected > 0
+			}
+    	}
+  	},
 	methods:{
+		remove(){
+			console.log('remove pressed');
+			let remove= []
+			this.widgetTemplate.elements.forEach((elm, idx)=>{
+				if (( elm.selected !== undefined ) && (elm.selected)){
+					remove.push(elm.handle)
+				}
+			})
+			while (remove.length > 0){
+				let handle= remove.pop();
+				this.widgetTemplate.elements.forEach((elm, idx)=>{
+					if (elm.handle === handle){
+						this.widgetTemplate.elements.splice(idx, 1);
+					}
+				})
+			}
+
+		},
 		onChange(evt){
 		},
 	}

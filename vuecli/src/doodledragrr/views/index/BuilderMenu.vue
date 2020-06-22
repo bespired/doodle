@@ -2,17 +2,19 @@
 	<div>
 		<od-action @click="create"   :label="`Create new ${source}`"  icon="plus"      type="action" />
 		<od-action @click="upload"   :label="`Import ${source}`"      icon="publish"   type="second" />
-		<od-action @click="edit"      label="Edit selected"      icon="edit"      thumbs="1" />
-		<od-action @click="duplicate" label="Duplicate selected" icon="duplicate" thumbs="1" />
+		<od-action @click="edit"      label="Edit selected"           icon="edit"      thumbs="1"  />
+
 
 		<div class="od-bottom-menu">
-			<od-action @click="download" thumbs=">0" label="Export selected" icon="download" type="second" />
-			<od-action @click="remove"   thumbs=">0" label="Delete selected" icon="trash"    type="danger"/>
+			<od-action @click="duplicate" thumbs=">0" label="Duplicate selected"  icon="duplicate"  />
+			<od-action @click="download"  thumbs=">0" label="Export selected"     icon="download" type="second" />
+			<od-action @click="remove"    thumbs=">0" label="Delete selected"     icon="trash"    type="danger"/>
 		</div>
 
-		<od-alert index="created"   type="success" title="Created"    :message="`Your ${source} template is created.`" />
-		<od-alert index="deleted"   type="success" title="Deleted"     message="Your templates are deleted." />
-		<od-alert index="no-delete" type="error"   title="Not Deleted" message="Something went wrong." />
+		<od-alert index="duplicated" type="success" title="Duplicated" :message="`Your ${source} template is duplicated.`" />
+		<od-alert index="created"    type="success" title="Created"    :message="`Your ${source} template is created.`" />
+		<od-alert index="deleted"    type="success" title="Deleted"     message="Your templates are deleted." />
+		<od-alert index="error"      type="error"   title="Error"       message="Something went wrong." />
 
 	</div>
 </template>
@@ -48,9 +50,10 @@ export default {
 			})
 		},
 		duplicate(){
-			this.$options.confirmModal.open(
-				'Sorry', 'Not implemented yet.', 'Hmmm...', {type: 'success'}
-			)
+			this.$store.dispatch('dragrr/duplicateTemplates', {
+				source:  this.source,
+				handles: this.selectedIndex
+			})
 		},
 		upload(){
 			this.$options.confirmModal.open(

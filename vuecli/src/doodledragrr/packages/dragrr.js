@@ -12,6 +12,10 @@ export default class DoodleApi {
         return axios.get(`${this.baseUrl}/templates/${type}/schema`)
     }
 
+    duplicateTemplates(type, handles) {
+        return axios.post(`${this.baseUrl}/templates/${type}/duplicate`, {handles:handles})
+    }
+
     saveTemplates(type, payload) {
         return axios.post(`${this.baseUrl}/templates/${type}/save`, payload)
     }

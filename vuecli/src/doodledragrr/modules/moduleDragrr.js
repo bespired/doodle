@@ -79,6 +79,7 @@ export default {
         },
 
         // Current
+        touchCurrentTemplate(state) { state.currentTemplate.updated_at = new Date() },
         clearCurrentTemplate(state) { state.currentTemplate = null },
         setCurrentTemplate(state, payload) {
             const source    = payload.source
@@ -151,6 +152,18 @@ export default {
             })
         },
 
+        duplicateTemplates(context, payload){
+            context.state.apis.dragrrApi.duplicateTemplates(payload.source, payload.handles)
+            .then( result => {
+                context.commit('doodlegui/clearIndexSelected', null, {root:true})
+                context.dispatch('getTemplatedTemplates', { source: payload.source, force: true })
+                context.dispatch('doodlegui/addNamedAlertPanel', 'duplicated', {root:true})
+            })
+            .catch((cancel) => {
+                context.dispatch('doodlegui/addNamedAlertPanel', 'error', {root:true})
+            })
+        },
+
         createTemplate(context, payload){
             context.state.apis.dragrrApi.createTemplate(payload.source)
             .then( result => {
@@ -165,7 +178,7 @@ export default {
                 context.dispatch('doodlegui/addNamedAlertPanel', 'saved', {root:true})
             })
             .catch((cancel) => {
-                context.dispatch('doodlegui/addNamedAlertPanel', 'not-saved', {root:true})
+                context.dispatch('doodlegui/addNamedAlertPanel', 'error', {root:true})
             })
         }
 

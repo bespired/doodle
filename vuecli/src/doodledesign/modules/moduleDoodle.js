@@ -115,7 +115,11 @@ export default {
             if (state.options[item] === undefined) Vue.set(state.options, item, [])
             return state.options[item]
         },
-        getIndexSelected: (state) => item => {
+        // getIndexSelected: (state) => item => {
+        //     if (state.indexSelected === undefined) Vue.set(state, 'indexSelected', [])
+        //     return state.indexSelected
+        // },
+        getIndexSelected: (state) => {
             if (state.indexSelected === undefined) Vue.set(state, 'indexSelected', [])
             return state.indexSelected
         },
@@ -150,14 +154,12 @@ export default {
         clearIndexSelected(state)          { state.indexSelected=[]; },
         addIndexSelected(state, handle)    { state.indexSelected.push(handle) },
         removeIndexSelected(state, handle) {
-            state.indexSelected.forEach((handle, idx) => {
+            state.indexSelected.forEach((key, idx) => {
                 if ( state.indexSelected[idx] === handle ){
                     state.indexSelected.splice(idx, 1)
                 }
             })
         },
-
-
         addAlertPanel(state, payload) {
             let now = new Date().getTime()
             payload.id = Helpers.uuid(payload.title)

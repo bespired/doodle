@@ -20,6 +20,12 @@ trait HasHandleId
             $model->handle = static::createId($model);
 
         });
+
+        static::saving(function (Model $model) {
+            if ($model->handle == null) {
+                $model->handle = static::createId($model);
+            }
+        });
     }
 
     public static function createId($model): string

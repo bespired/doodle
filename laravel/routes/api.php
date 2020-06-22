@@ -23,6 +23,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('templates/{type}/index', 'JsonApi\TemplateController@index');
     Route::post('templates/{type}/save', 'JsonApi\TemplateController@save');
     Route::post('templates/{type}/delete', 'JsonApi\TemplateController@remove');
+    Route::post('templates/{type}/duplicate', 'JsonApi\TemplateController@duplicate');
     Route::post('templates/{type}/export', 'JsonApi\TemplateController@export');
 
 });

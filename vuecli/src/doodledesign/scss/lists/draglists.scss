@@ -1,53 +1,72 @@
-.drag .od-draggables .handle{
-	cursor: grab;
-}
-.drop .od-draggables .handle{
-	cursor: pointer;
+.drag .od-draggables .handle {
+    cursor: grab;
 }
 
-.od-draggables{
+.drop .od-draggables .handle {
+    cursor: pointer;
+}
 
-	.sortable-ghost{
-		opacity: 0.5;
-	}
+.small.drag .od-content {
+    min-height: calc(100vh - 190px);
+    position: relative;
 
-	.handle{
-		padding: 6px 11px;
-    	margin: 4px;
-		background-color: rgba(233, 244, 255, .5);
-    	// border-bottom: 1px solid #dededf;
-    	border: 1px dashed;
-    	display: -webkit-box;
-    	display: -ms-flexbox;
-    	display: flex;
-    	align-items: center;
-    	border-radius: 0px;
+    .od-bottom-menu {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        right: 16px;
+    }
+}
 
-    	&.selected{
-    		padding: 3px 8px;
-			border: 4px solid var(--color-selected)
-    	}
+    // max-height: calc( 100vh - 300px );
+    // overflow: auto;
+    // background-color: antiquewhite;
 
-    	&:hover{
-    		background-color: rgba(255, 255, 255, .5);
-    	}
+.od-draggables {
 
-    	svg{
-    		display: flex;
-    		color: #424242;
-    		margin-right: 8px;
-    	}
-    	.label{
-    		display: flex;
-    		font-weight: 500;
-    		font-size: 14px;
-    		color: #424242;
+    .sortable-ghost {
+        opacity: 0.5;
+    }
 
-    	}
-	}
+    .handle {
+        padding: 6px 11px;
+        margin: 4px;
+        background-color: rgba(233, 244, 255, .5);
+        // border-bottom: 1px solid #dededf;
+        border: 1px dashed;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        align-items: center;
+        border-radius: 0px;
+
+        &.selected {
+            padding: 3px 8px;
+            border: 4px solid var(--color-selected)
+        }
+
+        &:hover {
+            background-color: rgba(255, 255, 255, .5);
+        }
+
+        svg {
+            display: flex;
+            color: #424242;
+            margin-right: 8px;
+        }
+
+        .label {
+            display: flex;
+            font-weight: 500;
+            font-size: 14px;
+            color: #424242;
+
+        }
+    }
 
 }
+
 .small.props .od-content,
-.small.drag .od-content{
-	padding: 20px 10px;
+.small.drag .od-content {
+    padding: 20px 10px;
 }

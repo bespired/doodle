@@ -57,6 +57,27 @@ class TemplateController extends Controller
         return response()->json($row);
     }
 
+    public function duplicate(Request $request, $type)
+    {
+        $data  = (object) $request->all();
+        $Model = sprintf('\App\Models\Eloquent\Templated%s', ucfirst($type));
+
+        $fetched = $Model::query()
+            ->whereIn('handle', $data->handles)
+            ->get();
+
+        foreach ($fetched as $instance) {
+            $instance->handle = null;
+            $instance->status = "new";
+            $instance->label  = 'Copy of ' . str_replace('Copy of ', '', $instance->label);
+            $instance->name   = $this->copyName($instance->name, $Model);
+            $clone            = (array) clone ((object) $instance->toArray());
+            $create           = $Model::create($clone);
+        }
+
+        return response()->json($data->handles);
+    }
+
     public function remove(Request $request, $type)
     {
         $data  = (object) $request->all();
@@ -77,7 +98,6 @@ class TemplateController extends Controller
     private function uniqueName($row, $data)
     {
         // figure out model by row
-
         $slug  = slug($data->label);
         $Model = get_class($row);
 
@@ -95,6 +115,22 @@ class TemplateController extends Controller
         }
         return $check;
 
+    }
+
+    private function copyName($name, $Model)
+    {
+        $name   = str_replace('cp-', '', $name);
+        $parts  = explode('-', $name);
+        $last   = end($parts);
+        $number = intval($last);
+
+        do {
+            $number++;
+            $newname = sprintf('cp-%s-%s', $name, $number);
+            $exists  = $Model::where('name', $newname)->first();
+        } while ($exists);
+
+        return $newname;
     }
 
     private function fillTemplateData($row, $data)

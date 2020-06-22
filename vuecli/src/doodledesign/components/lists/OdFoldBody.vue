@@ -9,8 +9,5 @@
 export default {
 	name: 'od-fold-body',
 	props: ['label'],
-
-	mounted() {
-	},
 }
 </script>

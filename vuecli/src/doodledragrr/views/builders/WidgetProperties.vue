@@ -2,7 +2,6 @@
 	<section v-if="widgetTemplate">
 		<od-text-input vmodel="widgetTemplate.label" label="label"/>
 
-
 	</section>
 </template>
 <script>
@@ -22,7 +21,6 @@ export default {
 
 	data(){
 		return {
-			layoutOptions: ['full-width', '12-layout'],
 		}
 	},
 
@@ -44,6 +42,9 @@ export default {
 		save(){
 			this.$store.dispatch('dragrr/saveCurrentTemplate', { source: 'widget' })
 		},
+		remove(){
+
+		}
 
 	}
 
