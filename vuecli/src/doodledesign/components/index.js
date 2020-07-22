@@ -10,7 +10,9 @@ import OdIconpath from './basic/OdIconpath'
 import OdLabel from './basic/OdLabel'
 import OdLink from './basic/OdLink'
 import OdLoading from './basic/OdLoading'
+import OdMarkdown from './basic/OdMarkdown'
 import OdPanel from './basic/OdPanel'
+import OdProgressbar from './basic/OdProgressbar'
 import OdReady from './basic/OdReady'
 import OdSign from './basic/OdSign'
 import OdTitle from './basic/OdTitle'
@@ -22,9 +24,13 @@ import OdRadiobox from './inputs/OdRadiobox'
 import OdSlider from './inputs/OdSlider'
 import OdSwitch from './inputs/OdSwitch'
 import OdTextInput from './inputs/OdTextInput'
+import OdUpload from './inputs/OdUpload'
 import OdFoldBody from './lists/OdFoldBody'
 import OdFoldHeader from './lists/OdFoldHeader'
 import OdFoldable from './lists/OdFoldable'
+import OdIndex from './lists/OdIndex'
+import OdIndexRows from './lists/OdIndexRows'
+import OdIndexThumbs from './lists/OdIndexThumbs'
 import OdLegend from './lists/OdLegend'
 import OdStatusList from './lists/OdStatusList'
 import OdTabmenu from './lists/OdTabmenu'
@@ -59,21 +65,27 @@ export default {
     OdLabel,
     OdLink,
     OdLoading,
+    OdMarkdown,
     OdPanel,
+    OdProgressbar,
     OdReady,
     OdSign,
-    OdSlider,
     OdTitle,
     OdButton,
     OdCheckbox,
     OdRadioButton,
     OdRadioRow,
     OdRadiobox,
+    OdSlider,
     OdSwitch,
     OdTextInput,
+    OdUpload,
     OdFoldBody,
     OdFoldHeader,
     OdFoldable,
+    OdIndex,
+    OdIndexRows,
+    OdIndexThumbs,
     OdLegend,
     OdStatusList,
     OdTabmenu,

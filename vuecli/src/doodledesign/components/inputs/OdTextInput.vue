@@ -1,6 +1,6 @@
 <template>
     <div class="input-group" :class="prefixer()">
-        <label :for="$options.namedId" :class="{ placeholder:placeholder }">
+        <label :for="$options.namedId" :class="{ placeholder:placeholder, inset:inset }">
             {{ label }}
         </label>
         <div class="input-row">
@@ -31,6 +31,8 @@ export default {
         smodel:       { type: String,  default: null  },
         value:        { type: String,  default: null  },
         label:        { type: String,  default: null  },
+        inset:        { type: Boolean, default: false },
+
         required:     { type: Boolean, default: false },
         autocomplete: { type: String,  default: null },
         type:         { type: String,  default: 'text'},
@@ -43,6 +45,7 @@ export default {
     },
 
     data() {
+        // transform: scale(.9) translateY(18px) translateX(14px);
         return {
             focus:          false,
             autofill:       false,

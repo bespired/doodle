@@ -1,0 +1,45 @@
+    .list-group {
+        margin-bottom: 1rem;
+    }
+
+    #drop-container {
+        background-color: vc(grey-light);
+        padding: 5rem 0;
+        text-align: center;
+        border: 1px solid vc(grey);
+        border-radius: 5px;
+    }
+
+    #drop-container p {
+        margin: 0;
+    }
+
+    #drop-container.hover {
+        border-color: vc(grey-medium);
+        border-style: dashed;
+    }
+
+    .area__dialog .list-group__item input {
+        width: 50%;
+    }
+
+    .panel .padding {
+        padding: 1em 2em;
+        border-radius: 2em;
+    }
+
+    .area__dialog {
+        .button {
+            margin-right: 8px
+        }
+    }
+
+    .area__footer {
+        text-align: right;
+    }
+
+    .list-group,
+    .area__footer,
+    .area__body {
+        margin-top: 1em
+    }

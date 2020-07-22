@@ -1,8 +1,11 @@
 .od-panel-header{
+
+    display: flex;
+
     .od-search {
-        display: inline-block;
+        display: inline-flex;
         position: relative;
-        width: 100%;
+        flex-grow: 10;
         min-height: 50px;
         max-height: 50px;
         border-bottom: 1px solid vc('hdr-border');
@@ -18,10 +21,21 @@
 
         }
     }
+
     .od-search-eyeglass{
         position: absolute;
         right: 1em;
         top: 18px;
         color: gray;
+    }
+
+    .od-search + .button{
+        display: inline-flex;
+        position: relative;
+        border-right: 0px;
+        min-height: 49px;
+        max-height: 49px;
+        border-left: 1px solid vc('hdr-border');
+        border-bottom: 1px solid vc('hdr-border');
     }
 }

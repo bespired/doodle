@@ -63,13 +63,31 @@ export default {
 
 	camelcase(str) {
   		return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
-    		return index === 0 ? word.toLowerCase() : word.toUpperCase();
-  		}).replace(/\s+/g, '');
+    		return index === 0 ? word.toLowerCase() : word.toUpperCase()
+  		}).replace(/\s+/g, '')
 	},
 
 	pascalcase(str) {
 		return str.split('-').map(function(word,index){
-			return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-		}).join('');
+			return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+		}).join('')
+	},
+
+
+	slugify(str) {
+		const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'
+		const b = 'aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------'
+		const p = new RegExp(a.split('').join('|'), 'g')
+
+		return str.toString().toLowerCase()
+			.replace(/\s+/g, '-') // Replace spaces with -
+			.replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
+			.replace(/&/g, '-and-') // Replace & with 'and'
+			.replace(/[^\w\-]+/g, '') // Remove all non-word characters
+			.replace(/\-\-+/g, '-') // Replace multiple - with single -
+			.replace(/^-+/, '') // Trim - from start of text
+			.replace(/-+$/, '') // Trim - from end of text
 	}
+
+
 };

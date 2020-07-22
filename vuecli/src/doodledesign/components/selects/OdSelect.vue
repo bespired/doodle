@@ -1,11 +1,12 @@
 /* eslint-disable no-alert, no-console */
 <template>
-    <div class="input-select-group" >
+    <div class="input-select-group" :class="prefixer()">
 
-        <label :for="$options.namedId">
+        <label :for="$options.namedId" v-if="label">
             {{ label }}
         </label>
 
+        <span class="prefix" v-if="prefix!==null">{{ prefix }}</span>
         <multiselect
             v-if="!isTags && !isCustom"
             :id="$options.namedId"
@@ -54,6 +55,8 @@ export default {
         soptions:     { type: String,  default: null  },
         value:        { type: String,  default: null  },
         label:        { type: String,  default: null  },
+        prefix:       { type: String,  default: null  },
+        minWidth:     { type: String,  default: null  },
         required:     { type: Boolean, default: false },
         single:       { type: String,  default: null  },
         list:         { type: String,  default: null  },
@@ -78,16 +81,13 @@ export default {
 
     methods: {
         addTag (newTag) {
-            // const tag = {
-            //     label: newTag,
-            //     value: newTag,
-            //     id: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
-            // }
-            // this.options.push(tag)
-            // this.value.push(tag)
         },
-
-    },
+        prefixer() {
+            let prefixer = this.prefix  === null ? 0 : this.prefix.length
+            let prefixLength = Math.max(this.minWidth, Math.ceil(prefixer / 3))
+            return this.prefix  === null ? '' : 'prefix prefix-' + prefixLength
+        },
+     },
 
     computed: {
         modelOptions(){
@@ -103,6 +103,7 @@ export default {
             }
             return this.options
         },
+
         modelValue: {
             get() {
                 // check if its in the options... if not ... then what?

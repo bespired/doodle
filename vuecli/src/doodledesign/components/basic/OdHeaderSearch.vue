@@ -1,16 +1,24 @@
 <template>
     <div class="od-panel-header" :class="type">
         <span class="od-search">
-        	<input
-        		:id="$options.namedId"
-        		:name="$options.namedId"
-        		type="text"
-        		placeholder="Search"
-        		v-model="searchvalue"
-				autocomplete="search"
-        		>
-	        <od-iconpath name="search" class="od-search-eyeglass"/>
+            <input
+                :id="$options.namedId"
+                :name="$options.namedId"
+                type="text"
+                placeholder="Search"
+                v-model="searchvalue"
+                autocomplete="search"
+                >
+            <od-iconpath name="search" class="od-search-eyeglass"/>
         </span>
+
+        <od-button
+            function="toggle"
+            class="square"
+            icons="tiles,th-list"
+            smodel="thumbs-type-rows"
+        />
+
     </div>
 </template>
 <script>
@@ -20,18 +28,18 @@ export default {
         type: String
     },
 
-	computed: {
-		searchvalue: {
-    		get: function () {
-    			return this.$store.getters['doodlegui/getSearchValue']
-    		},
-    		set: function (newValue) {
+    computed: {
+        searchvalue: {
+            get: function () {
+                return this.$store.getters['doodlegui/getSearchValue']
+            },
+            set: function (newValue) {
                 this.$store.commit('doodlegui/setSearchValue', {
                     value: newValue,
                 })
-    		}
-  		},
-	},
+            }
+        },
+    },
 
 };
 </script>

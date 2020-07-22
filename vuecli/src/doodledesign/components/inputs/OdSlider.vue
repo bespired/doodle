@@ -1,10 +1,11 @@
 /* eslint-disable no-alert, no-console */
 <template>
-    <div class="input-group">
-        <label :for="$options.namedId" >
+    <div class="input-group" :class="prefixer()">
+        <label :for="$options.namedId" v-if="label">
             {{ label }}
         </label>
         <div class="input-row input-slider" :class="{ numberless }">
+            <span class="prefix" v-if="prefix!==null">{{ prefix }}</span>
             <input
                 type="range"
                 :min="min"
@@ -13,7 +14,11 @@
                 :id="$options.namedId"
                 v-model="modelValue"
             >
-            <span v-if="!numberless" :class="{ units }">{{ modelValue  }}{{ units }}</span>
+            <span v-if="!numberless" :class="{ units }">
+                <input type="number" :min="min" :max="max" :step="step" v-model="modelValue" >
+                <span>{{ units }}</span>
+            </span>
+            <!-- <span v-if="!numberless" :class="{ units }">{{ modelValue  }}{{ units }}</span> -->
         </div>
     </div>
 
@@ -34,6 +39,9 @@ export default {
         label:      { type: String,  default: null  },
         units:      { type: String,  default: null  },
         numberless: { type: Boolean, default: false },
+        prefix:     { type: String,  default: null  },
+        minWidth:   { type: String,  default: null  },
+
     },
 
     data() {
@@ -75,5 +83,13 @@ export default {
             }
         }
     },
+
+     methods: {
+        prefixer() {
+            let prefixer = this.prefix  === null ? 0 : this.prefix.length
+            let prefixLength = Math.max(this.minWidth, Math.ceil(prefixer / 3))
+            return this.prefix  === null ? '' : 'prefix prefix-' + prefixLength
+        },
+    }
 }
 </script>

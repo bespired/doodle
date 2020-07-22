@@ -239,7 +239,7 @@ fieldset[disabled] .multiselect {
 .multiselect__select {
     position: absolute;
     width: 40px;
-    height: 38px;
+    height: $input-height;
     right: 1px;
     top: 1px;
     padding: 4px 8px;

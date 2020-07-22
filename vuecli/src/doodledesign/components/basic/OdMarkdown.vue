@@ -1,11 +1,9 @@
 <template>
-    <div class="od-panel-frame" :class="type">
-        <slot />
-    </div>
+    <VueShowdown :markdown="markdown" tag="span" class="markdown"/>
 </template>
 <script>
 export default {
-    name: 'od-panel',
+    name: 'od-markdown',
     props: {
         markdown: String
     },

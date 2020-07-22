@@ -152,6 +152,7 @@
 			<div class="od-icon-spacer"><od-iconpath name="tasks" />tasks</div>
 			<div class="od-icon-spacer"><od-iconpath name="text" />text</div>
 			<div class="od-icon-spacer"><od-iconpath name="th-list" />th-list</div>
+			<div class="od-icon-spacer"><od-iconpath name="tiles" />tiles</div>
 			<div class="od-icon-spacer"><od-iconpath name="timeicon" />timeicon</div>
 			<div class="od-icon-spacer"><od-iconpath name="timeline" />timeline</div>
 			<div class="od-icon-spacer"><od-iconpath name="toggle-off" />toggle-off</div>

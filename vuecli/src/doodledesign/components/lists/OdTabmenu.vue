@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import Helpers from '../../helpers/helpers.js'
 
 export default {
 	name: 'od-tabmenu',
@@ -20,6 +21,7 @@ export default {
 
    data(){
         return{
+        	vparent:     this.$parent,
             sluggedTabs: this.getSluggedTabs(),
             storageName: this.getStorageName(),
             selectState: this.getSelectedState(),
@@ -57,10 +59,11 @@ export default {
 			let name = 'temp'
 			if ( this.smodel !== null ) name = this.smodel
 			if ( this.vmodel !== null ) name = this.vmodel
-        	return `od.tab-${name}`
+        	return `doodle.tab.${name}`
 		},
 
  		getSelectedState(){
+
 			let selectState = this.vmodel ? this.$parent[this.vmodel] : null
         	if (this.smodel) selectState = this.$store.getters['doodlegui/getTabState'](this.smodel)
 
@@ -69,6 +72,7 @@ export default {
 				let slugged= this.createKeys(this.tabs)
 				keys = Object.keys(slugged)
 			}
+
 			if ( selectState === null ) {
 				let name = this.getStorageName()
 				selectState = localStorage.getItem(name)
@@ -87,7 +91,20 @@ export default {
 
             localStorage.setItem(this.storageName, this.selectState);
 
-            this.$emit('click', this.selectState)
+			if (this.vmodel !== null) {
+                Helpers.dotset(this.vparent, this.vmodel, key)
+                return
+            }
+            if (this.smodel !== null) {
+                this.$store.commit('doodlegui/setTabValue', {
+                    key: this.smodel,
+                    value: key,
+                })
+                return
+            }
+
+            this.$emit('changed', this.selectState)
+            this.$emit('click',   this.selectState)
 
         }
 

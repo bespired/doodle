@@ -1,39 +1,124 @@
-.input-select-group, .input-group {
+.input-select-group.foldable {
+    padding-bottom: 0;
+    margin-bottom: -1px;
+
+    span.prefix {
+        border-bottom-left-radius: 0 !important;
+    }
+
+    .multiselect__tags {
+        border-bottom-right-radius: 0 !important;
+    }
+}
+
+.input-select-group.prefix {
+    .od-select {
+        display: inline-block;
+    }
+
+    span.prefix {
+        display: inline-block;
+        border: 1px solid vc(border);
+        padding: 6px 0 7px 12px;
+        max-height: $input-height;
+        border-top-left-radius: var(--border-radius);
+        border-bottom-left-radius: var(--border-radius);
+        border-right: 0px;
+    }
+
+    .multiselect__tags {
+        border-left: 0;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .multiselect--active .multiselect__tags {
+        border-left: 1px solid vc(border-focus);
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+}
+
+.input-select-group,
+.input-group {
 
     font-family: $font-family-primary;
-    width: 100%;
+    width: calc(100% + 1px);
     color: vc(font);
     text-align: left;
     padding-bottom: 7px;
 
-    .input-row.input-slider{
+
+    .input-row {
+        min-height: $input-height;
+        max-height: $input-height;
+    }
+
+    .input-row.input-slider {
+        position: relative;
+        background-color: white;
+        border: 1px solid vc(border);
+        max-height: $input-height;
+
+        .prefix {
+            // background-color: vc(darker);
+            // border-right: 1px solid vc(border) !important;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            display: inline-block;
+            text-align: left;
+        }
+
         input {
             min-height: $input-height;
             max-height: $input-height;
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
+            padding: 0;
         }
-        input::-moz-range-thumb,
-        input::-webkit-slider-thumb {
-            appearance: none; /* Override default look */
-            width: 25px; /* Set a specific slider handle width */
-            height: 25px; /* Slider handle height */
-            background: #4CAF50; /* Green background */
-            cursor: pointer; /* Cursor on hover */
+
+        .units {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            min-width: 5em;
+
+            input {
+                background-color: transparent;
+                border: 0px;
+                margin-top: -1px;
+                margin-right: -33px;
+                width: 100%;
+            }
         }
+
+        input[type=range] {
+            -webkit-appearance: slider-horizontal;
+            padding: 0;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
         span {
             min-width: 4em;
             max-height: $input-height;
             border-left: 0 solid;
+            border-width: 0;
             border-top-right-radius: v(border-radius);
             border-bottom-right-radius: v(border-radius);
-            &.units{
-                min-width: 6em;
+
+            &.units span {
+                padding-right: 26px;
+                min-width: 0;
+                text-align: left;
+                padding-left: 0;
+                pointer-events: none;
             }
         }
     }
-    .input-row.input-slider.numberless{
-        input{
+
+    .input-row.input-slider.numberless {
+        input {
             border-top-right-radius: v(border-radius);
             border-bottom-right-radius: v(border-radius);
         }
@@ -43,7 +128,7 @@
     label[for] {
         cursor: pointer;
         font-weight: 500;
-        // letter-spacing: -.05px;
+        position: relative;
         line-height: 22px;
         display: inline-block;
         margin-bottom: .25rem;
@@ -52,12 +137,25 @@
         margin-left: 0px;
         transition: transform 200ms linear, margin-left 200ms linear, font-weight 200ms;
 
+        &.inset {
+            transform: scale(.9) translateY(18px) translateX(8px);
+        }
+
         &.placeholder {
             font-weight: 100;
             color: lighten($color-font, 20%);
             transform: scale(1.2) translateY(25px) translateX(8px);
         }
+    }
 
+    .inset:before {
+        content: "";
+        bottom: 10px;
+        position: absolute;
+        background-color: #fefefe;
+        height: 2px;
+        width: 100%;
+        z-index: -1;
     }
 
     .input-row {
@@ -74,11 +172,12 @@
             border: 1px solid vc('border');
         }
 
-        .input-button{
+        .input-button {
             &:hover {
                 cursor: pointer;
                 background-color: vc('panel');
             }
+
             &:active {
                 filter: brightness(0.95);
                 box-shadow: inset 0px 5px 4px 0 rgba(0, 0, 0, 0.15);
@@ -87,11 +186,12 @@
 
     }
 
-    &.prefix .input-row{
-        input{
+    &.prefix .input-row {
+        input {
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
         }
+
         span:first-of-type {
             border-right: 0;
             border-top-left-radius: v(border-radius);
@@ -99,12 +199,14 @@
         }
     }
 
-    &.postfix .input-row{
-        input{
+    &.postfix .input-row {
+        input {
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
-            & ~ span {
+
+            &~span {
                 border-left: 0;
+
                 &:last-of-type {
                     border-top-right-radius: v(border-radius);
                     border-bottom-right-radius: v(border-radius);
@@ -118,7 +220,7 @@
 
 }
 
-.input-group{
+.input-group {
     input {
         font-family: $font-family-primary;
         font-weight: 400;
@@ -150,8 +252,17 @@
         & .input-row span:first-of-type {
             min-width: #{$i * 1.2 * $font-size + 24};
         }
+
+        & span.prefix {
+            min-width: #{$i * 1.2 * $font-size + 24};
+        }
+
         & label[for].placeholder {
             margin-left: #{$i * 1.2 * $font-size + 26};
+        }
+
+        & .od-select {
+            width: calc(100% - #{$i * 1.2 * $font-size + 24});
         }
     }
 }

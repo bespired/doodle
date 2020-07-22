@@ -1,15 +1,37 @@
-.od-thumbs{
 
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+.od-index{
+
 	padding: 20px;
 
+    .od-tabmenu{
+        margin-top: -20px;
+    }
+
+    .od-thumb-row{
+        cursor: pointer;
+        width: 100%;
+        padding: 8px;
+        border: 1px solid vc('border');
+        margin-bottom: 8px;
+    }
+
+    .od-thumbs{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
 	.od-thumb{
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 20px;
 
         cursor: pointer;
         padding: 8px;
         margin: 12px;
+        margin-right: 0px;
         position: relative;
 
         .draw{
@@ -33,7 +55,7 @@
         	position: relative;
         	overflow: hidden;
 
-            min-width: 215px;
+            min-width: 204px;
             max-width: 215px;
             min-height: 171px;
             max-height: 171px;

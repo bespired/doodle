@@ -171,6 +171,15 @@ export default {
                 if (panel.id === id) state.alertPanels.display.splice(idx, 1)
             })
         },
+        saveToDesktop(state, payload) {
+            let url      = window.URL.createObjectURL(new Blob([payload.data]))
+            let link     = document.createElement('a')
+            link.href    = url
+            link.setAttribute('download', payload.filename)
+            document.body.appendChild(link)
+            link.click()
+        },
+
     },
 
     actions: {
