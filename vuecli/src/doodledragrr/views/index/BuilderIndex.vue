@@ -5,7 +5,7 @@
 			<template #subtitle >{{ index }}</template>
 			<template #leftMenu ><od-header-search /></template>
 			<template #leftContent  >
-				<od-thumbs :thumbs="thumbs" :route="route" v-if="thumbs"/>
+				<od-index :items="thumbs" :route="route" v-if="thumbs"/>
 				<od-loading v-else/>
 			</template>
 			<template #rightContent ><builder-menu /></template>

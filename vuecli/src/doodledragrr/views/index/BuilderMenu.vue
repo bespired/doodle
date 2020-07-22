@@ -2,6 +2,13 @@
 	<div>
 		<od-action @click="create"   :label="`Create new ${source}`"  icon="plus"      type="action" />
 		<od-action @click="upload"   :label="`Import ${source}`"      icon="publish"   type="second" />
+		<!-- <od-upload
+				:label     = "`Drop a ${source} file in this box`"
+				cancel     = "journeys"
+				uploadUrl  = "uploadUrl"
+				@uploaded  = "done"
+			/> -->
+
 		<od-action @click="edit"      label="Edit selected"           icon="edit"      thumbs="1"  />
 
 
@@ -44,6 +51,9 @@ export default {
 	},
 
 	methods:{
+		done(){
+
+		},
 		create(){
 			this.$store.dispatch('dragrr/createTemplate', {
 				source: this.source
@@ -65,9 +75,10 @@ export default {
 			this.$router.push({ path: path })
 		},
 		download(){
-			this.$options.confirmModal.open(
-				'Sorry', 'Not implemented yet.', 'Hmmm...', {type: 'success'}
-			)
+			this.$store.dispatch('dragrr/exportTemplates', {
+				source:  this.source,
+				handles: this.selectedIndex
+			})
 		},
 		remove(){
 			this.$options.confirmModal.open(

@@ -2,31 +2,32 @@
 	<section v-if="layoutTemplate">
 		<!-- <od-title type="big" :key="layoutTemplate.label">{{ layoutTemplate.label }}</od-title> -->
 
-		<od-text-input vmodel="layoutTemplate.label" label="label"/>
+		<od-text-input vmodel="layoutTemplate.label"      minWidth="4" prefix="label"/>
+		<od-select     vmodel="layoutTemplate.responsive" minWidth="4" prefix="responsive" :options="responsiveOptions" />
 
-		<od-select vmodel="layoutTemplate.responsive" label="responsive" :options="responsiveOptions" />
-
-		<od-select smodel="row:devicesize" label="media" :options="mediaOptions"  />
+		<od-select     smodel="row:devicesize"            minWidth="4" prefix="media" class="foldable" :options="mediaOptions"  />
 
 		<od-foldable >
 			<od-fold-header label="Gutter sizes" />
 			<od-fold-body>
-				<od-slider label="Row"    vmodel="layoutTemplate.media.$media.gutters.row"    :min="0" :max="200" units="px" />
-				<od-slider label="column" vmodel="layoutTemplate.media.$media.gutters.column" :min="0" :max="200" units="px" />
-				<od-slider label="Top"    vmodel="layoutTemplate.media.$media.gutters.top"    :min="0" :max="200" units="px" />
-				<od-slider label="Bottom" vmodel="layoutTemplate.media.$media.gutters.bottom" :min="0" :max="200" units="px" />
+				<od-slider prefix="Row"    minWidth="2" vmodel="layoutTemplate.media.$media.gutters.row"    :min="0" :max="200" units="px" />
+				<od-slider prefix="Column" minWidth="2" vmodel="layoutTemplate.media.$media.gutters.column" :min="0" :max="200" units="px" />
+				<od-slider prefix="Top"    minWidth="2" vmodel="layoutTemplate.media.$media.gutters.top"    :min="0" :max="200" units="px" />
+				<od-slider prefix="Bottom" minWidth="2" vmodel="layoutTemplate.media.$media.gutters.bottom" :min="0" :max="200" units="px" />
 			</od-fold-body>
+
 			<od-fold-header label="Row layout" />
 			<od-fold-body>
-				<od-select label="fillstyle"   vmodel="layoutTemplate.media.$media.fillstyle"  :options="fillstyleOptions" />
-				<od-slider label="Max width"   vmodel="layoutTemplate.media.$media.maxWidth"   :min="100" :max="2000" units="px"
+				<od-select prefix="fillstyle"   vmodel="layoutTemplate.media.$media.fillstyle"  :options="fillstyleOptions" />
+				<od-slider prefix="Max width"   vmodel="layoutTemplate.media.$media.maxWidth"   :min="100" :max="2000" units="px"
 						   v-if="layoutTemplate.media[media].fillstyle === 'max-width'" />
-				<od-select label="background"  vmodel="layoutTemplate.media.$media.background" :options="backgroundOptions" />
+				<od-select prefix="background"  vmodel="layoutTemplate.media.$media.background" :options="backgroundOptions" />
 			</od-fold-body>
+
 			<od-fold-header label="Media breakpoints" />
 			<od-fold-body>
-				<od-slider label="Media minimum" vmodel="layoutTemplate.media.$media.min" :min="0" :max="2000" units="px" />
-				<od-slider label="Media maximum" vmodel="layoutTemplate.media.$media.max" :min="0" :max="2000" units="px" />
+				<od-slider prefix="Min" vmodel="layoutTemplate.media.$media.min" :min="0" :max="2000" units="px" />
+				<od-slider prefix="Max" vmodel="layoutTemplate.media.$media.max" :min="0" :max="2000" units="px" />
 			</od-fold-body>
 		</od-foldable>
 

@@ -15,11 +15,11 @@ export default {
             dragrrApi: new DragrrApi(),
         },
 
+        classTemplates:  null,
+        classTemplateId: null,
+
         elementTemplates:  null,
         elementTemplateId: null,
-
-        widgetTemplates:  null,
-        widgetTemplateId: null,
 
         layoutTemplates:  null,
         layoutTemplateId: null,
@@ -27,15 +27,23 @@ export default {
         sectionTemplates:  null,
         sectionTemplateId: null,
 
+        themeTemplates:  null,
+        themeTemplateId: null,
+
+        widgetTemplates:  null,
+        widgetTemplateId: null,
+
         currentTemplate: null,
 
     },
 
     getters: {
+        getClassTemplates:   (state) => { return state.classTemplates   },
         getElementTemplates: (state) => { return state.elementTemplates },
-        getWidgetTemplates:  (state) => { return state.widgetTemplates  },
         getLayoutTemplates:  (state) => { return state.layoutTemplates  },
         getSectionTemplates: (state) => { return state.sectionTemplates },
+        getThemeTemplates:   (state) => { return state.themeTemplates   },
+        getWidgetTemplates:  (state) => { return state.widgetTemplates  },
 
         currentTemplate:     (state) => {
             if ( state.currentTemplate  === null ) return null
@@ -62,6 +70,7 @@ export default {
     mutations: {
         // General for Layout and Section
         setTemplates(state, payload)  {
+            // Vue.set(state, `${payload.source}Templates`, payload.templates)
             state[`${payload.source}Templates`] = payload.templates
         },
         addTemplate(state, payload)    {
@@ -100,6 +109,7 @@ export default {
             const source    = payload.source
             const stateName = payload.source + 'Templates'
             const stateId   = payload.source + 'TemplateId'
+
             if ( payload.force || context.state[stateName] === null ){
                 context.state.apis.dragrrApi.getTemplates(source)
                 .then( result => {
@@ -137,7 +147,14 @@ export default {
 
         exportTemplates(context, payload){
             context.state.apis.dragrrApi.exportTemplates(payload.source, payload.handles)
-
+            .then( response => {
+                let filename = response.request.getResponseHeader('X-Filename')
+                context.commit('doodlegui/saveToDesktop', {
+                    filename: filename ? filename : 'download.yaml',
+                    data    : response.data
+                }, { root:true })
+                context.commit('doodlegui/clearIndexSelected', null, {root:true})
+            })
         },
 
         deleteTemplates(context, payload){
