@@ -187,6 +187,21 @@
 			"label": "Element Builders",
 			"location": "/admin/element-builders"
 		}]
+	},
+	{
+		"alias": "main3.chapter4",
+		"label": "Theme/Class",
+		"items": [
+		{
+			"alias": "main3.chapter4.item1",
+			"label": "Theme Builders",
+			"location": "/admin/theme-builders"
+		},
+		{
+			"alias": "main3.chapter4.item2",
+			"label": "Class Builders",
+			"location": "/admin/class-builders"
+		}]
 	}]
 },
 {

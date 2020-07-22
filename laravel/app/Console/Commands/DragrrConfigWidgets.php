@@ -18,7 +18,7 @@ class DragrrConfigWidgets extends Command
 
         $elementTemplates = TemplatedElement::all()->keyBy('name');
 
-        foreach (config('dragrr.widget-templates') as $templated) {
+        foreach (config('dragrr.widgets.templates') as $templated) {
 
             $template = (object) $templated;
 

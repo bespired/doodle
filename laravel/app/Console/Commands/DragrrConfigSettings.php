@@ -16,7 +16,7 @@ class DragrrConfigSettings extends Command
     {
         Setting::updateOrCreate(
             ['type' => 'mainmenu'],
-            ['payload' => config('dragrr.menus')]
+            ['payload' => config('dragrr.menus.menus')]
         );
         Setting::updateOrCreate(
             ['type' => 'responsiveOptions'],

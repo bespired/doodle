@@ -15,7 +15,7 @@ class DragrrConfigElements extends Command
     public function handle()
     {
 
-        foreach (config('dragrr.element-templates') as $templated) {
+        foreach (config('dragrr.elements.templates') as $templated) {
 
             $template = (object) $templated;
 

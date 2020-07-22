@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\JsonApi;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\Yamlaar;
 use Illuminate\Http\Request;
 
 class TemplateController extends Controller
@@ -92,7 +93,41 @@ class TemplateController extends Controller
 
     public function export(Request $request, $type)
     {
-        return response()->json('yay');
+        $exceptions = ['id', 'deleted_at', 'created_at', 'updated_at'];
+
+        $data  = (object) $request->all();
+        $Model = sprintf('\App\Models\Eloquent\Templated%s', ucfirst($type));
+
+        $fetched = $Model::query()
+            ->whereIn('handle', $data->handles)
+            ->get();
+
+        // relations? widgets also save elements?
+
+        $models = [
+            'type' => $type,
+            $type  => [],
+        ];
+        foreach ($fetched->toArray() as $data) {
+            $name            = $data['name'];
+            $models[$type][] = collect($data)->except($exceptions)->toArray();
+        }
+
+        if (!$name) {
+            return;
+        }
+
+        $filename = sprintf('%s.yaml', $name);
+
+        return response()
+            ->streamDownload(function () use ($models) {
+                echo Yamlaar::dump($models);
+            }, $filename, [
+                'Access-Control-Expose-Headers' => 'Content-Disposition,X-Filename',
+                'Content-Type'                  => 'text/yaml',
+                'X-Filename'                    => $filename,
+            ]);
+
     }
 
     private function uniqueName($row, $data)

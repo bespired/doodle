@@ -15,7 +15,7 @@ class DragrrConfigSections extends Command
     public function handle()
     {
 
-        foreach (config('dragrr.section-templates') as $templated) {
+        foreach (config('dragrr.sections.templates') as $templated) {
 
             $template = (object) $templated;
 

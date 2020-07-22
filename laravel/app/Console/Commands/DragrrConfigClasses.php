@@ -2,20 +2,20 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Eloquent\TemplatedLayout;
+use App\Models\Eloquent\TemplatedClass;
 use Illuminate\Console\Command;
 
-class DragrrConfigLayouts extends Command
+class DragrrConfigClasses extends Command
 {
 
-    protected $signature = 'dragrr:config:layouts';
+    protected $signature = 'dragrr:config:classes';
 
-    protected $description = 'Create layouts in database from config';
+    protected $description = 'Create classes in database from config';
 
     public function handle()
     {
 
-        foreach (config('dragrr.layouts.templates') as $templated) {
+        foreach (config('dragrr.classes.templates') as $templated) {
 
             $template = (object) $templated;
 
@@ -24,7 +24,7 @@ class DragrrConfigLayouts extends Command
             unset($templated['name']);
             unset($templated['type']);
 
-            TemplatedLayout::updateOrCreate(
+            TemplatedClass::updateOrCreate(
                 [
                     'name' => $name,
                     'type' => $type,
