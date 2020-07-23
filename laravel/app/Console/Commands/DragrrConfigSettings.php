@@ -34,6 +34,10 @@ class DragrrConfigSettings extends Command
             ['type' => 'mediaOptions'],
             ['payload' => config('dragrr.settings.mediaOptions')]
         );
+        Setting::updateOrCreate(
+            ['type' => 'googleFonts'],
+            ['payload' => config('dragrr.settings.googleFonts')]
+        );
 
     }
 

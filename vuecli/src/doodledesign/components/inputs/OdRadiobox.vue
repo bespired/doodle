@@ -26,6 +26,8 @@ export default {
         let radioState = this.vmodel ? vparent[this.vmodel] : false
         if (this.smodel) radioState = this.$store.getters['doodlegui/getRadioState'](this.smodel)
 
+        console.log( vparent )
+
         return {
             vparent: vparent,
             radioState: radioState,

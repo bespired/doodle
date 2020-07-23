@@ -1,16 +1,22 @@
 <template>
 	<section v-if="classTemplate">
 		<od-text-input vmodel="classTemplate.label" label="label"/>
-
-		... class related properties ...
-
+		<component :is="`class-properties-${classTemplate.area}`" />
 	</section>
 </template>
 <script>
 
 import Vue from 'vue';
+import ClassPropertiesColor from './classbuilders/ClassPropertiesColor.vue'
+import ClassPropertiesFont  from './classbuilders/ClassPropertiesFont.vue'
+import ClassPropertiesSize  from './classbuilders/ClassPropertiesSize.vue'
+
 export default {
 	name: 'widget-properties',
+
+	components: {
+		ClassPropertiesColor, ClassPropertiesFont, ClassPropertiesSize
+	},
 
 	created() {
 		this.$eventHub.$on('save',  this.save );
