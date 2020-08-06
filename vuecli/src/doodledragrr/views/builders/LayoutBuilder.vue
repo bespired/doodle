@@ -78,13 +78,13 @@ export default {
 	},
 
 	watch: {
-    	layoutTemplate: {
-      		deep: true,
-      		handler(){
-      			this.update++;
-    	  	}
-    	}
-  	},
+		layoutTemplate: {
+			deep: true,
+			handler(){
+				this.update++;
+			}
+		}
+	},
 
 	methods:{
 		clock(){

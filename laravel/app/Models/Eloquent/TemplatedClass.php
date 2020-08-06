@@ -18,7 +18,7 @@ class TemplatedClass extends Model
     ];
 
     protected $casts = [
-        'data' => 'array',
+        'data' => 'object',
     ];
 
     public function scopeExclude($query, $value = array())

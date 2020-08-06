@@ -10,6 +10,7 @@
     </div>
 </template>
 <script>
+import Helpers from '../../helpers/helpers.js'
 export default {
     name: 'od-switch',
     props: {
@@ -18,17 +19,21 @@ export default {
         smodel: { type: String, default: null },
     },
     data() {
-        let toggleState = this.vmodel ? this.$parent[this.vmodel] : false
+        let vparent = this.$parent
+        if (this.vmodel){ vparent = Helpers.findParent(this.$parent, this.vmodel) }
+
+        let toggleState = this.vmodel ? Helpers.dotget(vparent, this.vmodel) : false
         if (this.smodel) toggleState = this.$store.getters['doodlegui/getToggleState'](this.smodel)
 
         return {
+            vparent    : vparent,
             toggleState: toggleState,
         }
     },
 
     computed: {
         changed() {
-            if (this.vmodel) return this.$parent[this.vmodel]
+            if (this.vmodel) return Helpers.dotget(this.vparent, this.vmodel)
             if (this.smodel) return this.$store.getters['doodlegui/getToggleState'](this.smodel)
             return this.toggleState
         }
@@ -50,7 +55,8 @@ export default {
             this.toggleState = !this.toggleState
 
             if (this.vmodel !== null) {
-                this.$parent[this.vmodel] = this.toggleState
+                Helpers.dotset(this.vparent, this.vmodel, this.toggleState)
+                this.$emit('changed', this.toggleState)
                 return
             }
 
@@ -59,6 +65,7 @@ export default {
                     key: this.smodel,
                     value: this.toggleState,
                 })
+                this.$emit('changed', this.toggleState)
                 return
             }
 

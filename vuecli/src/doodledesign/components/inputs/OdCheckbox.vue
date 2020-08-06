@@ -20,7 +20,10 @@ export default {
         smodel: { type: String, default: null },
     },
     data() {
-        let toggleState = this.vmodel ? this.$parent[this.vmodel] : false
+        let vparent = this.$parent
+        if (this.vmodel){ vparent = Helpers.findParent(this.$parent, this.vmodel) }
+
+        let toggleState = this.vmodel ? vparent[this.vmodel] : false
         if (this.smodel) toggleState = this.$store.getters['doodlegui/getToggleState'](this.smodel)
 
         return {

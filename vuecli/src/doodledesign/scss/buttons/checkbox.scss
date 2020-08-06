@@ -54,6 +54,13 @@
         min-height: 28px;
     }
 
+    &.smallest .od-checkbox-container {
+        width: 16px;
+        min-width: 16px;
+        height: 16px;
+        min-height: 16px;
+    }
+
     &:hover {
         filter: brightness(1.10);
     }

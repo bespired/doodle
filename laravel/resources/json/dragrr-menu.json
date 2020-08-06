@@ -187,30 +187,15 @@
 			"label": "Element Builders",
 			"location": "/admin/element-builders"
 		}]
-	},
-	{
-		"alias": "main3.chapter4",
-		"label": "Theme/Class",
-		"items": [
-		{
-			"alias": "main3.chapter4.item1",
-			"label": "Theme Builders",
-			"location": "/admin/theme-builders"
-		},
-		{
-			"alias": "main3.chapter4.item2",
-			"label": "Class Builders",
-			"location": "/admin/class-builders"
-		}]
 	}]
 },
 {
 	"alias": "main4",
-	"label": "Menu4",
+	"label": "Class",
 	"chapters": [
 	{
 		"alias": "main4.profiles",
-		"label": "Chapter 1",
+		"label": "Theme",
 		"items": [
 		{
 			"alias": "main4.chapter1.find",
@@ -230,22 +215,27 @@
 	},
 	{
 		"alias": "main4.settings",
-		"label": "Chapter 2",
+		"label": "Class",
 		"items": [
 		{
-			"alias": "main4.chapter2.tags",
-			"label": "Item",
-			"location": ""
+			"alias": "main4.chapter2.fonts",
+			"label": "Fonts",
+			"location": "/admin/class-builders/fonts"
 		},
 		{
-			"alias": "main4.chapter2.fields",
-			"label": "Item",
-			"location": ""
+			"alias": "main4.chapter2.borders",
+			"label": "Borders",
+			"location": "/admin/class-builders/borders"
 		},
 		{
-			"alias": "main4.chapter3.consents",
-			"label": "Item",
-			"location": ""
+			"alias": "main4.chapter2.sizes",
+			"label": "Sizes",
+			"location": "/admin/class-builders/sizes"
+		},
+		{
+			"alias": "main4.chapter2.colors",
+			"label": "Colors",
+			"location": "/admin/class-builders/colors"
 		}]
 	}]
 },

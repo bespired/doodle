@@ -4,6 +4,7 @@ import OdAction from './basic/OdAction'
 import OdBadge from './basic/OdBadge'
 import OdCodeview from './basic/OdCodeview'
 import OdContent from './basic/OdContent'
+import OdFlex from './panels/OdFlex'
 import OdHeader from './basic/OdHeader'
 import OdHeaderSearch from './basic/OdHeaderSearch'
 import OdIconpath from './basic/OdIconpath'
@@ -41,10 +42,12 @@ import ConfirmModal from './modals/ConfirmModal'
 import LoginModal from './modals/LoginModal'
 import ActionPanel from './panels/ActionPanel'
 import AlertPanel from './panels/AlertPanel'
+import OdAddShield from './panels/OdAddShield'
 import OdAlert from './panels/OdAlert'
 import TitlePanel from './panels/TitlePanel'
 import OdCustomFunction from './selects/OdCustomFunction'
 import OdCustomSelect from './selects/OdCustomSelect'
+import OdDataSelect from './selects/OdDataSelect'
 import OdDropdown from './selects/OdDropdown'
 import OdOptions from './selects/OdOptions'
 import OdSelect from './selects/OdSelect'
@@ -59,6 +62,7 @@ export default {
     OdBadge,
     OdCodeview,
     OdContent,
+    OdFlex,
     OdHeader,
     OdHeaderSearch,
     OdIconpath,
@@ -96,10 +100,12 @@ export default {
     LoginModal,
     ActionPanel,
     AlertPanel,
+    OdAddShield,
     OdAlert,
     TitlePanel,
     OdCustomFunction,
     OdCustomSelect,
+    OdDataSelect,
     OdDropdown,
     OdOptions,
     OdSelect,

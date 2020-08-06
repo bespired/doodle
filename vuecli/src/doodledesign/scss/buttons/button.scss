@@ -40,6 +40,11 @@ a.button{
     pointer-events: initial;
     user-select: none;
 
+    &.right-align{
+        margin-left: auto;
+        margin-right: 0;
+    }
+
     &.pressed {
         background-image: none;
         background-color: lighten($color-default, 30%);

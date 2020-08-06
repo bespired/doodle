@@ -19,12 +19,14 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('closed', 'JwtApi\DataController@closed');
     Route::post('register', 'JwtApi\UserController@register');
 
-    Route::get('templates/{type}/schema', 'JsonApi\TemplateController@schema');
-    Route::get('templates/{type}/index', 'JsonApi\TemplateController@index');
-    Route::post('templates/{type}/save', 'JsonApi\TemplateController@save');
-    Route::post('templates/{type}/delete', 'JsonApi\TemplateController@remove');
-    Route::post('templates/{type}/duplicate', 'JsonApi\TemplateController@duplicate');
-    Route::post('templates/{type}/export', 'JsonApi\TemplateController@export');
+    Route::get('templates/{fulltype}/schema', 'JsonApi\TemplateController@schema');
+
+    Route::get('templates/{fulltype}/index', 'JsonApi\TemplateController@index');
+
+    Route::post('templates/{fulltype}/save', 'JsonApi\TemplateController@save');
+    Route::post('templates/{fulltype}/delete', 'JsonApi\TemplateController@remove');
+    Route::post('templates/{fulltype}/duplicate', 'JsonApi\TemplateController@duplicate');
+    Route::post('templates/{fulltype}/export', 'JsonApi\TemplateController@export');
 
 });
 
@@ -37,5 +39,6 @@ Route::get('mainmenu', 'JsonApi\SettingController@mainMenu');
 Route::get('tenantmenu', 'JsonApi\SettingController@tenantMenu');
 Route::get('profilemenu', 'JsonApi\SettingController@profileMenu');
 Route::get('usermenu', 'JsonApi\SettingController@userMenu');
+Route::get('settings/{setting}/index', 'JsonApi\SettingController@setting');
 
 Route::get('/', function () {return json_encode(['hi']);});

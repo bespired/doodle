@@ -16,10 +16,14 @@ export default {
     },
 
     data() {
-        let radioState = this.vmodel ? this.$parent[this.vmodel] : false
+        let vparent = this.$parent
+        if (this.vmodel){ vparent = Helpers.findParent(this.$parent, this.vmodel) }
+
+        let radioState = this.vmodel ? vparent[this.vmodel] : false
         if (this.smodel) radioState = this.$store.getters['doodlegui/getRadioState'](this.smodel)
 
         return {
+            vparent: vparent,
             radioState: radioState,
             local: '',
             icon: this.icons ? true : false,
@@ -29,7 +33,7 @@ export default {
 
     computed: {
         changed() {
-            if (this.vmodel) return this.$parent[this.vmodel]
+            if (this.vmodel) return Helpers.dotget(this.vparent, this.vmodel)
             if (this.smodel) return this.$store.getters['doodlegui/getRadioState'](this.smodel)
             return this.radioState
         }

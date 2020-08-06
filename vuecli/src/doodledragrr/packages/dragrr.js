@@ -1,15 +1,21 @@
-export default class DoodleApi {
+export default class DraggrApi {
 
     constructor() {
         this.baseUrl = `${window.location.protocol}//${window.location.hostname}/api`
     }
 
-    getTemplates(type) {
-        return axios.get(`${this.baseUrl}/templates/${type}/index`).then( response => response.data )
+    getSettings(type) {
+        return axios.get(`${this.baseUrl}/settings/${type}/index`).then( response => response.data )
     }
 
-    createTemplate(type) {
-        return axios.get(`${this.baseUrl}/templates/${type}/schema`)
+    getTemplates(type, area) {
+        let fulltype = ( area === undefined ) ? type : `${type}--${area}`
+        return axios.get(`${this.baseUrl}/templates/${fulltype}/index`).then( response => response.data )
+    }
+
+    createTemplate(type, area) {
+        let fulltype = ( area === undefined ) ? type : `${type}--${area}`
+        return axios.get(`${this.baseUrl}/templates/${fulltype}/schema`)
     }
 
     duplicateTemplates(type, handles) {

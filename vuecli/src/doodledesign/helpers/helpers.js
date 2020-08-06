@@ -1,35 +1,47 @@
-/* eslint no-useless-escape: 0 */  // --> OFF
+/* eslint no-useless-escape: 0 */ // --> OFF
 import Vue from 'vue'
 export default {
 
-	clone(data){
+	clone(data) {
 		if (data === null) return null
 		if (data === undefined) return undefined
 		return JSON.parse(JSON.stringify(data))
 	},
 
-	uuid(str)
-	{
+	uuid(str) {
 		let prefix = ''
-		if ( str !== undefined)
+		if (str !== undefined)
 			prefix = str.toLowerCase() + '-'
 
 		return prefix + Math.ceil(1e9 * Math.random()).toString(36).substr(-5)
 	},
 
-	labelize(name){
+	labelize(name) {
 		return name.replace('_', ' ');
 	},
 
-	dotget(root, prop)
-	{
-		let dots= (prop.match(/\./g) || []).length
+	findParent(vparent, find) {
+		if (find.indexOf('.') > 0) find = find.substr(0, find.indexOf('.'))
+		if (vparent[find] === undefined) {
+			let depth= 0
+			while ((vparent !== undefined) && (vparent[find] === undefined) && depth < 8) {
+				depth++
+				vparent = vparent.$parent
+			}
+		}
+		return vparent
+	},
+
+	dotget(root, prop) {
+		if (root === undefined) return null
+
+		let dots = (prop.match(/\./g) || []).length
 		if (!dots) return root[prop];
-		let parts= prop.split('.')
+		let parts = prop.split('.')
 		for (var i = parts.length - 1; i >= 0; i--) {
-			if (parts[i].substr(0,1) === '$'){
-				const varname= parts[i].substr(1)
-				parts[i]=root[varname]
+			if (parts[i].substr(0, 1) === '$') {
+				const varname = parts[i].substr(1)
+				parts[i] = root[varname]
 			}
 		}
 		if (dots === 1) return root[parts[0]][parts[1]]
@@ -39,17 +51,17 @@ export default {
 		if (dots === 5) return root[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[4]]
 	},
 
-	dotset(root, prop, value)
-	{
-		let dots= (prop.match(/\./g) || []).length
+	dotset(root, prop, value) {
+		let dots = (prop.match(/\./g) || []).length
 		if (!dots) { Vue.set(root, prop, value); return }
-		let parts= prop.split('.')
+		let parts = prop.split('.')
 		for (var i = parts.length - 1; i >= 0; i--) {
-			if (parts[i].substr(0,1) === '$'){
-				const varname= parts[i].substr(1)
-				parts[i]=root[varname]
+			if (parts[i].substr(0, 1) === '$') {
+				const varname = parts[i].substr(1)
+				parts[i] = root[varname]
 			}
 		}
+
 		if (dots === 1) { root[parts[0]][parts[1]] = value; return }
 		if (dots === 2) { root[parts[0]][parts[1]][parts[2]] = value; return }
 		if (dots === 3) { root[parts[0]][parts[1]][parts[2]][parts[3]] = value; return }
@@ -58,17 +70,17 @@ export default {
 	},
 
 	capitalize(str) {
-  		return str.charAt(0).toUpperCase() + str.slice(1)
+		return str.charAt(0).toUpperCase() + str.slice(1)
 	},
 
 	camelcase(str) {
-  		return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
-    		return index === 0 ? word.toLowerCase() : word.toUpperCase()
-  		}).replace(/\s+/g, '')
+		return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
+			return index === 0 ? word.toLowerCase() : word.toUpperCase()
+		}).replace(/\s+/g, '')
 	},
 
 	pascalcase(str) {
-		return str.split('-').map(function(word,index){
+		return str.split('-').map(function(word, index) {
 			return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
 		}).join('')
 	},

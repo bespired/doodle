@@ -9,12 +9,15 @@ Vue.prototype.$eventHub = new Vue(); // Global event bus
 Vue.mixin({
 
 	methods: {
-		capitalizeFirstLetter: str => str.charAt(0).toUpperCase() + str.slice(1),
 		odID:       str => 'od-' + str + '-' + Math.ceil(1e9 * Math.random()).toString(36).substr(-5),
-		clone:      obj => JSON.parse(JSON.stringify(obj)),
 		slugify:    str => Helpers.slugify(str),
 		camelcase:  str => Helpers.camelcase(str),
 		pascalcase: str => Helpers.pascalcase(str),
+		capitalize: str => Helpers.pascalcase(str),
+		clone:      obj => {
+			if (typeof obj === 'function') return obj
+			return JSON.parse(JSON.stringify(obj))
+		},
 	},
 
 	beforeCreate() {

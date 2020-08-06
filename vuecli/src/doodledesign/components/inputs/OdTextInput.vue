@@ -41,17 +41,22 @@ export default {
         minWidth:     { type: String,  default: null  },
         postfix:      { type: String,  default: null  },
         action:       { type: String,  default: null  },
+        clearaction:  { type: String,  default: null  },
         clear:        { type: Boolean, default: false },
     },
 
     data() {
         // transform: scale(.9) translateY(18px) translateX(14px);
+        let vparent = this.$parent
+        if (this.vmodel){ vparent = Helpers.findParent(this.$parent, this.vmodel) }
+        if (!this.vmodel && action ) vparent = Helpers.findParent(this.$parent, this.action)
+
         return {
             focus:          false,
             autofill:       false,
             isRequired:     this.required ? 'required' : false,
-            vparent:        this.$parent,
-            placeholder:    this.initialLabel(),
+            vparent:        vparent,
+            placeholder:    this.initialLabel(vparent),
             autocompleter:  this.initialAutocomplete(),
         }
     },
@@ -60,7 +65,7 @@ export default {
         modelValue: {
             get() {
                 if (this.vmodel) {
-                    if (this.vparent === undefined) return this.$parent[this.vmodel]
+                    // if (this.vparent === undefined) return this.$parent[this.vmodel]
                     return Helpers.dotget(this.vparent, this.vmodel)
                 }
                 if (this.smodel) return this.$store.getters['doodlegui/getTextValue'](this.smodel)
@@ -90,8 +95,12 @@ export default {
     },
 
     methods: {
-        doAction() {},
-        doClear() {},
+        doAction() {
+            this.vparent[this.action]()
+        },
+        doClear() {
+            this.vparent[this.clearaction]()
+        },
         prefixer() {
             let classes = []
             let prefixer = this.prefix  === null ? 0 : this.prefix.length
@@ -117,8 +126,10 @@ export default {
             if (this.type === 'password') return 'password'
             return this.autocomplete ? this.autocomplete : 'new-password'
         },
-        initialLabel() {
-            if (this.vmodel) return Helpers.dotget(this.$parent, this.vmodel) === null || Helpers.dotget(this.$parent, this.vmodel).length === 0
+        initialLabel(vparent) {
+            if (this.vmodel) {
+                return Helpers.dotget(vparent, this.vmodel) === null || Helpers.dotget(vparent, this.vmodel).length === 0
+            }
             if (this.smodel) return this.$store.getters['doodlegui/getTextValue'](this.smodel).length === 0
             return this.value.length === 0
         },

@@ -19,6 +19,18 @@ export default {
 	},
 
 	computed: {
+		// tabmenu(){
+  //           let tabs = {}
+  //           let keys = Object.keys(this.items)
+  //           keys.forEach((key)=>{
+  //               let item = this.items[key]
+  //               if ( item.hasOwnProperty('area') ) {
+  //                   tabs.all= 'All'
+  //                   tabs[item.area]= item.area
+  //               }
+  //           })
+  //           return tabs
+  //       },
 		compared(){
 			if (this.thumbs === undefined) return true;
 			let number  = this.thumbs

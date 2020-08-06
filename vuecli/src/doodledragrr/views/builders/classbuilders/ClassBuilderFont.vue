@@ -1,8 +1,7 @@
 <template>
-	<div style="padding: 20px">
-
+	<div style="padding: 20px" >
 		<template v-for="(font,index) in classTemplate.data" >
-			<div :key="index">
+			<div :key="`ufo-${index}-${update}`">
 				<div>
 					{{ index }} / {{ font.fontname }}
 				</div>
@@ -12,28 +11,7 @@
 				<hr>
 			</div>
 		</template>
-		<!--
-		<div>
-			Article font / {{ classTemplate.data.articlefont.fontname }}
-		</div>
-		<div class="articlefont">
-			<od-markdown :markdown="previewText" />
-		</div>
-		<hr>
-		<div>
-			Special font / {{ classTemplate.data.specialfont.fontname }}
-		</div>
-		<div class="specialfont">
-			<od-markdown :markdown="previewText" />
-		</div>
-		<hr>
-		<div>
-			Code font / {{ classTemplate.data.codefont.fontname }}
-		</div>
-		<div class="codefont">
-			<od-markdown :markdown="previewText" />
-		</div>
-		<hr> -->
+
 		<od-text-input vmodel="previewText" label="Preview text" :inset="true"/>
 
 	</div>
@@ -59,13 +37,24 @@ export default {
 
 	data(){
 		return {
-			previewText: "The quick brown fox __jumps__ over the _lazy_ dog",
+			update     : 0,
+			previewText: "The quick brown fox __jumps__ over a _lazy_ dog",
 		}
 	},
 
 	computed: {
   		classTemplate(){
 			return this.$store.getters['dragrr/currentTemplate']
+		},
+	},
+
+	watch: {
+		classTemplate: {
+			deep: true,
+			handler(){
+				// console.log('class-builder-font : classTemplate ', this.classTemplate)
+				this.update++;
+			}
 		},
 	},
 

@@ -3,10 +3,38 @@
 return [
     'templates' => [
         [
-            'label'  => 'New class', 'name' => 'schema',
-            'status' => 'default', 'type'   => 'schema', 'area' => 'color',
-            'draw'   => '',
+            'label'  => 'New font class', 'name' => 'font-schema',
+            'status' => 'default', 'type'        => 'schema', 'area' => 'font',
+            'draw'   => '', 'data'               =>
+            json_decode(file_get_contents(__DIR__ . '/../../resources/json/font-class-schema.json')),
         ],
+        [
+            'label'  => 'New color class', 'name' => 'color-schema',
+            'status' => 'default', 'type'         => 'schema', 'area' => 'color',
+            'draw'   => '', 'data'                =>
+            '',
+        ], [
+            'label'  => 'New border class', 'name' => 'border-schema',
+            'status' => 'default', 'type'          => 'schema', 'area' => 'border',
+            'draw'   => '', 'data'                 =>
+            '',
+        ], [
+            'label'  => 'New animation class', 'name' => 'animation-schema',
+            'status' => 'default', 'type'             => 'schema', 'area' => 'animation',
+            'draw'   => '', 'data'                    =>
+            '',
+        ], [
+            'label'  => 'New size class', 'name' => 'size-schema',
+            'status' => 'default', 'type'        => 'schema', 'area' => 'size',
+            'draw'   => '', 'data'               =>
+            '',
+        ], [
+            'label'  => 'New margin class', 'name' => 'padding-margin-schema',
+            'status' => 'default', 'type'          => 'schema', 'area' => 'padding-margin',
+            'draw'   => '', 'data'                 =>
+            '',
+        ],
+
         [
             'label'  => 'Helvetica', 'name' => 'font-1',
             'status' => 'saved', 'type'     => 'template', 'draw' => '',

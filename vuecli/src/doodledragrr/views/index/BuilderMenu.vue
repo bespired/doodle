@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<od-action @click="create"   :label="`Create new ${source}`"  icon="plus"      type="action" />
-		<od-action @click="upload"   :label="`Import ${source}`"      icon="publish"   type="second" />
+		<od-action @click="create" :label="`Create new ${source}`"  icon="plus" type="action" />
+		<od-action @click="upload"   :label="`Import ${source}`"    icon="publish"   type="second" />
 		<!-- <od-upload
 				:label     = "`Drop a ${source} file in this box`"
 				cancel     = "journeys"
@@ -9,7 +9,7 @@
 				@uploaded  = "done"
 			/> -->
 
-		<od-action @click="edit"      label="Edit selected"           icon="edit"      thumbs="1"  />
+		<od-action @click="edit" label="Edit selected" icon="edit" thumbs="1"  />
 
 
 		<div class="od-bottom-menu">
@@ -27,7 +27,9 @@
 </template>
 <script>
 export default {
-	name: 'action-menu',
+	name: 'builder-menu',
+
+	props: ['items', 'index'],
 
 	mounted() {
 		this.$store.commit('doodlegui/clearIndexSelected')
@@ -37,9 +39,15 @@ export default {
 	},
 
 	data(){
+
 		const route = document.location.pathname.replace('/admin', '')
+		const area  = this.$router.currentRoute.params.area
+
+		console.log( 'builder-menus', this.items, this.index , area )
+
 		return {
-			source: route.replace('/', '').replace('-builders', '')
+			source: this.index.replace('-templates', ''),
+			area  : area
 		}
 	},
 
@@ -56,7 +64,8 @@ export default {
 		},
 		create(){
 			this.$store.dispatch('dragrr/createTemplate', {
-				source: this.source
+				source: this.source,
+				area:   this.area,
 			})
 		},
 		duplicate(){
@@ -89,7 +98,8 @@ export default {
 			).then((confirm) => {
 				if (confirm){
 					this.$store.dispatch('dragrr/deleteTemplates', {
-						source: this.source,
+						source:  this.source,
+						area:    this.area,
 						handles: this.selectedIndex
 					})
 				}

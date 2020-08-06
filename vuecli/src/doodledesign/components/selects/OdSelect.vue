@@ -17,9 +17,10 @@
             :allow-empty="false"
             :label="labelby"
             :track-by= "trackby"
+            @input="alter"
         />
 
-        <multiselect
+        <!-- <multiselect
             v-if="isTags"
             :id="$options.namedId"
             class="od-select"
@@ -31,7 +32,7 @@
             :multiple="isMultiple"
             :taggable="isTaggable"
             @tag="addTag"
-        />
+        /> -->
     </div>
 </template>
 <script>
@@ -63,29 +64,86 @@ export default {
     },
 
     data() {
-        var wrapper= this.$parent.$vnode.tag.indexOf('od-fold-body') > -1
+        let vparent = this.$parent
+        if (this.vmodel){ vparent = Helpers.findParent(this.$parent, this.vmodel) }
 
         return {
             labelby    : "label",
-            trackby    : "id",
-            isTags     : this.$attrs.tags   !== undefined,
+            trackby    : "value",
+            isTags     : this.$attrs.tags !== undefined,
             isMultiple : this.$attrs.tags !== undefined,
             isCustom   : this.single !== null,
             isTaggable : false, // true to create new tags...
-            vparent    : wrapper ? this.$parent.$parent.$parent : this.$parent,
+            vparent    : vparent,
             theme      : this.$vnode.data.staticClass,
             byholder   : this.placeholder ? this.placeholder : 'Select option',
-            react      : 'value'
+            react      : 'value',
+
+            modelValue : this.initialValue()
         }
     },
 
     methods: {
         addTag (newTag) {
         },
+
         prefixer() {
             let prefixer = this.prefix  === null ? 0 : this.prefix.length
             let prefixLength = Math.max(this.minWidth, Math.ceil(prefixer / 3))
             return this.prefix  === null ? '' : 'prefix prefix-' + prefixLength
+        },
+
+        alter(value, id){
+            // console.log(value, id)
+            let setvalue = (this.react !== '') ? value[this.react] : value
+
+            if (this.vmodel !== null) {
+                Helpers.dotset(this.vparent, this.vmodel, setvalue)
+                this.$emit('changed', setvalue)
+                return
+            }
+
+            if (this.smodel !== null) {
+                this.$store.commit('doodlegui/setSelectValue', {
+                    key: this.smodel,
+                    value: setvalue,
+                })
+                this.$emit('changed', setvalue)
+                return
+            }
+
+            this.$emit('changed', setvalue)
+
+        },
+
+        initialValue(){
+            if (this.vmodel !== null) {
+                let vparent  = this.$parent
+                let loptions = this.options
+                let value    = 0
+
+                if (this.vmodel){
+                    vparent = Helpers.findParent(this.$parent, this.vmodel)
+                    value   = Helpers.dotget(vparent, this.vmodel)
+                }
+
+                if (this.soptions)
+                    loptions= this.$store.getters['doodlegui/getSelectOptions'](this.soptions)
+
+                if ( loptions === undefined ) return {}
+
+                const isValue = loptions.filter(obj => {
+                    return obj.value.toString() === value.toString()
+                })
+                if ( isValue.length ) {
+                    this.trackby = 'value'
+                    return isValue[0]
+                }
+                // track by id ??? ___
+                // given value is already an object ...
+
+                return { label: '?', value: 0, id: 0 }
+            }
         },
      },
 
@@ -93,92 +151,9 @@ export default {
         modelOptions(){
             if (this.soptions)
                 return this.$store.getters['doodlegui/getSelectOptions'](this.soptions)
-            if ( this.options === undefined ) return []
-            if ( Array.isArray(this.options) ){
-                let options = []
-                this.options.forEach((i)=>{
-                    options.push({ id: i, value: i, label: i })
-                })
-                return options
-            }
             return this.options
         },
 
-        modelValue: {
-            get() {
-                // check if its in the options... if not ... then what?
-                if (this.vmodel) {
-                    let value = null;
-
-                    if (this.vparent === undefined) value = this.$parent[this.vmodel]
-                    else value = Helpers.dotget(this.vparent, this.vmodel)
-
-                    if ( typeof value !== 'object' ){
-                        const isValue = this.modelOptions.filter(obj => {
-                            return obj.value.toString() === value.toString()
-                        })
-                        if ( isValue.length ) return isValue;
-
-                        const isId = this.modelOptions.filter(obj => {
-                            return obj.id.toString() === value.toString()
-                        })
-                        if ( isId.length ) return isId;
-                    }
-
-                    return value
-                }
-
-                if (this.smodel) {
-                    ////// if Row: then get the getRowValue ...
-                    if ( this.smodel.indexOf(':') !== -1 ){
-                        const regex = /([\S]*):([\S]*)/gm;
-                        const m = regex.exec(this.smodel)
-                        if (m[1] === 'row') {
-                            const value = this.$store.getters['doodlegui/getRadioState'](m[2])
-                            const result = this.modelOptions.filter(option => option.id === value);
-                            return result.length ? result[0] : null
-                        }
-                        if (m[1] === 'select') return this.$store.getters['doodlegui/getSelectValue'](m[2])
-                        return null;
-                    }
-
-                    return this.$store.getters['doodlegui/getSelectValue'](this.smodel)
-
-                }
-
-                return null
-            },
-            set(value) {
-                if ( this.react !== ''){
-                    value = value[this.react]
-                }
-                if (this.vmodel !== null) {
-                    Helpers.dotset(this.vparent, this.vmodel, value)
-                    return
-                }
-                if (this.smodel !== null) {
-
-                    if ( this.smodel.indexOf(':') !== -1 ){
-                        const regex = /([\S]*):([\S]*)/gm;
-                        const m = regex.exec(this.smodel)
-                        if (m[1] === 'row') {
-                            this.$store.commit('doodlegui/setRadioState', {
-                                key: m[2],
-                                value: value,
-                            })
-                        }
-                        return
-                    }
-
-                    this.$store.commit('doodlegui/setSelectValue', {
-                        key: this.smodel,
-                        value: value,
-                    })
-                    return
-                }
-                this.$emit('changed', value)
-            }
-        }
     },
 
 

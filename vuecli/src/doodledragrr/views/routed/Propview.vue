@@ -1,8 +1,8 @@
 <template>
 	<section class="full-height">
-		<od-split-window sizes="large,small" types="edit, props">
+		<od-split-window sizes="large, small" types="edit, props">
 			<template #title        >doodle</template>
-			<template #subtitle     >{{ $router.currentRoute.name }}</template>
+			<template #subtitle     >{{ $router.currentRoute.meta.title }}</template>
 			<template #leftMenu     ><router-view name="leftMenu"     /></template>
 			<template #rightMenu    ><router-view name="rightMenu"    /></template>
 			<template #leftContent  ><router-view name="leftContent"  /></template>
@@ -21,8 +21,12 @@ export default {
 
 	mounted(){
 		let handle= this.$router.currentRoute.params.id
-
-		this.$store.dispatch(`dragrr/setCurrentTemplate`, { source: this.source, handle: handle })
+		let area  = this.$router.currentRoute.params.area
+		this.$store.dispatch(`dragrr/setCurrentTemplate`, {
+			source: this.source,
+			area  : area,
+			handle: handle
+		})
 
 		let media = this.$store.getters['doodlegui/getRadioState']('devicesize')
 		if (!media) {
@@ -34,7 +38,12 @@ export default {
 
 	beforeUpdate() {
 		let handle= this.$router.currentRoute.params.id
-		this.$store.dispatch(`dragrr/setCurrentTemplate`, { source: this.source, handle: handle })
+		let area  = this.$router.currentRoute.params.area
+		this.$store.dispatch(`dragrr/setCurrentTemplate`, {
+			source: this.source,
+			area  : area,
+			handle: handle
+		})
 	},
 
 	beforeDestroy() {

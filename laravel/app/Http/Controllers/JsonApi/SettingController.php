@@ -44,4 +44,10 @@ class SettingController extends Controller
         return $data->payload;
     }
 
+    public function setting($setting)
+    {
+        $data = Setting::whereType($setting)->first();
+        return $data->payload;
+    }
+
 }

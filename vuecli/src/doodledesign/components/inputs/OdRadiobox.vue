@@ -10,6 +10,7 @@
     </div>
 </template>
 <script>
+import Helpers from '../../helpers/helpers.js'
 export default {
     name: 'od-radiobox',
 
@@ -22,11 +23,13 @@ export default {
     },
 
     data() {
-        let vparent = this.$parent.$options._componentTag === "od-radiorow" ? this.$parent.$parent : this.$parent
-        let radioState = this.vmodel ? vparent[this.vmodel] : false
+        let vparent = this.$parent
+        if (this.vmodel){ vparent = Helpers.findParent(this.$parent, this.vmodel) }
+
+        let radioState = false
         if (this.smodel) radioState = this.$store.getters['doodlegui/getRadioState'](this.smodel)
 
-        console.log( vparent )
+        if ((this.vmodel) && (vparent !== undefined)) radioState = Helpers.dotget(vparent, this.vmodel)
 
         return {
             vparent: vparent,
@@ -36,7 +39,7 @@ export default {
 
     computed: {
         changed() {
-            if (this.vmodel) return this.vparent[this.vmodel]
+            if (this.vmodel) return Helpers.dotget(this.vparent, this.vmodel)
             if (this.smodel) return this.$store.getters['doodlegui/getRadioState'](this.smodel)
             return this.radioState
         },
@@ -47,6 +50,7 @@ export default {
 
     watch: {
         changed(val) {
+            // if (this.vmodel) return Helpers.dotset(this.vparent, this.vmodel, val)
             this.radioState = val
         }
     },
@@ -66,7 +70,7 @@ export default {
             this.radioState = this.value
 
             if (this.vmodel !== null) {
-                this.vparent[this.vmodel] = this.radioState
+                Helpers.dotset(this.vparent, this.vmodel, this.radioState)
                 return
             }
 

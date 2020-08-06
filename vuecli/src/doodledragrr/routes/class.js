@@ -1,10 +1,16 @@
 export default [
+    // {
+    //     name: 'class-builders',
+    //     path: '/class-builders',
+    //     component: global.loadDrag('index/ClassesOverview'),
+    //     meta:  { title: 'Classes | Dragrr' },
+    //     props: { index: 'class-templates' }
+    // },
     {
-        name: 'class-builders',
-        path: '/class-builders',
+        path: '/class-builders/:area',
         component: global.loadDrag('index/BuilderIndex'),
-        meta:  { title: 'Class | Dragrr' },
-        props: { index: 'class-templates' }
+        meta:  { title: 'Class Builder | Dragrr' },
+        props: { source: 'class', index: 'class-templates' },
     },
     {
         path: '/class-builder',
@@ -13,8 +19,8 @@ export default [
         props: { source: 'class' },
         children: [
             {
-                name: 'class-builder',
-                path: ':id',
+                name: 'class-builder-item',
+                path: ':area/:id',
                 components: {
                     leftMenu:       global.loadDrag('builders/DeviceSizesIndex'),
                     leftContent:    global.loadDrag('builders/ClassBuilder'),

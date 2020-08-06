@@ -5,11 +5,26 @@ namespace App\Http\Controllers\JsonApi;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\Yamlaar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class TemplateController extends Controller
 {
 
-    public function schema($type)
+    public function schema($fulltype)
+    {
+
+        $type = $this->getTypes($fulltype)[0];
+        $area = $this->getTypes($fulltype)[1];
+
+        if ($area !== null) {
+            return $this->area($type, $area);
+        }
+
+        return $this->type($type);
+
+    }
+
+    public function type($type)
     {
         $Model = sprintf('\App\Models\Eloquent\Templated%s', ucfirst($type));
 
@@ -21,7 +36,7 @@ class TemplateController extends Controller
             ->toArray();
 
         $create         = $Model::create($schema);
-        $create->name   = $count . time();
+        $create->name   = rand(100, 999) . '-' . substr(time(), -9) . '-' . $type . '-' . $count;
         $create->type   = 'template';
         $create->status = 'new';
         $create->save();
@@ -29,19 +44,50 @@ class TemplateController extends Controller
         return response()->json($create);
     }
 
-    public function index($type)
+    public function area($type, $area)
     {
         $Model = sprintf('\App\Models\Eloquent\Templated%s', ucfirst($type));
 
-        $rows = $Model::query()
-            ->whereType('template')
-            ->get();
+        $count  = $Model::count();
+        $schema = $Model::query()
+            ->whereType('schema')
+            ->whereArea($area)
+            ->exclude(['handle'])
+            ->first()
+            ->toArray();
+
+        $create         = $Model::create($schema);
+        $create->name   = rand(100, 999) . '-' . substr(time(), -9) . '-' . $area . '-' . $count;
+        $create->type   = 'template';
+        $create->status = 'new';
+        $create->save();
+
+        return response()->json($create);
+    }
+
+    public function index($fulltype)
+    {
+        $type = $this->getTypes($fulltype)[0];
+        $area = $this->getTypes($fulltype)[1];
+
+        $Model = sprintf('\App\Models\Eloquent\Templated%s', ucfirst($type));
+
+        $query = $Model::query()
+            ->whereType('template');
+
+        if ($area !== null) {
+            $query = $query->whereArea(Str::singular($area));
+        }
+
+        $rows = $query->get();
 
         return response()->json($rows);
     }
 
-    public function save(Request $request, $type)
+    public function save(Request $request, $fulltype)
     {
+
+        $type = $this->getTypes($fulltype)[0];
 
         $data = (object) $request->all();
 
@@ -58,8 +104,9 @@ class TemplateController extends Controller
         return response()->json($row);
     }
 
-    public function duplicate(Request $request, $type)
+    public function duplicate(Request $request, $fulltype)
     {
+        $type  = $this->getTypes($fulltype)[0];
         $data  = (object) $request->all();
         $Model = sprintf('\App\Models\Eloquent\Templated%s', ucfirst($type));
 
@@ -79,8 +126,9 @@ class TemplateController extends Controller
         return response()->json($data->handles);
     }
 
-    public function remove(Request $request, $type)
+    public function remove(Request $request, $fulltype)
     {
+        $type  = $this->getTypes($fulltype)[0];
         $data  = (object) $request->all();
         $Model = sprintf('\App\Models\Eloquent\Templated%s', ucfirst($type));
 
@@ -91,10 +139,11 @@ class TemplateController extends Controller
         return response()->json($data->handles);
     }
 
-    public function export(Request $request, $type)
+    public function export(Request $request, $fulltype)
     {
         $exceptions = ['id', 'deleted_at', 'created_at', 'updated_at'];
 
+        $type  = $this->getTypes($fulltype)[0];
         $data  = (object) $request->all();
         $Model = sprintf('\App\Models\Eloquent\Templated%s', ucfirst($type));
 
@@ -168,6 +217,18 @@ class TemplateController extends Controller
         return $newname;
     }
 
+    private function getTypes($fulltype)
+    {
+
+        if (strpos($fulltype, '--') === false) {
+            return [$fulltype, null];
+        }
+
+        list($type, $area) = explode('--', $fulltype);
+
+        return [$type, \Illuminate\Support\Str::singular($area)];
+    }
+
     private function fillTemplateData($row, $data)
     {
         if ($data->status === 'new') {
@@ -181,13 +242,18 @@ class TemplateController extends Controller
             $row->media      = $data->media;
         }
         if (isset($data->tag)) {
-            $row->tag   = $data->tag;
+            $row->tag  = $data->tag;
+            $row->icon = $data->icon;
+            $row->otml = $data->otml;
+        }
+        if (isset($data->style)) {
             $row->style = $data->style;
-            $row->icon  = $data->icon;
-            $row->otml  = $data->otml;
         }
         if (isset($data->rows)) {
             $row->rows = $data->rows;
+        }
+        if (isset($data->data)) {
+            $row->data = $data->data;
         }
         if (isset($data->elements)) {
             $row->elements = $data->elements;
