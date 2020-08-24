@@ -1,24 +1,25 @@
 <template>
-	<div>
-		color ...
-	</div>
+	<div>size</div>
 </template>
+
+<style>
+	.elements{
+		padding: 20px;
+	}
+</style>
 
 <script>
 import Vue from 'vue';
-
 export default {
-	name: 'class-properties-color',
+	name: 'size-builder',
 
 	beforeMount() {
 	},
-
 	destroyed() {
 	},
 
 	data(){
 		return {
-
 		}
 	},
 
@@ -29,8 +30,9 @@ export default {
 	},
 
 	methods: {
-
 	},
+
+
 
 }
 </script>

@@ -7,9 +7,9 @@
 <script>
 
 import Vue from 'vue';
-import ClassPropertiesColor from './classbuilders/ClassPropertiesColor.vue'
-import ClassPropertiesFont  from './classbuilders/ClassPropertiesFont.vue'
-import ClassPropertiesSize  from './classbuilders/ClassPropertiesSize.vue'
+// import ClassPropertiesColor from './classbuilders/ClassPropertiesColor.vue'
+// import ClassPropertiesFont  from './classbuilders/ClassPropertiesFont.vue'
+// import ClassPropertiesSize  from './classbuilders/ClassPropertiesSize.vue'
 
 export default {
 	name: 'widget-properties',

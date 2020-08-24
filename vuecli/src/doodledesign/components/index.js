@@ -51,6 +51,7 @@ import OdDataSelect from './selects/OdDataSelect'
 import OdDropdown from './selects/OdDropdown'
 import OdOptions from './selects/OdOptions'
 import OdSelect from './selects/OdSelect'
+import OdSelected from './selects/OdSelected'
 import OdFullWindow from './windows/OdFullWindow'
 import OdSplit3Window from './windows/OdSplit3Window'
 import OdSplitWindow from './windows/OdSplitWindow'
@@ -109,6 +110,7 @@ export default {
     OdDropdown,
     OdOptions,
     OdSelect,
+    OdSelected,
     OdFullWindow,
     OdSplit3Window,
     OdSplitWindow

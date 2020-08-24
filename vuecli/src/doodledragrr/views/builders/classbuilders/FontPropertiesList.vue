@@ -56,7 +56,7 @@
 import Vue from 'vue';
 
 export default {
-	name: 'class-properties-font',
+	name: 'font-properties-list',
 
 	beforeMount() {
 		this.$store.dispatch('dragrr/getSettings', { source: 'googleFonts', force: false })

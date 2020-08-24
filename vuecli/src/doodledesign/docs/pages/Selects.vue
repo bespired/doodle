@@ -55,7 +55,9 @@
         </od-codeview>
 
         <div class="flex-80">
-            <od-options sname="store-options" :options="options" />
+            <od-options  sname="store-options" :options="options" />
+            <od-selected sname="selected" :value="{ label: 'label 1', value: '1' , id: 1 }" />
+
             <od-select label="StoreModel select, model options" smodel="selected" :options="options" />
             <od-select label="StoreModel select, store options" smodel="selected" soptions="store-options" />
         </div>
@@ -135,7 +137,8 @@ export default {
                 { id: 2, value: '2' , title: "3-3", arr: [3,3,3,3] }
             ],
 
-            selected: 1, // well no, should be { label: 'label 1', value: '1' , id: 1 },
+            // selected: 1, // well no, should be { label: 'label 1', value: '1' , id: 1 },
+            selected: { label: 'label 1', value: '1' , id: 1 },
             options:[
                 { label: 'label 1', value: '1' , id: 1 },
                 { label: 'label 2', value: '2' , id: 2 }

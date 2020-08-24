@@ -36,10 +36,10 @@ return [
         ],
 
         [
-            'label'  => 'Helvetica', 'name' => 'font-1',
+            'label'  => 'Open Sans', 'name' => 'font-1',
             'status' => 'saved', 'type'     => 'template', 'draw' => '',
             'area'   => 'font', 'data'      =>
-            '[{"helvetica": {"value": "Helvetica", "type" : "sysfont"}} ]',
+            json_decode(file_get_contents(__DIR__ . '/../../resources/json/font-class-schema.json')),
         ],
         [
             'label'  => 'Blue', 'name'  => 'color-1',

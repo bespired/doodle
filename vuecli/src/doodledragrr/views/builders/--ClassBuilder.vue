@@ -11,9 +11,9 @@
 </style>
 
 <script>
-import ClassBuilderColor from './classbuilders/ClassBuilderColor.vue'
-import ClassBuilderFont  from './classbuilders/ClassBuilderFont.vue'
-import ClassBuilderSize  from './classbuilders/ClassBuilderSize.vue'
+// import ClassBuilderColor from './classbuilders/ClassBuilderColor.vue'
+// import ClassBuilderFont  from './classbuilders/ClassBuilderFont.vue'
+// import ClassBuilderSize  from './classbuilders/ClassBuilderSize.vue'
 
 export default {
 	name: 'class-builder',

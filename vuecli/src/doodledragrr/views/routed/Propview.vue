@@ -21,7 +21,8 @@ export default {
 
 	mounted(){
 		let handle= this.$router.currentRoute.params.id
-		let area  = this.$router.currentRoute.params.area
+		let area  = this.$router.currentRoute.meta.area
+		console.log('setCurrentTemplate' , this.source, area ,handle )
 		this.$store.dispatch(`dragrr/setCurrentTemplate`, {
 			source: this.source,
 			area  : area,
@@ -38,7 +39,8 @@ export default {
 
 	beforeUpdate() {
 		let handle= this.$router.currentRoute.params.id
-		let area  = this.$router.currentRoute.params.area
+		let area  = this.$router.currentRoute.meta.area
+
 		this.$store.dispatch(`dragrr/setCurrentTemplate`, {
 			source: this.source,
 			area  : area,

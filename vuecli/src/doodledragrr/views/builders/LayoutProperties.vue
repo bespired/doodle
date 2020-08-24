@@ -4,7 +4,6 @@
 
 		<od-text-input vmodel="layoutTemplate.label"      minWidth="4" prefix="label"/>
 		<od-select     vmodel="layoutTemplate.responsive" minWidth="4" prefix="responsive" :options="responsiveOptions" />
-
 		<od-select     smodel="row:devicesize"            minWidth="4" prefix="media" class="foldable" :options="mediaOptions"  />
 
 		<od-foldable >

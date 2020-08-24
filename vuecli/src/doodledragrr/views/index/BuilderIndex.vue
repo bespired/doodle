@@ -26,9 +26,11 @@ export default {
 	components: { BuilderMenu },
 
 	data(){
-		let area  = this.$router.currentRoute.params.area
+		const area = this.$router.currentRoute.params.area
+		let route  = document.location.pathname.replace('/admin', '')
 
-		const route = document.location.pathname.replace('/admin', '')
+		if (area !== undefined) route = route.replace('-builders/', '-builder/')
+
 		return {
 			route: route,
 			area : area,
@@ -37,8 +39,6 @@ export default {
 
 	mounted() {
 		const source= this.index.split('-')[0]
-		// console.log(source)
-		console.log( 'getTemplatedTemplates mounted in builderindex' , this.index , this.area)
 		this.$store.dispatch('dragrr/getTemplatedTemplates', {
 			source: source, area: this.area, force: false
 		})
@@ -46,7 +46,6 @@ export default {
 
 	beforeUpdate() {
 		const source= this.index.split('-')[0]
-		console.log( 'getTemplatedTemplates update in builderindex' , this.index )
 		this.$store.dispatch('dragrr/getTemplatedTemplates', {
 			source: source, area: this.area, force: false
 		})
@@ -54,7 +53,6 @@ export default {
 
 	computed: {
 		thumbs() {
-			console.log('computed thumbs...', this.area)
 			if ( this.area ){
 				return this.$store.getters[`dragrr/get${this.index.pascalcase()}`](this.area)
 			}else{
@@ -62,7 +60,6 @@ export default {
 			}
 		}
 	},
-
 
 }
 </script>

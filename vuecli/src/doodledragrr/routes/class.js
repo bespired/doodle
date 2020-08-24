@@ -19,15 +19,27 @@ export default [
         props: { source: 'class' },
         children: [
             {
-                name: 'class-builder-item',
-                path: ':area/:id',
+                path: 'font/:id',
+                name: 'font-class-builder',
+                meta:  { title: 'Font Class Builder | Dragrr', area: 'fonts' },
                 components: {
                     leftMenu:       global.loadDrag('builders/DeviceSizesIndex'),
-                    leftContent:    global.loadDrag('builders/ClassBuilder'),
-                    rightContent:   global.loadDrag('builders/ClassProperties'),
+                    leftContent:    global.loadDrag('builders/classbuilders/FontBuilder'),
+                    rightContent:   global.loadDrag('builders/classbuilders/FontProperties'),
                     rightMenu:      global.loadDrag('builders/SharedSave'),
                 }
-            }
+            },
+            {
+                path: 'color/:id',
+                name: 'color-class-builder',
+                meta:  { title: 'Color Class Builder | Dragrr', area: 'colors' },
+                components: {
+                    leftMenu:       global.loadDrag('builders/DeviceSizesIndex'),
+                    leftContent:    global.loadDrag('builders/classbuilders/ColorBuilder'),
+                    rightContent:   global.loadDrag('builders/classbuilders/ColorProperties'),
+                    rightMenu:      global.loadDrag('builders/SharedSave'),
+                }
+            },
         ]
     },
 

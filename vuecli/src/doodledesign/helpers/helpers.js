@@ -21,6 +21,7 @@ export default {
 	},
 
 	findParent(vparent, find) {
+		if (find === null) return null
 		if (find.indexOf('.') > 0) find = find.substr(0, find.indexOf('.'))
 		if (vparent[find] === undefined) {
 			let depth= 0
@@ -85,7 +86,6 @@ export default {
 		}).join('')
 	},
 
-
 	slugify(str) {
 		const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'
 		const b = 'aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------'
@@ -99,7 +99,25 @@ export default {
 			.replace(/\-\-+/g, '-') // Replace multiple - with single -
 			.replace(/^-+/, '') // Trim - from start of text
 			.replace(/-+$/, '') // Trim - from end of text
-	}
+	},
 
+	keyify(str, obj) {
+		const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_:;'
+		const b = 'aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz-----'
+		const p = new RegExp(a.split('').join('|'), 'g')
+
+		console.log( 'keyify', obj , typeof obj)
+		if (typeof obj === 'number') return str + '--' + obj
+		if (typeof obj === 'string') return str + '--' + obj
+
+		if ( obj === null ) obj = {}
+		let val = Object.values(obj)
+		let jsn = JSON.stringify(val).toLowerCase()
+			.replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
+			.replace(/\s+/g, '-')   // Replace spaces with -
+			.replace(/[\"\'\[\]\{\}]/g, '') // Replace " with _
+
+		return str + '--' + jsn
+	},
 
 };

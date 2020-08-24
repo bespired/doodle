@@ -3,8 +3,6 @@
     <a :id="$options.namedId" :data-options="`${sname} created`" />
 </template>
 <script>
-import Helpers from '../../helpers/helpers.js'
-import Vue     from 'vue'
 
 export default {
     name: 'od-options',
@@ -12,8 +10,9 @@ export default {
         options: {}, // Array, null or undefined...
         sname:   { type: String,  default: null  },
     },
-    mounted() {
+    created() {
         if (this.sname !== null) {
+            console.log('set ', this.sname, this.options)
             this.$store.commit('doodlegui/setSelectOptions', {
                 key: this.sname,
                 value: this.options,

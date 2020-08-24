@@ -1,6 +1,6 @@
 <template>
 	<div style="padding: 20px" >
-		<template v-for="(font,index) in classTemplate.data" >
+		<!-- <template v-for="(font,index) in classTemplate.data" >
 			<div :key="`ufo-${index}-${update}`">
 				<div>
 					{{ index }} / {{ font.fontname }}
@@ -10,7 +10,7 @@
 				</div>
 				<hr>
 			</div>
-		</template>
+		</template> -->
 
 		<od-text-input vmodel="previewText" label="Preview text" :inset="true"/>
 
@@ -27,7 +27,7 @@
 import Vue from 'vue';
 
 export default {
-	name: 'class-builder-font',
+	name: 'font-builder',
 
 	beforeMount() {
 	},
@@ -44,6 +44,7 @@ export default {
 
 	computed: {
   		classTemplate(){
+  			console.log(this.$store.getters['dragrr/currentTemplate'])
 			return this.$store.getters['dragrr/currentTemplate']
 		},
 	},

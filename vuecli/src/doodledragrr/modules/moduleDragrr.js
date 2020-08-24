@@ -46,12 +46,8 @@ export default {
 
 
     getters: {
-        // getFontClassTemplates:   (state) => { return state.fontclassTemplates  },
-
-        getClassTemplates:   (state) => area => {
-            console.log('get Class templates of area ' , area , state.classTemplates[area])
-            return state.classTemplates[area]
-        },
+        // this template has sub areas... multiple views, but saved in same DB table.
+        getClassTemplates:   (state) => area => { return state.classTemplates[area] },
 
         getElementTemplates: (state) => { return state.elementTemplates },
         getLayoutTemplates:  (state) => { return state.layoutTemplates  },
@@ -92,11 +88,8 @@ export default {
         },
         // General for Layout and Section and ...
         setTemplates(state, payload)  {
-            console.log('set Templates ... ', payload)
             if ( payload.area !== undefined ){
-                // Helpers.initClassTemplate(state, payload)
                 state[`${payload.source}Templates`][payload.area]= payload.templates
-                console.log('set Class Template of area ', payload.area , payload.source, payload.templates)
             }else{
                 state[`${payload.source}Templates`] = payload.templates
             }
@@ -168,8 +161,6 @@ export default {
             const area      = payload.area
             const stateName = `${payload.source}Templates`
             const stateId   = `${payload.source}TemplateId`
-
-            console.log('getTemplatedTemplates', payload)
 
             if ( area !== undefined ){
 

@@ -137,8 +137,6 @@ export default {
                 return null
             },
             set(value) {
-                // console.log( this.vparent, this.vmodel, value )
-                // return;
 
                 if ( this.react !== ''){
                     value = value[this.react]

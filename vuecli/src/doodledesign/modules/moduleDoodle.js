@@ -115,6 +115,21 @@ export default {
             if (state.options[item] === undefined) Vue.set(state.options, item, [])
             return state.options[item]
         },
+
+        getStoreValue: (state) => item => {
+            let colon = item.indexOf(':')
+            // if item does not have a : assume Select...
+            if ( colon == -1 ) return state.selects[item]
+
+            if ( item.substr(0, 5) === 'fold:')  return state.folds[item]
+            if ( item.substr(0, 6) === 'radio:') return state.radiorows[item]
+            if ( item.substr(0, 5) === 'text:')  return state.texts[item]
+            if ( item.substr(0, 5) === 'text:')  return state.texts[item]
+
+
+            return state.selects[item]
+        },
+
         // getIndexSelected: (state) => item => {
         //     if (state.indexSelected === undefined) Vue.set(state, 'indexSelected', [])
         //     return state.indexSelected
