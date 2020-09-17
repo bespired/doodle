@@ -2,7 +2,6 @@
 /vuecli/dist
 /laravel/public/hot
 /laravel/bootstrap/cache/
-/laravel/storage/
 /laravel/vendor
 /laravel/.env
 /laravel/supervisord.pid
