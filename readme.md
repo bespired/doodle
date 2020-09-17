@@ -10,42 +10,42 @@
 
 ## Doodle
 
-Docker boilerplate with traefik 2, laravel 6, vue-cli and doodle-design
+Docker boilerplate with traefik 2, laravel 6, vue-cli and doodle-design  
 
-> Works with:
-> node 11.10.1
-> npm 6.14.5
+> Works with:  
+> node 11.10.1  
+> npm 6.14.5  
+  
+> Results in:  
+> traefik 2.2.1  
+> php 7.2  
+> mysql 8  
+> laravel 6.2  
+> vuejs 2.6  
+  
+so no https.  
 
-> Results in:
-> traefik 2.2.1
-> php 7.2
-> mysql 8
-> laravel 6.2
-> vuejs 2.6
+__git clone__  
 
-so no https.
+`git clone git@github.com:bespired/doodle.git doodle`  
 
-__git clone__
+__install__  
+`cd doodle`  
 
-`git clone git@github.com:bespired/doodle.git doodle`
+`cp laravel/.env.example laravel/.env`  
 
-__install__
-`cd doodle`
+`cd vuecli;npm install;cd ..`  
 
-`cp laravel/.env.example laravel/.env`
+On mac make sure de doodle folder is in the shared files.  
+![file-share]  
 
-`cd vuecli;npm install;cd ..`
-
-On mac make sure de doodle folder is in the shared files.
-![file-share]
-
-build the server
-`docker-compose build`
-(only needed the first time you start the server)
-
-start the server
-`docker-compose up -d`
-
+build the server  
+`docker-compose build`  
+(only needed the first time you start the server)  
+  
+start the server  
+`docker-compose up -d`  
+  
 `docker ps`
 ```
 IMAGE                 PORTS                                        NAMES
@@ -58,40 +58,40 @@ traefik:v2.2          0.0.0.0:80->80/tcp, 0.0.0.0:9090->8080/tcp   traefik
 ```
 
 
-Use php version 7.2 in container to install Laravel 6
-`docker/doexec.sh doodle_php composer install`
-`docker/doexec.sh doodle_php php artisan key:generate`
-`docker/doexec.sh doodle_php php artisan jwt:secret`
+Use php version 7.2 in container to install Laravel 6  
+`docker/doexec.sh doodle_php composer install`  
+`docker/doexec.sh doodle_php php artisan key:generate`  
+`docker/doexec.sh doodle_php php artisan jwt:secret`  
 
 
 
 __view__
-Traefik:
-http://localhost:9090/dashboard/#/
+Traefik:  
+http://localhost:9090/dashboard/#/  
 
-Laravel welcome:
-http://localhost/_
+Laravel welcome:  
+http://localhost/_  
 
-Doodle welcome:
-http://localhost/admin
-
-
-
-Create default admin login
-`docker/doexec.sh doodle_php php artisan doodle:create:admin`
-
-Doodle design:
-http://localhost/admin/doodledesign/welcome
+Doodle welcome:  
+http://localhost/admin  
 
 
 
-__develop__
-Develop doodle with:
-`cd doodle/vuecli`
-`npm run serve`
-http://localhost:8020/admin
+Create default admin login  
+`docker/doexec.sh doodle_php php artisan doodle:create:admin`  
+
+Doodle design:  
+http://localhost/admin/doodledesign/welcome  
 
 
-__artisan commands__
-docker/doexec.sh doodle_php php artisan
+
+__develop__  
+Develop doodle with:  
+`cd doodle/vuecli`  
+`npm run serve`  
+http://localhost:8020/admin  
+ 
+
+__artisan commands__  
+docker/doexec.sh doodle_php php artisan  
 
