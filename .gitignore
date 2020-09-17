@@ -1,7 +1,6 @@
 /vuecli/node_modules
 /vuecli/dist
 /laravel/public/hot
-/laravel/public/storage/
 /laravel/bootstrap/cache/
 /laravel/storage/
 /laravel/vendor
