@@ -20,7 +20,7 @@ Docker boilerplate with traefik 2, laravel 6, vue-cli and doodle-design
 > traefik 2.2.1  
 > php 7.2  
 > mysql 8  
-> laravel 6.2  
+> laravel v6.18.40  
 > vuejs 2.6  
   
 so no https.  
@@ -39,30 +39,34 @@ __install__
 On mac make sure de doodle folder is in the shared files.  
 ![file-share]  
 
-build the server  
+Build the server  
 `docker-compose build`  
 (only needed the first time you start the server)  
   
-start the server  
-`docker-compose up -d`  
-  
-`docker ps`
-```
-IMAGE                 PORTS                                        NAMES
-nginx:alpine          80/tcp, 443/tcp, 9000/tcp                    doodle_api
-doodle_doodle_php     9000/tcp                                     doodle_php
-doodle_doodle_vuejs   80/tcp, 443/tcp                              doodle_vuejs
-redis:alpine          6379/tcp                                     doodle_redis
-mysql:5.7             33060/tcp, 0.0.0.0:3319->3306/tcp            doodle_mysql
-traefik:v2.2          0.0.0.0:80->80/tcp, 0.0.0.0:9090->8080/tcp   traefik
-```
-
+Start the php server for laravel install  
+`docker-compose start doodle_php doodle_api`  
 
 Use php version 7.2 in container to install Laravel 6  
 `docker/doexec.sh doodle_php composer install`  
 `docker/doexec.sh doodle_php php artisan key:generate`  
 `docker/doexec.sh doodle_php php artisan jwt:secret`  
 
+`docker-compose stop`
+
+
+Start the full system 
+`docker-compose up -d`  
+  
+`docker/ps `
+```
+CONTAINER           NAMES               IMAGE       
+6b65d00a77bd:       doodle_api          nginx:alpine          
+f07a2c0937f2:       doodle_php          draggr_doodle_php     
+434a009eeebd:       doodle_vuejs        draggr_doodle_vuejs   
+13d08027eb8c:       doodle_mysql        mysql:8               
+e428d8bd5543:       traefik             traefik:v2.2          
+64dfa0c56a0d:       doodle_redis        redis:alpine          
+```
 
 
 __view__
@@ -76,9 +80,8 @@ Doodle welcome:
 http://localhost/admin  
 
 
-
 Create default admin login  
-`docker/doexec.sh doodle_php php artisan doodle:create:admin`  
+`docker/doexec doodle_php php artisan doodle:create:admin`  
 
 Doodle design:  
 http://localhost/admin/doodledesign/welcome  
