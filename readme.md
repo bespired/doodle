@@ -46,7 +46,7 @@ Build the server
 (only needed the first time you start the server)  
   
 Start the php server for laravel install  
-`docker-compose start doodle_php doodle_api`  
+`docker-compose up doodle_php`  
 
 Use php version 7.2 in container to install Laravel 6  
 `docker/doexec doodle_php composer install`  
@@ -100,7 +100,4 @@ After a publish...
 
 http://localhost/admin  
 (sorry... seems broken... assets are not loading)
-
-
-
 
