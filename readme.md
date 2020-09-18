@@ -34,7 +34,9 @@ __install__
 
 `cp laravel/.env.example laravel/.env`  
 
-`cd vuecli;npm install;cd ..`  
+`cd vuecli`
+`npm install`
+`cd ..`  
 
 On mac make sure de doodle folder is in the shared files.  
 ![file-share]  
@@ -76,17 +78,11 @@ http://localhost:9090/dashboard/#/
 Laravel welcome:  
 http://localhost/_  
 
-Doodle welcome:  
-http://localhost/admin  
-
-
 Create default admin login  
 `docker/doexec doodle_php php artisan doodle:create:admin`  
 
 Doodle design:  
 http://localhost/admin/doodledesign/welcome  
-
-
 
 __develop__  
 Develop doodle with:  
@@ -97,4 +93,14 @@ http://localhost:8020/admin
 
 __artisan commands__  
 docker/doexec doodle_php php artisan  
+
+__Doodle welcome:__  
+After a publish...
+`docker/publish`
+
+http://localhost/admin  
+(sorry... seems broken... assets are not loading)
+
+
+
 
