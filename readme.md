@@ -95,9 +95,6 @@ __artisan commands__
 docker/doexec doodle_php php artisan  
 
 __Doodle welcome:__  
-After a publish...
-`docker/publish`
-
 http://localhost/admin  
-(sorry... seems broken... assets are not loading)
+
 
