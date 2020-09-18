@@ -11,8 +11,8 @@ RUN ls dist
 
 FROM nginx AS vueapp
 RUN mkdir /application
-RUN mkdir /application/dist
-COPY --from=node /application/dist /application
+RUN mkdir /application/admin
+COPY --from=node /application/dist /application/admin
 COPY ./docker/nginx-vue/nginx.conf /etc/nginx/nginx.conf
 
 RUN ls /application
