@@ -47,9 +47,9 @@ Start the php server for laravel install
 `docker-compose start doodle_php doodle_api`  
 
 Use php version 7.2 in container to install Laravel 6  
-`docker/doexec.sh doodle_php composer install`  
-`docker/doexec.sh doodle_php php artisan key:generate`  
-`docker/doexec.sh doodle_php php artisan jwt:secret`  
+`docker/doexec doodle_php composer install`  
+`docker/doexec doodle_php php artisan key:generate`  
+`docker/doexec doodle_php php artisan jwt:secret`  
 
 `docker-compose stop`
 
@@ -60,12 +60,12 @@ Start the full system
 `docker/ps `
 ```
 CONTAINER           NAMES               IMAGE       
-6b65d00a77bd:       doodle_api          nginx:alpine          
-f07a2c0937f2:       doodle_php          draggr_doodle_php     
-434a009eeebd:       doodle_vuejs        draggr_doodle_vuejs   
-13d08027eb8c:       doodle_mysql        mysql:8               
-e428d8bd5543:       traefik             traefik:v2.2          
-64dfa0c56a0d:       doodle_redis        redis:alpine          
+e428d8bd5xxx:       traefik             traefik:v2.2          
+6b65d00a7xxx:       doodle_api          nginx:alpine          
+f07a2c093xxx:       doodle_php          draggr_doodle_php     
+434a009eexxx:       doodle_vuejs        draggr_doodle_vuejs   
+13d08027exxx:       doodle_mysql        mysql:8               
+64dfa0c56xxx:       doodle_redis        redis:alpine          
 ```
 
 
@@ -96,5 +96,5 @@ http://localhost:8020/admin
  
 
 __artisan commands__  
-docker/doexec.sh doodle_php php artisan  
+docker/doexec doodle_php php artisan  
 
