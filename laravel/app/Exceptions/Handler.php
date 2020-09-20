@@ -51,30 +51,35 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
 
+        if (method_exists($exception, 'getStatusCode')) {
+
+            switch ($exception->getStatusCode()) {
+                case 500:
+                    return parent::render($request, $exception);
+
+                case 404:
+                    return parent::render($request, $exception);
+
+                case 422:
+                    return response()->json([
+                        'error'   => $exception->getStatusCode(),
+                        'message' => $exception->getMessage(),
+                    ], 422);
+
+                default:
+                    return parent::render($request, $exception);
+            }
+        }
+
         if ($exception->getCode() == 0) {
             return response()->json([
                 'error'   => 500,
                 'message' => $exception->getMessage(),
                 'file'    => $exception->getFile(),
                 'line'    => $exception->getLine(),
-                // 'severity' => $exception->getSeverity(),
                 'trace'   => $exception->getTrace()[0],
             ], 500);
 
-        }
-
-        switch ($exception->getStatusCode()) {
-            case 500:
-                return parent::render($request, $exception);
-
-            case 422:
-                return response()->json([
-                    'error'   => $exception->getStatusCode(),
-                    'message' => $exception->getMessage(),
-                ], 422);
-
-            default:
-                return parent::render($request, $exception);
         }
 
     }
