@@ -12,6 +12,13 @@ if (!function_exists('slug')) {
 if (!function_exists('pathslug')) {
     function pathslug($str)
     {
-        return Str::slug(str_replace('/', '--', $str));
+        // I want to keep --
+        // and slug doesnt allow me...
+
+        do {
+            $key = sprintf('-%s-', slug(Str::random(8)));
+        } while (strpos($str, $key) > -1);
+
+        return str_replace($key, '--', slug(str_replace('/', $key, $str)));
     }
 }
