@@ -15,23 +15,26 @@ trait OtmlHtml
         $this->fetchVariableNames();
 
         $html = $otml;
-        foreach ($this->variables as $find => $variable) {
+        if ($this->variables) {
 
-            switch ($variable) {
-                case "csrf-token":
-                    $value = csrf_token();
-                    break;
-                case "visitor-id":
-                    $value = 'vi0';
-                    break;
+            foreach ($this->variables as $find => $variable) {
 
-                default:
-                    $value = '';
+                switch ($variable) {
+                    case "csrf-token":
+                        $value = csrf_token();
+                        break;
+                    case "visitor-id":
+                        $value = 'vi0';
+                        break;
+
+                    default:
+                        $value = '';
+
+                }
+
+                $html = str_replace($find, $value, $html);
 
             }
-
-            $html = str_replace($find, $value, $html);
-
         }
 
         return $html;
@@ -43,6 +46,10 @@ trait OtmlHtml
 
         $re = '/\{\[([\s\S]+?)\]\}/m';
         preg_match_all($re, $this->otml, $matches, PREG_SET_ORDER, 0);
+
+        if (count($matches) === 0) {
+            return;
+        }
 
         foreach ($matches as $match) {
             $variables[trim($match[0])] = trim($match[1]);

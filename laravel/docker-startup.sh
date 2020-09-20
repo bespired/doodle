@@ -6,12 +6,12 @@ if [ "$APP_ENV" = "production" ] || [ "$APP_ENV" = "staging" ] ; then
 fi
 
 # Set folder permissions
-chown -R www-data:www-data /application/storage /application/bootstrap/cache
-chgrp -R www-data /application/storage /application/bootstrap/cache
+chown -R www-data:www-data /application/storage /application/bootstrap/cache /application/public
+chgrp -R www-data /application/storage /application/bootstrap/cache /application/public
 
 # Enforce permissions and inherit parent folder permissions
-chmod g+s /application/storage /application/bootstrap/cache
-chmod -R ug+rwx /application/storage /application/bootstrap/cache
+chmod g+s /application/storage /application/bootstrap/cache /application/public
+chmod -R ug+rwx /application/storage /application/bootstrap/cache /application/public
 
 # This should not be needed and is very dangerous
 chmod 777 -R /application/storage/logs

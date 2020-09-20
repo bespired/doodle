@@ -61,6 +61,7 @@ services:
       target: vueapp
 
     working_dir: /application
+
     volumes:
       - ./docker/nginx-vue/nginx.conf:/etc/nginx/nginx.conf
     expose:
@@ -83,7 +84,7 @@ services:
     depends_on:
       - doodle_php
     volumes:
-#      - ./laravel:/application
+      - ./laravel:/application
       - ./docker/nginx-api/nginx.conf:/etc/nginx/conf.d/default.conf
     expose:
       - "80"
