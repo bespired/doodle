@@ -22,6 +22,10 @@ services:
   doodle_redis:
     container_name: doodle_redis
     image: redis:alpine
+    ports:
+      - "6379:6379"
+    expose:
+      - "6379"
     networks:
       - inter-net
 
@@ -66,10 +70,7 @@ services:
         - "traefik.enable=true"
         - "traefik.docker.network=traefik-net"
         - "traefik.port=80"
-#        - "traefik.http.middlewares.for_doodle_vuejs.stripprefix.prefixes=/admin"
-#        - "traefik.http.middlewares.for_doodle_vuejs.stripprefix.forceslash=false"
         - "traefik.http.routers.doodle_vuejs.rule=PathPrefix(`/admin`)"
-#       - "traefik.http.routers.doodle_vuejs.middlewares=for_doodle_vuejs@docker"
 
     networks:
       - inter-net

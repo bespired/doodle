@@ -11,9 +11,9 @@
 |
  */
 
-Route::get('/_', function () {
-    return view('welcome');
-});
+// Route::get('/_', function () {
+//     return view('welcome');
+// });
 
 Route::any('/{any}', 'Front\HtmlController@all')
     ->where('any', '.*');
