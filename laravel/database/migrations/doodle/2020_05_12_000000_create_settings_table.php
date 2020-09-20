@@ -14,6 +14,8 @@ class CreateSettingsTable extends Migration
     public function up()
     {
 
+        dump('create setting table');
+
         Schema::create('settings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('handle', 32);
@@ -21,6 +23,8 @@ class CreateSettingsTable extends Migration
             $table->longText('payload')->nullable();
             $table->timestamps();
         });
+
+        dump('doodle:config:settings');
 
         Artisan::call('doodle:config:settings');
 
