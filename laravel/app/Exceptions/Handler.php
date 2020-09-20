@@ -79,8 +79,8 @@ class Handler extends ExceptionHandler
                 'line'    => $exception->getLine(),
                 'trace'   => $exception->getTrace()[0],
             ], 500);
-
         }
 
+        return parent::render($request, $exception);
     }
 }
