@@ -34,8 +34,8 @@ __install__
 
 `cp laravel/.env.example laravel/.env`  
 
-`cd vuecli`
-`npm install`
+`cd vuecli`  
+`npm install`  
 `cd ..`  
 
 On mac make sure de doodle folder is in the shared files.  
@@ -96,5 +96,8 @@ docker/doexec doodle_php php artisan
 
 __Doodle welcome:__  
 http://localhost/admin  
+  
+frontend welcome:  
+http://localhost/page  
 
 
