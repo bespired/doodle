@@ -15,5 +15,7 @@
 //     return view('welcome');
 // });
 
+Route::any('/me', 'Back\BrowserController@me');
+
 Route::any('/{any}', 'Front\HtmlController@all')
     ->where('any', '.*');

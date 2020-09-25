@@ -20,11 +20,11 @@ class DragrrConfigOtml extends Command
                 'pathslug' => '_',
             ],
             [
-                'name'  => 'welcome',
-                'type'  => 'page',
-                'label' => 'Laravel Welcome Page',
-                'type'  => 'static',
-                'otml'  => view('welcome')->render(),
+                'name'   => 'welcome',
+                'type'   => 'page',
+                'label'  => 'Laravel Welcome Page',
+                'status' => 'published',
+                'otml'   => view('welcome')->render(),
             ]
         );
 
@@ -33,13 +33,15 @@ class DragrrConfigOtml extends Command
                 'pathslug' => 'page',
             ],
             [
-                'name'  => 'page',
-                'type'  => 'page',
-                'label' => 'Doodle Welcome Page',
-                'type'  => 'static',
-                'otml'  => view('base', ['url' => 'http://localhost/page'])->render(),
+                'name'   => 'page',
+                'type'   => 'page',
+                'label'  => 'Doodle Welcome Page',
+                'status' => 'private',
+                'otml'   => view('base', ['url' => 'http://localhost/page'])->render(),
             ]
         );
+
+        \Cache::tags('urls')->flush();
 
     }
 

@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "cbschuld/browser.php": "^1.9",
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^1.0",
         "laravel/framework": "^6.2",
@@ -41,7 +42,8 @@
             "app/helpers.php"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Browser\\":"vendor/cbschuld/browser.php/"
         },
         "classmap": [
             "database/seeds",

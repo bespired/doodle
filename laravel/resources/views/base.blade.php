@@ -28,9 +28,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-    <script type="text/javascript">
-        document.doodle = document.doodle || {};
-    </script>
+    <script type="text/javascript" src="js/doodle.js"></script>
 
 </head>
 <body >

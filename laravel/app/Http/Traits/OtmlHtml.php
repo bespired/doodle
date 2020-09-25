@@ -6,38 +6,38 @@ trait OtmlHtml
 {
 
     private $otml;
-    private $variables;
+    private $variables = [];
+    private $payload;
 
     public function inserts($otml)
     {
         $this->otml = $otml;
 
+        $this->pagePayload();
+
         $this->fetchVariableNames();
 
         $html = $otml;
-        if ($this->variables) {
-
-            foreach ($this->variables as $find => $variable) {
-
-                switch ($variable) {
-                    case "csrf-token":
-                        $value = csrf_token();
-                        break;
-                    case "visitor-id":
-                        $value = 'vi0';
-                        break;
-
-                    default:
-                        $value = '';
-
-                }
-
-                $html = str_replace($find, $value, $html);
-
-            }
+        foreach ($this->variables as $find => $variable) {
+            $value = !isset($this->payload[$variable]) ? '' : $this->payload[$variable];
+            $html  = str_replace($find, $value, $html);
         }
 
         return $html;
+
+    }
+
+    public function pagePayload()
+    {
+
+        // Add Laravel CSRF just in case
+        $this->payload['csrf-token'] = csrf_token();
+
+        // if request has a Ovid cookie then use that.
+        // if not then create an ovid
+        $ovid = isset($_COOKIE['ovid']) ? $_COOKIE['ovid'] : uovid();
+
+        $this->payload['visitor-id'] = $ovid;
 
     }
 
