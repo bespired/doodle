@@ -27,6 +27,13 @@ if (!function_exists('pathslug')) {
     }
 }
 
+if (!function_exists('dekebab')) {
+    function dekebab($str)
+    {
+        return str_replace('-', ' ', $str);
+    }
+}
+
 if (!function_exists('tagCombi')) {
     function tagCombi($str1, $str2)
     {
@@ -38,6 +45,17 @@ if (!function_exists('cacheTags')) {
     function cacheTags($tag1, $tag2)
     {
         return [$tag1, $tag2, tagCombi($tag1, $tag2)];
+    }
+}
+
+if (!function_exists('indent')) {
+    function indent($file, $amount)
+    {
+        $rows = [];
+        foreach (explode("\n", $file) as $row) {
+            $rows[] = str_repeat("    ", $amount) . trim($row);
+        }
+        return join("\n", $rows);
     }
 }
 
