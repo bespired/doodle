@@ -2,6 +2,7 @@
 
 namespace App\Http\Traits;
 
+use App\Models\Eloquent\Otml;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Token;
 

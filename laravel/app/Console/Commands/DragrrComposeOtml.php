@@ -30,7 +30,7 @@ class DragrrComposeOtml extends Command
                 'type'   => 'page',
                 'label'  => 'Page compose test',
                 'status' => 'published',
-                'otml'   => $composer->compose('index'),
+                'otml'   => $composer->compose('index', $path),
             ]
         );
 
