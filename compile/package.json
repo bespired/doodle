@@ -5,7 +5,8 @@
     "main": "index.js",
     "scripts": {
         "build": "browserify src/index.js -o ../laravel/public/js/bundle.js",
-        "watch": "watchify src/index.js -d -o ../laravel/public/js/bundle.js -v"
+        "watch": "watchify src/index.js -d -o ../laravel/public/js/bundle.js -v",
+        "sass": "sass --style=compressed scss/index.scss ../laravel/public/css/frontend.css"
     },
     "keywords": [
         "frontend"

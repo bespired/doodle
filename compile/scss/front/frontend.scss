@@ -1,0 +1,34 @@
+html {
+	background-color: #fefefe;
+}
+
+body{
+	height: 100vh;
+    overflow-y: scroll;
+}
+
+.nice-class{
+	width: 100vw;
+	height: 100vh;
+	padding: 2em;
+}
+
+.nice-class:nth-child(even) { background: #cccccc }
+.nice-class:nth-child(odd)  { background: #fefefe }
+
+header{
+	background-color: transparent;
+	position: fixed;
+	padding: 8px;
+	width: 100vw;
+	transition: background-color 1500ms ease;
+	z-index: 10;
+}
+
+.is-scrolled header{
+	background-color: #dedede;
+}
+
+.will-change{
+	will-change: opacity;
+}

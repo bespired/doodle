@@ -101,10 +101,16 @@ Develop doodle with:
 `npm run serve`  
 http://localhost:8020/admin  
  
-__develop draggrjs__  
-`cd doodle/draggrjs`  
+__develop draggr js__  
+`cd doodle/compile`  
 `npm run watch`  
-Compiles frontend to the public folder of laravel  
+Compiles frontend js to the public folder of laravel  
+
+__develop draggr css__  
+`cd doodle/compile `  
+`npm run sass`  
+Compiles frontend css to the public folder of laravel  
+
 
 __artisan commands__  
 docker/doexec doodle_php php artisan *command*
