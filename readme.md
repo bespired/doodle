@@ -4,9 +4,10 @@
 [node-logo]: https://raw.githubusercontent.com/bespired/doodle/master/docker/logos/node.png
 [traefik-logo]: https://raw.githubusercontent.com/bespired/doodle/master/docker/logos/traefik.png
 [vuejs-logo]: https://raw.githubusercontent.com/bespired/doodle/master/docker/logos/vue.png
+[sass-logo]: https://raw.githubusercontent.com/bespired/doodle/master/docker/logos/sass.png
 [file-share]: https://raw.githubusercontent.com/bespired/doodle/master/docker/logos/file-share.png
 
-![docker-logo] ![traefik-logo] ![laravel-logo] ![vuejs-logo] ![node-logo]
+![docker-logo] ![traefik-logo] ![laravel-logo] ![vuejs-logo] ![node-logo] ![sass-logo]
 
 ## Doodle
 
@@ -15,14 +16,15 @@ Docker boilerplate with traefik 2, laravel 6, vue-cli and doodle-design
 > Works with:  
 > node 11.10.1  
 > npm 6.14.5  
+> sass 1.26.11  
   
 > Results in:  
 > traefik 2.2.1  
 > php 7.2  
 > mysql 8  
 > laravel v6.18.40  
-> vuejs 2.6
-> babel 7
+> vuejs 2.6  
+> babel 7  
   
 so no https.  
 
