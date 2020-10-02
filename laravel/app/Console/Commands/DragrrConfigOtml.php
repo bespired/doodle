@@ -31,11 +31,12 @@ class DragrrConfigOtml extends Command
                     'pathslug' => '---' . basename($file['basename']),
                 ],
                 [
-                    'name'   => $file['filename'],
-                    'type'   => 'stub',
-                    'label'  => ucwords(dekebab($file['filename'])),
-                    'status' => 'private',
-                    'otml'   => $this->simpleIndent($otml, 2),
+                    'name'     => $file['filename'],
+                    'type'     => 'stub',
+                    'language' => null,
+                    'label'    => ucwords(dekebab($file['filename'])),
+                    'status'   => 'private',
+                    'otml'     => $this->simpleIndent($otml, 2),
                 ]
             );
 
@@ -46,11 +47,12 @@ class DragrrConfigOtml extends Command
                 'pathslug' => '_',
             ],
             [
-                'name'   => 'welcome',
-                'type'   => 'page',
-                'label'  => 'Laravel Welcome Page',
-                'status' => 'published',
-                'otml'   => view('welcome')->render(),
+                'name'     => 'welcome',
+                'type'     => 'page',
+                'language' => 'en',
+                'label'    => 'Laravel Welcome Page',
+                'status'   => 'published',
+                'otml'     => view('welcome')->render(),
             ]
         );
 
@@ -59,11 +61,12 @@ class DragrrConfigOtml extends Command
                 'pathslug' => 'page',
             ],
             [
-                'name'   => 'page',
-                'type'   => 'page',
-                'label'  => 'Doodle Welcome Page',
-                'status' => 'private',
-                'otml'   => view('base', ['url' => 'http://localhost/page'])->render(),
+                'name'     => 'page',
+                'type'     => 'page',
+                'language' => 'en',
+                'label'    => 'Doodle Welcome Page',
+                'status'   => 'private',
+                'otml'     => view('base', ['url' => 'http://localhost/page'])->render(),
             ]
         );
 

@@ -1,0 +1,29 @@
+{
+    "name": "frontdraggr",
+    "version": "1.0.0",
+    "description": "Write ES6 frontend functions for draggr",
+    "main": "index.js",
+    "scripts": {
+        "build": "browserify src/index.js -o ../laravel/public/js/bundle.js",
+        "watch": "watchify src/index.js -o ../laravel/public/js/bundle.js -v"
+    },
+    "keywords": [
+        "frontend"
+    ],
+    "author": "joeri@bespired.nl",
+    "license": "ISC",
+    "dependencies": {
+        "browserify": "^16.5.2",
+        "reading-time": "^1.2.0",
+        "watchify": "^3.11.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.11.6",
+        "@babel/preset-env": "^7.11.5",
+        "babelify": "^10.0.0"
+    },
+    "browserify": {
+        "transform": [["babelify", { "presets": ["@babel/preset-env"] }]]
+    }
+
+}

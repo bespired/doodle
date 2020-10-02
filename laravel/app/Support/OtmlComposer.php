@@ -15,6 +15,7 @@ class OtmlComposer
     protected $output;
     protected $brostages;
     protected $stubnames;
+    protected $loadnames;
     protected $varsnames;
     protected $stubs;
     protected $pagedata;
@@ -26,16 +27,30 @@ class OtmlComposer
 
         $this->loadIndex();
         $this->loadContent();
-        $this->extractBrostages();
-        $this->extractStubNames();
         $this->loadStubs();
 
+        $this->extractBrostages();
+        $this->extractStubNames();
         $this->replaceStubs();
 
         $this->extractBrostages();
         $this->extractFillerNames();
 
         $this->replaceFillers();
+
+        // keep filling untill done...
+        $maxDepth = 0;
+        $this->extractBrostages();
+        while (($maxDepth < 100) && (count($this->brostages) > 0)) {
+
+            $this->extractStubNames();
+            $this->replaceStubs();
+
+            $this->extractFillerNames();
+            $this->replaceFillers();
+
+            $this->extractBrostages();
+        }
 
         return $this->output;
     }
@@ -69,10 +84,10 @@ class OtmlComposer
             ->whereName($this->contentname)
             ->whereType('page')
             ->firstOrFail();
+        $content = json_decode(json_encode($content->data), true);
 
-        $this->pagedata = [
+        $system = [
             'site'   => (array) $website->data,
-            'page'   => (array) $content->data,
             'system' => [
                 'url'    => config('app.url') . '/' . $this->contentname,
                 'date'   => date("Ymd"),
@@ -82,19 +97,25 @@ class OtmlComposer
             ],
         ];
 
+        $this->pagedata = array_merge($system, $content);
+
+        // dd($this->pagedata);
+
         return $this;
     }
 
     private function loadStubs()
     {
+        // just load all stubs...
         $this->stubs = Otml::query()
-            ->whereType('stub')
+        // ->whereIn('name', $this->loadnames)
             ->whereStatus('private')
-            ->whereIn('name', array_keys($this->stubnames))
+            ->whereType('stub')
             ->get()
             ->keyBy('name');
 
         return $this;
+
     }
 
     private function replaceFillers()
@@ -147,9 +168,13 @@ class OtmlComposer
     {
         foreach ($this->brostages as $brostage => $locator) {
             if (strpos($brostage, ':') === false) {
+                $stubname = explode('--', $brostage)[0];
+
                 $this->stubnames[$brostage] = $locator;
+                $this->loadnames[$stubname] = $stubname;
             }
         }
+
         return $this;
     }
 
@@ -170,7 +195,20 @@ class OtmlComposer
     public function getStubData($stub)
     {
 
-        return isset($this->stubs[$stub]) ? trim($this->stubs[$stub]->otml) : '';
+        // rename instances to root name of the stub
+        $stubname = explode('--', $stub)[0];
+
+        if (!isset($this->stubs[$stubname])) {
+            return '';
+        }
+
+        // rename instances to variables that contain data
+        $stubby = trim($this->stubs[$stubname]->otml);
+
+        $find = '{! self:';
+        $repl = '{! ' . $stub . ':';
+
+        return str_replace($find, $repl, $stubby);
 
     }
 
@@ -183,6 +221,10 @@ class OtmlComposer
 
         if (!isset($this->pagedata[$category][$key])) {
             return '';
+        }
+
+        if ($category . ':' . $key === 'page:body') {
+            return join("\n        ", $this->pagedata[$category][$key]);
         }
 
         return $this->pagedata[$category][$key];

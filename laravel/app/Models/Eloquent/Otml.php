@@ -14,7 +14,7 @@ class Otml extends Model
 
     protected $fillable = [
         'handle', 'name', 'label', 'type', 'status',
-        'pathslug', 'otml',
+        'pathslug', 'otml', 'language',
     ];
 
     protected $casts = [

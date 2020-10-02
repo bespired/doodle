@@ -23,11 +23,12 @@ class DragrrConfigContent extends Command
                 'pathslug' => '---website',
             ],
             [
-                'name'   => 'website',
-                'type'   => 'website',
-                'label'  => 'Global website data',
-                'status' => 'private',
-                'data'   => config('dragrr.contents.website'),
+                'name'     => 'website',
+                'type'     => 'website',
+                'language' => 'en',
+                'label'    => 'Global website data',
+                'status'   => 'private',
+                'data'     => config('dragrr.contents.website'),
             ]
         );
         Content::updateOrCreate(
@@ -35,11 +36,12 @@ class DragrrConfigContent extends Command
                 'pathslug' => 'composed',
             ],
             [
-                'name'   => 'composed',
-                'type'   => 'page',
-                'label'  => 'Composed test data',
-                'status' => 'private',
-                'data'   => config('dragrr.contents.page'),
+                'name'     => 'composed',
+                'type'     => 'page',
+                'language' => 'en',
+                'label'    => 'Composed test data',
+                'status'   => 'private',
+                'data'     => config('dragrr.contents.content'),
             ]
         );
 

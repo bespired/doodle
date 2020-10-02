@@ -21,7 +21,8 @@ Docker boilerplate with traefik 2, laravel 6, vue-cli and doodle-design
 > php 7.2  
 > mysql 8  
 > laravel v6.18.40  
-> vuejs 2.6  
+> vuejs 2.6
+> babel 7
   
 so no https.  
 
@@ -29,14 +30,22 @@ __git clone__
 
 `git clone git@github.com:bespired/doodle.git doodle`  
 
-__install__  
+__install laravel__  
 `cd doodle`  
 
 `cp laravel/.env.example laravel/.env`  
 
+__install vuecli__
+If you want to change the backend  
 `cd vuecli`  
 `npm install`  
 `cd ..`  
+
+__install draggr__   
+If you want to change the frontend js  
+`cd draggrjs`  
+`npm install`  
+`cd ..` 
 
 On mac make sure de doodle folder is in the shared files.  
 ![file-share]  
@@ -84,15 +93,19 @@ Create default admin login
 Doodle design:  
 http://localhost/admin/doodledesign/welcome  
 
-__develop__  
+__develop doodle__  
 Develop doodle with:  
 `cd doodle/vuecli`  
 `npm run serve`  
 http://localhost:8020/admin  
  
+__develop draggrjs__  
+`cd doodle/draggrjs`  
+`npm run watch`  
+Compiles frontend to the public folder of laravel  
 
 __artisan commands__  
-docker/doexec doodle_php php artisan  
+docker/doexec doodle_php php artisan *command*
 
 __Doodle welcome:__  
 http://localhost/admin  

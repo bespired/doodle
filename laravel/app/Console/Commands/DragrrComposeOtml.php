@@ -26,11 +26,12 @@ class DragrrComposeOtml extends Command
                 'pathslug' => $path,
             ],
             [
-                'name'   => 'composed',
-                'type'   => 'page',
-                'label'  => 'Page compose test',
-                'status' => 'published',
-                'otml'   => $composer->compose('index', $path),
+                'name'     => 'composed',
+                'type'     => 'page',
+                'language' => 'en',
+                'label'    => 'Page compose test',
+                'status'   => 'published',
+                'otml'     => $composer->compose('index', $path),
             ]
         );
 

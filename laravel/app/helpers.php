@@ -59,6 +59,27 @@ if (!function_exists('indent')) {
     }
 }
 
+if (!function_exists('device')) {
+    function device()
+    {
+        $browser = new \Browser();
+
+        if ($browser->isMobile()) {
+            return 'is-mobile';
+        }
+
+        if ($browser->isTablet()) {
+            return 'is-tablet';
+        }
+
+        if ($browser->isRobot()) {
+            return 'is-robot';
+        }
+
+        return 'is-desktop';
+
+    }
+}
 if (!function_exists('uovid')) {
     function uovid()
     {

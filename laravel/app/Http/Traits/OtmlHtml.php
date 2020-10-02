@@ -29,6 +29,8 @@ trait OtmlHtml
 
     public function pagePayload()
     {
+        // Prepare device type
+        $this->payload['device'] = device();
 
         // Add Laravel CSRF just in case
         $this->payload['csrf-token'] = csrf_token();

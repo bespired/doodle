@@ -21,6 +21,7 @@ class CreateOtmlTable extends Migration
             $table->char('handle', 32);
             $table->string('pathslug')->nullable();
             $table->char('type', 32)->default('');
+            $table->char('language', 8)->default('en')->nullable();
             $table->char('status', 16)->default('new');
             $table->char('name', 32)->nullable();
             $table->char('label', 64)->default('No Label');

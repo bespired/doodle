@@ -14,7 +14,7 @@ class Content extends Model
 
     protected $fillable = [
         'handle', 'name', 'label', 'type', 'status',
-        'pathslug', 'data',
+        'pathslug', 'data', 'language',
     ];
 
     protected $casts = [
