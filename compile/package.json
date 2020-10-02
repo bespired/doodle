@@ -6,7 +6,7 @@
     "scripts": {
         "build": "browserify src/index.js -o ../laravel/public/js/bundle.js",
         "watch": "watchify src/index.js -d -o ../laravel/public/js/bundle.js -v",
-        "sass": "sass --style=compressed scss/index.scss ../laravel/public/css/frontend.css"
+        "sass": "sass --watch --style=compressed scss/index.scss ../laravel/public/css/frontend.css"
     },
     "keywords": [
         "frontend"
@@ -15,7 +15,7 @@
     "license": "ISC",
     "dependencies": {
         "browserify": "^16.5.2",
-        "in-view": "^0.6.1",
+        "lodash": "^4.17.20",
         "reading-time": "^1.2.0",
         "watchify": "^3.11.1"
     },

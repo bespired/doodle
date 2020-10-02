@@ -1,11 +1,585 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-/*!
- * in-view 0.6.1 - Get notified when a DOM element enters or exits the viewport.
- * Copyright (c) 2016 Cam Wiegert <cam@camwiegert.com> - https://camwiegert.github.io/in-view
- * License: MIT
+var root = require('./_root');
+
+/** Built-in value references. */
+var Symbol = root.Symbol;
+
+module.exports = Symbol;
+
+},{"./_root":6}],2:[function(require,module,exports){
+var Symbol = require('./_Symbol'),
+    getRawTag = require('./_getRawTag'),
+    objectToString = require('./_objectToString');
+
+/** `Object#toString` result references. */
+var nullTag = '[object Null]',
+    undefinedTag = '[object Undefined]';
+
+/** Built-in value references. */
+var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+/**
+ * The base implementation of `getTag` without fallbacks for buggy environments.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
  */
-!function(t,e){"object"==typeof exports&&"object"==typeof module?module.exports=e():"function"==typeof define&&define.amd?define([],e):"object"==typeof exports?exports.inView=e():t.inView=e()}(this,function(){return function(t){function e(r){if(n[r])return n[r].exports;var i=n[r]={exports:{},id:r,loaded:!1};return t[r].call(i.exports,i,i.exports,e),i.loaded=!0,i.exports}var n={};return e.m=t,e.c=n,e.p="",e(0)}([function(t,e,n){"use strict";function r(t){return t&&t.__esModule?t:{"default":t}}var i=n(2),o=r(i);t.exports=o["default"]},function(t,e){function n(t){var e=typeof t;return null!=t&&("object"==e||"function"==e)}t.exports=n},function(t,e,n){"use strict";function r(t){return t&&t.__esModule?t:{"default":t}}Object.defineProperty(e,"__esModule",{value:!0});var i=n(9),o=r(i),u=n(3),f=r(u),s=n(4),c=function(){if("undefined"!=typeof window){var t=100,e=["scroll","resize","load"],n={history:[]},r={offset:{},threshold:0,test:s.inViewport},i=(0,o["default"])(function(){n.history.forEach(function(t){n[t].check()})},t);e.forEach(function(t){return addEventListener(t,i)}),window.MutationObserver&&addEventListener("DOMContentLoaded",function(){new MutationObserver(i).observe(document.body,{attributes:!0,childList:!0,subtree:!0})});var u=function(t){if("string"==typeof t){var e=[].slice.call(document.querySelectorAll(t));return n.history.indexOf(t)>-1?n[t].elements=e:(n[t]=(0,f["default"])(e,r),n.history.push(t)),n[t]}};return u.offset=function(t){if(void 0===t)return r.offset;var e=function(t){return"number"==typeof t};return["top","right","bottom","left"].forEach(e(t)?function(e){return r.offset[e]=t}:function(n){return e(t[n])?r.offset[n]=t[n]:null}),r.offset},u.threshold=function(t){return"number"==typeof t&&t>=0&&t<=1?r.threshold=t:r.threshold},u.test=function(t){return"function"==typeof t?r.test=t:r.test},u.is=function(t){return r.test(t,r)},u.offset(0),u}};e["default"]=c()},function(t,e){"use strict";function n(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(e,"__esModule",{value:!0});var r=function(){function t(t,e){for(var n=0;n<e.length;n++){var r=e[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(t,r.key,r)}}return function(e,n,r){return n&&t(e.prototype,n),r&&t(e,r),e}}(),i=function(){function t(e,r){n(this,t),this.options=r,this.elements=e,this.current=[],this.handlers={enter:[],exit:[]},this.singles={enter:[],exit:[]}}return r(t,[{key:"check",value:function(){var t=this;return this.elements.forEach(function(e){var n=t.options.test(e,t.options),r=t.current.indexOf(e),i=r>-1,o=n&&!i,u=!n&&i;o&&(t.current.push(e),t.emit("enter",e)),u&&(t.current.splice(r,1),t.emit("exit",e))}),this}},{key:"on",value:function(t,e){return this.handlers[t].push(e),this}},{key:"once",value:function(t,e){return this.singles[t].unshift(e),this}},{key:"emit",value:function(t,e){for(;this.singles[t].length;)this.singles[t].pop()(e);for(var n=this.handlers[t].length;--n>-1;)this.handlers[t][n](e);return this}}]),t}();e["default"]=function(t,e){return new i(t,e)}},function(t,e){"use strict";function n(t,e){var n=t.getBoundingClientRect(),r=n.top,i=n.right,o=n.bottom,u=n.left,f=n.width,s=n.height,c={t:o,r:window.innerWidth-u,b:window.innerHeight-r,l:i},a={x:e.threshold*f,y:e.threshold*s};return c.t>e.offset.top+a.y&&c.r>e.offset.right+a.x&&c.b>e.offset.bottom+a.y&&c.l>e.offset.left+a.x}Object.defineProperty(e,"__esModule",{value:!0}),e.inViewport=n},function(t,e){(function(e){var n="object"==typeof e&&e&&e.Object===Object&&e;t.exports=n}).call(e,function(){return this}())},function(t,e,n){var r=n(5),i="object"==typeof self&&self&&self.Object===Object&&self,o=r||i||Function("return this")();t.exports=o},function(t,e,n){function r(t,e,n){function r(e){var n=x,r=m;return x=m=void 0,E=e,w=t.apply(r,n)}function a(t){return E=t,j=setTimeout(h,e),M?r(t):w}function l(t){var n=t-O,r=t-E,i=e-n;return _?c(i,g-r):i}function d(t){var n=t-O,r=t-E;return void 0===O||n>=e||n<0||_&&r>=g}function h(){var t=o();return d(t)?p(t):void(j=setTimeout(h,l(t)))}function p(t){return j=void 0,T&&x?r(t):(x=m=void 0,w)}function v(){void 0!==j&&clearTimeout(j),E=0,x=O=m=j=void 0}function y(){return void 0===j?w:p(o())}function b(){var t=o(),n=d(t);if(x=arguments,m=this,O=t,n){if(void 0===j)return a(O);if(_)return j=setTimeout(h,e),r(O)}return void 0===j&&(j=setTimeout(h,e)),w}var x,m,g,w,j,O,E=0,M=!1,_=!1,T=!0;if("function"!=typeof t)throw new TypeError(f);return e=u(e)||0,i(n)&&(M=!!n.leading,_="maxWait"in n,g=_?s(u(n.maxWait)||0,e):g,T="trailing"in n?!!n.trailing:T),b.cancel=v,b.flush=y,b}var i=n(1),o=n(8),u=n(10),f="Expected a function",s=Math.max,c=Math.min;t.exports=r},function(t,e,n){var r=n(6),i=function(){return r.Date.now()};t.exports=i},function(t,e,n){function r(t,e,n){var r=!0,f=!0;if("function"!=typeof t)throw new TypeError(u);return o(n)&&(r="leading"in n?!!n.leading:r,f="trailing"in n?!!n.trailing:f),i(t,e,{leading:r,maxWait:e,trailing:f})}var i=n(7),o=n(1),u="Expected a function";t.exports=r},function(t,e){function n(t){return t}t.exports=n}])});
-},{}],2:[function(require,module,exports){
+function baseGetTag(value) {
+  if (value == null) {
+    return value === undefined ? undefinedTag : nullTag;
+  }
+  return (symToStringTag && symToStringTag in Object(value))
+    ? getRawTag(value)
+    : objectToString(value);
+}
+
+module.exports = baseGetTag;
+
+},{"./_Symbol":1,"./_getRawTag":4,"./_objectToString":5}],3:[function(require,module,exports){
+(function (global){
+/** Detect free variable `global` from Node.js. */
+var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+
+module.exports = freeGlobal;
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],4:[function(require,module,exports){
+var Symbol = require('./_Symbol');
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/** Built-in value references. */
+var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+/**
+ * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the raw `toStringTag`.
+ */
+function getRawTag(value) {
+  var isOwn = hasOwnProperty.call(value, symToStringTag),
+      tag = value[symToStringTag];
+
+  try {
+    value[symToStringTag] = undefined;
+    var unmasked = true;
+  } catch (e) {}
+
+  var result = nativeObjectToString.call(value);
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag] = tag;
+    } else {
+      delete value[symToStringTag];
+    }
+  }
+  return result;
+}
+
+module.exports = getRawTag;
+
+},{"./_Symbol":1}],5:[function(require,module,exports){
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/**
+ * Converts `value` to a string using `Object.prototype.toString`.
+ *
+ * @private
+ * @param {*} value The value to convert.
+ * @returns {string} Returns the converted string.
+ */
+function objectToString(value) {
+  return nativeObjectToString.call(value);
+}
+
+module.exports = objectToString;
+
+},{}],6:[function(require,module,exports){
+var freeGlobal = require('./_freeGlobal');
+
+/** Detect free variable `self`. */
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || Function('return this')();
+
+module.exports = root;
+
+},{"./_freeGlobal":3}],7:[function(require,module,exports){
+var isObject = require('./isObject'),
+    now = require('./now'),
+    toNumber = require('./toNumber');
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMax = Math.max,
+    nativeMin = Math.min;
+
+/**
+ * Creates a debounced function that delays invoking `func` until after `wait`
+ * milliseconds have elapsed since the last time the debounced function was
+ * invoked. The debounced function comes with a `cancel` method to cancel
+ * delayed `func` invocations and a `flush` method to immediately invoke them.
+ * Provide `options` to indicate whether `func` should be invoked on the
+ * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
+ * with the last arguments provided to the debounced function. Subsequent
+ * calls to the debounced function return the result of the last `func`
+ * invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the debounced function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.debounce` and `_.throttle`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to debounce.
+ * @param {number} [wait=0] The number of milliseconds to delay.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=false]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {number} [options.maxWait]
+ *  The maximum time `func` is allowed to be delayed before it's invoked.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new debounced function.
+ * @example
+ *
+ * // Avoid costly calculations while the window size is in flux.
+ * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
+ *
+ * // Invoke `sendMail` when clicked, debouncing subsequent calls.
+ * jQuery(element).on('click', _.debounce(sendMail, 300, {
+ *   'leading': true,
+ *   'trailing': false
+ * }));
+ *
+ * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
+ * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
+ * var source = new EventSource('/stream');
+ * jQuery(source).on('message', debounced);
+ *
+ * // Cancel the trailing debounced invocation.
+ * jQuery(window).on('popstate', debounced.cancel);
+ */
+function debounce(func, wait, options) {
+  var lastArgs,
+      lastThis,
+      maxWait,
+      result,
+      timerId,
+      lastCallTime,
+      lastInvokeTime = 0,
+      leading = false,
+      maxing = false,
+      trailing = true;
+
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  wait = toNumber(wait) || 0;
+  if (isObject(options)) {
+    leading = !!options.leading;
+    maxing = 'maxWait' in options;
+    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
+    trailing = 'trailing' in options ? !!options.trailing : trailing;
+  }
+
+  function invokeFunc(time) {
+    var args = lastArgs,
+        thisArg = lastThis;
+
+    lastArgs = lastThis = undefined;
+    lastInvokeTime = time;
+    result = func.apply(thisArg, args);
+    return result;
+  }
+
+  function leadingEdge(time) {
+    // Reset any `maxWait` timer.
+    lastInvokeTime = time;
+    // Start the timer for the trailing edge.
+    timerId = setTimeout(timerExpired, wait);
+    // Invoke the leading edge.
+    return leading ? invokeFunc(time) : result;
+  }
+
+  function remainingWait(time) {
+    var timeSinceLastCall = time - lastCallTime,
+        timeSinceLastInvoke = time - lastInvokeTime,
+        timeWaiting = wait - timeSinceLastCall;
+
+    return maxing
+      ? nativeMin(timeWaiting, maxWait - timeSinceLastInvoke)
+      : timeWaiting;
+  }
+
+  function shouldInvoke(time) {
+    var timeSinceLastCall = time - lastCallTime,
+        timeSinceLastInvoke = time - lastInvokeTime;
+
+    // Either this is the first call, activity has stopped and we're at the
+    // trailing edge, the system time has gone backwards and we're treating
+    // it as the trailing edge, or we've hit the `maxWait` limit.
+    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
+      (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));
+  }
+
+  function timerExpired() {
+    var time = now();
+    if (shouldInvoke(time)) {
+      return trailingEdge(time);
+    }
+    // Restart the timer.
+    timerId = setTimeout(timerExpired, remainingWait(time));
+  }
+
+  function trailingEdge(time) {
+    timerId = undefined;
+
+    // Only invoke if we have `lastArgs` which means `func` has been
+    // debounced at least once.
+    if (trailing && lastArgs) {
+      return invokeFunc(time);
+    }
+    lastArgs = lastThis = undefined;
+    return result;
+  }
+
+  function cancel() {
+    if (timerId !== undefined) {
+      clearTimeout(timerId);
+    }
+    lastInvokeTime = 0;
+    lastArgs = lastCallTime = lastThis = timerId = undefined;
+  }
+
+  function flush() {
+    return timerId === undefined ? result : trailingEdge(now());
+  }
+
+  function debounced() {
+    var time = now(),
+        isInvoking = shouldInvoke(time);
+
+    lastArgs = arguments;
+    lastThis = this;
+    lastCallTime = time;
+
+    if (isInvoking) {
+      if (timerId === undefined) {
+        return leadingEdge(lastCallTime);
+      }
+      if (maxing) {
+        // Handle invocations in a tight loop.
+        clearTimeout(timerId);
+        timerId = setTimeout(timerExpired, wait);
+        return invokeFunc(lastCallTime);
+      }
+    }
+    if (timerId === undefined) {
+      timerId = setTimeout(timerExpired, wait);
+    }
+    return result;
+  }
+  debounced.cancel = cancel;
+  debounced.flush = flush;
+  return debounced;
+}
+
+module.exports = debounce;
+
+},{"./isObject":8,"./now":11,"./toNumber":13}],8:[function(require,module,exports){
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = typeof value;
+  return value != null && (type == 'object' || type == 'function');
+}
+
+module.exports = isObject;
+
+},{}],9:[function(require,module,exports){
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return value != null && typeof value == 'object';
+}
+
+module.exports = isObjectLike;
+
+},{}],10:[function(require,module,exports){
+var baseGetTag = require('./_baseGetTag'),
+    isObjectLike = require('./isObjectLike');
+
+/** `Object#toString` result references. */
+var symbolTag = '[object Symbol]';
+
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ *
+ * _.isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * _.isSymbol('abc');
+ * // => false
+ */
+function isSymbol(value) {
+  return typeof value == 'symbol' ||
+    (isObjectLike(value) && baseGetTag(value) == symbolTag);
+}
+
+module.exports = isSymbol;
+
+},{"./_baseGetTag":2,"./isObjectLike":9}],11:[function(require,module,exports){
+var root = require('./_root');
+
+/**
+ * Gets the timestamp of the number of milliseconds that have elapsed since
+ * the Unix epoch (1 January 1970 00:00:00 UTC).
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Date
+ * @returns {number} Returns the timestamp.
+ * @example
+ *
+ * _.defer(function(stamp) {
+ *   console.log(_.now() - stamp);
+ * }, _.now());
+ * // => Logs the number of milliseconds it took for the deferred invocation.
+ */
+var now = function() {
+  return root.Date.now();
+};
+
+module.exports = now;
+
+},{"./_root":6}],12:[function(require,module,exports){
+var debounce = require('./debounce'),
+    isObject = require('./isObject');
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/**
+ * Creates a throttled function that only invokes `func` at most once per
+ * every `wait` milliseconds. The throttled function comes with a `cancel`
+ * method to cancel delayed `func` invocations and a `flush` method to
+ * immediately invoke them. Provide `options` to indicate whether `func`
+ * should be invoked on the leading and/or trailing edge of the `wait`
+ * timeout. The `func` is invoked with the last arguments provided to the
+ * throttled function. Subsequent calls to the throttled function return the
+ * result of the last `func` invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the throttled function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.throttle` and `_.debounce`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to throttle.
+ * @param {number} [wait=0] The number of milliseconds to throttle invocations to.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=true]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new throttled function.
+ * @example
+ *
+ * // Avoid excessively updating the position while scrolling.
+ * jQuery(window).on('scroll', _.throttle(updatePosition, 100));
+ *
+ * // Invoke `renewToken` when the click event is fired, but not more than once every 5 minutes.
+ * var throttled = _.throttle(renewToken, 300000, { 'trailing': false });
+ * jQuery(element).on('click', throttled);
+ *
+ * // Cancel the trailing throttled invocation.
+ * jQuery(window).on('popstate', throttled.cancel);
+ */
+function throttle(func, wait, options) {
+  var leading = true,
+      trailing = true;
+
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  if (isObject(options)) {
+    leading = 'leading' in options ? !!options.leading : leading;
+    trailing = 'trailing' in options ? !!options.trailing : trailing;
+  }
+  return debounce(func, wait, {
+    'leading': leading,
+    'maxWait': wait,
+    'trailing': trailing
+  });
+}
+
+module.exports = throttle;
+
+},{"./debounce":7,"./isObject":8}],13:[function(require,module,exports){
+var isObject = require('./isObject'),
+    isSymbol = require('./isSymbol');
+
+/** Used as references for various `Number` constants. */
+var NAN = 0 / 0;
+
+/** Used to match leading and trailing whitespace. */
+var reTrim = /^\s+|\s+$/g;
+
+/** Used to detect bad signed hexadecimal string values. */
+var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+
+/** Used to detect binary string values. */
+var reIsBinary = /^0b[01]+$/i;
+
+/** Used to detect octal string values. */
+var reIsOctal = /^0o[0-7]+$/i;
+
+/** Built-in method references without a dependency on `root`. */
+var freeParseInt = parseInt;
+
+/**
+ * Converts `value` to a number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to process.
+ * @returns {number} Returns the number.
+ * @example
+ *
+ * _.toNumber(3.2);
+ * // => 3.2
+ *
+ * _.toNumber(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toNumber(Infinity);
+ * // => Infinity
+ *
+ * _.toNumber('3.2');
+ * // => 3.2
+ */
+function toNumber(value) {
+  if (typeof value == 'number') {
+    return value;
+  }
+  if (isSymbol(value)) {
+    return NAN;
+  }
+  if (isObject(value)) {
+    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
+    value = isObject(other) ? (other + '') : other;
+  }
+  if (typeof value != 'string') {
+    return value === 0 ? value : +value;
+  }
+  value = value.replace(reTrim, '');
+  var isBinary = reIsBinary.test(value);
+  return (isBinary || reIsOctal.test(value))
+    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
+    : (reIsBadHex.test(value) ? NAN : +value);
+}
+
+module.exports = toNumber;
+
+},{"./isObject":8,"./isSymbol":10}],14:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30,20 +604,28 @@ var _EnterView = _interopRequireDefault(require("./js/EnterView"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-},{"./js/EnterView":3,"./js/ScrollWatch":4}],3:[function(require,module,exports){
+},{"./js/EnterView":15,"./js/ScrollWatch":16}],15:[function(require,module,exports){
 "use strict";
 
-var _inView = _interopRequireDefault(require("in-view"));
+var _index = _interopRequireDefault(require("./inView/index.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-(0, _inView["default"])('section').on('enter', function (el) {
+(0, _index["default"])('section').on('enter', function (el) {
   el.classList.add("will-change");
 }).on('exit', function (el) {
   el.classList.remove("will-change");
 });
+(0, _index["default"])('[data-houdini]', {
+  top: -200,
+  bottom: 200
+}).on('enter', function (el) {
+  el.classList.add("active");
+}).on('exit', function (el) {
+  el.classList.remove("active");
+});
 
-},{"in-view":1}],4:[function(require,module,exports){
+},{"./inView/index.js":18}],16:[function(require,module,exports){
 "use strict";
 
 window.addEventListener('scroll', function (e) {
@@ -58,5 +640,330 @@ window.addEventListener('scroll', function (e) {
   }
 });
 
-},{}]},{},[2])
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm5vZGVfbW9kdWxlcy9icm93c2VyLXBhY2svX3ByZWx1ZGUuanMiLCJub2RlX21vZHVsZXMvaW4tdmlldy9kaXN0L2luLXZpZXcubWluLmpzIiwic3JjL2luZGV4LmpzIiwic3JjL2pzL0VudGVyVmlldy5qcyIsInNyYy9qcy9TY3JvbGxXYXRjaC5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQ0FBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUNMQTs7QUFDQTs7Ozs7OztBQ0RBOzs7O0FBRUEsd0JBQU8sU0FBUCxFQUNFLEVBREYsQ0FDSyxPQURMLEVBQ2MsVUFBQSxFQUFFLEVBQUk7QUFDWixFQUFBLEVBQUUsQ0FBQyxTQUFILENBQWEsR0FBYixDQUFpQixhQUFqQjtBQUNILENBSEwsRUFJRSxFQUpGLENBSUssTUFKTCxFQUlhLFVBQUEsRUFBRSxFQUFJO0FBQ1gsRUFBQSxFQUFFLENBQUMsU0FBSCxDQUFhLE1BQWIsQ0FBb0IsYUFBcEI7QUFDSCxDQU5MOzs7OztBQ0ZBLE1BQU0sQ0FBQyxnQkFBUCxDQUF3QixRQUF4QixFQUFrQyxVQUFTLENBQVQsRUFBWTtBQUM3QyxNQUFJLElBQUksR0FBRyxRQUFRLENBQUMsYUFBVCxDQUF1QixNQUF2QixDQUFYOztBQUVBLE1BQUksTUFBTSxDQUFDLE9BQVgsRUFBb0I7QUFDbkIsSUFBQSxJQUFJLENBQUMsU0FBTCxDQUFlLE1BQWYsQ0FBc0IsUUFBdEI7QUFBaUMsSUFBQSxJQUFJLENBQUMsU0FBTCxDQUFlLEdBQWYsQ0FBbUIsYUFBbkI7QUFDakMsR0FGRCxNQUVPO0FBQ04sSUFBQSxJQUFJLENBQUMsU0FBTCxDQUFlLEdBQWYsQ0FBbUIsUUFBbkI7QUFBOEIsSUFBQSxJQUFJLENBQUMsU0FBTCxDQUFlLE1BQWYsQ0FBc0IsYUFBdEI7QUFDOUI7QUFDRCxDQVJEIiwiZmlsZSI6ImdlbmVyYXRlZC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzQ29udGVudCI6WyIoZnVuY3Rpb24oKXtmdW5jdGlvbiByKGUsbix0KXtmdW5jdGlvbiBvKGksZil7aWYoIW5baV0pe2lmKCFlW2ldKXt2YXIgYz1cImZ1bmN0aW9uXCI9PXR5cGVvZiByZXF1aXJlJiZyZXF1aXJlO2lmKCFmJiZjKXJldHVybiBjKGksITApO2lmKHUpcmV0dXJuIHUoaSwhMCk7dmFyIGE9bmV3IEVycm9yKFwiQ2Fubm90IGZpbmQgbW9kdWxlICdcIitpK1wiJ1wiKTt0aHJvdyBhLmNvZGU9XCJNT0RVTEVfTk9UX0ZPVU5EXCIsYX12YXIgcD1uW2ldPXtleHBvcnRzOnt9fTtlW2ldWzBdLmNhbGwocC5leHBvcnRzLGZ1bmN0aW9uKHIpe3ZhciBuPWVbaV1bMV1bcl07cmV0dXJuIG8obnx8cil9LHAscC5leHBvcnRzLHIsZSxuLHQpfXJldHVybiBuW2ldLmV4cG9ydHN9Zm9yKHZhciB1PVwiZnVuY3Rpb25cIj09dHlwZW9mIHJlcXVpcmUmJnJlcXVpcmUsaT0wO2k8dC5sZW5ndGg7aSsrKW8odFtpXSk7cmV0dXJuIG99cmV0dXJuIHJ9KSgpIiwiLyohXG4gKiBpbi12aWV3IDAuNi4xIC0gR2V0IG5vdGlmaWVkIHdoZW4gYSBET00gZWxlbWVudCBlbnRlcnMgb3IgZXhpdHMgdGhlIHZpZXdwb3J0LlxuICogQ29weXJpZ2h0IChjKSAyMDE2IENhbSBXaWVnZXJ0IDxjYW1AY2Ftd2llZ2VydC5jb20+IC0gaHR0cHM6Ly9jYW13aWVnZXJ0LmdpdGh1Yi5pby9pbi12aWV3XG4gKiBMaWNlbnNlOiBNSVRcbiAqL1xuIWZ1bmN0aW9uKHQsZSl7XCJvYmplY3RcIj09dHlwZW9mIGV4cG9ydHMmJlwib2JqZWN0XCI9PXR5cGVvZiBtb2R1bGU/bW9kdWxlLmV4cG9ydHM9ZSgpOlwiZnVuY3Rpb25cIj09dHlwZW9mIGRlZmluZSYmZGVmaW5lLmFtZD9kZWZpbmUoW10sZSk6XCJvYmplY3RcIj09dHlwZW9mIGV4cG9ydHM/ZXhwb3J0cy5pblZpZXc9ZSgpOnQuaW5WaWV3PWUoKX0odGhpcyxmdW5jdGlvbigpe3JldHVybiBmdW5jdGlvbih0KXtmdW5jdGlvbiBlKHIpe2lmKG5bcl0pcmV0dXJuIG5bcl0uZXhwb3J0czt2YXIgaT1uW3JdPXtleHBvcnRzOnt9LGlkOnIsbG9hZGVkOiExfTtyZXR1cm4gdFtyXS5jYWxsKGkuZXhwb3J0cyxpLGkuZXhwb3J0cyxlKSxpLmxvYWRlZD0hMCxpLmV4cG9ydHN9dmFyIG49e307cmV0dXJuIGUubT10LGUuYz1uLGUucD1cIlwiLGUoMCl9KFtmdW5jdGlvbih0LGUsbil7XCJ1c2Ugc3RyaWN0XCI7ZnVuY3Rpb24gcih0KXtyZXR1cm4gdCYmdC5fX2VzTW9kdWxlP3Q6e1wiZGVmYXVsdFwiOnR9fXZhciBpPW4oMiksbz1yKGkpO3QuZXhwb3J0cz1vW1wiZGVmYXVsdFwiXX0sZnVuY3Rpb24odCxlKXtmdW5jdGlvbiBuKHQpe3ZhciBlPXR5cGVvZiB0O3JldHVybiBudWxsIT10JiYoXCJvYmplY3RcIj09ZXx8XCJmdW5jdGlvblwiPT1lKX10LmV4cG9ydHM9bn0sZnVuY3Rpb24odCxlLG4pe1widXNlIHN0cmljdFwiO2Z1bmN0aW9uIHIodCl7cmV0dXJuIHQmJnQuX19lc01vZHVsZT90OntcImRlZmF1bHRcIjp0fX1PYmplY3QuZGVmaW5lUHJvcGVydHkoZSxcIl9fZXNNb2R1bGVcIix7dmFsdWU6ITB9KTt2YXIgaT1uKDkpLG89cihpKSx1PW4oMyksZj1yKHUpLHM9big0KSxjPWZ1bmN0aW9uKCl7aWYoXCJ1bmRlZmluZWRcIiE9dHlwZW9mIHdpbmRvdyl7dmFyIHQ9MTAwLGU9W1wic2Nyb2xsXCIsXCJyZXNpemVcIixcImxvYWRcIl0sbj17aGlzdG9yeTpbXX0scj17b2Zmc2V0Ont9LHRocmVzaG9sZDowLHRlc3Q6cy5pblZpZXdwb3J0fSxpPSgwLG9bXCJkZWZhdWx0XCJdKShmdW5jdGlvbigpe24uaGlzdG9yeS5mb3JFYWNoKGZ1bmN0aW9uKHQpe25bdF0uY2hlY2soKX0pfSx0KTtlLmZvckVhY2goZnVuY3Rpb24odCl7cmV0dXJuIGFkZEV2ZW50TGlzdGVuZXIodCxpKX0pLHdpbmRvdy5NdXRhdGlvbk9ic2VydmVyJiZhZGRFdmVudExpc3RlbmVyKFwiRE9NQ29udGVudExvYWRlZFwiLGZ1bmN0aW9uKCl7bmV3IE11dGF0aW9uT2JzZXJ2ZXIoaSkub2JzZXJ2ZShkb2N1bWVudC5ib2R5LHthdHRyaWJ1dGVzOiEwLGNoaWxkTGlzdDohMCxzdWJ0cmVlOiEwfSl9KTt2YXIgdT1mdW5jdGlvbih0KXtpZihcInN0cmluZ1wiPT10eXBlb2YgdCl7dmFyIGU9W10uc2xpY2UuY2FsbChkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKHQpKTtyZXR1cm4gbi5oaXN0b3J5LmluZGV4T2YodCk+LTE/blt0XS5lbGVtZW50cz1lOihuW3RdPSgwLGZbXCJkZWZhdWx0XCJdKShlLHIpLG4uaGlzdG9yeS5wdXNoKHQpKSxuW3RdfX07cmV0dXJuIHUub2Zmc2V0PWZ1bmN0aW9uKHQpe2lmKHZvaWQgMD09PXQpcmV0dXJuIHIub2Zmc2V0O3ZhciBlPWZ1bmN0aW9uKHQpe3JldHVyblwibnVtYmVyXCI9PXR5cGVvZiB0fTtyZXR1cm5bXCJ0b3BcIixcInJpZ2h0XCIsXCJib3R0b21cIixcImxlZnRcIl0uZm9yRWFjaChlKHQpP2Z1bmN0aW9uKGUpe3JldHVybiByLm9mZnNldFtlXT10fTpmdW5jdGlvbihuKXtyZXR1cm4gZSh0W25dKT9yLm9mZnNldFtuXT10W25dOm51bGx9KSxyLm9mZnNldH0sdS50aHJlc2hvbGQ9ZnVuY3Rpb24odCl7cmV0dXJuXCJudW1iZXJcIj09dHlwZW9mIHQmJnQ+PTAmJnQ8PTE/ci50aHJlc2hvbGQ9dDpyLnRocmVzaG9sZH0sdS50ZXN0PWZ1bmN0aW9uKHQpe3JldHVyblwiZnVuY3Rpb25cIj09dHlwZW9mIHQ/ci50ZXN0PXQ6ci50ZXN0fSx1LmlzPWZ1bmN0aW9uKHQpe3JldHVybiByLnRlc3QodCxyKX0sdS5vZmZzZXQoMCksdX19O2VbXCJkZWZhdWx0XCJdPWMoKX0sZnVuY3Rpb24odCxlKXtcInVzZSBzdHJpY3RcIjtmdW5jdGlvbiBuKHQsZSl7aWYoISh0IGluc3RhbmNlb2YgZSkpdGhyb3cgbmV3IFR5cGVFcnJvcihcIkNhbm5vdCBjYWxsIGEgY2xhc3MgYXMgYSBmdW5jdGlvblwiKX1PYmplY3QuZGVmaW5lUHJvcGVydHkoZSxcIl9fZXNNb2R1bGVcIix7dmFsdWU6ITB9KTt2YXIgcj1mdW5jdGlvbigpe2Z1bmN0aW9uIHQodCxlKXtmb3IodmFyIG49MDtuPGUubGVuZ3RoO24rKyl7dmFyIHI9ZVtuXTtyLmVudW1lcmFibGU9ci5lbnVtZXJhYmxlfHwhMSxyLmNvbmZpZ3VyYWJsZT0hMCxcInZhbHVlXCJpbiByJiYoci53cml0YWJsZT0hMCksT2JqZWN0LmRlZmluZVByb3BlcnR5KHQsci5rZXkscil9fXJldHVybiBmdW5jdGlvbihlLG4scil7cmV0dXJuIG4mJnQoZS5wcm90b3R5cGUsbiksciYmdChlLHIpLGV9fSgpLGk9ZnVuY3Rpb24oKXtmdW5jdGlvbiB0KGUscil7bih0aGlzLHQpLHRoaXMub3B0aW9ucz1yLHRoaXMuZWxlbWVudHM9ZSx0aGlzLmN1cnJlbnQ9W10sdGhpcy5oYW5kbGVycz17ZW50ZXI6W10sZXhpdDpbXX0sdGhpcy5zaW5nbGVzPXtlbnRlcjpbXSxleGl0OltdfX1yZXR1cm4gcih0LFt7a2V5OlwiY2hlY2tcIix2YWx1ZTpmdW5jdGlvbigpe3ZhciB0PXRoaXM7cmV0dXJuIHRoaXMuZWxlbWVudHMuZm9yRWFjaChmdW5jdGlvbihlKXt2YXIgbj10Lm9wdGlvbnMudGVzdChlLHQub3B0aW9ucykscj10LmN1cnJlbnQuaW5kZXhPZihlKSxpPXI+LTEsbz1uJiYhaSx1PSFuJiZpO28mJih0LmN1cnJlbnQucHVzaChlKSx0LmVtaXQoXCJlbnRlclwiLGUpKSx1JiYodC5jdXJyZW50LnNwbGljZShyLDEpLHQuZW1pdChcImV4aXRcIixlKSl9KSx0aGlzfX0se2tleTpcIm9uXCIsdmFsdWU6ZnVuY3Rpb24odCxlKXtyZXR1cm4gdGhpcy5oYW5kbGVyc1t0XS5wdXNoKGUpLHRoaXN9fSx7a2V5Olwib25jZVwiLHZhbHVlOmZ1bmN0aW9uKHQsZSl7cmV0dXJuIHRoaXMuc2luZ2xlc1t0XS51bnNoaWZ0KGUpLHRoaXN9fSx7a2V5OlwiZW1pdFwiLHZhbHVlOmZ1bmN0aW9uKHQsZSl7Zm9yKDt0aGlzLnNpbmdsZXNbdF0ubGVuZ3RoOyl0aGlzLnNpbmdsZXNbdF0ucG9wKCkoZSk7Zm9yKHZhciBuPXRoaXMuaGFuZGxlcnNbdF0ubGVuZ3RoOy0tbj4tMTspdGhpcy5oYW5kbGVyc1t0XVtuXShlKTtyZXR1cm4gdGhpc319XSksdH0oKTtlW1wiZGVmYXVsdFwiXT1mdW5jdGlvbih0LGUpe3JldHVybiBuZXcgaSh0LGUpfX0sZnVuY3Rpb24odCxlKXtcInVzZSBzdHJpY3RcIjtmdW5jdGlvbiBuKHQsZSl7dmFyIG49dC5nZXRCb3VuZGluZ0NsaWVudFJlY3QoKSxyPW4udG9wLGk9bi5yaWdodCxvPW4uYm90dG9tLHU9bi5sZWZ0LGY9bi53aWR0aCxzPW4uaGVpZ2h0LGM9e3Q6byxyOndpbmRvdy5pbm5lcldpZHRoLXUsYjp3aW5kb3cuaW5uZXJIZWlnaHQtcixsOml9LGE9e3g6ZS50aHJlc2hvbGQqZix5OmUudGhyZXNob2xkKnN9O3JldHVybiBjLnQ+ZS5vZmZzZXQudG9wK2EueSYmYy5yPmUub2Zmc2V0LnJpZ2h0K2EueCYmYy5iPmUub2Zmc2V0LmJvdHRvbSthLnkmJmMubD5lLm9mZnNldC5sZWZ0K2EueH1PYmplY3QuZGVmaW5lUHJvcGVydHkoZSxcIl9fZXNNb2R1bGVcIix7dmFsdWU6ITB9KSxlLmluVmlld3BvcnQ9bn0sZnVuY3Rpb24odCxlKXsoZnVuY3Rpb24oZSl7dmFyIG49XCJvYmplY3RcIj09dHlwZW9mIGUmJmUmJmUuT2JqZWN0PT09T2JqZWN0JiZlO3QuZXhwb3J0cz1ufSkuY2FsbChlLGZ1bmN0aW9uKCl7cmV0dXJuIHRoaXN9KCkpfSxmdW5jdGlvbih0LGUsbil7dmFyIHI9big1KSxpPVwib2JqZWN0XCI9PXR5cGVvZiBzZWxmJiZzZWxmJiZzZWxmLk9iamVjdD09PU9iamVjdCYmc2VsZixvPXJ8fGl8fEZ1bmN0aW9uKFwicmV0dXJuIHRoaXNcIikoKTt0LmV4cG9ydHM9b30sZnVuY3Rpb24odCxlLG4pe2Z1bmN0aW9uIHIodCxlLG4pe2Z1bmN0aW9uIHIoZSl7dmFyIG49eCxyPW07cmV0dXJuIHg9bT12b2lkIDAsRT1lLHc9dC5hcHBseShyLG4pfWZ1bmN0aW9uIGEodCl7cmV0dXJuIEU9dCxqPXNldFRpbWVvdXQoaCxlKSxNP3IodCk6d31mdW5jdGlvbiBsKHQpe3ZhciBuPXQtTyxyPXQtRSxpPWUtbjtyZXR1cm4gXz9jKGksZy1yKTppfWZ1bmN0aW9uIGQodCl7dmFyIG49dC1PLHI9dC1FO3JldHVybiB2b2lkIDA9PT1PfHxuPj1lfHxuPDB8fF8mJnI+PWd9ZnVuY3Rpb24gaCgpe3ZhciB0PW8oKTtyZXR1cm4gZCh0KT9wKHQpOnZvaWQoaj1zZXRUaW1lb3V0KGgsbCh0KSkpfWZ1bmN0aW9uIHAodCl7cmV0dXJuIGo9dm9pZCAwLFQmJng/cih0KTooeD1tPXZvaWQgMCx3KX1mdW5jdGlvbiB2KCl7dm9pZCAwIT09aiYmY2xlYXJUaW1lb3V0KGopLEU9MCx4PU89bT1qPXZvaWQgMH1mdW5jdGlvbiB5KCl7cmV0dXJuIHZvaWQgMD09PWo/dzpwKG8oKSl9ZnVuY3Rpb24gYigpe3ZhciB0PW8oKSxuPWQodCk7aWYoeD1hcmd1bWVudHMsbT10aGlzLE89dCxuKXtpZih2b2lkIDA9PT1qKXJldHVybiBhKE8pO2lmKF8pcmV0dXJuIGo9c2V0VGltZW91dChoLGUpLHIoTyl9cmV0dXJuIHZvaWQgMD09PWomJihqPXNldFRpbWVvdXQoaCxlKSksd312YXIgeCxtLGcsdyxqLE8sRT0wLE09ITEsXz0hMSxUPSEwO2lmKFwiZnVuY3Rpb25cIiE9dHlwZW9mIHQpdGhyb3cgbmV3IFR5cGVFcnJvcihmKTtyZXR1cm4gZT11KGUpfHwwLGkobikmJihNPSEhbi5sZWFkaW5nLF89XCJtYXhXYWl0XCJpbiBuLGc9Xz9zKHUobi5tYXhXYWl0KXx8MCxlKTpnLFQ9XCJ0cmFpbGluZ1wiaW4gbj8hIW4udHJhaWxpbmc6VCksYi5jYW5jZWw9dixiLmZsdXNoPXksYn12YXIgaT1uKDEpLG89big4KSx1PW4oMTApLGY9XCJFeHBlY3RlZCBhIGZ1bmN0aW9uXCIscz1NYXRoLm1heCxjPU1hdGgubWluO3QuZXhwb3J0cz1yfSxmdW5jdGlvbih0LGUsbil7dmFyIHI9big2KSxpPWZ1bmN0aW9uKCl7cmV0dXJuIHIuRGF0ZS5ub3coKX07dC5leHBvcnRzPWl9LGZ1bmN0aW9uKHQsZSxuKXtmdW5jdGlvbiByKHQsZSxuKXt2YXIgcj0hMCxmPSEwO2lmKFwiZnVuY3Rpb25cIiE9dHlwZW9mIHQpdGhyb3cgbmV3IFR5cGVFcnJvcih1KTtyZXR1cm4gbyhuKSYmKHI9XCJsZWFkaW5nXCJpbiBuPyEhbi5sZWFkaW5nOnIsZj1cInRyYWlsaW5nXCJpbiBuPyEhbi50cmFpbGluZzpmKSxpKHQsZSx7bGVhZGluZzpyLG1heFdhaXQ6ZSx0cmFpbGluZzpmfSl9dmFyIGk9big3KSxvPW4oMSksdT1cIkV4cGVjdGVkIGEgZnVuY3Rpb25cIjt0LmV4cG9ydHM9cn0sZnVuY3Rpb24odCxlKXtmdW5jdGlvbiBuKHQpe3JldHVybiB0fXQuZXhwb3J0cz1ufV0pfSk7IiwiaW1wb3J0IFNjcm9sbFdhdGNoIGZyb20gJy4vanMvU2Nyb2xsV2F0Y2gnXG5pbXBvcnQgRW50ZXJWaWV3ICAgZnJvbSAnLi9qcy9FbnRlclZpZXcnXG5cbmV4cG9ydCB7IFNjcm9sbFdhdGNoIH1cbmV4cG9ydCB7IEVudGVyVmlldyB9XG4iLCJpbXBvcnQgaW5WaWV3IGZyb20gJ2luLXZpZXcnXG5cbmluVmlldygnc2VjdGlvbicpXG5cdC5vbignZW50ZXInLCBlbCA9PiB7XG4gICAgICAgIGVsLmNsYXNzTGlzdC5hZGQoXCJ3aWxsLWNoYW5nZVwiKTtcbiAgICB9KVxuXHQub24oJ2V4aXQnLCBlbCA9PiB7XG4gICAgICAgIGVsLmNsYXNzTGlzdC5yZW1vdmUoXCJ3aWxsLWNoYW5nZVwiKTtcbiAgICB9KSIsIndpbmRvdy5hZGRFdmVudExpc3RlbmVyKCdzY3JvbGwnLCBmdW5jdGlvbihlKSB7XG5cdGxldCBib2R5ID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcignYm9keScpXG5cblx0aWYgKHdpbmRvdy5zY3JvbGxZKSB7XG5cdFx0Ym9keS5jbGFzc0xpc3QucmVtb3ZlKFwiYXQtdG9wXCIpOyBib2R5LmNsYXNzTGlzdC5hZGQoXCJpcy1zY3JvbGxlZFwiKVxuXHR9IGVsc2Uge1xuXHRcdGJvZHkuY2xhc3NMaXN0LmFkZChcImF0LXRvcFwiKTsgYm9keS5jbGFzc0xpc3QucmVtb3ZlKFwiaXMtc2Nyb2xsZWRcIilcblx0fVxufSlcbiJdfQ==
+},{}],17:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _registry = _interopRequireDefault(require("./registry"));
+
+var _viewport = require("./viewport");
+
+var _throttle = _interopRequireDefault(require("lodash/throttle"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+/**
+* Create and return the inView function.
+*/
+var inView = function inView() {
+  /**
+  * Fallback if window is undefined.
+  */
+  if (typeof window === 'undefined') return;
+  /**
+  * How often and on what events we should check
+  * each registry.
+  */
+
+  var interval = 100;
+  var triggers = ['scroll', 'resize', 'load'];
+  /**
+  * Maintain a hashmap of all registries, a history
+  * of selectors to enumerate, and an options object.
+  */
+
+  var selectors = {
+    history: []
+  };
+  var options = {
+    offset: {},
+    threshold: 0,
+    test: _viewport.inViewport
+  };
+  /**
+  * Check each registry from selector history,
+  * throttled to interval.
+  */
+
+  var check = (0, _throttle["default"])(function () {
+    selectors.history.forEach(function (selector) {
+      selectors[selector].check();
+    });
+  }, interval);
+  /**
+  * For each trigger event on window, add a listener
+  * which checks each registry.
+  */
+
+  triggers.forEach(function (event) {
+    return addEventListener(event, check);
+  });
+  /**
+  * If supported, use MutationObserver to watch the
+  * DOM and run checks on mutation.
+  */
+
+  if (window.MutationObserver) {
+    addEventListener('DOMContentLoaded', function () {
+      new MutationObserver(check).observe(document.body, {
+        attributes: true,
+        childList: true,
+        subtree: true
+      });
+    });
+  }
+  /**
+  * The main interface. Take a selector and retrieve
+  * the associated registry or create a new one.
+  */
+
+
+  var control = function control(selector, settings) {
+    if (typeof selector !== 'string') return; // Get an up-to-date list of elements.
+
+    var elements = [].slice.call(document.querySelectorAll(selector)); // If the registry exists, update the elements.
+
+    if (selectors.history.indexOf(selector) > -1) {
+      selectors[selector].elements = elements;
+    } // If it doesn't exist, create a new registry.
+    else {
+        var localOptions = options;
+
+        if (settings) {
+          localOptions.offset.top = settings.top ? settings.top : options.offset.top;
+          localOptions.offset.bottom = settings.bottom ? settings.bottom : options.offset.bottom;
+        }
+
+        selectors[selector] = (0, _registry["default"])(elements, options);
+        selectors.history.push(selector);
+      }
+
+    return selectors[selector];
+  };
+  /**
+  * Mutate the offset object with either an object
+  * or a number.
+  */
+
+
+  control.offset = function (o) {
+    if (o === undefined) return options.offset;
+
+    var isNum = function isNum(n) {
+      return typeof n === 'number';
+    };
+
+    ['top', 'right', 'bottom', 'left'].forEach(isNum(o) ? function (dim) {
+      return options.offset[dim] = o;
+    } : function (dim) {
+      return isNum(o[dim]) ? options.offset[dim] = o[dim] : null;
+    });
+    return options.offset;
+  };
+  /**
+  * Set the threshold with a number.
+  */
+
+
+  control.threshold = function (n) {
+    return typeof n === 'number' && n >= 0 && n <= 1 ? options.threshold = n : options.threshold;
+  };
+  /**
+  * Use a custom test, overriding inViewport, to
+  * determine element visibility.
+  */
+
+
+  control.test = function (fn) {
+    return typeof fn === 'function' ? options.test = fn : options.test;
+  };
+  /**
+  * Add proxy for test function, set defaults,
+  * and return the interface.
+  */
+
+
+  control.is = function (el) {
+    return options.test(el, options);
+  };
+
+  control.offset(0);
+  return control;
+}; // Export a singleton.
+
+
+var _default = inView();
+
+exports["default"] = _default;
+
+},{"./registry":19,"./viewport":20,"lodash/throttle":12}],18:[function(require,module,exports){
+"use strict";
+
+var _inView = _interopRequireDefault(require("./in-view.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+module.exports = _inView["default"];
+
+},{"./in-view.js":17}],19:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+/**
+* - Registry -
+*
+* Maintain a list of elements, a subset which currently pass
+* a given criteria, and fire events when elements move in or out.
+*/
+var inViewRegistry = /*#__PURE__*/function () {
+  function inViewRegistry(elements, options) {
+    _classCallCheck(this, inViewRegistry);
+
+    this.options = options;
+    this.elements = elements;
+    this.current = [];
+    this.handlers = {
+      enter: [],
+      exit: []
+    };
+    this.singles = {
+      enter: [],
+      exit: []
+    };
+  }
+  /**
+  * Check each element in the registry, if an element
+  * changes states, fire an event and operate on current.
+  */
+
+
+  _createClass(inViewRegistry, [{
+    key: "check",
+    value: function check() {
+      var _this = this;
+
+      this.elements.forEach(function (el) {
+        var passes = _this.options.test(el, _this.options);
+
+        var index = _this.current.indexOf(el);
+
+        var current = index > -1;
+        var entered = passes && !current;
+        var exited = !passes && current;
+
+        if (entered) {
+          _this.current.push(el);
+
+          _this.emit('enter', el);
+        }
+
+        if (exited) {
+          _this.current.splice(index, 1);
+
+          _this.emit('exit', el);
+        }
+      });
+      return this;
+    }
+    /**
+    * Register a handler for event, to be fired
+    * for every event.
+    */
+
+  }, {
+    key: "on",
+    value: function on(event, handler) {
+      this.handlers[event].push(handler);
+      return this;
+    }
+    /**
+    * Register a handler for event, to be fired
+    * once and removed.
+    */
+
+  }, {
+    key: "once",
+    value: function once(event, handler) {
+      this.singles[event].unshift(handler);
+      return this;
+    }
+    /**
+    * Emit event on given element. Used mostly
+    * internally, but could be useful for users.
+    */
+
+  }, {
+    key: "emit",
+    value: function emit(event, element) {
+      while (this.singles[event].length) {
+        this.singles[event].pop()(element);
+      }
+
+      var length = this.handlers[event].length;
+
+      while (--length > -1) {
+        this.handlers[event][length](element);
+      }
+
+      return this;
+    }
+  }]);
+
+  return inViewRegistry;
+}();
+
+var _default = function _default(elements, options) {
+  return new inViewRegistry(elements, options);
+};
+
+exports["default"] = _default;
+
+},{}],20:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.inViewport = inViewport;
+
+/**
+* Check whether an element is in the viewport by
+* more than offset px.
+*/
+function inViewport(element, options) {
+  var _element$getBoundingC = element.getBoundingClientRect(),
+      top = _element$getBoundingC.top,
+      right = _element$getBoundingC.right,
+      bottom = _element$getBoundingC.bottom,
+      left = _element$getBoundingC.left,
+      width = _element$getBoundingC.width,
+      height = _element$getBoundingC.height;
+
+  var intersection = {
+    t: bottom,
+    r: window.innerWidth - left,
+    b: window.innerHeight - top,
+    l: right
+  };
+  var threshold = {
+    x: options.threshold * width,
+    y: options.threshold * height
+  };
+  return intersection.t > options.offset.top + threshold.y && intersection.r > options.offset.right + threshold.x && intersection.b > options.offset.bottom + threshold.y && intersection.l > options.offset.left + threshold.x;
+}
+
+},{}]},{},[14]);

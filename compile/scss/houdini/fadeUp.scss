@@ -1,0 +1,18 @@
+
+.will-change .fade-up{
+	will-change: opacity, translate
+}
+
+.fade-up{
+
+	transform: translate(0, 40px);
+	opacity: 0;
+
+	transition: transform 400ms ease-out, opacity 700ms;
+
+	&.active{
+		transform: translate(0, 0);
+		opacity: 1;
+	}
+
+}

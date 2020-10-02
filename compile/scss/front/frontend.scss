@@ -1,5 +1,6 @@
 html {
-	background-color: #fefefe;
+	background-color: #0e0e0e;
+	color: #fefefe;
 }
 
 body{
@@ -13,8 +14,8 @@ body{
 	padding: 2em;
 }
 
-.nice-class:nth-child(even) { background: #cccccc }
-.nice-class:nth-child(odd)  { background: #fefefe }
+.nice-class:nth-child(even) { background: #1c1c1c; color: #fefefe; }
+.nice-class:nth-child(odd)  { background: #0e0e0e; color: #cccccc; }
 
 header{
 	background-color: transparent;
@@ -26,7 +27,7 @@ header{
 }
 
 .is-scrolled header{
-	background-color: #dedede;
+	background-color: #4e4e4e;
 }
 
 .will-change{
