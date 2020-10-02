@@ -44,10 +44,14 @@ If you want to change the backend
 `cd ..`  
 
 __install draggr__   
-If you want to change the frontend js  
-`cd draggrjs`  
+If you want to change the frontend js and css  
+`cd compile`  
 `npm install`  
 `cd ..` 
+
+And install sass globally if you didn't already have sass   
+`npm install -g sass`  
+
 
 On mac make sure de doodle folder is in the shared files.  
 ![file-share]  
