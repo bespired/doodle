@@ -18,6 +18,7 @@ return [
                 '{! header  !}',
                 '{! draggr-section--1 !}',
                 '{! draggr-section--2 !}',
+                '{! draggr-sticky !}',
                 '{! draggr-view !}',
                 '{! draggr-section--3 !}',
                 '{! footer  !}',

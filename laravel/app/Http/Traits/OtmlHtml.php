@@ -41,6 +41,12 @@ trait OtmlHtml
 
         $this->payload['visitor-id'] = $ovid;
 
+        $jsstat  = stat(public_path('js/bundle.js'));
+        $cssstat = stat(public_path('css/frontend.css'));
+
+        $this->payload['manifest-js']  = $jsstat[9];
+        $this->payload['manifest-css'] = $cssstat[9];
+
     }
 
     public function fetchVariableNames()

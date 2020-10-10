@@ -1,4 +1,5 @@
-import inView from './inView/index.js'
+import inView  from './inView/index.js'
+import Houdini from './Houdini/index.js'
 
 inView('section')
 	.on('enter', el => {
@@ -15,3 +16,6 @@ inView('[data-houdini]', { top: -200, bottom: 200 })
 	.on('exit', el => {
         el.classList.remove("active");
     })
+
+
+Houdini('[data-pinokio]')
