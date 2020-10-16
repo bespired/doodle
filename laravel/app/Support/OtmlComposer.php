@@ -3,6 +3,7 @@
 namespace App\Support;
 
 use App\Models\Eloquent\Content;
+use App\Models\Eloquent\Image;
 use App\Models\Eloquent\Otml;
 use Illuminate\Support\Str;
 
@@ -17,6 +18,7 @@ class OtmlComposer
     protected $stubnames;
     protected $loadnames;
     protected $varsnames;
+    protected $missing;
     protected $stubs;
     protected $pagedata;
 
@@ -36,6 +38,8 @@ class OtmlComposer
         $this->extractBrostages();
         $this->extractFillerNames();
 
+        // dd($this->output, $this->pagedata);
+
         $this->replaceFillers();
 
         // keep filling untill done...
@@ -47,6 +51,9 @@ class OtmlComposer
             $this->replaceStubs();
 
             $this->extractFillerNames();
+            $this->missingFillerNames();
+            $this->loadMissingFillers();
+
             $this->replaceFillers();
 
             $this->extractBrostages();
@@ -75,21 +82,33 @@ class OtmlComposer
 
         $websitename = 'website';
 
+        //
         $website = Content::query()
             ->whereName($websitename)
             ->whereType('website')
             ->firstOrFail();
 
+        //
         $content = Content::query()
             ->whereName($this->contentname)
             ->whereType('page')
             ->firstOrFail();
+
         $content = json_decode(json_encode($content->data), true);
 
+        if (!isset($content['page'])) {
+            $content = ['page' => $content];
+        }
+
+        //
+        $images    = Image::select(['name', 'url'])->get()->keyBy('name');
+        $imageurls = $images->map(function ($entry) {return $entry['url'];})->toArray();
+
         $system = [
+            'image'  => $imageurls,
             'site'   => (array) $website->data,
             'system' => [
-                'url'    => config('app.url') . '/' . $this->contentname,
+                'url'    => array_fallback($content, 'slug', config('app.url') . '/' . $this->contentname),
                 'date'   => date("Ymd"),
                 'time'   => date("H:i:s"),
                 'utc'    => time(),
@@ -189,6 +208,39 @@ class OtmlComposer
 
             }
         }
+
+        return $this;
+    }
+
+    public function missingFillerNames()
+    {
+
+        $this->missing = array_diff(
+            array_keys($this->varsnames),
+            array_keys($this->pagedata)
+        );
+
+        return $this;
+    }
+
+    public function loadMissingFillers()
+    {
+        if (count($this->missing) === 0) {
+            return;
+        }
+
+        $collection = Content::select('name', 'data')
+            ->whereIn('name', $this->missing)
+            ->get()
+            ->keyBy('name');
+
+        $content = $collection->map(function ($entry) {
+            return (array) $entry['data'];
+        })->toArray();
+
+        $this->pagedata = array_merge($this->pagedata, $content);
+
+        $this->missing = [];
         return $this;
     }
 
@@ -223,8 +275,9 @@ class OtmlComposer
             return '';
         }
 
+        // if request has past validation we can return the page:body
         if ($category . ':' . $key === 'page:body') {
-            return join("\n        ", $this->pagedata[$category][$key]);
+            return join("\n        ", $this->pagedata['page']['body']);
         }
 
         return $this->pagedata[$category][$key];

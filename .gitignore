@@ -2,7 +2,9 @@
 /draggrjs/node_modules
 /vuecli/node_modules
 /vuecli/dist
+/laravel/resources/demo
 /laravel/public/hot
+/laravel/app/Console/Commands/.php_cs.cache
 /laravel/bootstrap/cache/*
 /laravel/vendor
 /laravel/.env

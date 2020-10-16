@@ -15,8 +15,8 @@ if (!function_exists('pathslug')) {
         // I want to keep --
         // and slug doesnt allow me...
 
-        if ($str === '_') {
-            return '_';
+        if (($str === '_') or ($str === '/')) {
+            return $str;
         }
 
         do {
@@ -45,6 +45,22 @@ if (!function_exists('cacheTags')) {
     function cacheTags($tag1, $tag2)
     {
         return [$tag1, $tag2, tagCombi($tag1, $tag2)];
+    }
+}
+
+if (!function_exists('array_fallback')) {
+    function array_fallback($arr, $attribute, $fallback)
+    {
+
+        if (empty($arr)) {
+            return $fallback;
+        }
+
+        if (!isset($arr[$attribute])) {
+            return $fallback;
+        }
+
+        return $arr[$attribute];
     }
 }
 

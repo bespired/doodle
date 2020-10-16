@@ -51,6 +51,8 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
 
+        dd($exception);
+
         if (method_exists($exception, 'getStatusCode')) {
 
             switch ($exception->getStatusCode()) {
@@ -71,14 +73,16 @@ class Handler extends ExceptionHandler
             }
         }
 
-        if ($exception->getCode() == 0) {
-            return response()->json([
-                'error'   => 500,
-                'message' => $exception->getMessage(),
-                'file'    => $exception->getFile(),
-                'line'    => $exception->getLine(),
-                'trace'   => $exception->getTrace()[0],
-            ], 500);
+        if (method_exists($exception, 'getCode')) {
+            if ($exception->getCode() == 0) {
+                return response()->json([
+                    'error'   => 500,
+                    'message' => $exception->getMessage(),
+                    'file'    => $exception->getFile(),
+                    'line'    => $exception->getLine(),
+                    'trace'   => $exception->getTrace()[0],
+                ], 500);
+            }
         }
 
         return parent::render($request, $exception);
