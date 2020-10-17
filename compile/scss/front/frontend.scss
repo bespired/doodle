@@ -14,6 +14,14 @@ body{
 	padding: 2em;
 }
 
+.sane-size{
+	padding-left: 1em;
+	padding-right: 1em;
+	max-width: 640px;
+	margin-left: auto;
+    margin-right: auto;
+}
+
 .nice-class:nth-child(even) { background: #1c1c1c; color: #fefefe; }
 .nice-class:nth-child(odd)  { background: #0e0e0e; color: #cccccc; }
 

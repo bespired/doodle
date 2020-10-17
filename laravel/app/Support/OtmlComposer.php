@@ -5,6 +5,7 @@ namespace App\Support;
 use App\Models\Eloquent\Content;
 use App\Models\Eloquent\Image;
 use App\Models\Eloquent\Otml;
+use Illuminate\Mail\Markdown;
 use Illuminate\Support\Str;
 
 class OtmlComposer
@@ -58,6 +59,8 @@ class OtmlComposer
 
             $this->extractBrostages();
         }
+
+        $this->convertMarkdown();
 
         return $this->output;
     }
@@ -118,8 +121,6 @@ class OtmlComposer
 
         $this->pagedata = array_merge($system, $content);
 
-        // dd($this->pagedata);
-
         return $this;
     }
 
@@ -166,7 +167,7 @@ class OtmlComposer
         return $this;
     }
 
-    public function extractBrostages()
+    private function extractBrostages()
     {
         $this->brostages = [];
 
@@ -183,7 +184,7 @@ class OtmlComposer
         return $this;
     }
 
-    public function extractStubNames()
+    private function extractStubNames()
     {
         foreach ($this->brostages as $brostage => $locator) {
             if (strpos($brostage, ':') === false) {
@@ -197,7 +198,7 @@ class OtmlComposer
         return $this;
     }
 
-    public function extractFillerNames()
+    private function extractFillerNames()
     {
         foreach ($this->brostages as $brostage => $locator) {
             if (strpos($brostage, ':') !== false) {
@@ -212,7 +213,7 @@ class OtmlComposer
         return $this;
     }
 
-    public function missingFillerNames()
+    private function missingFillerNames()
     {
 
         $this->missing = array_diff(
@@ -223,7 +224,7 @@ class OtmlComposer
         return $this;
     }
 
-    public function loadMissingFillers()
+    private function loadMissingFillers()
     {
         if (count($this->missing) === 0) {
             return;
@@ -244,7 +245,34 @@ class OtmlComposer
         return $this;
     }
 
-    public function getStubData($stub)
+    private function convertMarkdown()
+    {
+        if (!$this->hasMarkdown()) {
+            return;
+        }
+
+        $re = '/\<markdown\>([\s\S]*?)\<\/markdown\>/m';
+        preg_match_all($re, $this->output, $matches, PREG_SET_ORDER, 0);
+
+        foreach ($matches as $match) {
+            $replace  = $match[0];
+            $markdown = $match[1];
+            $markdown = str_replace('    ', "  \n\n", $markdown);
+
+            $html = Markdown::parse($markdown);
+
+            $this->output = str_replace($replace, $html, $this->output);
+
+        }
+
+    }
+
+    private function hasMarkdown()
+    {
+        return strpos($this->output, '<markdown>') > 0;
+    }
+
+    private function getStubData($stub)
     {
 
         // rename instances to root name of the stub
@@ -264,7 +292,7 @@ class OtmlComposer
 
     }
 
-    public function getPageData($category, $key)
+    private function getPageData($category, $key)
     {
 
         if (!isset($this->pagedata[$category])) {
