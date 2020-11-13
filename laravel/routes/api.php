@@ -21,6 +21,11 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
     Route::get('templates/{fulltype}/schema', 'JsonApi\TemplateController@schema');
 
+    Route::get('dson/{language}/{pageslug}', 'JsonApi\PageController@dson');
+    Route::get('template/widget/{pageslug}', 'JsonApi\PageController@widget');
+
+    Route::get('templates/page/index', 'JsonApi\PageController@index');
+
     Route::get('templates/{fulltype}/index', 'JsonApi\TemplateController@index');
 
     Route::post('templates/{fulltype}/save', 'JsonApi\TemplateController@save');

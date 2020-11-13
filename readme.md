@@ -17,7 +17,7 @@ Docker boilerplate with traefik 2, laravel 6, vue-cli and doodle-design
 > node 11.10.1  
 > npm 6.14.5  
 > sass 1.26.11  
-  
+
 > Results in:  
 > traefik 2.2.1  
 > php 7.2  
@@ -25,7 +25,7 @@ Docker boilerplate with traefik 2, laravel 6, vue-cli and doodle-design
 > laravel v6.18.40  
 > vuejs 2.6  
 > babel 7  
-  
+
 so no https.  
 
 __git clone__  
@@ -59,7 +59,7 @@ On mac make sure de doodle folder is in the shared files.
 Build the server  
 `docker-compose build`  
 (only needed the first time you start the server)  
-  
+
 Start the php server for laravel install  
 `docker-compose up doodle_php`  
 
@@ -70,12 +70,12 @@ Use php version 7.2 in container to install Laravel 6
 
 `docker-compose stop`
 
-
 Start the full system 
 `docker-compose up -d`  
-  
+
 `docker/ps `
-```
+
+```bash
 CONTAINER           NAMES               IMAGE       
 e428d8bd5xxx:       traefik             traefik:v2.2          
 6b65d00a7xxx:       doodle_api          nginx:alpine          
@@ -84,7 +84,6 @@ f07a2c093xxx:       doodle_php          draggr_doodle_php
 13d08027exxx:       doodle_mysql        mysql:8               
 64dfa0c56xxx:       doodle_redis        redis:alpine          
 ```
-
 
 __view__
 Traefik:  
@@ -104,7 +103,7 @@ Develop doodle with:
 `cd doodle/vuecli`  
 `npm run serve`  
 http://localhost:8020/admin  
- 
+
 __develop draggr js__  
 `cd doodle/compile`  
 `npm run watch`  
@@ -121,7 +120,7 @@ docker/doexec doodle_php php artisan *command*
 
 __Doodle welcome:__  
 http://localhost/admin  
-  
+
 frontend welcome:  
 http://localhost/page  
 

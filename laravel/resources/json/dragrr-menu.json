@@ -61,21 +61,16 @@
 },
 {
 	"alias": "main2",
-	"label": "Menu2",
+	"label": "Pages",
 	"chapters": [
 	{
 		"alias": "main2.chapter1",
-		"label": "Chapter 1",
+		"label": "Content",
 		"items": [
 		{
-			"alias": "main2.chapter1.form",
-			"label": "Item",
-			"location": ""
-		},
-		{
-			"alias": "main2.chapter1.partials",
-			"label": "Item",
-			"location": ""
+			"alias": "main2.chapter1.attach",
+			"label": "Attach",
+			"location": "/admin/page-contents"
 		}]
 	},
 	{
@@ -95,7 +90,7 @@
 	},
 	{
 		"alias": "main2.chapter3",
-		"label": "Chapter 3",
+		"label": "Pages",
 		"items": [
 		{
 			"alias": "main2.chapter3.website",

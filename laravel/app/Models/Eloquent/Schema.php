@@ -6,7 +6,7 @@ use App\Models\Traits\HasHandleId;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Content extends Model
+class Schema extends Model
 {
 
     use HasHandleId;
@@ -14,11 +14,11 @@ class Content extends Model
 
     protected $fillable = [
         'handle', 'name', 'label', 'type', 'status',
-        'pathslug', 'data', 'language',
+        'pathslug', 'data',
     ];
 
     protected $casts = [
-        'data' => 'object',
+        'data' => 'array',
     ];
 
 }

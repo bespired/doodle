@@ -14,7 +14,7 @@ Vue.mixin({
 		camelcase:  str => Helpers.camelcase(str),
 		pascalcase: str => Helpers.pascalcase(str),
 		capitalize: str => Helpers.pascalcase(str),
-		clone:      obj => {
+		clonedub:   obj => {
 			if (typeof obj === 'function') return obj
 			return JSON.parse(JSON.stringify(obj))
 		},

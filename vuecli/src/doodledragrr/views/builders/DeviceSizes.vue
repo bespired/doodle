@@ -1,6 +1,6 @@
 <template>
 	<div class="od-window-header">
-		<od-button function="radio" smodel="devicesize" value="mobile"  icons="mobile"   class="push-middle square"/>
+		<od-button function="radio" smodel="devicesize" value="mobile"  icons="mobile"   class="push-right square"/>
     	<od-button function="radio" smodel="devicesize" value="tablet"  icons="tablet"   class="square"/>
     	<od-button function="radio" smodel="devicesize" value="desktop" icons="desktop"  class="square"/>
     	<od-button function="radio" smodel="devicesize" value="xlarge"  icons="desktop"  class="square"/>

@@ -49,6 +49,9 @@ trait Upload
         curl_close($curl);
 
         $json = json_decode($response);
+        if (json_last_error()) {
+            dd(json_last_error());
+        }
 
         $this->response = $json->data;
 

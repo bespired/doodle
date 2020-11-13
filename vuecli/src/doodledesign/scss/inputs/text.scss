@@ -54,6 +54,19 @@
         max-height: $input-height;
     }
 
+    &.mini {
+        margin-top: 4px;
+        margin-bottom: 4px;
+        .input-row{
+            min-height: 24px;
+            max-height: 24px;
+        }
+        label[for].placeholder.inset {
+            transform: scale(1.0) translateY(16px) translateX(8px);
+        }
+    }
+
+
     .input-row.input-slider {
         position: relative;
         background-color: white;
@@ -115,6 +128,7 @@
                 pointer-events: none;
             }
         }
+
     }
 
     .input-row.input-slider.numberless {
@@ -138,7 +152,10 @@
         transition: transform 200ms linear, margin-left 200ms linear, font-weight 200ms;
 
         &.inset {
-            transform: scale(.9) translateY(18px) translateX(8px);
+            transform: scale(0.8) translateY(4px) translateX(8px);
+            line-height: 0;
+            display: block;
+            opacity: 0.8;
         }
 
         &.placeholder {
@@ -146,15 +163,19 @@
             color: lighten($color-font, 20%);
             transform: scale(1.2) translateY(25px) translateX(8px);
         }
+        &.placeholder.inset {
+            transform: scale(1.2) translateY(18px) translateX(8px);
+            &:before { width: 0%; }
+        }
     }
 
     .inset:before {
         content: "";
-        bottom: 10px;
+        bottom: -3px;
         position: absolute;
         background-color: #fefefe;
-        height: 2px;
-        width: 100%;
+        height: 4px;
+        width: 120%;
         z-index: -1;
     }
 
@@ -238,6 +259,8 @@
         outline: 0;
         background-color: #fff;
         background-color: vc('input-bg');
+
+        width: 100%;
 
         &:focus {
             border-color: vc(border-focus);

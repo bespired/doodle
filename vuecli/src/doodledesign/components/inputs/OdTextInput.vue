@@ -9,7 +9,7 @@
                 :id="$options.namedId"
                 :required="isRequired"
                 :type="type"
-                autocomplete="new-password"
+                :autocomplete="autocompleter"
                 v-model="modelValue"
                 @focus="focusLabel(true)"
                 @blur="focusLabel(false)"
@@ -32,6 +32,7 @@ export default {
         value:        { type: String,  default: null  },
         label:        { type: String,  default: null  },
         inset:        { type: Boolean, default: false },
+        mini:         { type: Boolean, default: false },
 
         required:     { type: Boolean, default: false },
         autocomplete: { type: String,  default: null },
@@ -105,10 +106,11 @@ export default {
             let classes = []
             let prefixer = this.prefix  === null ? 0 : this.prefix.length
             let prefixLength = Math.max(this.minWidth, Math.ceil(prefixer / 3))
-            classes.push(this.prefix  === null ? '' : 'prefix')
-            classes.push(this.postfix === null ? '' : 'postfix')
-            classes.push(this.clear   === null ? '' : 'clear')
-            classes.push(this.prefix  === null ? '' : 'prefix-' + prefixLength)
+            classes.push(this.prefix  === null  ? '' : 'prefix')
+            classes.push(this.postfix === null  ? '' : 'postfix')
+            classes.push(this.clear   === null  ? '' : 'clear')
+            classes.push(this.mini    === false ? '' : 'mini')
+            classes.push(this.prefix  === null  ? '' : 'prefix-' + prefixLength)
             return classes.join(' ')
         },
 

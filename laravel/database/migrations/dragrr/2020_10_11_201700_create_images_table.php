@@ -35,7 +35,7 @@ class CreateImagesTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('contents', function (Blueprint $table) {
+        Schema::table('images', function (Blueprint $table) {
             $table->unique(['name', 'deleted_at']);
         });
 

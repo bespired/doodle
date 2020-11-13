@@ -1,10 +1,11 @@
 import Vue       from 'vue'
 import Vuex      from 'vuex'
 import DragrrApi from '../packages/dragrr'
+import PageLoad  from '../packages/pageload'
 
 Vue.use(Vuex)
 
-import Helpers from '../../helpers.js'
+import Helpers   from '../../helpers.js'
 
 export default {
 
@@ -13,48 +14,71 @@ export default {
     state: {
         mainDragrr: true,
 
+        pageLoad: new PageLoad(),
+
         apis: {
             dragrrApi: new DragrrApi(),
         },
 
-        // classTemplates:  null,
-        // classTemplateId: null,
+        classTemplates:    null,
+        classTemplateId:   null,
         // or
-        classTemplates:  { fonts: null, sizes: null, borders: null },
-        classTemplateId: { fonts: null, sizes: null, borders: null },
+        // classTemplates:  { fonts: null, sizes: null, borders: null },
+        // classTemplateId: { fonts: null, sizes: null, borders: null },
 
         elementTemplates:  null,
         elementTemplateId: null,
 
-        layoutTemplates:  null,
-        layoutTemplateId: null,
+        layoutTemplates:   null,
+        layoutTemplateId:  null,
 
         sectionTemplates:  null,
         sectionTemplateId: null,
 
-        themeTemplates:  null,
-        themeTemplateId: null,
+        themeTemplates:    null,
+        themeTemplateId:   null,
 
-        widgetTemplates:  null,
-        widgetTemplateId: null,
+        widgetTemplates:   null,
+        widgetTemplateId:  null,
 
-        currentTemplate: null,
+        pageTemplates:     null,
+        pageTemplateId:    null,
 
-        settings: {},
+        currentTemplate:   null,
+
+        htmlPage:          null,
+        dsonPage:          null,
+        dsonStub:          null,
+        dsonSchema:        null,
+
+        settings:          {},
+        dragging:          null,
+
+        elements: {
+            text:     { attrib: "", input: "text",     label: "", width: 100 },
+            markdown: { attrib: "", input: "markdown", label: "", width: 100 },
+            image:    { attrib: "", input: "image",    label: "", width: 100 },
+            button:   { attrib: "", input: "button",   label: "", width: 100 },
+        },
 
     },
 
 
     getters: {
-        // this template has sub areas... multiple views, but saved in same DB table.
-        getClassTemplates:   (state) => area => { return state.classTemplates[area] },
 
+        getClassTemplates:   (state) => { return state.classTemplates   },
+        getPageTemplates:    (state) => { return state.pageTemplates    },
         getElementTemplates: (state) => { return state.elementTemplates },
         getLayoutTemplates:  (state) => { return state.layoutTemplates  },
         getSectionTemplates: (state) => { return state.sectionTemplates },
         getThemeTemplates:   (state) => { return state.themeTemplates   },
         getWidgetTemplates:  (state) => { return state.widgetTemplates  },
-
+        getHtmlPage:         (state) => { return state.htmlPage         },
+        getDsonPage:         (state) => { return state.dsonPage         },
+        getDsonStub:         (state) => { return state.dsonStub         },
+        getDsonSchema:       (state) => { return state.dsonSchema       },
+        getDragging:         (state) => { return state.dragging         },
+        getElements:         (state) => { return state.elements         },
         currentTemplate:     (state) => {
             if ( state.currentTemplate  === null ) return null
             if ( state.currentTemplate.error !== undefined ) {
@@ -63,7 +87,8 @@ export default {
             return state.currentTemplate
         },
 
-        getSetting:(state) => name =>{
+
+        getSetting:  (state) => name =>{
             if ( state.settings[name] === null ) return null
             return state.settings[name]
         },
@@ -86,50 +111,79 @@ export default {
         setSetting(state, payload)  {
             Vue.set(state.settings, payload.source, payload.items)
         },
+        setDragging(state, value) {
+            console.log('setDragging(state, value)' , value)
+            state.dragging = value
+        },
+        swapDropped(state, payload)  {
+            // find the damn thing in the DOM for g*d sake.
+            let idx = 0, found = null, atIdx = null
+            payload.to.children.forEach((child) => {
+                if ( child.classList, child.classList.contains('select') ) {
+                    found = child
+                    atIdx = idx
+                }
+                idx++
+            })
+
+            const rowId = payload.to.dataset.row
+            const elemName = `.dropzone [data-type="${found.dataset.type}"]`
+
+            let elm = document.querySelector(elemName)
+            if (elm){
+                // only change if found
+                elm.remove()
+
+                // splice the type on the right spot...
+                let handle = state.currentTemplate.elements[rowId]
+                handle.splice( atIdx, 0, state.elements[found.dataset.type])
+
+                // adjust the widths...
+                handle.forEach((e) => {
+                    let w = handle.length === 3 ? 33 : 100 / handle.length
+                    e.width = Math.floor(w)
+                })
+            }
+
+        },
         // General for Layout and Section and ...
         setTemplates(state, payload)  {
-            if ( payload.area !== undefined ){
-                state[`${payload.source}Templates`][payload.area]= payload.templates
-            }else{
-                state[`${payload.source}Templates`] = payload.templates
-            }
+            state[`${payload.source}Templates`] = payload.templates
         },
         addTemplate(state, payload)    {
             const stateTemplates = `${payload.source}Templates`
-            if ( payload.area !== undefined ){
-                state[stateTemplates][payload.area].push(payload.template)
-            }else{
-                state[stateTemplates].push(payload.template)
-            }
+            state[stateTemplates].push(payload.template)
         },
         removeTemplates(state, payload){
             const stateTemplates = `${payload.source}Templates`
-            if ( payload.area !== undefined ){
-                payload.removedHandles.forEach((h)=>{
-                    state[stateTemplates][payload.area].forEach((t, i)=>{
-                        if ( t.handle === h )  {
-                            state[stateTemplates][payload.area].splice(i, 1)
-                        }
-                    })
+            payload.removedHandles.forEach((h)=>{
+                state[stateTemplates].forEach((t, i)=>{
+                    if ( t.handle === h )  {
+                        state[stateTemplates].splice(i, 1)
+                    }
                 })
-            }else{
-                payload.removedHandles.forEach((h)=>{
-                    state[stateTemplates].forEach((t, i)=>{
-                        if ( t.handle === h )  {
-                            state[stateTemplates].splice(i, 1)
-                        }
-                    })
-                })
-            }
+            })
+        },
+        setHtmlPage(state, html) {
+            state.htmlPage = state.pageLoad.fixHtml(html)
+        },
+        setDsonPage(state, dson) {
+            state.dsonPage = dson
+        },
+        setDsonStub(state, dson) {
+            state.dsonStub = dson
+        },
+        setDsonSchema(state, schema) {
+            state.dsonSchema = schema
         },
 
         // Current
         touchCurrentTemplate(state) { state.currentTemplate.updated_at = new Date() },
         clearCurrentTemplate(state) { state.currentTemplate = null },
         setCurrentTemplate(state, payload) {
-            const handle         = payload.handle
             const stateTemplates = `${payload.source}Templates`
-            const templates      = (payload.area === undefined) ? state[stateTemplates] : state[stateTemplates][payload.area]
+            const handle         = payload.handle
+            const templates      = state[stateTemplates]
 
             state.currentTemplate = null;
             if ( templates === null ) return
@@ -158,55 +212,30 @@ export default {
 
         getTemplatedTemplates(context, payload){
             const source    = payload.source
-            const area      = payload.area
             const stateName = `${payload.source}Templates`
             const stateId   = `${payload.source}TemplateId`
 
-            if ( area !== undefined ){
+            if ( payload.force || context.state[stateName] === null ){
+                context.state.apis.dragrrApi.getTemplates(source)
+                .then( result => {
+                    context.commit('setTemplates', { source: source, templates: result })
 
-                if ( payload.force || context.state[stateName][area] === null ){
-                    context.state.apis.dragrrApi.getTemplates(source, area)
-                    .then( result => {
-                        context.commit('setTemplates', { source: source, area: area, templates: result })
-                        if (context.state[stateId][area]){
-                            context.commit('setCurrentTemplate', {
-                                source: source,
-                                area: area,
-                                handle: context.state[stateId][area]
-                            })
-                            context.state[stateId][area] = null
-                        }
-                    })
-                }
+                    if (context.state[stateId]){
+                        context.commit('setCurrentTemplate', { source: source, handle: context.state[stateId] })
+                        context.state[stateId] = null
+                    }
 
-            }else{
-
-                if ( payload.force || context.state[stateName] === null ){
-                    context.state.apis.dragrrApi.getTemplates(source)
-                    .then( result => {
-                        context.commit('setTemplates', { source: source, area: area, templates: result })
-                        if (context.state[stateId]){
-                            context.commit('setCurrentTemplate', { source: source, area: area, handle: context.state[stateId] })
-                            context.state[stateId] = null
-                        }
-                    })
-                }
+                })
             }
         },
 
         setCurrentTemplate(context, payload){
             const handle    = payload.handle
             const source    = payload.source
-            const area      = payload.area
             const stateName = `${payload.source}Templates`
             const stateId   = `${payload.source}TemplateId`
             let templates   = context.state[stateName]
             let templateId  = context.state[stateId]
-
-            if ( area !== undefined ){
-                templates  = templates[area]
-                templateId = templateId[area]
-            }
 
             // load all referenced templates...
             if (( source === 'section' ) && ( context.state.layoutTemplates === null ))
@@ -216,10 +245,9 @@ export default {
                 context.dispatch('getTemplatedTemplates', { source: 'element', force: true })
 
             if (templates === null) {
-                templateId= handle
+                if (handle) context.state[stateId] = handle
                 context.dispatch('getTemplatedTemplates', {
                     source: source,
-                    area  : area,
                     force : true
                 })
                 return
@@ -247,7 +275,6 @@ export default {
         deleteTemplates(context, payload){
             context.commit('removeTemplates', {
                 source: payload.source,
-                area: payload.area,
                 removedHandles: payload.handles
             })
             context.state.apis.dragrrApi.deleteTemplates(payload.source, payload.handles)
@@ -255,7 +282,7 @@ export default {
                 context.commit('doodlegui/clearIndexSelected', null, {root:true})
                 context.dispatch('doodlegui/addNamedAlertPanel', 'deleted', {root:true})
             })
-            .catch((cancel) => {
+            .catch( cancel => {
                 context.dispatch('doodlegui/addNamedAlertPanel', 'no-delete', {root:true})
             })
         },
@@ -267,18 +294,17 @@ export default {
                 context.dispatch('getTemplatedTemplates', { source: payload.source, force: true })
                 context.dispatch('doodlegui/addNamedAlertPanel', 'duplicated', {root:true})
             })
-            .catch((cancel) => {
+            .catch( cancel => {
                 context.dispatch('doodlegui/addNamedAlertPanel', 'error', {root:true})
             })
         },
 
         createTemplate(context, payload){
-            context.state.apis.dragrrApi.createTemplate(payload.source, payload.area)
+            context.state.apis.dragrrApi.createTemplate(payload.source)
             .then( result => {
                 context.dispatch('doodlegui/addNamedAlertPanel', 'created', {root:true})
                 context.commit('addTemplate', {
                     source: payload.source,
-                    area: payload.area,
                     template: result.data
                 })
             })
@@ -289,9 +315,38 @@ export default {
             .then( result => {
                 context.dispatch('doodlegui/addNamedAlertPanel', 'saved', {root:true})
             })
-            .catch((cancel) => {
+            .catch( cancel => {
                 context.dispatch('doodlegui/addNamedAlertPanel', 'error', {root:true})
             })
+        },
+
+        loadOtml(context, pathslug) {
+            context.state.apis.dragrrApi.loadOtml(pathslug)
+                .then(  result => { context.commit('setHtmlPage', result); })
+                .catch( cancel => { context.dispatch('doodlegui/addNamedAlertPanel', 'error', {root:true}) })
+        },
+
+        loadDson(context, payload) {
+             if (payload.type === 'page') {
+                context.state.apis.dragrrApi.loadDson(payload.name, payload.language)
+                    .then(  result => { context.commit('setDsonPage', result); })
+                    .catch( cancel => { context.dispatch('doodlegui/addNamedAlertPanel', 'error', {root:true}) })
+            }else{
+
+                context.state.apis.dragrrApi.loadDson(payload.name, payload.language)
+                    .then(  result => { context.commit('setDsonStub', result); })
+                    .catch( cancel => { context.dispatch('doodlegui/addNamedAlertPanel', 'error', {root:true}) })
+
+                context.state.apis.dragrrApi.loadSchema(payload.name, payload.language)
+                    .then(  result => { context.commit('setDsonSchema', result); })
+                    .catch( cancel => { context.dispatch('doodlegui/addNamedAlertPanel', 'error', {root:true}) })
+
+            }
+        },
+
+        loadPage(context, pathslug) {
+            context.dispatch('loadOtml', pathslug)
+            context.dispatch('loadDson', { name: pathslug, type: 'page' })
         }
 
     },

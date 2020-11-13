@@ -26,38 +26,31 @@ export default {
 	components: { BuilderMenu },
 
 	data(){
-		const area = this.$router.currentRoute.params.area
 		let route  = document.location.pathname.replace('/admin', '')
-
-		if (area !== undefined) route = route.replace('-builders/', '-builder/')
 
 		return {
 			route: route,
-			area : area,
 		}
 	},
 
 	mounted() {
 		const source= this.index.split('-')[0]
 		this.$store.dispatch('dragrr/getTemplatedTemplates', {
-			source: source, area: this.area, force: false
+			source: source, force: false
 		})
 	},
 
 	beforeUpdate() {
 		const source= this.index.split('-')[0]
 		this.$store.dispatch('dragrr/getTemplatedTemplates', {
-			source: source, area: this.area, force: false
+			source: source, force: false
 		})
 	},
 
 	computed: {
 		thumbs() {
-			if ( this.area ){
-				return this.$store.getters[`dragrr/get${this.index.pascalcase()}`](this.area)
-			}else{
-				return this.$store.getters[`dragrr/get${this.index.pascalcase()}`]
-			}
+			console.log('==>', `dragrr/get${this.index.pascalcase()}`)
+			return this.$store.getters[`dragrr/get${this.index.pascalcase()}`]
 		}
 	},
 

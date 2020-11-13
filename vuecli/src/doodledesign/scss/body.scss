@@ -1,26 +1,13 @@
 @import url($font-family-url);
 
-#app:before{
-    content: "";
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-repeat: no-repeat;
-    background-size: 100% $heroimage-height;
-    background-size: cover;
-    background-position: 0 $mainheader-height;
-    filter: saturate(70%) hue-rotate(-10deg);
-
-};
-
 body {
     min-height: 100vh;
     background-color: black;
-    // background-image: $image-url-home-doodle-1;
+    background-image: $image-url-home-doodle-1;
     background-repeat: no-repeat;
     background-size: 100% $heroimage-height;
     background-size: cover;
-    background-position: 0 $mainheader-height;
+    background-position: 50% 0%;
 
     font-family: $font-family-primary;
     font-size: $font-size;
@@ -29,7 +16,8 @@ body {
 
 
     .full-height {
-        min-height: 100vh;
+        min-height: calc(100vh - #{$mainheader-height});
+        max-height: calc(100vh - #{$mainheader-height});
     }
 
     .full-width {
@@ -46,14 +34,13 @@ body {
 }
 
 
-#app:before { background-image: $image-url-home-doodle-1 }
 
 @media (min-width: $media-small){
-    #app:before { background-image: $image-url-home-doodle-2 }
+    body { background-image: $image-url-home-doodle-2 }
 }
 
 @media (min-width: $media-medium){
-    #app:before { background-image: $image-url-home-doodle-3 }
+    body { background-image: $image-url-home-doodle-3 }
 }
 
 

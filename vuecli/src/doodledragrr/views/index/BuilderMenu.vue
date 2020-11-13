@@ -39,18 +39,11 @@ export default {
 	},
 
 	data(){
-
 		const route = document.location.pathname.replace('/admin', '')
-		const area  = this.$router.currentRoute.params.area
-
-		console.log( 'builder-menus', this.items, this.index , area )
-
 		return {
 			source: this.index.replace('-templates', ''),
-			area  : area
 		}
 	},
-
 
 	computed: {
 		selectedIndex(){
@@ -65,7 +58,6 @@ export default {
 		create(){
 			this.$store.dispatch('dragrr/createTemplate', {
 				source: this.source,
-				area:   this.area,
 			})
 		},
 		duplicate(){
@@ -99,7 +91,6 @@ export default {
 				if (confirm){
 					this.$store.dispatch('dragrr/deleteTemplates', {
 						source:  this.source,
-						area:    this.area,
 						handles: this.selectedIndex
 					})
 				}

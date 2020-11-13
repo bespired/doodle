@@ -1,6 +1,6 @@
 <template>
     <section class="full-height">
-        <od-split3-window sizes="small,large,small" types="drag,drop,props" >
+        <od-split3-window sizes="small,half,small" types="drag,drop,props" >
             <template #title        >Builder</template>
             <template #subtitle     >{{ $router.currentRoute.name }}</template>
             <template #leftMenu      ><router-view name="leftMenu"      /></template>

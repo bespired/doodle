@@ -4,9 +4,12 @@
     "description": "Write ES6 frontend functions for draggr",
     "main": "index.js",
     "scripts": {
-        "build": "browserify src/index.js -o ../laravel/public/js/bundle.js",
-        "watch": "watchify src/index.js -d -o ../laravel/public/js/bundle.js -v",
-        "sass": "sass --watch --style=compressed scss/index.scss ../laravel/public/css/frontend.css"
+        "front-build": "browserify frontend/src/index.js -o ../laravel/public/js/bundle.js",
+        "front-watch": "watchify frontend/src/index.js -d -o ../laravel/public/js/bundle.js -v",
+        "front-sass": "sass --watch --style=compressed frontend/scss/index.scss ../laravel/public/css/frontend.css",
+        "back-build": "browserify backend/src/index.js -o ../laravel/public/js/dragrr.js",
+        "back-watch": "watchify backend/src/index.js -d -o ../laravel/public/js/dragrr.js -v",
+        "back-sass": "sass --watch --style=compressed backend/scss/index.scss ../laravel/public/css/backend.css"
     },
     "keywords": [
         "frontend"

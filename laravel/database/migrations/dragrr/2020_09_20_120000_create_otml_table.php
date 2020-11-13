@@ -34,8 +34,6 @@ class CreateOtmlTable extends Migration
             $table->unique(['pathslug', 'deleted_at']);
         });
 
-        Artisan::call('dragrr:config:otml');
-
     }
 
     /**

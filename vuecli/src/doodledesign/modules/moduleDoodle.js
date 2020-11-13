@@ -176,6 +176,7 @@ export default {
             })
         },
         addAlertPanel(state, payload) {
+            if ( payload === undefined ) return
             let now = new Date().getTime()
             payload.id = Helpers.uuid(payload.title)
             payload.created_at = now

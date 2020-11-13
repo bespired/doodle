@@ -33,7 +33,7 @@ class CreateWidgetTemplatesTable extends Migration
             $table->unique(['name', 'deleted_at']);
         });
 
-        Artisan::call('dragrr:config:widgets');
+        // Artisan::call('dragrr:config:widgets');
 
     }
 

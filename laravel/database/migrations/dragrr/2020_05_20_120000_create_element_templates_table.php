@@ -35,7 +35,7 @@ class CreateElementTemplatesTable extends Migration
             $table->unique(['name', 'deleted_at']);
         });
 
-        Artisan::call('dragrr:config:elements');
+        // Artisan::call('dragrr:config:elements');
 
     }
 

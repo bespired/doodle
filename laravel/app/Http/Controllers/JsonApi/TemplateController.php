@@ -44,26 +44,26 @@ class TemplateController extends Controller
         return response()->json($create);
     }
 
-    public function area($type, $area)
-    {
-        $Model = sprintf('\App\Models\Eloquent\Templated%s', ucfirst($type));
+    // public function area($type, $area)
+    // {
+    //     $Model = sprintf('\App\Models\Eloquent\Templated%s', ucfirst($type));
 
-        $count  = $Model::count();
-        $schema = $Model::query()
-            ->whereType('schema')
-            ->whereArea($area)
-            ->exclude(['handle'])
-            ->first()
-            ->toArray();
+    //     $count  = $Model::count();
+    //     $schema = $Model::query()
+    //         ->whereType('schema')
+    //         ->whereArea($area)
+    //         ->exclude(['handle'])
+    //         ->first()
+    //         ->toArray();
 
-        $create         = $Model::create($schema);
-        $create->name   = rand(100, 999) . '-' . substr(time(), -9) . '-' . $area . '-' . $count;
-        $create->type   = 'template';
-        $create->status = 'new';
-        $create->save();
+    //     $create         = $Model::create($schema);
+    //     $create->name   = rand(100, 999) . '-' . substr(time(), -9) . '-' . $area . '-' . $count;
+    //     $create->type   = 'template';
+    //     $create->status = 'new';
+    //     $create->save();
 
-        return response()->json($create);
-    }
+    //     return response()->json($create);
+    // }
 
     public function index($fulltype)
     {

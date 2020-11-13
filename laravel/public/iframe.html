@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    	<style>
+    		:root {
+  				--border-color : #d6d6d6;
+  				--neutral-color: #d6d6d6;
+			}
+    		body {
+    			background-color: var(--neutral-color);
+    			padding         : 0; margin: 0;
+    		}
+    		.browser {
+    			position   : absolute;
+    			width      : calc(100vw - 400px);
+    			height     : calc(100vh -  80px);
+    			top        :  30px;
+    			left       : 370px;
+    			box-shadow : 0px 0px 21px 0px rgba(0,0,0,0.25);
+    		}
+    		iframe{
+    			border     : 0;
+    			width      : 100%;
+    			height     : 100%;
+    		}
+    	</style>
+    </head>
+    <body>
+
+    	<div class="browser">
+			<iframe src="" id="content"></iframe>
+   		</div>
+
+   		<script type="text/javascript">
+			window.onload = function() {
+			    let xhr = window.XMLHttpRequest ? new XMLHttpRequest : new ActiveXObject("Microsoft.XMLHTTP");
+			    let location = `${document.location.protocol}//${document.location.host}`
+
+			    console.log(location)
+
+			    xhr.open("GET", `${location}/josette-gevers`, false);
+			    xhr.onreadystatechange = function() {
+			        if (xhr.readyState === 4) {
+
+						let   regex = ''
+						let   subst = ''
+						let   html   = xhr.responseText
+
+						regex = /( href="\/fav)/gm
+						subst = ` href="${location}/fav`
+						html  = html.replace(regex, subst)
+
+						regex = /(\ src="js\/|\ src="\/js\/|\ src="\.\/js\/)/gm
+						subst = ` src="${location}/js/`
+						html  = html.replace(regex, subst)
+
+						regex = /(\ href="css\/|\ href="\/css\/|\ href="\.\/css\/)/gm
+						subst = `href="${location}/css/`
+						html  = html.replace(regex, subst)
+
+						// const iframe = document.createElement('iframe');
+						const blob   = new Blob([html], {type: 'text/html'})
+
+						const iframe = document.getElementById('content')
+						iframe.src = window.URL.createObjectURL(blob)
+						// document.body.appendChild(iframe)
+
+			        }
+			    };
+			    xhr.send(null);
+			};
+		</script>
+    </body>
+</html>

@@ -33,7 +33,7 @@ class CreateThemeTemplatesTable extends Migration
             $table->unique(['name', 'deleted_at']);
         });
 
-        Artisan::call('dragrr:config:themes');
+        // Artisan::call('dragrr:config:themes');
 
     }
 

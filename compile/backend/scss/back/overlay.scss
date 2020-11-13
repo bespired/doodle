@@ -1,0 +1,50 @@
+body {
+	box-sizing: border-box;
+}
+
+div[data-overlay] {
+	border: 4px solid rgba(33, 150, 243, 0.80);
+	pointer-events: none;
+	z-index: 100;
+	cursor: pointer;
+}
+
+.overlay-bar {
+	position: absolute;
+	background-color: rgb(33, 150, 243);
+	color: white;
+	padding: 3px 5px;
+	font-size: 12px;
+	font-family: monospace;
+	pointer-events: auto;
+	user-select: none;
+	top: -18px;
+	left: -4px;
+
+	&:hover {
+		color: rgb(33, 150, 243);
+		background-color: white;
+	}
+}
+
+.bar-inset {
+	top: 0;
+}
+
+.bar-fixed {
+	&.static{
+		position: fixed;
+		top: 0px;
+		left: 0px;
+	}
+	&.fixed{
+		position: fixed;
+		left: initial;
+		top: 0px;
+		right: 0px;
+	}
+}
+
+body.pointer {
+	cursor: pointer;
+}

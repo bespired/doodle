@@ -34,7 +34,7 @@ class CreateLayoutTemplatesTable extends Migration
             $table->unique(['name', 'deleted_at']);
         });
 
-        Artisan::call('dragrr:config:layouts');
+        // Artisan::call('dragrr:config:layouts');
 
     }
 

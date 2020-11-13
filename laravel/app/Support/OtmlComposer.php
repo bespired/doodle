@@ -2,7 +2,8 @@
 
 namespace App\Support;
 
-use App\Models\Eloquent\Content;
+use App\Http\Traits\SimpleIndent;
+use App\Models\Eloquent\Dson;
 use App\Models\Eloquent\Image;
 use App\Models\Eloquent\Otml;
 use Illuminate\Mail\Markdown;
@@ -10,6 +11,8 @@ use Illuminate\Support\Str;
 
 class OtmlComposer
 {
+
+    use SimpleIndent;
 
     protected $basestubname;
     protected $contentname;
@@ -22,6 +25,7 @@ class OtmlComposer
     protected $missing;
     protected $stubs;
     protected $pagedata;
+    protected $repeats;
 
     public function compose($basestubname, $contentname)
     {
@@ -58,11 +62,18 @@ class OtmlComposer
             $this->replaceFillers();
 
             $this->extractBrostages();
+
+            // dump($this->output);
+
         }
 
         $this->convertMarkdown();
+        $this->repeaterLabels();
 
-        return $this->output;
+        // try catch for error?
+        return $this->simpleIndent($this->output);
+
+        // return $this->output;
     }
 
     /////
@@ -86,13 +97,13 @@ class OtmlComposer
         $websitename = 'website';
 
         //
-        $website = Content::query()
+        $website = Dson::query()
             ->whereName($websitename)
             ->whereType('website')
             ->firstOrFail();
 
         //
-        $content = Content::query()
+        $content = Dson::query()
             ->whereName($this->contentname)
             ->whereType('page')
             ->firstOrFail();
@@ -195,6 +206,10 @@ class OtmlComposer
             }
         }
 
+        // \Log::info('stubnames');
+        // \Log::info(json_encode($this->stubnames));
+        // \Log::info(json_encode($this->loadnames));
+
         return $this;
     }
 
@@ -209,6 +224,9 @@ class OtmlComposer
 
             }
         }
+
+        // \Log::info('varsnames');
+        // \Log::info(json_encode($this->varsnames));
 
         return $this;
     }
@@ -230,7 +248,7 @@ class OtmlComposer
             return;
         }
 
-        $collection = Content::select('name', 'data')
+        $collection = Dson::select('name', 'data')
             ->whereIn('name', $this->missing)
             ->get()
             ->keyBy('name');
@@ -242,7 +260,56 @@ class OtmlComposer
         $this->pagedata = array_merge($this->pagedata, $content);
 
         $this->missing = [];
+
         return $this;
+    }
+
+    // change <!-- repeat --> into data-repeat=
+    private function repeaterLabels()
+    {
+        $compose = $this->output;
+
+        $res = '/<!-- repeat start : ([\s\S]*?) -->/m';
+        $ree = '/<!-- repeat end : ([\s\S]*?) -->/m';
+
+        $re = '/<!-- repeat start [\s\S]*?<!-- repeat end : ([\s\S]*?) -->/m';
+        preg_match_all($re, $compose, $matches, PREG_SET_ORDER, 0);
+
+        if (count($matches) == 0) {
+            return;
+        }
+
+        foreach ($matches as $match) {
+            $chars  = str_split($compose);
+            $find   = $match[0];
+            $repeat = $match[1];
+
+            $replace = preg_replace($res, '', $find);
+            $replace = preg_replace($ree, '', $replace);
+
+            // find previous tag to inject the repeat data in.
+            $begin = strpos($compose, $find);
+
+            $tagPos = $begin - 1;
+            while ($chars[$tagPos] !== '<') {$tagPos--;}
+            $prevTag = substr($compose, $tagPos, $begin - $tagPos);
+            $tagLen  = strlen($prevTag);
+
+            // inject the repeat in precending tag ( matched 1 so [1][0] )
+            $inject  = sprintf(' data-repeat="%s"', $repeat);
+            $hookpos = strpos($prevTag, '>');
+            $newTag  = substr($prevTag, 0, $hookpos) . $inject . substr($prevTag, $hookpos);
+
+            // cut out old tag, replace with new tag
+            // then find repeats and replace with remark removed repeats
+
+            $compose = substr($compose, 0, $tagPos) . $newTag . substr($compose, $tagPos + $tagLen);
+            $compose = str_replace($find, trim($replace), $compose);
+
+        }
+
+        $this->output = $compose;
+
     }
 
     private function convertMarkdown()
@@ -285,10 +352,14 @@ class OtmlComposer
         // rename instances to variables that contain data
         $stubby = trim($this->stubs[$stubname]->otml);
 
-        $find = '{! self:';
+        $stubby = $this->editable($stubby, $stub);
+
         $repl = '{! ' . $stub . ':';
 
-        return str_replace($find, $repl, $stubby);
+        $finds = ['{! self:', '{! :', '{!self:', '{!:'];
+        $repls = [$repl, $repl, $repl, $repl];
+
+        return str_replace($finds, $repls, $stubby);
 
     }
 
@@ -296,7 +367,9 @@ class OtmlComposer
     {
 
         if (!isset($this->pagedata[$category])) {
-            return '';
+
+            return $this->actions($category, $key);
+
         }
 
         if (!isset($this->pagedata[$category][$key])) {
@@ -310,6 +383,107 @@ class OtmlComposer
 
         return $this->pagedata[$category][$key];
 
+    }
+
+    private function repeat($key)
+    {
+        // do the repeat creation only once.
+        if (isset($this->repeats[$key])) {
+            return $this->repeats[$key];
+        }
+
+        // figure out how many repeats
+        $re = '/\[([0-9\ \,\*]*?)\]/m';
+        preg_match_all($re, $key, $matches, PREG_SET_ORDER, 0);
+
+        if (count($matches) == 0) {
+            return '';
+        }
+
+        $stub = explode('[', $key)[0];
+        $ids  = explode(',', $matches[0][1]);
+
+        if ($ids[0] == '*') {
+
+            $repeat = $this->loadIdsOf($stub);
+
+        } else {
+
+            $repeat = [];
+            foreach ($ids as $id) {
+                $repeat[] = sprintf("{! %s--%s !}\n", $stub, $id);
+            }
+
+        }
+
+        $otml[] = "<!-- repeat start : $key --> \n";
+        $otml[] = join('', $repeat);
+        $otml[] = "<!-- repeat end : $key --> \n";
+
+        $this->repeats[$key] = join('', $otml);
+
+        return join('', $otml);
+    }
+
+    private function editable($otml, $stub)
+    {
+
+        $name = explode('--', $stub)[0];
+
+        $tags = ['section', 'header', 'footer', 'div', 'li'];
+
+        foreach ($tags as $tag) {
+
+            $ltml       = trim($otml);
+            $starthook  = sprintf('<%s>', $tag);
+            $startspace = sprintf('<%s ', $tag);
+            $slen       = strlen($starthook);
+            $chop       = substr($ltml, 0, $slen);
+            $repl       = sprintf('<%s data-stub="%s" data-id="%s" ', $tag, $name, $stub);
+
+            if ($chop === $starthook) {
+                $start = strpos($otml, $starthook);
+                $otml  = substr($otml, 0, $start) . $repl . '>' . substr($otml, $start + $slen);
+            }
+            if ($chop === $startspace) {
+                $start = strpos($otml, $startspace);
+                $otml  = substr($otml, 0, $start) . $repl . substr($otml, $start + $slen);
+            }
+        }
+
+        return $otml;
+    }
+
+    private function loadIdsOf($key)
+    {
+        $repeat = [];
+        $loaded = Dson::select('name')
+            ->whereType($key)
+            ->get();
+
+        foreach ($loaded as $load) {
+            $repeat[] = sprintf("{! %s !}\n", $load->name);
+        }
+
+        return $repeat;
+    }
+
+    private function actions($category, $key)
+    {
+        $action = $category . ':' . $key;
+
+        if ($action == 'compile:scss') {
+            $comp = new \App\Support\SassComposer();
+            $comp->compose();
+
+            return $comp->url;
+        }
+
+        if ($category === 'repeat') {
+            return $this->repeat($key);
+        }
+
+        return '';
     }
 
 }

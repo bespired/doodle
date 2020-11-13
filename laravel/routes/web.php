@@ -11,13 +11,7 @@
 |
  */
 
-// Route::get('/_', function () {
-//     return view('welcome');
-// });
-
 Route::any('/me', 'Back\BrowserController@me');
-
-Route::post('test/upload', 'Back\UploadController@upload');
 
 Route::any('/{any}', 'Front\HtmlController@all')
     ->where('any', '.*');

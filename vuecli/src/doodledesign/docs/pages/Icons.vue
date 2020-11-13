@@ -100,6 +100,7 @@
 			<div class="od-icon-spacer"><od-iconpath name="locked" />locked</div>
 			<div class="od-icon-spacer"><od-iconpath name="mail-open" />mail-open</div>
 			<div class="od-icon-spacer"><od-iconpath name="mail" />mail</div>
+			<div class="od-icon-spacer"><od-iconpath name="markdown" />markdown</div>
 			<div class="od-icon-spacer"><od-iconpath name="menu" />menu</div>
 			<div class="od-icon-spacer"><od-iconpath name="minus" />minus</div>
 			<div class="od-icon-spacer"><od-iconpath name="mobile" />mobile</div>
@@ -150,6 +151,7 @@
 			<div class="od-icon-spacer"><od-iconpath name="tags" />tags</div>
 			<div class="od-icon-spacer"><od-iconpath name="tap" />tap</div>
 			<div class="od-icon-spacer"><od-iconpath name="tasks" />tasks</div>
+			<div class="od-icon-spacer"><od-iconpath name="text-t" />text-t</div>
 			<div class="od-icon-spacer"><od-iconpath name="text" />text</div>
 			<div class="od-icon-spacer"><od-iconpath name="th-list" />th-list</div>
 			<div class="od-icon-spacer"><od-iconpath name="tiles" />tiles</div>

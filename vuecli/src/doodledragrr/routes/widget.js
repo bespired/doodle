@@ -17,11 +17,11 @@ export default [
 				path: ':id',
 				components: {
 					leftMenu:       global.loadDrag('builders/IndexReturn'),
-					leftContent:    global.loadDrag('builders/WidgetDrag'),
-					centerMenu:     global.loadDrag('builders/DeviceSizes'),
-					centerContent:  global.loadDrag('builders/WidgetBuilder'),
-					rightContent:   global.loadDrag('builders/WidgetProperties'),
+					centerMenu:     global.loadDrag('builders/PreviewView'),
 					rightMenu:      global.loadDrag('builders/SharedSave'),
+					leftContent:    global.loadDrag('builders/widget/WidgetDrag'),
+					centerContent:  global.loadDrag('builders/widget/WidgetDropzone'),
+					rightContent:   global.loadDrag('builders/widget/WidgetProperties'),
 				}
 			}
 		]

@@ -10,12 +10,4 @@ export default {
     	return str.charAt(0).toUpperCase() + str.slice(1)
     },
 
-    initClassTemplate(state, payload){
-    	if ( state[`${payload.source}Templates`][payload.area] === undefined)
-    	{
-    		state[`${payload.source}Templates`][payload.area]  = null
-    		state[`${payload.source}TemplateId`][payload.area] = null
-    	}
-    }
-
 }

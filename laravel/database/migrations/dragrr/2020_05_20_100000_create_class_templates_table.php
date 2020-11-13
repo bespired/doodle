@@ -34,7 +34,7 @@ class CreateClassTemplatesTable extends Migration
             $table->unique(['name', 'deleted_at']);
         });
 
-        Artisan::call('dragrr:config:classes');
+        // Artisan::call('dragrr:config:classes');
 
     }
 

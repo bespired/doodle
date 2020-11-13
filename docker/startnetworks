@@ -1,0 +1,3 @@
+#!/bin/bash
+docker network create traefik-net
+docker network create inter-net

@@ -62,7 +62,7 @@ export default {
         filtered(){
             // this.storeTab()
 
-            let buffer = this.clone(this.items)
+            let buffer = this.clonedub(this.items)
             // if ( (this.hasTabmenu) && (this.tabValue !== 'all') ){
             //     buffer = buffer.filter(item => {
             //         return item.area.toLowerCase() === this.tabValue.toLowerCase()

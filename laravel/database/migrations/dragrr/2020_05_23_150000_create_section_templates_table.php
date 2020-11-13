@@ -33,7 +33,7 @@ class CreateSectionTemplatesTable extends Migration
             $table->unique(['name', 'deleted_at']);
         });
 
-        Artisan::call('dragrr:config:sections');
+        // Artisan::call('dragrr:config:sections');
 
     }
 
