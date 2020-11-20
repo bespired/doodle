@@ -14,6 +14,7 @@ export default {
 				{ name: 'headers',    label: 'Headers'    },
 				{ name: 'buttons',    label: 'Buttons'    },
 				{ name: 'inputs',     label: 'Inputs'     },
+				{ name: 'images',     label: 'images'     },
 				{ name: 'selects',    label: 'Selects'    },
 				{ name: 'switches',   label: 'Switches'   },
 				{ name: 'panels',     label: 'Panels'     },

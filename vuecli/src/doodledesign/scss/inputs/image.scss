@@ -1,0 +1,92 @@
+.menu-over{
+        position: absolute;
+    }
+    .drop-container{
+        background-color: white;
+        padding: 10px;
+        text-align: center;
+        border: 1px solid var(--color-grey);
+        border-radius: 5px;
+        display: flex;
+        position: relative;
+        .menu-over{
+            display: none;
+            right: 18px;
+            top: 18px;
+            .input-button{
+                background-color: rgba(255,255,255, 0.8);
+            }
+        }
+        .progress-over{
+            position: absolute;
+            bottom: 48px;
+            width: calc(100% - 20px);
+            color: white;
+        }
+        .info-over{
+            position: absolute;
+            display: none;
+            bottom: 16px;
+            width: calc(100% - 40px);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 5px;
+            border: 1px solid var(--color-grey);;
+            border-radius: 5px;
+            left: 20px;
+        }
+
+        progress[value]::-webkit-progress-bar {
+            background-color: #eee;
+            border-radius: 2px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+        }
+        progress {
+            color: var(--color-hdr-hover);
+        }
+
+        progress::-webkit-progress-value {
+          background: var(--color-hdr-hover);
+        }
+
+        progress::-moz-progress-bar {
+          background: var(--color-hdr-hover);
+        }
+
+        progress::-webkit-progress-value {
+          background: var(--color-hdr-hover);
+        }
+
+        progress::-webkit-progress-bar {
+          background: var(--color-hdr-hover);
+        }
+
+    }
+    .input-group .drop-container.input-row{
+            background-color: white;
+            min-height: initial;
+            max-height: initial;
+    }
+
+    .drop-container:hover .menu-over{
+        display: flex;
+    }
+    .drop-container:hover .info-over{
+        display: inline-block;
+    }
+
+
+    .drop-container.hover{
+        .drop-area { background-color: var(--color-grey); }
+    }
+    .preview-area,
+    .drop-area{
+        border: 1px dashed var(--color-grey);
+        border-radius: 5px;
+        padding: 4em 0px;
+        width: 100%; //calc(100% - 16px);
+    }
+    .preview-area{
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }

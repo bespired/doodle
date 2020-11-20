@@ -34,6 +34,13 @@ if (!function_exists('dekebab')) {
     }
 }
 
+if (!function_exists('keepCapital')) {
+    function keepCapital($str)
+    {
+        return preg_replace("/([^A-Z])/", "", $str);
+    }
+}
+
 if (!function_exists('tagCombi')) {
     function tagCombi($str1, $str2)
     {

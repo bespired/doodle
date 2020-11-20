@@ -31,18 +31,21 @@ trait HasHandleId
     public static function createId($model): string
     {
 
+        $reflect = new \ReflectionClass($model);
+
         list($usec, $sec) = explode(" ", microtime());
 
         $smllsec = ($usec * 10000) % 999;
         $mac     = self::compressMac();
 
+        $m = strtolower(keepCapital($reflect->getShortName()));
         $c = isset($mac) ? $mac . '-' : '';
-        $t = base_convert($sec, 10, 36);
+        $t = substr(base_convert($sec, 10, 36), -6);
         $r = substr(rand(1000, 9999) . $smllsec, -5);
         $n = substr('000' . ($model->count() + rand(100, 500)) % 999, -3);
         $d = base_convert($r . $n, 10, 36);
 
-        return sprintf('%s%s-%s', $c, $t, $d);
+        return sprintf('%s%s%s-%s', $c, $m, $t, $d);
     }
 
     private static function compressMac()

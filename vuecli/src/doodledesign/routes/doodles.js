@@ -16,7 +16,7 @@ export default [
             },{
                 name: 'buttons',
                 path: 'buttons',
-                meta:{ title: 'Doodle' },
+                meta:{ title: 'Doodle Buttons' },
                 components: {
                     // default: global.loadView('routed/Empty'),
                     leftContent:   global.loadDoc('views/Legenda'),
@@ -25,15 +25,23 @@ export default [
             },{
                 name: 'headers',
                 path: 'headers',
-                meta:{ title: 'Doodle' },
+                meta:{ title: 'Doodle Headers' },
                 components: {
                     leftContent:   global.loadDoc('views/Legenda'),
                     rightContent:  global.loadDoc('pages/Headers')
                 }
             },{
+                name: 'images',
+                path: 'images',
+                meta:{ title: 'Doodle Images' },
+                components: {
+                    leftContent:   global.loadDoc('views/Legenda'),
+                    rightContent:  global.loadDoc('pages/Images')
+                }
+            },{
                 name: 'inputs',
                 path: 'inputs',
-                meta:{ title: 'Doodle' },
+                meta:{ title: 'Doodle Inputs' },
                 components: {
                     leftContent:   global.loadDoc('views/Legenda'),
                     rightContent:  global.loadDoc('pages/Inputs')
@@ -41,7 +49,7 @@ export default [
             },{
                 name: 'selects',
                 path: 'selects',
-                meta:{ title: 'Doodle' },
+                meta:{ title: 'Doodle Selects' },
                 components: {
                     leftContent:   global.loadDoc('views/Legenda'),
                     rightContent:  global.loadDoc('pages/Selects')
@@ -49,7 +57,7 @@ export default [
             },{
                 name: 'icons',
                 path: 'icons',
-                meta:{ title: 'Doodle' },
+                meta:{ title: 'Doodle Icons' },
                 components: {
                     leftContent:   global.loadDoc('views/Legenda'),
                     rightContent:  global.loadDoc('pages/Icons')
@@ -57,14 +65,14 @@ export default [
             },{
                 name: 'panels',
                 path: 'panels',
-                meta:{ title: 'Doodle' },
+                meta:{ title: 'Doodle Panels' },
                 components: {
                     leftContent:   global.loadDoc('views/Legenda'),
                     rightContent:  global.loadDoc('pages/Panels')
                 }
             },{
                 name: 'accordions',
-                path: 'accordions',
+                path: 'accordions Accordions',
                 meta:{ title: 'Doodle' },
                 components: {
                     leftContent:   global.loadDoc('views/Legenda'),
@@ -73,7 +81,7 @@ export default [
             },{
                 name: 'lists',
                 path: 'lists',
-                meta:{ title: 'Doodle' },
+                meta:{ title: 'Doodle Lists' },
                 components: {
                     leftContent:   global.loadDoc('views/Legenda'),
                     rightContent:  global.loadDoc('pages/Lists')
@@ -81,7 +89,7 @@ export default [
             },{
                 name: 'badges',
                 path: 'badges',
-                meta:{ title: 'Doodle' },
+                meta:{ title: 'Doodle Badges' },
                 components: {
                     leftContent:   global.loadDoc('views/Legenda'),
                     rightContent:  global.loadDoc('pages/Badges')
@@ -89,7 +97,7 @@ export default [
             },{
                 name: 'switches',
                 path: 'switches',
-                meta:{ title: 'Doodle' },
+                meta:{ title: 'Doodle Switches' },
                 components: {
                     leftContent:   global.loadDoc('views/Legenda'),
                     rightContent:  global.loadDoc('pages/Switches')
@@ -97,7 +105,7 @@ export default [
             },{
                 name: 'alerts',
                 path: 'alerts',
-                meta:{ title: 'Doodle' },
+                meta:{ title: 'Doodle Alerts' },
                 components: {
                     leftContent:   global.loadDoc('views/Legenda'),
                     rightContent:  global.loadDoc('pages/Alerts')
@@ -105,7 +113,7 @@ export default [
             },{
                 name: 'layouts',
                 path: 'layouts',
-                meta:{ title: 'Doodle' },
+                meta:{ title: 'Doodle Layouts' },
                 components: {
                     leftContent:   global.loadDoc('views/Legenda'),
                     rightContent:  global.loadDoc('pages/Layouts')
@@ -113,7 +121,7 @@ export default [
             },{
                 name: 'tools',
                 path: 'tools',
-                meta:{ title: 'Doodle' },
+                meta:{ title: 'Doodle Tools' },
                 components: {
                     leftContent:   global.loadDoc('views/Legenda'),
                     rightContent:  global.loadDoc('pages/Tools')
@@ -121,7 +129,7 @@ export default [
             },{
                 name: 'install',
                 path: 'install',
-                meta:{ title: 'Doodle' },
+                meta:{ title: 'Doodle Install' },
                 components: {
                     leftContent:   global.loadDoc('views/Legenda'),
                     rightContent:  global.loadDoc('pages/Install')

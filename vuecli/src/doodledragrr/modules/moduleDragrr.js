@@ -88,12 +88,12 @@ export default {
         },
 
 
-        getSetting:  (state) => name =>{
+        getSetting: (state) => name =>{
             if ( state.settings[name] === null ) return null
             return state.settings[name]
         },
 
-        getLayoutTemplate:(state) => name =>{
+        getLayoutTemplate: (state) => name =>{
             if ( state.layoutTemplates === null ) return null
 
             const found = state.layoutTemplates.find(element => {
@@ -104,6 +104,9 @@ export default {
             }
             return null
         },
+
+        getApiUrl: (state) => { return state.apis.dragrrApi.getApiUrl() }
+
 
     },
 

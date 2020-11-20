@@ -13,7 +13,7 @@ class Image extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'handle', 'folder', 'name', 'label', 'mimetype', 'extension',
+        'handle', 'folder', 'name', 'label', 'status', 'file', 'mimetype', 'extension',
         'likes', 'width', 'height', 'bytes', 'deletehash',
         'url', 'data',
     ];

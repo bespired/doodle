@@ -33,12 +33,11 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('templates/{fulltype}/duplicate', 'JsonApi\TemplateController@duplicate');
     Route::post('templates/{fulltype}/export', 'JsonApi\TemplateController@export');
 
-});
+    Route::post('image/upload', 'JsonApi\ImageController@upload');
+    Route::post('image/remove', 'JsonApi\ImageController@remove');
+    Route::get('image/url/{name}', 'JsonApi\ImageController@url');
 
-// Route::get('/event/send/{message}', function ($message) {
-//     event(new \App\Events\MessageSend($message));
-//     return json_encode(['message sent' => $message]);
-// });
+});
 
 Route::get('mainmenu', 'JsonApi\SettingController@mainMenu');
 Route::get('tenantmenu', 'JsonApi\SettingController@tenantMenu');

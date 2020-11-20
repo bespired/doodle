@@ -1,35 +1,47 @@
 <template>
-    <section class="widget-builder" v-if="widgetTemplate">
+    <section class="schemafiller" v-if="widgetTemplate">
+        <template v-for="(row, idx) in widgetElements">
+            <div class="row" :key="`row-${idx}`" :data-row="`${idx}`">
+                <template v-for="(column, jdx) in row">
+                    <div :class="`column width-${column.width}`"
+                         :key="`${idx}-${jdx}`"
+                         :data-column="`${idx}-${jdx}`">
+                         <div :data-fakevalue="setDummy(column)">
+                            <od-text-input  v-if="column.input == 'text'"     :vmodel="`dummy.${column.attrib}`" :label="column.label"/>
+                            <od-text-area   v-if="column.input == 'markdown'" :vmodel="`dummy.${column.attrib}`" :label="column.label"/>
 
-            <template v-for="(row,idx) in widgetElements">
-                <div class="row" :class="`kids-${row.length}`" :key="`row-${idx}`" >
+                            <!-- <od-image-input v-if="column.input == 'image'"   :image = "`dummy.${column.attrib}.image`" /> -->
+                            <od-image-input
+                                v-if="column.input == 'image'"
 
-                    <template v-for="(column,jdx) in row">
-                        <span class="column" :key="`column-${idx}-${jdx}`" :class="`width-${column.width}`">
-                            <div class="column-content">
-                                <div class="type">
-                                    <od-iconpath :name="textToIcon[column.input]" />
-                                </div>
-                                <div class="buttons">
-                                    <od-text-input mini :vmodel="`widgetElements.${idx}.${jdx}.label`"  label="label"     :inset="true" />
-                                    <od-text-input mini :vmodel="`widgetElements.${idx}.${jdx}.attrib`" label="attribute" :inset="true" />
-                                </div>
-                            </div>
-
-                        </span>
-                    </template>
-
-
-                </div>
-            </template>
-
+                                    :owner = "`dummy-${column.attrib}-image`"
+                                    :label = "column.label"
+                                />
+                            <!-- <od-button-input v-if="column.input == 'button'"  :link  = "`dummy.${column.attrib}.link`"  /> -->
+                         </div>
+                    </div>
+                </template>
+            </div>
+        </template>
     </section>
 </template>
+
+<style>
+    .schemafiller { padding: 30px; }
+    .schemafiller .input-group input { width: 100%; }
+    .schemafiller .row       { display:flex; }
+    .schemafiller .column    { display:flex; flex-direction: column;}
+    .schemafiller .width-100 { flex-grow: 1; padding-right: 8px; }
+    .schemafiller .width-50  { flex-grow: 50; padding-right: 8px; }
+    .schemafiller .width-33  { flex-grow: 33; padding-right: 8px; }
+    .schemafiller .width-25  { flex-grow: 25; padding-right: 8px; }
+    .schemafiller .width-30  { width:  30%; padding-right: 8px; }
+    .schemafiller .width-70  { width:  70%; padding-right: 8px; }
+</style>
 
 <script>
 import Vue from 'vue';
 import draggable from 'vuedraggable'
-
 
 export default {
     name: 'widget-builder-preview',
@@ -45,27 +57,13 @@ export default {
 
     data(){
         return {
-            dragover: null,
-            textToIcon:{
-                markdown: 'markdown',
-                text:     'text',
-                image:    'image',
-                button:   'button',
-            }
+            dummy: {}
         }
     },
 
     computed: {
         widgetTemplate(){
             return this.$store.getters['dragrr/currentTemplate']
-        },
-
-        elementTemplates(){
-            return this.$store.getters['dragrr/getElementTemplates']
-        },
-
-        dragging(){
-            return this.$store.getters['dragrr/getDragging']
         },
 
         widgetElements:{
@@ -76,47 +74,14 @@ export default {
     },
 
     methods: {
-        mouseover(idx){
-            this.dragover = idx + 1
-        },
-        mouseleave(idx){
-            this.dragover = -idx
-        },
-        isDragover(idx){
-            return idx === ( this.dragover - 1 ) ? 'hover' : ''
-        },
-        trash(idx, jdx){
-            if ( jdx === undefined ) {
-                 this.widgetElements.splice(idx, 1)
-            }else{
-                this.widgetElements[idx].splice(jdx, 1)
-                this.spread(idx)
+        setDummy(column){
+            switch(column){
+                case 'text':     this.dummy[column.attrib] = attrib; break;
+                case 'markdown': this.dummy[column.attrib] = attrib; break;
+                case 'image':    this.dummy[column.attrib] = { link: '', alt: '' }; break;
+                case 'button':   this.dummy[column.attrib] = { link: '#', text: 'button',  target: '' }; break;
             }
-        },
-        duplicate(idx, jdx){
-            if ( jdx === undefined ) {
-                let another= this.clonedub(this.widgetElements[idx])
-                this.widgetElements.splice(idx, 0, another)
-            }else{
-                let another= this.clonedub(this.widgetElements[idx][jdx])
-                this.widgetElements[idx].push(another)
-                this.spread(idx)
-            }
-        },
-        layout(idx){
-            let layouts= []
-            this.widgetElements[idx].forEach((e)=>{ layouts.push(e.width) })
-            let layout= layouts.join('-')
-            if ( layout === '50-50' ) { layouts[0]= 30; layouts[1]= 70; }
-            if ( layout === '30-70' ) { layouts[0]= 70; layouts[1]= 30; }
-            if ( layout === '70-30' ) { layouts[0]= 50; layouts[1]= 50; }
-            this.widgetElements[idx].forEach((e, i)=>{ e.width = layouts[i] })
-        },
-        spread(idx){
-            let count= this.widgetElements[idx].length
-            this.widgetElements[idx].forEach((e)=>{ e.width = Math.floor(100 / count) })
-        },
-
+        }
     }
 
 }

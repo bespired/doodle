@@ -19,11 +19,13 @@ import OdSign from './basic/OdSign'
 import OdTitle from './basic/OdTitle'
 import OdButton from './inputs/OdButton'
 import OdCheckbox from './inputs/OdCheckbox'
+import OdImageInput from './inputs/OdImageInput'
 import OdRadioButton from './inputs/OdRadioButton'
 import OdRadioRow from './inputs/OdRadioRow'
 import OdRadiobox from './inputs/OdRadiobox'
 import OdSlider from './inputs/OdSlider'
 import OdSwitch from './inputs/OdSwitch'
+import OdTextArea from './inputs/OdTextArea'
 import OdTextInput from './inputs/OdTextInput'
 import OdUpload from './inputs/OdUpload'
 import OdFoldBody from './lists/OdFoldBody'
@@ -51,6 +53,10 @@ import OdDataSelect from './selects/OdDataSelect'
 import OdDropdown from './selects/OdDropdown'
 import OdOptions from './selects/OdOptions'
 import OdSelect from './selects/OdSelect'
+import OdSelectArrayObject from './selects/OdSelectArrayObject'
+import OdSelectArrayValue from './selects/OdSelectArrayValue'
+import OdSelectObjectValue from './selects/OdSelectObjectValue'
+import OdSelectOld from './selects/OdSelectOld'
 import OdSelected from './selects/OdSelected'
 import OdFullWindow from './windows/OdFullWindow'
 import OdSplit3Window from './windows/OdSplit3Window'
@@ -78,11 +84,13 @@ export default {
     OdTitle,
     OdButton,
     OdCheckbox,
+    OdImageInput,
     OdRadioButton,
     OdRadioRow,
     OdRadiobox,
     OdSlider,
     OdSwitch,
+    OdTextArea,
     OdTextInput,
     OdUpload,
     OdFoldBody,
@@ -110,6 +118,10 @@ export default {
     OdDropdown,
     OdOptions,
     OdSelect,
+    OdSelectArrayObject,
+    OdSelectArrayValue,
+    OdSelectObjectValue,
+    OdSelectOld,
     OdSelected,
     OdFullWindow,
     OdSplit3Window,

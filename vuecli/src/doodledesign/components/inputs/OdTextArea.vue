@@ -5,7 +5,7 @@
         </label>
         <div class="input-row">
             <span :ref="$options.namedId" v-if="prefix!==null">{{ prefix }}</span>
-            <input
+            <textarea
                 :id="$options.namedId"
                 :required="isRequired"
                 :autocomplete="autocompleter"
@@ -14,7 +14,7 @@
                 v-model="modelValue"
                 @focus="focusLabel(true)"
                 @blur="focusLabel(false)"
-            />
+            ></textarea>
             <span @click="doAction()" v-if="postfix!==null" :class="{'input-button':action}">{{ postfix }}</span>
             <span @click="doClear()"  v-if="clear" class="input-button">×</span>
         </div>
@@ -25,7 +25,7 @@ import Helpers from '../../helpers/helpers.js'
 import Vue     from 'vue'
 
 export default {
-    name: 'od-text-input',
+    name: 'od-text-area',
     props: {
         commit:       { type: String,  default: null  },
         vmodel:       { type: String,  default: null  },

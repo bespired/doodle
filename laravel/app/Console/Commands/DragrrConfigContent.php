@@ -5,6 +5,8 @@ namespace App\Console\Commands;
 use App\Http\Traits\SimpleIndent;
 use App\Models\Eloquent\Dson;
 use App\Models\Eloquent\Otml;
+use App\Models\Eloquent\TemplatedElement;
+use App\Models\Eloquent\TemplatedWidget;
 use Illuminate\Console\Command;
 
 class DragrrConfigContent extends Command
@@ -22,7 +24,7 @@ class DragrrConfigContent extends Command
         $this->folders();
         $this->otmls();
         $this->dsons();
-        $this->widgets();
+        // $this->widgets();
 
     }
 

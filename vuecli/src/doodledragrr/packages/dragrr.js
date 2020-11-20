@@ -5,6 +5,10 @@ export default class DraggrApi {
         this.baseUrl = `${window.location.protocol}//${window.location.hostname}`
     }
 
+    getApiUrl(){
+        return this.apiUrl
+    }
+
     getSettings(type) {
         return axios.get(`${this.apiUrl}/settings/${type}/index`).then( response => response.data )
     }
@@ -45,5 +49,10 @@ export default class DraggrApi {
     exportTemplates(type, handles) {
         return axios.post(`${this.apiUrl}/templates/${type}/export`, {handles:handles})
     }
+
+    saveImage(type, payload) {
+        return axios.post(`${this.apiUrl}/templates/${type}/save`, payload)
+    }
+
 
 }
