@@ -22,7 +22,7 @@
                         <span class="input-button" @click="clear()">×</span>
                     </div>
 
-                    <div class="progress-over" v-show="uploading" v-if="percentage > 0">
+                    <div class="progress-over" v-show="uploading" :data-update="percentage">
                         <div>{{ percentage }}%</div>
                         <od-progressbar :value="percentage" :max="100" />
                     </div>
@@ -56,7 +56,7 @@ export default {
     data() {
         return {
             files: [],
-            uploading: true,
+            uploading: false,
             percentage: 0,
             canvasId: `${this.$options.namedId}-preview` ,
 
@@ -89,7 +89,7 @@ export default {
                 let factor = response.data.height / response.data.width
                 let width  = Math.max(512, rect.width )
                 let height = Math.min(200, Math.floor(width * factor))
-                bgcanvas.style.backgroundImage = 'url(' + response.data.url + ')';
+                bgcanvas.style.backgroundImage = 'url(' + response.data.url + ')'
                 bgcanvas.style.height = `${height}px`
 
                 this.imgfile = response.data
@@ -99,21 +99,16 @@ export default {
             });
         },
 
-        clear() {
-            this.imgfile= null
-        },
-
         dropped(event) {
             const dt    = event.dataTransfer;
             const keys  = Object.keys(dt.items)
 
             keys.forEach((key) => {
                 let item = dt.items[key]
-                let file = item.getAsFile();
-                file.extension = file.name.split('.').pop();
+                let file = item.getAsFile()
+                file.extension = file.name.split('.').pop()
 
                 if (['png', 'jpg', 'jpeg'].indexOf(file.extension) > -1) {
-                    console.log( '-->' ,  file )
                     this.imgfile = file
                 }
             })
@@ -134,7 +129,7 @@ export default {
             reader.onloadend = function() {
                 let bgcanvas = document.getElementById(context.canvasId)
 
-                bgcanvas.style.backgroundImage = 'url(' + reader.result + ')';
+                bgcanvas.style.backgroundImage = 'url(' + reader.result + ')'
 
                 var image      = new Image();
                 image.src      = reader.result;
@@ -153,27 +148,48 @@ export default {
         uploadFiles(context) {
             let formData = new FormData();
 
-            formData.append('owner', context.owner);
-            formData.append('image', context.imgfile);
+            formData.append('owner', context.owner)
+            formData.append('image', context.imgfile)
 
-            context.uploading = true;
+            context.percentage = 1
+            context.uploading = true
+
+            console.log( 'uploadFiles ', context )
 
             const location = `${context.apiUrl}/image/upload`
             axios.post(location, formData, {
                 onUploadProgress: (e) => {
-                    context.percentage = Math.floor((e.loaded * 100) / e.total);
+                    context.percentage = Math.floor((e.loaded * 99) / e.total)
                 },
             }).then((response) => {
-
-                let data = response.data;
-                context.uploading  = false;
-                context.percentage = 0;
-
-                // this.$emit('uploaded', { data });
+                context.uploading  = false
+                context.percentage = 0
+                console.log( 'uploadFiles done ' , context )
             }).catch((error) => {
-                console.log(error);
+                console.log(error)
             });
         },
+
+        clear() {
+            this.imgfile = null
+            this.percentage = 0
+            this.uploading  = false
+
+            let bgcanvas = document.getElementById(this.canvasId)
+            bgcanvas.style.backgroundImage = ''
+            bgcanvas.style.height = ''
+
+            let formData = new FormData();
+
+            formData.append('name', this.owner);
+            formData.append('folder', 'doodle');
+
+            const location = `${this.apiUrl}/image/remove`
+            axios.post(location, formData)
+            .then((response) => { })
+            .catch((error) => { console.log(error); });
+        },
+
     },
 };
 
