@@ -11,7 +11,7 @@
 
 ## Doodle
 
-Docker boilerplate with traefik 2, laravel 8, vue-cli and primefaces vue
+Docker boilerplate with traefik 2, laravel 8, vue-cli and doodle components
 
 > Works with:
 > node 11.10.1
