@@ -95,7 +95,7 @@ Traefik:
 http://localhost:9090/dashboard/#/  
   
 Laravel welcome:  
-http://localhost/\_  
+[http://localhost/_](http://localhost/\_)
   
 Create default admin login  
 `docker/doexec doodle_php php artisan doodle:create:admin`  
