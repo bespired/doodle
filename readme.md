@@ -67,12 +67,14 @@ Build the server
 
 Start the php server for laravel install  
 `docker-compose up doodle_php`  
+`^Z` will push this service to the background  
 
 Use php version 7.3 in container to install Laravel 8  
 `docker/doexec doodle_php composer install`  
 `docker/doexec doodle_php php artisan key:generate`  
 `docker/doexec doodle_php php artisan jwt:secret`  
   
+`fg` will bring the service back to the front  
 `docker-compose stop`  
   
 Start the full system  
