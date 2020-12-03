@@ -104,14 +104,14 @@ services:
     build:
       context: .
       dockerfile: ./DockerfilePhp
-      target: php72
+      target: php73
     working_dir: /application
     depends_on:
       - doodle_mysql
     volumes:
       - ./laravel:/application
       - ./laravel/supervisord.conf:/etc/supervisord.conf
-      - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+      - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
     networks:
       - inter-net
       - traefik-net
