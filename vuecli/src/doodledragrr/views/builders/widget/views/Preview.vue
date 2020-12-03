@@ -7,17 +7,19 @@
                          :key="`${idx}-${jdx}`"
                          :data-column="`${idx}-${jdx}`">
                          <div :data-fakevalue="setDummy(column)">
+
                             <od-text-input  v-if="column.input == 'text'"     :vmodel="`dummy.${column.attrib}`" :label="column.label"/>
                             <od-text-area   v-if="column.input == 'markdown'" :vmodel="`dummy.${column.attrib}`" :label="column.label"/>
-
-                            <!-- <od-image-input v-if="column.input == 'image'"   :image = "`dummy.${column.attrib}.image`" /> -->
-                            <od-image-input
+                            <draggr-image-input
                                 v-if="column.input == 'image'"
-
                                     :owner = "`dummy-${column.attrib}-image`"
                                     :label = "column.label"
                                 />
-                            <!-- <od-button-input v-if="column.input == 'button'"  :link  = "`dummy.${column.attrib}.link`"  /> -->
+                            <draggr-link-input
+                                v-if="column.input == 'button'"
+                                :owner = "`dummy-${column.attrib}`"
+                                :label = "column.label"
+                            />
                          </div>
                     </div>
                 </template>
@@ -43,11 +45,16 @@
 import Vue from 'vue';
 import draggable from 'vuedraggable'
 
+import DraggrImageInput from '@dragrr/components/DraggrImageInput'
+import DraggrLinkInput  from '@dragrr/components/DraggrLinkInput'
+
 export default {
     name: 'widget-builder-preview',
 
     components: {
-        draggable: draggable,
+        draggable,
+        DraggrImageInput,
+        DraggrLinkInput,
     },
 
     beforeMount() {

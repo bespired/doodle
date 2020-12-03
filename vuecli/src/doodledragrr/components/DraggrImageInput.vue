@@ -44,7 +44,7 @@ import Vue from 'vue'
 
 export default {
 
-    name: 'od-image-input',
+    name: 'dragrr-image-input',
 
     props: {
         owner:        { type: String,  default: null },

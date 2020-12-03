@@ -1,0 +1,12 @@
+textarea {
+
+    width: 100%;
+    border-radius: var(--border-radius);
+    border-color: var(--color-grey);
+
+}
+
+.input-row.textarea {
+    min-height: 2 * $input-height;
+    max-height: initial;
+}

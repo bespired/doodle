@@ -1,0 +1,43 @@
+[
+	[
+	{
+		"attrib": "bg-image",
+		"input": "image",
+		"label": "Background image",
+		"width": 100,
+		"schema": { "url": "image", "alt": "text" }
+	}],
+	[
+	{
+		"width": 100,
+		"label": "Title",
+		"input": "text",
+		"attrib": "title",
+		"schema": { "text": "text" }
+	}],
+	[
+	{
+		"width": 100,
+		"label": "Subtitle",
+		"input": "text",
+		"attrib": "sub-title",
+		"schema": { "text": "text" }
+	}],
+	[
+	{
+		"input": "markdown",
+		"attrib": "article",
+		"label": "Article",
+		"width": 100,
+		"schema": { "text": "textarea" }
+	}],
+	[
+	{
+		"input": "button",
+		"attrib": "link",
+		"label": "Link",
+		"icon": null,
+		"width": 100,
+		"schema": { "label": "text", "url": "text", "icon": "text", "target": "text" }
+	}]
+]

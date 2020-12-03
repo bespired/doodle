@@ -10,22 +10,9 @@ use Illuminate\Support\Str;
 class TemplateController extends Controller
 {
 
-    public function schema($fulltype)
+    public function schema($type)
     {
 
-        $type = $this->getTypes($fulltype)[0];
-        $area = $this->getTypes($fulltype)[1];
-
-        if ($area !== null) {
-            return $this->area($type, $area);
-        }
-
-        return $this->type($type);
-
-    }
-
-    public function type($type)
-    {
         $Model = sprintf('\App\Models\Eloquent\Templated%s', ucfirst($type));
 
         $count  = $Model::count();

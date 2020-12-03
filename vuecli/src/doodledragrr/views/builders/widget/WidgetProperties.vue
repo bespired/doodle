@@ -1,7 +1,15 @@
 <template>
 	<section v-if="widgetTemplate">
 		<od-text-input vmodel="widgetTemplate.label" label="label"/>
+
+		<div>
+			Not attached to any Snippet.
+		</div>
+		<div>
+			Not used in Collections.
+		</div>
 	</section>
+
 </template>
 <script>
 

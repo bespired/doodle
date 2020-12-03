@@ -19,7 +19,6 @@ import OdSign from './basic/OdSign'
 import OdTitle from './basic/OdTitle'
 import OdButton from './inputs/OdButton'
 import OdCheckbox from './inputs/OdCheckbox'
-import OdImageInput from './inputs/OdImageInput'
 import OdRadioButton from './inputs/OdRadioButton'
 import OdRadioRow from './inputs/OdRadioRow'
 import OdRadiobox from './inputs/OdRadiobox'
@@ -84,7 +83,6 @@ export default {
     OdTitle,
     OdButton,
     OdCheckbox,
-    OdImageInput,
     OdRadioButton,
     OdRadioRow,
     OdRadiobox,

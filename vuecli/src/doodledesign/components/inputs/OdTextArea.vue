@@ -3,7 +3,7 @@
         <label :for="$options.namedId" :class="{ placeholder:placeholder, inset:inset }">
             {{ label }}
         </label>
-        <div class="input-row">
+        <div class="input-row textarea">
             <span :ref="$options.namedId" v-if="prefix!==null">{{ prefix }}</span>
             <textarea
                 :id="$options.namedId"

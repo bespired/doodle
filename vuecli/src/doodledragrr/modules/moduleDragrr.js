@@ -55,10 +55,10 @@ export default {
         dragging:          null,
 
         elements: {
-            text:     { attrib: "", input: "text",     label: "", width: 100 },
-            markdown: { attrib: "", input: "markdown", label: "", width: 100 },
-            image:    { attrib: "", input: "image",    label: "", width: 100 },
-            button:   { attrib: "", input: "button",   label: "", width: 100 },
+            text:     {  input: "text",     attrib: "", label: "", width: 100 },
+            markdown: {  input: "markdown", attrib: "", label: "", width: 100 },
+            image:    {  input: "image",    attrib: "", label: "", width: 100 },
+            button:   {  input: "button",   attrib: "", label: "", width: 100 },
         },
 
     },

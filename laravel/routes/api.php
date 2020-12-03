@@ -19,7 +19,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('closed', 'JwtApi\DataController@closed');
     Route::post('register', 'JwtApi\UserController@register');
 
-    Route::get('templates/{fulltype}/schema', 'JsonApi\TemplateController@schema');
+    Route::get('templates/{type}/schema', 'JsonApi\TemplateController@schema');
 
     Route::get('dson/{language}/{pageslug}', 'JsonApi\PageController@dson');
     Route::get('template/widget/{pageslug}', 'JsonApi\PageController@widget');
