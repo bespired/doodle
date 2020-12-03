@@ -6,13 +6,14 @@ WORKDIR /application
 # Install selected extensions and other stuff
 RUN apt-get update \
     && apt-get -y --no-install-recommends install \
-        ssh git \
-       	php-mbstring php-memcached \
+        ssh \
+        git \
+       	php-mbstring \
+        php-memcached \
       	php7.3-mysql \
        	php7.3-sqlite \
        	php7.3-gd \
        	php-imagick \
-		    php7.3-sockets \
        	php7.3-bcmath \
       	php7.3-json \
       	php7.3-mbstring \
@@ -22,6 +23,7 @@ RUN apt-get update \
       	php7.3-ctype \
       	php7.3-pdo \
       	php7.3-sockets \
+        php7.3-fileinfo \
       	supervisor \
         cron \
         nano \

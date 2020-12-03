@@ -8,26 +8,27 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.2",
+        "php": "^7.3|^8.0",
+        "fideloper/proxy": "^4.4",
+        "fruitcake/laravel-cors": "^2.0",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "laravel/framework": "^8.12",
+        "laravel/tinker": "^2.5",
         "cbschuld/browser.php": "^1.9",
-        "fideloper/proxy": "^4.0",
-        "fruitcake/laravel-cors": "^1.0",
-        "laravel/framework": "^8.0",
-        "laravel/tinker": "^2.0",
         "league/flysystem-cached-adapter": "^1.1",
         "nscreed/laravel-migration-paths": "^1.0",
         "predis/predis": "^1.1",
         "pusher/pusher-php-server": "^4.1",
         "scssphp/scssphp": "^1.2",
-        "symfony/translation": "4.3.8",
+        "symfony/translation": "^5.0",
         "tymon/jwt-auth": "dev-develop"
     },
     "require-dev": {
-        "facade/ignition": "^1.4",
-        "fzaninotto/faker": "^1.9.1",
-        "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^3.0",
-        "phpunit/phpunit": "^8.0"
+        "facade/ignition": "^2.5",
+        "fakerphp/faker": "^1.9.1",
+        "mockery/mockery": "^1.4.2",
+        "nunomaduro/collision": "^5.0",
+        "phpunit/phpunit": "^9.3.3"
     },
     "config": {
         "optimize-autoloader": true,
@@ -46,12 +47,10 @@
         "psr-4": {
             "App\\": "app/",
             "Bespired\\Imgur\\": "packages/bespired/imgur/src",
-            "Browser\\":"vendor/cbschuld/browser.php/"
-        },
-        "classmap": [
-            "database/seeds",
-            "database/factories"
-        ]
+            "Browser\\":"vendor/cbschuld/browser.php/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
     },
     "autoload-dev": {
         "psr-4": {
