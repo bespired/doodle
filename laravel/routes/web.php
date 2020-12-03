@@ -13,5 +13,9 @@
 
 Route::any('/me', 'Back\BrowserController@me');
 
+Route::get('/_', function () {
+    return view('welcome');
+});
+
 Route::any('/{any}', 'Front\HtmlController@all')
     ->where('any', '.*');

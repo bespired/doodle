@@ -95,7 +95,7 @@ Traefik:
 http://localhost:9090/dashboard/#/  
   
 Laravel welcome:  
-http://localhost/_  
+http://localhost/\_  
   
 Create default admin login  
 `docker/doexec doodle_php php artisan doodle:create:admin`  
@@ -122,6 +122,9 @@ Compiles frontend css to the public folder of laravel
 
 __artisan commands__  
 docker/doexec doodle_php php artisan *command*  
+
+example:  
+docker/doexec doodle_php php artisan --version  
   
 __Doodle welcome:__  
 http://localhost/admin  
