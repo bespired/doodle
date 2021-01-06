@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "adm-zip": "^0.4.16",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "browserslist": "^4.14.3",
     "caniuse-lite": "^1.0.30001131",
     "core-js": "^3.6.5",
