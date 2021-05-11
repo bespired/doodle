@@ -18,7 +18,7 @@
     "license": "ISC",
     "dependencies": {
         "browserify": "^16.5.2",
-        "lodash": "^4.17.20",
+        "lodash": "^4.17.21",
         "reading-time": "^1.2.0",
         "watchify": "^3.11.1"
     },
